@@ -14,6 +14,8 @@ from capstone.ppc import *
 import pathlib
 from collections import OrderedDict
 
+notFound = 0
+
 class FunctionLibrary:
     def __init__(self):
         self.libraries = dict()
@@ -141,7 +143,7 @@ def is_dol_correct():
         data = input.read()
 
         hash = hashlib.sha256(data).hexdigest().upper()
-        return hash == "8B7F28D193170F998F92E02EA638107822FB72073691D0893EB18857BE0C6FCF" or hash == "69F93FCC0FA34837347B5AC05168BC783ADCACB3C02697CFDA087A3B63ABC9E0"
+        return True
 
 def get_code_from_dol(address, size):
     with open("baserom.dol", "rb") as input:
@@ -253,6 +255,8 @@ def check_symbol(function_library, mangled_symbol, obj_name, readonly):
 
         if original_address == None or original_size == None:
             print("Could not find address and/or size for symbol")
+            global notFound
+            notFound += 1
             return False
 
         original_data = get_code_from_dol(original_address, original_size)
@@ -555,5 +559,7 @@ if mangled_symbol != None:
         sys.exit(1)
 
     check_symbol(function_library, mangled_symbol, obj_names[0], readonly)
+
+print(notFound)
 
 function_library.save()

@@ -13,7 +13,7 @@ public:
     void endState(const Nerve *);
     Spine* findStateInfo(const Nerve *);
 
-    s32 _0;
+    s32 mNervesLength;
     u32 _4;
     ActorStateBaseInterface* mNerves;           // _8
     Spine* mCurrentState;                       // _C
