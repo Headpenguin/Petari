@@ -9,6 +9,8 @@ namespace MR {
     s32 getPlacedZoneId(const JMapInfoIter &);
     s32 getCurrentPlacementZoneId();
 
+    const char* getCurrentPlacementZoneName();
+
     s32 getCurrentScenarioNo();
 
     const char* getCurrentStageName();
@@ -56,4 +58,10 @@ namespace MR {
     void incPurpleCoin();
 
     s32 getCoinNum();
+
+    bool isPlacementLocalStage();
+
+    bool isInitializeStateEnd();
+
+    bool isStageDisablePauseMenu();
 }

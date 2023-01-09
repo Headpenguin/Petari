@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Game/LiveActor/LiveActor.h"
-#include "Game/Util/Color8.h"
+#include "Game/Util/Color.h"
 
 namespace {
     static Color8 sPointLightColor(0xFF, 0xFF, 0x96, 0xFF);
@@ -23,7 +23,7 @@ public:
     virtual void control();
     virtual void attackSensor(HitSensor *, HitSensor *);
     virtual bool receiveMsgPlayerAttack(u32, HitSensor *, HitSensor *);
-    virtual u32 receiveMsgEnemyAttack(u32, HitSensor *, HitSensor *);
+    virtual bool receiveMsgEnemyAttack(u32, HitSensor *, HitSensor *);
 
     CollisionParts* mBoxCollider;   // _8C
     TMtx34f _90;

@@ -1,0 +1,99 @@
+# MarioActor.o
+| Symbol | Meaning 
+| ------------- | ------------- 
+| :x: | Function has not yet been started or is not matching. 
+| :white_check_mark: | Function is completed. 
+
+
+# 1 / 88 Completed -- (1.1363636363636365%)
+# MarioActor.o
+| Symbol | Decompiled? |
+| ------------- | ------------- |
+| `__as__8TriangleFRC8Triangle` | :white_check_mark: |
+| `getEuler__Q29JGeometry64TRotation3<Q29JGeometry38TMatrix34<Q29JGeometry13SMatrix34C<f>>>CFRQ29JGeometry8TVec3<f>` | :x: |
+| `__ct__10MarioActorFPCc` | :x: |
+| `__dt__10MarioActorFv` | :x: |
+| `init__10MarioActorFRC12JMapInfoIter` | :x: |
+| `init2__10MarioActorFRCQ29JGeometry8TVec3<f>RCQ29JGeometry8TVec3<f>l` | :x: |
+| `initAfterPlacement__10MarioActorFv` | :x: |
+| `initAfterOpeningDemo__10MarioActorFv` | :x: |
+| `calcBaseFrontVec__10MarioActorFRCQ29JGeometry8TVec3<f>` | :x: |
+| `playSound__10MarioActorFPCcl` | :x: |
+| `changeAnimation__10MarioActorFPCcPCc` | :x: |
+| `changeAnimationNonStop__10MarioActorFPCc` | :x: |
+| `changeAnimationUpper__10MarioActorFPCc` | :x: |
+| `stopAnimation__10MarioActorFPCc` | :x: |
+| `isAnimationRun__10MarioActorCFPCc` | :x: |
+| `changeNullAnimation__10MarioActorFPCcSc` | :x: |
+| `clearNullAnimation__10MarioActorFSc` | :x: |
+| `isStopNullAnimation__10MarioActorCFv` | :x: |
+| `changeGameOverAnimation__10MarioActorFv` | :x: |
+| `getJointCtrl__10MarioActorCFPCc` | :x: |
+| `updateRotationInfo__10MarioActorFv` | :x: |
+| `exeWait__10MarioActorFv` | :x: |
+| `movement__10MarioActorFv` | :x: |
+| `control__10MarioActorFv` | :x: |
+| `control2__10MarioActorFv` | :x: |
+| `controlMain__10MarioActorFv` | :x: |
+| `updateBehavior__10MarioActorFv` | :x: |
+| `updateBindRatio__10MarioActorFv` | :x: |
+| `isInPunchTimerRange__10MarioActorCFv` | :x: |
+| `updatePunching__10MarioActorFv` | :x: |
+| `doRush__10MarioActorFv` | :x: |
+| `updateSwingTimer__10MarioActorFv` | :x: |
+| `updateSwingAction__10MarioActorFv` | :x: |
+| `checkClapCatchStart__10MarioActorFv` | :x: |
+| `updateRealMtx__10MarioActorFv` | :x: |
+| `setUpperRotateY__10MarioActorFf` | :x: |
+| `decLife__10MarioActorFUs` | :x: |
+| `decLifeLarge__10MarioActorFv` | :x: |
+| `decLifeMiddle__10MarioActorFv` | :x: |
+| `decLifeSmall__10MarioActorFv` | :x: |
+| `resetWaterLife__10MarioActorFv` | :x: |
+| `updateLife__10MarioActorFv` | :x: |
+| `incLife__10MarioActorFUl` | :x: |
+| `changeMaxLife__10MarioActorFl` | :x: |
+| `doPressing__10MarioActorFv` | :x: |
+| `careMovingObject__10MarioActorFv` | :x: |
+| `doStun__10MarioActorFv` | :x: |
+| `scaleMtx__10MarioActorFPA4_f` | :x: |
+| `updateBaseScaleMtx__10MarioActorFv` | :x: |
+| `getRealMtx__10MarioActorCFPA4_fPCc` | :x: |
+| `getRealPos__10MarioActorCFPCcPQ29JGeometry8TVec3<f>` | :x: |
+| `getGlobalJointMtx__10MarioActorFPCc` | :x: |
+| `calcAnimInMovement__10MarioActorFv` | :x: |
+| `forceSetBaseMtx__10MarioActorFPA4_f` | :x: |
+| `calcAnim__10MarioActorFv` | :x: |
+| `calcAndSetBaseMtx__10MarioActorFv` | :x: |
+| `setBlendMtxTimer__10MarioActorFUs` | :x: |
+| `getGroundPos__10MarioActorCFPQ29JGeometry8TVec3<f>` | :x: |
+| `getShadowPos__10MarioActorCFv` | :x: |
+| `isTurning__10MarioActorCFv` | :x: |
+| `isJumping__10MarioActorCFv` | :x: |
+| `isJumpRising__10MarioActorCFv` | :x: |
+| `isPunching__10MarioActorCFv` | :x: |
+| `isItemSwinging__10MarioActorCFv` | :x: |
+| `isDamaging__10MarioActorCFv` | :x: |
+| `isNeedDamageFog__10MarioActorCFv` | :x: |
+| `isStaggering__10MarioActorCFv` | :x: |
+| `isSleeping__10MarioActorCFv` | :x: |
+| `isRefuseTalk__10MarioActorCFv` | :x: |
+| `isDebugMode__10MarioActorCFv` | :x: |
+| `jumpHop__10MarioActorFv` | :x: |
+| `calcCenterPos__10MarioActorFv` | :x: |
+| `calcHeadPos__10MarioActorFv` | :x: |
+| `setPress__10MarioActorFUcl` | :x: |
+| `getResourceTable__10MarioActorCFv` | :x: |
+| `isEnableMoveMario__10MarioActorCFv` | :x: |
+| `isEnableNerveChange__10MarioActorCFv` | :x: |
+| `forceGameOver__10MarioActorFv` | :x: |
+| `forceGameOverAbyss__10MarioActorFv` | :x: |
+| `forceGameOverBlackHole__10MarioActorFv` | :x: |
+| `forceGameOverNonStop__10MarioActorFv` | :x: |
+| `forceGameOverSink__10MarioActorFv` | :x: |
+| `updateCameraInfo__10MarioActorFv` | :x: |
+| `binderFilter__10MarioActorFPC8Triangle` | :x: |
+| `getFrameBufferWidth__2MRFv` | :x: |
+| `setPunchHitTimer__10MarioActorFUc` | :x: |
+| `__sinit_\MarioActor_cpp` | :x: |
+| `isInvalidTriangle__37TriangleFilterDelegator<10MarioActor>CFPC8Triangle` | :x: |

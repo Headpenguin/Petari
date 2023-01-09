@@ -6,6 +6,86 @@ import shutil
 import pathlib
 import shutil
 
+# todo -- implement me when SDK libs are decompiled
+sdk_o_paths = [
+    
+]
+
+
+other_libs = [
+    "deps/EABI/PowerPC_EABI_Support/MetroTRK/TRK_Hollywood_Revolution.a",
+    "deps/EABI/PowerPC_EABI_Support/Msl/MSL_C/PPC_EABI/LIB/MSL_C.PPCEABI.bare.h.a",
+    "deps/EABI/PowerPC_EABI_Support/Runtime/Lib/Runtime.PPCEABI.H.a",
+    "build/nw4r/lyt/lyt_init.o",
+    "deps/NDEV/lib/NdevExi2A.a",
+    "deps/RVL_SDK/RVL/lib/ai.a",
+    "deps/RVL_SDK/RVL/lib/base.a",
+    "deps/RVL_SDK/RVL/lib/bte.a",
+    "deps/RVL_SDK/RVL/lib/db.a",
+    "deps/RVL_SDK/RVL/lib/dvd.a",
+    "deps/RVL_SDK/RVL/lib/euart.a",
+    "deps/RVL_SDK/RVL/lib/esp.a",
+    "deps/RVL_SDK/RVL/lib/exi.a",
+    "deps/RVL_SDK/RVL/lib/fs.a",
+    "deps/RVL_SDK/RVL/lib/gx.a",
+    "deps/RVL_SDK/RVL/lib/ipc.a",
+    "deps/RVL_SDK/RVL/lib/nand.a",
+    "deps/RVL_SDK/RVL/lib/os.a",
+    "deps/RVL_SDK/RVL/lib/pad.a",
+    "deps/RVL_SDK/RVL/lib/sc.a",
+    "deps/RVL_SDK/RVL/lib/si.a",
+    "deps/RVL_SDK/RVL/lib/usb.a",
+    "deps/RVL_SDK/RVL/lib/WPAD.a",
+    "deps/RVL_SDK/RVL/lib/wud.a",
+    "deps/RVL_SDK/RVL/lib/vi.a",
+
+    "build/JSystem/JKernel/JKRHeap.o",
+    "build/JSystem/JKernel/JKRExpHeap.o",
+]
+
+def makeArchive(dir):
+    fileList = ""
+    for root, dirs, files in os.walk(f"build/Game/{dir}"):
+        for f in files:
+            if f.endswith(".o"):
+                fileList += f"build/Game/{dir}/{f} "
+
+    default_compiler_path = pathlib.Path("GC/3.0a3/")
+    linker_path = pathlib.Path(f"Compilers/{default_compiler_path}/mwldeppc.exe ")
+    linker_flags = f"-nodefaults -xm l -o archives/{dir}.a {fileList}"
+
+    if subprocess.call(f"{linker_path} {linker_flags}", shell=True) == 1:
+        print("Library creation failed.")
+
+def makeLibArchive():
+    if not os.path.isdir("archive"):
+        os.mkdir("archive")
+
+    for root, dirs, files in os.walk("build/Game"):
+        for dir in dirs:
+            makeArchive(dir)
+
+def makeElf():
+    default_compiler_path = pathlib.Path("GC/3.0a3/")
+
+    fileList = ""
+
+    for root, dirs, files in os.walk("archive"):
+        for f in files:
+            if f.endswith(".a"):
+                fileList += f"{root}\\{f} "
+
+    for sdk_o in sdk_o_paths:
+        fileList += f"{sdk_o} "
+
+    for lib_a in other_libs:
+        fileList += f"{lib_a} "
+
+    linker_path = pathlib.Path(f"Compilers/{default_compiler_path}/mwldeppc.exe ")
+    linker_flags = f"-lcf ldscript.lcf -fp hard -proc gekko -map main.map -o main.elf {fileList}"
+    if subprocess.call(f"{linker_path} {linker_flags}", shell=True) == 1:
+            print("Linking failed.")
+
 def deleteDFiles():
     dirs = os.listdir(os.getcwd())
 
@@ -13,20 +93,20 @@ def deleteDFiles():
         if dire.endswith(".d"):
             os.remove(os.path.join(os.getcwd(), dire))
 
-def main(compile_non_matching, use_ninja, clean_ninja):
-    if not os.path.exists("deps"):
-        print("deps folder not created, please run setup.py!")
+def main(compile_non_matching, use_ninja, clean_ninja, link):
+    if not os.path.exists("Compilers"):
+        print("Compilers folder not created, please run setup.py!")
         sys.exit(1)
 
     isNotWindows = os.name != "nt"
 
-    flags = "-c -Cpp_exceptions off -stdinc -nodefaults -proc gekko -fp hard -lang=c++ -ipa file -inline auto -O4,s -rtti off -sdata 4 -sdata2 4 -align powerpc -enum int -DRVL_SDK -DEPPC -DHOLLYWOOD_REV -DTRK_INTEGRATION -DGEKKO -DMTX_USE_PS -D_MSL_USING_MW_C_HEADERS -msgstyle gcc "
+    flags = "-c -Cpp_exceptions off -nodefaults -proc gekko -fp hard -lang=c++ -ipa file -inline auto -O4,s -rtti off -sdata 4 -sdata2 4 -align powerpc -enum int -msgstyle gcc "
     includes = "-i . -I- -i include "
 
     default_compiler_path = pathlib.Path("GC/3.0a3/")
 
     compiler_exceptions = {
-        #"source\JSystem\JKernel\JKRThread.cpp": "GC/2.5/"
+        #"source\JSystem\JKernel\JKRHeap.cpp": pathlib.Path("GC/1.2.5/")
     }
 
     compiler_flags = {
@@ -37,16 +117,15 @@ def main(compile_non_matching, use_ninja, clean_ninja):
         print("Using nonmatching functions")
         flags = flags + " -DNON_MATCHING "
 
-    rvl_sdk_path = pathlib.Path("deps/RVL_SDK/include")
-    nw4r_path = pathlib.Path("deps/NW4R/Library/include")
-    trk_path = pathlib.Path("deps/EABI/PowerPC_EABI_Support/MetroTRK")
-    runtime_path = pathlib.Path("deps/EABI/PowerPC_EABI_Support/Runtime/Inc")
-    msl_c_path = pathlib.Path("deps/EABI/PowerPC_EABI_Support/MSL/MSL_C/PPC_EABI/Include")
-    msl_cpp_path = pathlib.Path("deps/EABI/PowerPC_EABI_Support/MSL/MSL_C++/MSL_Common/Include")
-    msl_c_common_path = pathlib.Path("deps/EABI/PowerPC_EABI_Support/MSL/MSL_C/MSL_Common/Include")
-    facelib_path = pathlib.Path("deps/RVLFaceLib/include")
+    rvl_sdk_path =      pathlib.Path("libs/RVL_SDK/include")
+    trk_path =          pathlib.Path("libs/MetroTRK/include")
+    runtime_path =      pathlib.Path("libs/Runtime/include")
+    msl_c_path =        pathlib.Path("libs/MSL_C/include")
+    facelib_path =      pathlib.Path("libs/RVLFaceLib/include")
+    jsystem_path =      pathlib.Path("libs/JSystem/include")
+    nw4r_path =         pathlib.Path("libs/nw4r/include")
 
-    includes += f"-i {rvl_sdk_path} -I- -i {nw4r_path} -I- -i {trk_path} -I- -i {runtime_path} -I- -i {msl_c_path} -I- -i {msl_cpp_path} -I- -i {msl_c_common_path} -I- -i {facelib_path} "
+    includes += f"-i {facelib_path} -i {rvl_sdk_path} -I- -i {trk_path} -I- -i {runtime_path} -I- -i {msl_c_path} -I- -i {jsystem_path} -I- -i {nw4r_path} "
     flags += includes
 
     tasks = list()
@@ -76,7 +155,7 @@ def main(compile_non_matching, use_ninja, clean_ninja):
 
                 tasks.append((source_path, build_path))
 
-    compiler_path = pathlib.Path(f"deps/Compilers/{default_compiler_path}/mwcceppc.exe ")
+    compiler_path = pathlib.Path(f"Compilers/{default_compiler_path}/mwcceppc.exe ")
     if isNotWindows:
         compiler_path = pathlib.Path(f"wine {compiler_path} ")
 
@@ -88,7 +167,7 @@ def main(compile_non_matching, use_ninja, clean_ninja):
 
         # Create main compiler rule and exception compilers.
         nw.rule("cc", f"{compiler_path} $flags $in -o $out", "Compiling $in...")
-        exceptionsToRules = { "sample": "value" }
+        exceptionsToRules = { }
         cc_num = 1
         for exc in compiler_exceptions.values():
             if not exc in exceptionsToRules.keys():
@@ -102,6 +181,8 @@ def main(compile_non_matching, use_ninja, clean_ninja):
             try:
                 if compiler_exceptions[source_path]:
                     rule = exceptionsToRules[compiler_exceptions[source_path]]
+                    path = f"Compilers/{compiler_exceptions[source_path]}/mwcceppc.exe "
+                    nw.rule(f"{rule}", f"{path} $flags $in -o $out", "Compiling $in [With different compiler]...")
             except:
                 pass
             nw.build(build_path, rule, source_path, variables={ 'flags': flags })
@@ -116,14 +197,13 @@ def main(compile_non_matching, use_ninja, clean_ninja):
             deleteDFiles()
             sys.exit(1)
 
-    else:
-            
+    else:   
         for task in tasks:
             source_path, build_path = task     
 
             try:
                 if compiler_exceptions[source_path]:
-                    compiler_path = pathlib.Path(f"deps/Compilers/{compiler_exceptions[source_path]}/mwcceppc.exe ")
+                    compiler_path = pathlib.Path(f"Compilers/{compiler_exceptions[source_path]}/mwcceppc.exe ")
                     if isNotWindows:
                         compiler_path = pathlib.Path(f"wine {compiler_path} ")
             except:
@@ -136,10 +216,16 @@ def main(compile_non_matching, use_ninja, clean_ninja):
 
     deleteDFiles()
 
+    if link:
+        print("Creating library archives...")
+        makeLibArchive()
+        print("Making final ELF...")
+        makeElf()
     print("Complete.")
 
 def print_help_and_exit():
     print("Usage: build.py [flags...]")
+    print("\t-link: Link the final project together.")
     print("\t-non-matching: Compile non-matching code.")
     print("\t-no-ninja: Do not use ninja even if available.")
     print("\t-clean: Clean old build files before building new when using ninja.")
@@ -151,6 +237,7 @@ if __name__ == "__main__":
     compile_non_matching = False
     use_ninja = True
     clean_ninja = False
+    link = False
 
     for arg in sys.argv[1:]:
         if arg == "-non-matching":
@@ -161,9 +248,11 @@ if __name__ == "__main__":
             clean_ninja = True
         elif arg == "-help":
             print_help_and_exit()
+        elif arg == "-link":
+            link = True
         else:
             print(f"Invalid argument: {arg}")
             print()
             print_help_and_exit()
             
-    main(compile_non_matching, use_ninja, clean_ninja)
+    main(compile_non_matching, use_ninja, clean_ninja, link)

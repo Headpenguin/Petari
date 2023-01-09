@@ -3,7 +3,7 @@
 
 <br>
 
-1. **Obtain** a clean copy of `main.dol` from **Super Mario Galaxy 1**
+1. **Obtain** a clean copy of `main.dol` from **Super Mario Galaxy 1 (Korean)**
 
 <br>
 
@@ -39,7 +39,17 @@
 
     If your function is matching, then it will return with 0 errors. Be careful, as paired-single instructions are currently unsupported so those are ignored.
 
-<br>    
+<br>
+
+7. **Update** your progress with:
+
+    ```sh
+    python progress.py
+    ```
+
+    This will update all of the functions, documents, and the progress badge.
+
+<br>   
     
 *For more information check the **[Contribution Guide]** .*
 

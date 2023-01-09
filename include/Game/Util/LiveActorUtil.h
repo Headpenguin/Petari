@@ -2,6 +2,7 @@
 
 #include "JSystem/JGeometry/TVec.h"
 #include "Game/Animation/AnmPlayer.h"
+#include "Game/Util/JMapInfo.h"
 #include <revolution.h>
 
 class CollisionParts;
@@ -18,6 +19,7 @@ class LodCtrl;
 class CollisionParts;
 class HitSensor;
 class BtkCtrl;
+class MsgSharedGroup;
 
 namespace MR {
     enum CollisionScaleType {
@@ -29,6 +31,8 @@ namespace MR {
 
     bool isExistIndirectTexture(const LiveActor *);
 
+    bool isAnyAnimStopped(const LiveActor *, const char *);
+
     void validateClipping(LiveActor *);
     void invalidateClipping(LiveActor *);
     void setClippingTypeSphere(LiveActor *, f32);
@@ -38,7 +42,9 @@ namespace MR {
     void setClippingFar200m(LiveActor *);
     void startBtk(const LiveActor *, const char *);
 
-    LiveActorGroup* joinToGroupArray(LiveActor *, const JMapInfoIter &, const char *, s32);
+    void setBaseScale(LiveActor *, const TVec3f &);
+
+    MsgSharedGroup* joinToGroupArray(LiveActor *, const JMapInfoIter &, const char *, s32);
     LiveActorGroup* getGroupFromArray(const LiveActor *);
 
     void copyTransRotateScale(const LiveActor *, LiveActor *);
@@ -156,6 +162,8 @@ namespace MR {
     void invalidateCollisionParts(LiveActor *);
     void invalidateCollisionParts(CollisionParts *);
 
+    bool isExistCollisionParts(const LiveActor *);
+
     void resetAllCollisionMtx(LiveActor *);
 
     void startAllAnim(const LiveActor *, const char *);
@@ -168,6 +176,7 @@ namespace MR {
 
     void startBck(const LiveActor *, const char *, const char *);
     void startBckNoInterpole(const LiveActor *, const char *);
+    void startBckWithInterpole(const LiveActor *, const char *, s32);
     void startBrk(const LiveActor *, const char *);
     void startBva(const LiveActor *, const char *);
     void setBvaFrameAndStop(const LiveActor *, f32);
@@ -187,6 +196,8 @@ namespace MR {
     f32 getBrkFrameMax(const LiveActor *);
     f32 getBtkFrameMax(const LiveActor *);
     void setBckFrameAndStop(const LiveActor *, f32);
+
+    s16 getBrkFrameMax(const LiveActor *, const char *);
 
     void setBtkFrame(LiveActor *, f32);
     void setBtkFrameAndStop(const LiveActor *, f32);
@@ -291,4 +302,17 @@ namespace MR {
     bool isExistAnim(const LiveActor *, const char *);
 
     void setMirrorReflectionInfoFromMtxYUp(const TPos3f &);
+
+    const char* createLowModelObjName(const LiveActor *);
+    const char* createMiddleModelObjName(const LiveActor *);
+
+    void addToAttributeGroupSearchTurtle(const LiveActor *);
+
+    void stopSceneAtStep(const LiveActor *, s32, s32);
+
+    void initJointTransform(const LiveActor *);
+
+    void initCollisionPartsAutoEqualScaleOne(LiveActor *, const char *, HitSensor *, MtxPtr);
+
+    PartsModel* createBloomModel(LiveActor *, MtxPtr);
 };

@@ -1,8 +1,15 @@
 #include "Game/Util.h"
-#include <stdio.h>
+#include "Game/System/HeapMemoryWatcher.h"
+#include "Game/SingletonHolder.h"
+#include <cstdio>
 #include <string.h>
 
 namespace MR {
+    MEMAllocatorFunc NewDeleteAllocator::sAllocatorFunc = {
+        NewDeleteAllocator::alloc, 
+        NewDeleteAllocator::free, 
+    };
+
     #ifdef NON_MATCHING
     // shrug
     s32 calcCheckSum(const void *pData, u32 a2) {
@@ -46,10 +53,23 @@ namespace MR {
     }
 
     // MR::getAproposHeapForSceneArchive
-    // MR::getStationedHeapNapa
-    // MR::getStationedHeapGDDR3
-    // MR::getSceneHeapNapa
-    // MR::getSceneHeapGDDR3
+    
+    JKRExpHeap* MR::getStationedHeapNapa() {
+        return SingletonHolder<HeapMemoryWatcher>::sInstance->mStationedHeapNapa;
+    }
+
+    JKRExpHeap* getStationedHeapGDDR3() {
+        return SingletonHolder<HeapMemoryWatcher>::sInstance->mStationedHeapGDDR;
+    }
+
+    JKRSolidHeap* getSceneHeapNapa() {
+        return SingletonHolder<HeapMemoryWatcher>::sInstance->mSceneHeapNapa;
+    }
+
+    JKRSolidHeap* getSceneHeapGDDR3() {
+        return SingletonHolder<HeapMemoryWatcher>::sInstance->mSceneHeapGDDR;
+    }
+
     // MR::getHeapNapa
     // MR::getHeapGDDR3
 
@@ -66,7 +86,7 @@ namespace MR {
     // MR::adjustHeapSize
     // MR::copyMemory
 
-    void fillMemory(void *pDest, u8 a2, size_t size) {
+    void fillMemory(void *pDest, u8 a2, std::size_t size) {
         if (a2 == 0) {
             MR::zeroMemory(pDest, size);
         }

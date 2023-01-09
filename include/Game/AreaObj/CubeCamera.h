@@ -14,6 +14,10 @@ public:
     
     CubeCameraArea(int, const char *);
 
+    virtual ~CubeCameraArea() {
+
+    }
+
     virtual void init(const JMapInfoIter &);
     virtual void movement();
     virtual bool isInVolume(const TVec3f &) const;
@@ -28,4 +32,14 @@ public:
 
     u32 _3C;
     u32 mZoneID; // _40
+};
+
+class CubeCameraMgr : public AreaObjMgr {
+public:
+    CubeCameraMgr(s32, const char *);
+
+    virtual ~CubeCameraMgr();
+
+    void initAfterLoad();
+    void sort();
 };

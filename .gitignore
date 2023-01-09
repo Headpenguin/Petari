@@ -11,13 +11,15 @@ deps
 *.id2
 *.nam
 *.til
+*.map
+*.elf
 *.o
 *.out
 *.elf
 *.dol
 *.a
 *.d
-build
+build/**
 compiler
 __pycache__
 genCsv.py
@@ -26,3 +28,9 @@ sanity_check.py
 .ninja_log
 .ninja_deps
 build.ninja
+deps.zip
+Compilers.zip
+Compilers/*
+*.ninja
+*.ninja_log
+doxygen/*

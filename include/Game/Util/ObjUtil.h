@@ -75,6 +75,8 @@ namespace MR {
     void connectToSceneMirrorMapObjNoMovement(LiveActor *);
 
     void connectToSceneMirrorMapObjDecoration(LiveActor *);
+
+    void connectToSceneNoShadowedMapObjStrongLight(LiveActor *);
     
     bool isName(const NameObj *, const char *);
     bool isSame(const NameObj *, const NameObj *);
@@ -84,7 +86,7 @@ namespace MR {
     void requestMovementOn(NameObj *);
     void requestMovementOff(NameObj *);
     
-    const JMapInfo* createCsvParser(const char *, const char *, ...);
+    JMapInfo* createCsvParser(const char *, const char *, ...);
     JMapInfo* tryCreateCsvParser(const ResourceHolder *, const char *, ...);
     s32 getCsvDataElementNum(const JMapInfo *);
 
@@ -97,12 +99,17 @@ namespace MR {
     void listenNameObjStageSwitchOnAppear(const NameObj *, const StageSwitchCtrl *, const MR::FunctorBase &);
     void listenNameObjStageSwitchOnOffAppear(const NameObj *, const StageSwitchCtrl *, const MR::FunctorBase &, const MR::FunctorBase &);
 
+    void listenNameObjStageSwitchOnOffA(const NameObj *, const StageSwitchCtrl *, const MR::FunctorBase &, const MR::FunctorBase &);
+
+    void listenNameObjStageSwitchOnB(const NameObj *, const StageSwitchCtrl *, const MR::FunctorBase &);
+
     void requestMovementOn(LiveActor *);
 
     void requestMovementOn(LayoutActor *);
 
     void registerPreDrawFunction(const MR::FunctorBase &, int);
 
+    bool isJudgedToClipFrustum(const TVec3f &, f32);
     bool isJudgedToClipFrustum100m(const TVec3f &, f32);
     bool isJudgedToClipFrustum300m(const TVec3f &, f32);
 
@@ -113,6 +120,8 @@ namespace MR {
     bool tryRumblePadMiddle(const void *, s32);
     bool tryRumblePadStrong(const void *, s32);
     bool tryRumblePadVeryStrong(const void *, s32);
+
+    bool tryRumbleDefaultHit(const void *, s32);
 
     void declareCoin(const NameObj *, s32);
     void getDeclareRemnantCoinCount(const NameObj *);
@@ -158,10 +167,15 @@ namespace MR {
     bool isInDarkMatter(const TVec3f &);
 
     void stopScene(s32);
+    void stopSceneForDefaultHit(s32);
 
     const ResTIMG* loadTexFromArc(const char *, const char *);
 
     void joinToNameObjGroup(NameObj *, const char *);
 
     bool isEndPowerStarAppearDemo(const NameObj *);
+
+    bool tryRegisterNamePosLinkObj(const NameObj *, const JMapInfoIter &);
+
+    bool tryFindLinkNamePos(const NameObj *, const char *, MtxPtr);
 };

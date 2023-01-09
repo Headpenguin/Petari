@@ -5,7 +5,7 @@
 #include "Game/AreaObj/AreaForm.h"
 #include "Game/NameObj/NameObj.h"
 #include "Game/Map/StageSwitch.h"
-#include "Game/Util.h"
+#include "Game/Util/Array.h"
 
 class AreaObj : public NameObj {
 public:
@@ -55,6 +55,8 @@ public:
 class AreaObjMgr : public NameObj {
 public:
     AreaObjMgr(s32, const char *);
+
+    virtual ~AreaObjMgr();
 
     void entry(AreaObj *);
     AreaObj* find_in(const TVec3f &) const;
