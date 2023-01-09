@@ -2,7 +2,7 @@
 #include "Game/Map/LightDirector.h"
 #include "Game/Scene/SceneObjHolder.h"
 #include "Game/Util.h"
-#include <stdio.h>
+#include <cstdio>
 #include <cstring>
 
 void LightFunction::initLightData() {

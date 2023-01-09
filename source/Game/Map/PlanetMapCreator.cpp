@@ -2,7 +2,7 @@
 #include "Game/Scene/SceneObjHolder.h"
 #include "Game/NameObj/NameObjFactory.h"
 #include "Game/Util.h"
-#include <stdio.h>
+#include <cstdio>
 #include <cstring>
 
 #ifdef NON_MATCHING

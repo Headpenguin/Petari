@@ -6,6 +6,7 @@
 class LiveActor;
 class ActorCameraInfo;
 class CameraTargetArg;
+class NameObj;
 
 namespace MR {
     TVec3f getCamPos();
@@ -51,9 +52,10 @@ namespace MR {
 
     void calcScreenPosition(TVec2f *, const TVec3f &);
 
+    bool calcScreenPosition(TVec3f *, const TVec3f &);
+
     void declareEventCameraAnim(const ActorCameraInfo *, const char *, void *);
 
-    void initActorCamera(const LiveActor *, const JMapInfoIter &, ActorCameraInfo **);
     bool createActorCameraInfoIfExist(const JMapInfoIter &, ActorCameraInfo **);
     void endActorCamera(const LiveActor *, const ActorCameraInfo *, bool, s32);
 
@@ -65,6 +67,8 @@ namespace MR {
 
     void drawInitFor2DModel();
 
+    void declareCameraRegisterVec(const NameObj *, u32, TVec3f *);
+
     bool hasStartAnimCamera();
 
     void endStartAnimCamera();
@@ -72,4 +76,6 @@ namespace MR {
     void pauseOffCameraDirector();
 
     void calcScreenPosition(TVec2f *, const TVec3f &);
+
+    bool isCameraInWater();
 };

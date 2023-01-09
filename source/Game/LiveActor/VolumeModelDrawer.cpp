@@ -1,7 +1,7 @@
 #include "Game/LiveActor/VolumeModelDrawer.h"
 #include "Game/Scene/SceneObjHolder.h"
 #include "Game/System/ResourceHolder.h"
-#include <stdio.h>
+#include <cstdio>
 
 VolumeModelDrawInit::VolumeModelDrawInit() : NameObj("ボリュームモデル描画初期化") {
     MR::FunctorV0F func(*MR::setupShadowVolumeDraw);
@@ -20,7 +20,7 @@ VolumeModelDrawer::VolumeModelDrawer(const char *pName, const char *pFileName, M
     char buf[0x100];
     snprintf(buf, 0x100, "%s.arc", pFileName);
     ResourceHolder* resHolder = MR::createAndAddResourceHolder(buf);
-    mModelData = (J3DModelData*)resHolder->mTable->getRes(pFileName);
+    mModelData = (J3DModelData*)resHolder->mModelResTable->getRes(pFileName);
 }
 
 void VolumeModelDrawer::draw() const {

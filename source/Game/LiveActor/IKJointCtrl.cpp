@@ -2,7 +2,7 @@
 #include "Game/LiveActor/LiveActor.h"
 #include "Game/Util.h"
 
-#include <algorithm.h>
+#include <algorithm>
 
 void IKJointCtrl::setEndPosition(const TVec3f &rPos, f32 a2) {
     TVec3f joint_pos;
@@ -82,7 +82,7 @@ void IKJointCtrlHolder::setEndDirection(const char *pName, const TVec3f &rDirect
 #ifdef NON_MATCHING
 // for_each inlines
 void IKJointCtrlHolder::endUpdate() {
-    std::for_each(mControls, &mControls[mNumControls], std::mem_fun(&IKJointCtrl::endCtrl));
+    for_each(mControls, &mControls[mNumControls], mem_fun(&IKJointCtrl::endCtrl));
     _10 = 1;
 }
 #endif

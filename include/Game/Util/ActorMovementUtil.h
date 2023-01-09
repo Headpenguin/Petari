@@ -77,5 +77,17 @@ namespace MR {
 
     void addVelocityToGravity(LiveActor *, f32);
 
+    void addVelocityKeepHeight(LiveActor *, const TVec3f &, f32, f32, f32);
+
+    void reboundVelocityFromCollision(LiveActor *, f32, f32, f32);
+
+    void addVelocity(LiveActor *, const TVec3f &);
+
+    f32 calcVelocityLength(const LiveActor *);
+
     void turnDirectionAndGravityH(LiveActor *, const TVec3f &, f32, f32);
+
+    void turnDirectionToTargetUseGroundNormalDegree(const LiveActor *, TVec3f *, const TVec3f &, f32);
+
+    void turnDirectionToTargetDegree(const LiveActor *, TVec3f *, const TVec3f &, f32);
 };

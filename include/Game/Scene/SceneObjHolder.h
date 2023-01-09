@@ -23,16 +23,22 @@
 #define SceneObj_AllLiveActorGroup          0x30
 #define SceneObj_PlanetGravityManager       0x32
 #define SceneObj_PurpleCoinHolder           0x37
+#define SceneObj_CoinRotater                0x38
 #define SceneObj_AirBubbleHolder            0x39
 #define SceneObj_BigFanHolder               0x3A
 #define SceneObj_ShadowVolumeDrawer         0x45
 #define SceneObj_ShadowSurfaceDrawerInit    0x46
 #define SceneObj_VolumeModelDrawInit        0x4C
 #define SceneObj_SpinDrawerPathDrawInit     0x4D
+#define SceneObj_NoteGroup                  0x4E
+#define SceneObj_ArrowSwitchMultiHolder     0x54
 #define SceneObj_NameObjExecuteHolder       0x58
 #define SceneObj_QuakeEffectGenerator       0x5B
 #define SceneObj_HeatHazeDirector           0x5D
+#define SceneObj_FirePressureBulletHolder   0x6A
+#define SceneObj_GalaxyNamePlateDrawer      0x70
 #define SceneObj_PlanetMapCreator           0x74
+#define SceneObj_PriorDrawAirHolder         0x75
 
 class NameObj;
 

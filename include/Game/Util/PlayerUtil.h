@@ -34,6 +34,10 @@ namespace MR {
 
     bool isPlayerTeresaDisappear();
 
+    bool isPlayerInRush();
+
+    bool isPlayerHipDropFalling();
+
     f32 getPlayerHitRadius();
 
     void pushPlayerFromArea(const TVec3f &);
@@ -54,6 +58,9 @@ namespace MR {
     void startLevelSoundPlayer(const char *, long);
     void incPlayerOxygen(u32);
 
+    void scatterStarPiecePlayer(u32);
+
+    void startSoundPlayer(const char *, s32);
     void stopSoundPlayer(const char *, u32);
 
     void showPlayer();
@@ -73,4 +80,10 @@ namespace MR {
     bool isPlayerPointedBy2POnTriggerButton();
 
     void endBindAndSpinDriverJump(LiveActor *, const TVec3f &);
+
+    void endBindAndPlayerJumpWithRollLanding(LiveActor *, const TVec3f &, u32);
+
+    void startBckPlayer(const char *, s32);
+
+    void setPlayerFrontVec(const TVec3f &, s32);
 };

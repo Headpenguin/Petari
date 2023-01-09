@@ -1,7 +1,8 @@
 #include "Game/Util/JMapUtil.h"
 #include "Game/Util.h"
 #include "math_types.h"
-#include <stdio.h>
+#include <cstdio>
+#include <cmath>
 
 namespace MR {
     bool isValidInfo(const JMapInfoIter &rIter) {

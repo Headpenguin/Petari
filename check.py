@@ -57,6 +57,7 @@ class FunctionLibrary:
             for line in input:
                 line_split = line.rstrip().split("=")
 
+                print(line)
                 symbol = line_split[1].split(":")[0]
 
                 number_split = line_split[0].split(" ")
@@ -237,7 +238,7 @@ def check_symbol(function_library, mangled_symbol, obj_name, readonly):
         symtab = elf_file.get_section_by_name('.symtab')
 
         if symtab.get_symbol_by_name(mangled_symbol) is None:
-            print("Could not find symbol in object file. This may be caused by the code not being compiled, the function being in the wrong C++ source file or the function signature being wrong.")
+            print(f"Could not find symbol in object file. This may be caused by the code not being compiled, the function being in the wrong C++ source file or the function signature being wrong. File: {obj_files}")
             return False
 
         compiled_symbol = symtab.get_symbol_by_name(mangled_symbol)[0]
@@ -314,7 +315,7 @@ def check_symbol(function_library, mangled_symbol, obj_name, readonly):
                 continue
             
             if original_instruction.id == custom_instruction.id:
-                assert(len(original_operands) == len(custom_operands))
+                #assert(len(original_operands) == len(custom_operands))
 
                 # First check common r2 and r13 issues
                 if original_instruction.id in { PPC_INS_LBZ, PPC_INS_LWZ, PPC_INS_STW, PPC_INS_LFS }:

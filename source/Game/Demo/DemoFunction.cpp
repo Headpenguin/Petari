@@ -1,5 +1,5 @@
 #include "Game/Demo/DemoFunction.h"
-#include <stdio.h>
+#include <cstdio>
 #include <cstring>
 
 void* DemoFunction::loadDemoArchive() {

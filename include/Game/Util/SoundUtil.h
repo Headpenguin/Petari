@@ -49,4 +49,15 @@ namespace MR {
     void startCSSound(const char *, const char *, s32);
 
     bool hasME();
+
+    void start2PAttackAssistSound();
+
+    void startDPDHitSound();
+    void startDPDFreezeLevelSound(const LiveActor *);
+
+    void moveVolumeStageBGMForNoteFairy(f32, u32);
+
+    s32 getRemixMelodyNoteNum(s32);
+
+    void startSystemLevelSE(const char *, s32, s32);
 };

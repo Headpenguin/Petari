@@ -6,8 +6,14 @@
 class ActorStateBaseInterface : public NerveExecutor
 {
 public:
-	ActorStateBaseInterface() : NerveExecutor(0), mIsDead(0) {}
-	//INLINE_FUNC_DECL_NO_ARG(ActorStateBaseInterface) : CALL_INLINE_FUNC(NerveExecutor, 0), mIsDead(0) {}
+    inline ActorStateBaseInterface(const char *pName) : NerveExecutor(pName) {
+
+    }
+
+    virtual inline ~ActorStateBaseInterface() {
+
+    }
+
     virtual void init();
     virtual void appear();
     virtual void kill();
@@ -20,5 +26,11 @@ public:
 template<typename T>
 class ActorStateBase : public ActorStateBaseInterface {
 public:
-    virtual ~ActorStateBase();
+    inline ActorStateBase(const char *pName) : ActorStateBaseInterface(pName) {
+
+    }
+
+    virtual ~ActorStateBase() {
+
+    }
 };

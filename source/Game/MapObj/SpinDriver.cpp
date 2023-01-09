@@ -1,6 +1,6 @@
 #include "Game/MapObj/SpinDriver.h"
 #include "Game/MapObj/SpinDriverUtil.h"
-#include <stdio.h>
+#include <cstdio>
 #include <cstring>
 
 SpinDriver::SpinDriver(const char *pName) : LiveActor(pName),

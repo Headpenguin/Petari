@@ -10,7 +10,7 @@
 #include "Game/MapObj/StageEffectDataTable.h"
 #include "Game/Util.h"
 
-#include <stdio.h>
+#include <cstdio>
 #include <cstring>
 
 NrvMapObjActor::HostTypeDone NrvMapObjActor::HostTypeDone::sInstance;

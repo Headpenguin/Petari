@@ -32,6 +32,8 @@ namespace MR {
     void reverseRailDirection(LiveActor *);
 
     void setRailCoord(LiveActor *, f32);
+    void setRailCoordSpeed(LiveActor *, f32);
+    void accelerateRailCoordSpeed(LiveActor *, f32);
 
     void moveCoord(LiveActor *, f32);
     
@@ -45,6 +47,7 @@ namespace MR {
     bool getJMapInfoRailArg0NoInit(const LiveActor *, s32 *);
     bool getRailPointArg0NoInit(const LiveActor *, s32, f32 *);
 
+    bool getRailArg0WithInit(const LiveActor *, s32 *);
     bool getRailArg1WithInit(const RailRider *, s32 *);
 
     f32 calcNearestRailCoord(const LiveActor *, const TVec3f &);
@@ -52,4 +55,18 @@ namespace MR {
     void moveCoordAndFollowTrans(LiveActor *, f32);
 
     bool isExistRail(const LiveActor *);
+
+    void moveRailRider(const LiveActor *);
+
+    void moveCoordToEndPos(const LiveActor *);
+
+    void slowDownRailCoordSpeed(const LiveActor *, f32);
+
+    bool isRailGoingToEnd(const LiveActor *);
+
+    f32 getRailCoordSpeed(const LiveActor *);
+
+    void setRailDirectionToEnd(const LiveActor *);
+
+    bool isLoopRail(const LiveActor *);
 };

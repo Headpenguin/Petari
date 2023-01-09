@@ -55,13 +55,17 @@ class Object:
     def calculateProgress(self):
         fullSize = 0
         doneSize = 0
+        numFuncs = 0
+        doneFuncs = 0
         for function in self.functions:
             fullSize += function.funcSize
+            numFuncs += 1
             
             if function.isCompleted:
                 doneSize += function.funcSize
+                doneFuncs += 1
 
-        return doneSize, fullSize
+        return doneSize, fullSize, numFuncs, doneFuncs
 
 class Library:
     name = ""
@@ -101,13 +105,18 @@ class Library:
     def calculateProgress(self):
         fullSize = 0
         doneSize = 0
+        funcNum = 0
+        funcDone = 0
 
         for obj in self.objects:
-            d, f = obj.calculateProgress()
+            d, f, func_num, func_done = obj.calculateProgress()
             fullSize += f
             doneSize += d
+            funcNum += func_num
+            funcDone += func_done
         
-        return doneSize, fullSize
+        return doneSize, fullSize, funcNum, funcDone
+
 
     def getName(self):
         return self.name
@@ -117,7 +126,7 @@ class Library:
         json.append("{\n")
         json.append("\t\"schemaVersion\": 1,\n")
         json.append(f"\t\"label\": \"{self.name}\",\n")
-        json.append(f"\t\"message\": \"{truncate(percent, 5)}%\",\n")
+        json.append(f"\t\"message\": \"{truncate(percent, 3)}%\",\n")
         json.append(f"\t\"color\": \"{color}\"\n")
         json.append("}")
 
@@ -138,7 +147,7 @@ class Library:
         page.append("| ------------- | ------------- | ------------- | ------------- | ------------- \n")
 
         for obj in self.objects:
-            d, f = obj.calculateProgress()
+            d, f, pad1, pad2 = obj.calculateProgress()
             prog = (d / f) * 100.0
             funcProg = (obj.totalCompletedFunctions / obj.totalFunctions) * 100.0
 
@@ -149,15 +158,32 @@ class Library:
             elif d != f and d != 0:
                 marker = ":eight_pointed_black_star:"
 
-            page.append(f"| {obj.name} | {prog}% | {obj.totalCompletedFunctions} / {obj.totalFunctions} | {funcProg}% | {marker} \n")
+            obj_page_name = obj.name.replace(".o", "")
 
-        page.append("\n\n")
+            page.append(f"| [{obj.name}](https://github.com/shibbo/Petari/blob/master/docs/lib/{self.name}/{obj_page_name}.md) | {prog}% | {obj.totalCompletedFunctions} / {obj.totalFunctions} | {funcProg}% | {marker} \n")
 
-        # now we can do it per object in the library
+        with open(f"docs/lib/{self.name}.md", "w") as w:
+            w.writelines(page)
+
+        # now that we have written the main page, let's make the object page too
         for obj in self.objects:
-            page.append(f"# {obj.name}\n")
-            page.append("| Symbol | Decompiled? |\n")
-            page.append("| ------------- | ------------- |\n")
+            obj_page = []
+
+            obj_page.append(f"# {obj.name}\n")
+            obj_page.append("| Symbol | Meaning \n")
+            obj_page.append("| ------------- | ------------- \n")
+            obj_page.append("| :x: | Function has not yet been started or is not matching. \n")
+            obj_page.append("| :white_check_mark: | Function is completed. \n")
+            obj_page.append("\n\n")
+
+            pad1, pad2, numFunc, doneFunc = obj.calculateProgress()
+            percent = (doneFunc / numFunc) * 100.0
+
+            obj_page.append(f"# {doneFunc} / {numFunc} Completed -- ({percent}%)\n")
+
+            obj_page.append(f"# {obj.name}\n")
+            obj_page.append("| Symbol | Decompiled? |\n")
+            obj_page.append("| ------------- | ------------- |\n")
 
             for func in obj.getFunctions():
                 marker = ":x:"
@@ -165,15 +191,15 @@ class Library:
                 if func.isCompleted:
                     marker = ":white_check_mark:"
 
-                funcName = func.name.replace("<", "&lt;")
-                funcName = funcName.replace(">", "&gt;")
+                obj_page.append(f"| `{func.name}` | {marker} |\n")
 
-                page.append(f"| {funcName} | {marker} |\n")
+            obj_page_name = obj.name.replace(".o", "")
 
-            page.append("\n\n")
+            if not os.path.exists(f"docs/lib/{self.name}"):
+                os.makedirs(f"docs/lib/{self.name}")
 
-        with open(f"docs/lib/{self.name}.md", "w") as w:
-            w.writelines(page)
+            with open(f"docs/lib/{self.name}/{obj_page_name}.md", "w") as w:
+                w.writelines(obj_page)
 
 game_libs = [
     "Animation.a",
@@ -200,74 +226,6 @@ game_libs = [
     "Speaker.a",
     "System.a",
     "Util.a"
-]
-
-sdk_libs = [
-    "ai.a",
-    "aralt.a",
-    "arc.a",
-    "ax.a",
-    "axfx.a",
-    "base.a",
-    "bte.a",
-    "db.a",
-    "dsp.a",
-    "dvd.a",
-    "esp.a",
-    "euart.a",
-    "exi.a",
-    "fs.a",
-    "gd.a",
-    "gx.a",
-    "ipc.a",
-    "mem.a",
-    "mtx.a",
-    "nand.a",
-    "net.a",
-    "nwc24.a",
-    "os.a",
-    "pad.a",
-    "rso.a",
-    "sc.a",
-    "si.a",
-    "thp.a",
-    "tpl.a",
-    "usb.a",
-    "vf.a",
-    "vi.a",
-    "wenc.a",
-    "wpad.a",
-    "wud.a",
-]
-
-nw_libs = [
-    "libnw4Fr_ut.a",
-    "libnw4r_db.a",
-    "libnw4r_lyt.a",
-    "libnw4r_math.a",
-    "libnw4r_ut.a"
-]
-
-jsystem_libs = [
-    "JAudio2.a",
-    "JKernel.a",
-    "JSupport.a",
-    "JGadget.a",
-    "JUtility.a",
-    "J2DGraph.a",
-    "J3DGraphBase.a",
-    "J3DGraphAnimator.a",
-    "J3DGraphLoader.a",
-    "JMath.a",
-    "JParticle.a"
-]
-
-misc_libs = [            
-    "MSL_C.PPCEABI.bare.H.a",
-    "Runtime.PPCEABI.H.a",
-    "RVLFaceLib.a",
-    "TRK_Hollywood_Revolution.a",
-    "NdevExi2A.a"
 ]
 
 lib_percent_colors = {
@@ -336,73 +294,39 @@ for csv_file in sorted(csv_files, key=str.casefold):
 
     libraries[lib_name] = library
 
-fullSize = 0
-doneSize = 0
-
-full_game_size = 0
-done_game_size = 0
-
-full_nw_size = 0
-done_nw_size = 0
-
 full_sdk_size = 0
 done_sdk_size = 0
 
-full_jsystem_size = 0
-done_jsystem_size = 0
-
-full_misc_size = 0
-done_misc_size = 0
+num_funcs = 0
+num_done_funcs = 0
 
 print("Calculating percentages...")
 
 for key in libraries:
     lib = libraries[key]
-    d, f = lib.calculateProgress()
-    fullSize += f
-    doneSize += d
+    d, f, funcNum, funcDoneNum = lib.calculateProgress()
 
     libName = f"{lib.getName()}.a"
 
     if libName in game_libs:
-        full_game_size += f
-        done_game_size += d
-    elif libName in jsystem_libs:
-        full_jsystem_size += f
-        done_jsystem_size += d
-    elif libName in sdk_libs:
         full_sdk_size += f
         done_sdk_size += d
-    elif libName in nw_libs:
-        full_nw_size += f
-        done_nw_size += d
-    elif libName in misc_libs:
-        full_misc_size += f
-        done_misc_size += d
+        num_funcs += funcNum
+        num_done_funcs += funcDoneNum
 
     if lib.getName() not in lib_percent_colors:
         lib.generateJSONTag((d / f ) * 100.0, "ffff66")
     else:
         lib.generateJSONTag((d / f ) * 100.0, lib_percent_colors[lib.getName()])
 
-progPercent = (done_game_size / full_game_size ) * 100.0
-progNonPercent = int((done_game_size / full_game_size) * 120.0)
-
-progPercent_jsystem = (done_jsystem_size / full_jsystem_size ) * 100.0
-progPercent_nw = (done_nw_size / full_nw_size ) * 100.0
 progPercent_sdk = (done_sdk_size / full_sdk_size ) * 100.0
-progPercent_misc = (done_misc_size / full_misc_size ) * 100.0
+progPercent_Func = (num_done_funcs / num_funcs) * 100.0
 
-print(f"Progress: {progPercent}% [{done_game_size} / {full_game_size}] bytes")
-print(f"You currently have {progNonPercent} / 120 stars.")
-
+print(f"Progress: {progPercent_sdk}% [{done_sdk_size} / {full_sdk_size}] bytes")
+print(f"Progress: {progPercent_Func}% [{num_done_funcs} / {num_funcs}] functions")
 print("Generating JSON...")
 
-generateFullProgJSON("Game", progPercent, "blue")
-generateFullProgJSON("SDK", progPercent_sdk, "grey")
-generateFullProgJSON("JSystem", progPercent_jsystem, "red")
-generateFullProgJSON("NW4R", progPercent_nw, "green")
-generateFullProgJSON("Misc", progPercent_misc, "purple")
+generateFullProgJSON("Game", progPercent_sdk, "blue")
 
 print("Generating markdown pages...")
 
@@ -413,7 +337,7 @@ progressPage.append("| ------------- | ------------- |\n")
 
 for key in libraries:
     lib = libraries[key]
-    d, f = lib.calculateProgress()
+    d, f, pad1, pad2 = lib.calculateProgress()
     libprog = (d / f) * 100.0
     progressPage.append(f"| [{key}](https://github.com/shibbo/Petari/blob/master/docs/lib/{key}.md) | {libprog}% |\n")
 

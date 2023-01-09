@@ -16,8 +16,8 @@ class JointController {
 public:
     JointController();
 
-    virtual s32 calcJointMatrix(TPos3f *, const JointControllerInfo &);
-    virtual s32 calcJointMatrixAfterChild(TPos3f *, const JointControllerInfo &);
+    virtual bool calcJointMatrix(TPos3f *, const JointControllerInfo &);
+    virtual bool calcJointMatrixAfterChild(TPos3f *, const JointControllerInfo &);
 
     void registerCallBack();
     void calcJointMatrixAndSetSystem(J3DJoint *);
@@ -26,10 +26,6 @@ public:
 
     J3DModel* mModel;   // _4
     J3DJoint* mJoint;   // _8
-};
-
-namespace MR {
-    void setJointControllerParam(JointController *, const LiveActor *, const char *);
 };
 
 template<typename T>
@@ -48,7 +44,34 @@ public:
         
     }
 
+    virtual bool calcJointMatrix(TPos3f *a1, const JointControllerInfo &a2) {
+        if (mMtxCalcFunc != NULL) {
+            return (mHost->*mMtxCalcFunc)(a1, a2);
+        } else {
+            return false;
+        }
+    }
+
+    virtual bool calcJointMatrixAfterChild(TPos3f *a1, const JointControllerInfo &a2) {
+        if (mMtxCalcAfterChildFunc != NULL) {
+            return (mHost->*mMtxCalcAfterChildFunc)(a1, a2);
+        } else {
+            return false;
+        }
+    }
+
     T* mHost;                       // _C
     func mMtxCalcFunc;             // _10
     func mMtxCalcAfterChildFunc;   // _14
+};
+
+namespace MR {
+    void setJointControllerParam(JointController *, const LiveActor *, const char *);
+
+    template <class T>
+    JointControlDelegator<T>* createJointDelegatorWithNullChildFunc(T *pHost, bool (T::*calcFunc)(TPos3f *, const JointControllerInfo &), const char *pName) {
+        JointControlDelegator<T>* delegator = new JointControlDelegator<T>(pHost, calcFunc, 0);
+        setJointControllerParam(delegator, pHost, pName);
+        return delegator;
+    }
 };

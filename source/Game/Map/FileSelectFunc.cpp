@@ -1,8 +1,7 @@
 #include "Game/Map/FileSelectFunc.h"
 #include "Game/Map/FileSelectIconID.h"
 #include "Game/Util.h"
-#include "RVLFaceLibrary/RFL_Types.h"
-#include "RVLFaceLibrary/RFL_DataUtility.h"
+#include "RVLFaceLib.h"
 
 u32 FileSelectFunc::getMiiNameBufferSize() {
     return 0xB;
@@ -11,7 +10,7 @@ u32 FileSelectFunc::getMiiNameBufferSize() {
 void FileSelectFunc::copyMiiName(u16 *pData, const FileSelectIconID &rIcon) {
     if (rIcon.isFellow()) {
         u32 fellowID = rIcon.getFellowID();
-        void* msg = MR::getGameMessageDirect(sIconNameMessageID[fellowID]);
+        const wchar_t* msg = MR::getGameMessageDirect(sIconNameMessageID[fellowID]);
         MR::copyMemory(pData, msg, 0x16);
     }
     else {

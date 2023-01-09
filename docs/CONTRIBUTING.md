@@ -13,7 +13,7 @@ All pull requests and issues are welcome.
 Be sure that all of your submitted code <br>
 follows the guidelines that are listed below.
 
-When running `make`, it is **REQUIRED** that the output is `1:1`.
+When running `build.py`, it is **REQUIRED** that the output is `1:1`.
 
 After the code matches, be sure to run `scripts/check.py` <br>
 to check the function that you want to mark.
@@ -50,6 +50,43 @@ please join our **[Discord]** server.
 - **Python**
 
     *Version `3.7+`*
+
+- **Any Code IDE (Visual Studio Code recommended)**
+
+    *If you are using Visual Studio Code, add this to* `c_cpp_properties.json`:
+
+     ```json
+    {
+        "configurations": [
+            {
+                "name": "Win32",
+                "includePath": [
+                    "${workspaceFolder}/**",
+                    "${workspaceFolder}/libs/JSystem/include",
+                    "${workspaceFolder}/libs/MetroTRK/include",
+                    "${workspaceFolder}/libs/MSL_C/include",
+                    "${workspaceFolder}/libs/nw4r/include",
+                    "${workspaceFolder}/libs/Runtime/include",
+                    "${workspaceFolder}/libs/RVL_SDK/include",
+                    "${workspaceFolder}/libs/RVLFaceLib/include"
+                ],
+                "defines": [
+                    "_DEBUG",
+                    "UNICODE",
+                    "_UNICODE",
+                    "MTX_USE_PS",
+                    "GEKKO",
+                ],
+                "cStandard": "c99",
+                "cppStandard": "c++98",
+                "intelliSenseMode": "windows-msvc-x64"
+            }
+        ],
+        "version": 4
+    }
+    ```
+
+    *This setup will help you include each library without compiler error issues from Intellisense.*
 
 <br>
 
@@ -96,6 +133,36 @@ please join our **[Discord]** server.
 <br>
 
 - Use `forward-declared` types when possible
+
+- At the top of every header place:
+
+    ```c++
+    #pragma once
+    ```
+    
+
+<br>
+
+### Classes
+
+<br>
+
+- Follow the proper syntax for documenting a class's functions and variables:
+
+    ```c++
+    /* member-offset */     s32 varName;    ///< Description of varName.
+    ```
+
+    ```c++
+    /// @brief Function does a thing.
+    /// @param argumentName Is an argument to a function that does a thing.
+    /// @return If the function did a thing.
+    /// @note Might have not done a thing...
+    bool func(s32 argumentName);
+    ```
+
+    If there is a function that does not have this implemented (ie in headers before the new documentation revamp), please take the time to help reimplement them to document this repository better!
+    Note that the documentation website only updates every 15 minutes, so wait up to the nearest 15 minutes after your pull request has been merged. However, you can preview your changes before merging by running `doxygen`.
 
 - At the top of every header place:
 

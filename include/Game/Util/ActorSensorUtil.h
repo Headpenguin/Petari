@@ -74,6 +74,12 @@ namespace MR {
     bool isMsgStarPieceAttack(u32);
     bool isMsgStarPieceReflect(u32);
 
+    bool isMsgEnemyAttackFire(u32);
+    bool isMsgEnemyAttackFireStrong(u32);
+
+    bool isMsgToEnemyAttackBlow(u32);
+    bool isMsgToEnemyAttackTrample(u32);
+
     bool isMsgFloorTouch(u32);
 
     bool isSensorEnemy(const HitSensor *);
@@ -90,6 +96,11 @@ namespace MR {
 
     void validateHitSensors(LiveActor *);
     void invalidateHitSensors(LiveActor *);
+
+    void calcSensorDirection(TVec3f *, const HitSensor *, const HitSensor *);
+
+    void calcSensorDirectionNormalize(TVec3f *, const HitSensor *, const HitSensor *);
+    void calcSensorHorizonNormalize(TVec3f *, const TVec3f &, const HitSensor *, const HitSensor *);
 
     bool sendArbitraryMsg(u32, HitSensor *, HitSensor *);
     bool sendMsgPush(HitSensor *, HitSensor *);
@@ -128,6 +139,10 @@ namespace MR {
 
     bool sendMsgEnemyAttackExplosionToBindedSensor(LiveActor *, HitSensor *);
 
+    bool sendMsgEnemyAttackToBindedSensor(LiveActor *, HitSensor *);
+
+    bool sendMsgToEnemyAttackBlow(HitSensor *, HitSensor *);
+
     void sendMsgToGroupMember(u32, LiveActor *, HitSensor *, const char *);
 
     bool isMsgPlayerHitAll(u32);
@@ -149,6 +164,12 @@ namespace MR {
 
     bool isMsgInvincibleAttack(u32);
 
+    bool isMsgFireBallAttack(u32);
+
+    bool isMsgSpinStormRange(u32);
+
+    bool isMsgAutoRushBegin(u32);
+
     bool receiveItemShowMsg(u32, HitSensor *, HitSensor *);
     bool receiveItemHideMsg(u32, HitSensor *, HitSensor *);
 
@@ -167,4 +188,7 @@ namespace MR {
     void setSensorRadius(LiveActor *, const char *, f32);
 
     void setSensorOffset(LiveActor *, const char *, const TVec3f &);
+
+    void validateHitSensor(LiveActor *, const char *);
+    void invalidateHitSensor(LiveActor *, const char *);
 };

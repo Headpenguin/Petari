@@ -1,7 +1,7 @@
 #include "Game/LiveActor/LodCtrl.h"
 #include "Game/LiveActor/ClippingDirector.h"
 
-#include <stdio.h>
+#include <cstdio>
 
 namespace {
     void LodFuntionCall(LodCtrl *pCtrl, void (*pFunc)(LiveActor *)) {
@@ -43,7 +43,7 @@ LodCtrl::LodCtrl(LiveActor *pActor, const JMapInfoIter &rIter) {
     _19 = 0;
     _1A = 1;
     _1B = 0;
-    _2C = -1;
+    mViewGroupID = -1;
     mActorLightCtrl = NULL;
     _1C = &def;
     _20 = &def;

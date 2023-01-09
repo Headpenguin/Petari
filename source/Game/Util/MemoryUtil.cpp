@@ -1,10 +1,15 @@
 #include "Game/Util.h"
 #include "Game/System/HeapMemoryWatcher.h"
 #include "Game/SingletonHolder.h"
-#include <stdio.h>
+#include <cstdio>
 #include <string.h>
 
 namespace MR {
+    MEMAllocatorFunc NewDeleteAllocator::sAllocatorFunc = {
+        NewDeleteAllocator::alloc, 
+        NewDeleteAllocator::free, 
+    };
+
     #ifdef NON_MATCHING
     // shrug
     s32 calcCheckSum(const void *pData, u32 a2) {
@@ -81,7 +86,7 @@ namespace MR {
     // MR::adjustHeapSize
     // MR::copyMemory
 
-    void fillMemory(void *pDest, u8 a2, size_t size) {
+    void fillMemory(void *pDest, u8 a2, std::size_t size) {
         if (a2 == 0) {
             MR::zeroMemory(pDest, size);
         }
