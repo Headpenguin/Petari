@@ -57,7 +57,7 @@ class FunctionLibrary:
             for line in input:
                 line_split = line.rstrip().split("=")
 
-                print(line)
+                #print(line)
                 symbol = line_split[1].split(":")[0]
 
                 number_split = line_split[0].split(" ")

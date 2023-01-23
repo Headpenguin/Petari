@@ -1,7 +1,7 @@
 #include "Game/NPC/NPCActor.h"
 #include "Game/Util.h"
 
-NPCActorCaps::NPCActorCaps(const char *pName) {
+/*NPCActorCaps::NPCActorCaps(const char *pName) {
     _0 = pName;
     _C = 0;
     _D = 0;
@@ -77,7 +77,7 @@ void NPCActorCaps::setDefault() {
 
 void NPCActorCaps::setIndirect() {
     _84 = 2;
-}
+}*/
 
 #ifdef NON_MATCHING
 NPCActor::NPCActor(const char *pName) : LiveActor(pName) {

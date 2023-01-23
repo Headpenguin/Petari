@@ -5,10 +5,11 @@
 
 class NerveExecutor {
 public:
+	inline NerveExecutor() : mSpine(0) {}
     NerveExecutor(const char *);
-    //INLINE_FUNC_DECL(NerveExecutor, const char* a) : _0, mSpine(0) {}
+    INLINE_FUNC_DECL(NerveExecutor, const char* a1) : mSpine(0) {}
 
-    virtual ~NerveExecutor();
+    inline virtual ~NerveExecutor() {};
 
     void initNerve(const Nerve *);
     void updateNerve();
@@ -16,6 +17,5 @@ public:
     bool isNerve(const Nerve* ) const;
     s32 getNerveStep() const;
 
-	s32 _0; // This is probably wrong
     Spine* mSpine; // _4
 };

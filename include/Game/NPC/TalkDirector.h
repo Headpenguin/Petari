@@ -98,7 +98,7 @@ public:
     bool mIsOnGameEventFlagViewNormalEnding;                // _8B
 };
 
-class TalkFunction {
+/*class TalkFunction {
 public:
     static bool requestTalkSystem(TalkMessageCtrl *, bool);
     static void startTalkSystem(TalkMessageCtrl *, bool, bool, bool);
@@ -107,7 +107,7 @@ public:
     static bool isTalkSystemEnd(const TalkMessageCtrl *);
     static bool getBranchAstroGalaxyResult(u16);
     static void registerTalkSystem(TalkMessageCtrl *);
-};
+};*/
 
 namespace MR {
     bool isActiveTalkBalloonShort();
