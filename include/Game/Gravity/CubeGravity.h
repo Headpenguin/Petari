@@ -15,8 +15,8 @@ public:
 	void calcEdgeGravity(const TVec3f &rPosition, s32, TVec3f *pDest, f32 *pScalar) const;
 	void calcCornerGravity(const TVec3f &rPosition, s32, TVec3f *pDest, f32 *pScalar) const;
 
-	TPos3f _28;
-	TPos3f _58;
+	TMtx34f _28;
+	TMtx34f _58;
 	f32 _88;
 	f32 _8C;
 	f32 _90;

@@ -6,11 +6,9 @@
 class ActorStateBaseInterface : public NerveExecutor
 {
 public:
-    inline ActorStateBaseInterface(const char* pName) : CALL_INLINE_FUNC(NerveExecutor, pName), mIsDead(0) {
+    inline ActorStateBaseInterface(const char *pName) : NerveExecutor(pName) {
 
     }
-
-    inline ActorStateBaseInterface() : mIsDead(0) {}
 
     virtual inline ~ActorStateBaseInterface() {
 

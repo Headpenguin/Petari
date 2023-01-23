@@ -5,9 +5,9 @@ NerveExecutor::NerveExecutor(const char *a1) : mSpine(0) {
 }
 
 // This isn't right but when it's virtual it doesn't exist for some reason
-/*NerveExecutor::~NerveExecutor() {
+NerveExecutor::~NerveExecutor() {
 
-}*/
+}
 
 void NerveExecutor::initNerve(const Nerve *pNerve) {
     mSpine = new Spine(this, pNerve);

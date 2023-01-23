@@ -15,3 +15,14 @@ bool TVec3f::isZero() const {
 
 	return sum <= 0.0000038146973f;
 }
+
+CubeGravity::CubeGravity() : PlanetGravity() {
+
+	_88 = 1f; // FIX THIS
+	_8C = 1f;
+	_90 = 1f;
+	mActiveFaces = 63;
+	//Use the function to construct both TMtx34f
+	_28.identity();
+	_58.identity();
+}
