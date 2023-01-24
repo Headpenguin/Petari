@@ -33066,3 +33066,4 @@
   00000000 000000dc 802e0468 00000000=passRing__8MarioFooFPC9HitSensor:Player.a~MarioFoo.o
   00000000 0000003c 8004f22c 00000000=startPlayerCenterCamera__7DodoryuFv:Boss.a~Dodoryu.o
   00000000 00000010 8019798c 00000000=__ct__19J3DAnmKeyLoader_v15Fv:J3DGraphLoader.a~J3DAnmLoader.o
+  00000000 00000028 80156d40 00000000=setCube__11CubeGravityFRCQ29JGeometry64TPosition3<Q29JGeometry38TMatrix34<Q29JGeometry13SMatrix34C<f>>>:Gravity.a~CubeGravity.o

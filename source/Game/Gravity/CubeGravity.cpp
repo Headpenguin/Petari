@@ -26,3 +26,9 @@ CubeGravity::CubeGravity() : PlanetGravity() {
 	_28.identity();
 	_58.identity();
 }
+
+void CubeGravity::setCube(const TPos3f & cube) {
+	_28 = cube;
+	
+	updateIdentityMtx();
+}
