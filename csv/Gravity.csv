@@ -13,7 +13,7 @@ calcFaceGravity__11CubeGravityCFRCQ29JGeometry8TVec3<f>lPQ29JGeometry8TVec3<f>Pf
 calcEdgeGravity__11CubeGravityCFRCQ29JGeometry8TVec3<f>lPQ29JGeometry8TVec3<f>Pf,CubeGravity.o,Gravity.a,false
 calcCornerGravity__11CubeGravityCFRCQ29JGeometry8TVec3<f>lPQ29JGeometry8TVec3<f>Pf,CubeGravity.o,Gravity.a,false
 calcOwnGravityVector__11CubeGravityCFPQ29JGeometry8TVec3<f>PfRCQ29JGeometry8TVec3<f>,CubeGravity.o,Gravity.a,false
-updateMtx__11CubeGravityFRCQ29JGeometry64TPosition3<Q29JGeometry38TMatrix34<Q29JGeometry13SMatrix34C<f>>>,CubeGravity.o,Gravity.a,false
+updateMtx__11CubeGravityFRCQ29JGeometry64TPosition3<Q29JGeometry38TMatrix34<Q29JGeometry13SMatrix34C<f>>>,CubeGravity.o,Gravity.a,true
 normalize__Q29JGeometry8TVec3<f>FRCQ29JGeometry8TVec3<f>,CubeGravity.o,Gravity.a,false
 __ct__11DiskGravityFv,DiskGravity.o,Gravity.a,true
 setLocalPosition__11DiskGravityFRCQ29JGeometry8TVec3<f>,DiskGravity.o,Gravity.a,true
