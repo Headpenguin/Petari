@@ -44,22 +44,22 @@ void CubeGravity::updateMtx(const TPos3f &rMtx) {
 	_90 = VECMag(dir.toCVec());
 }
 
-bool CubeGravity::calcOwnGravityVector(TVec3f *pDest, f32 *pScalar, const TVec3f &rPosition) const {
+/*bool CubeGravity::calcOwnGravityVector(TVec3f *pDest, f32 *pScalar, const TVec3f &rPosition) const {
 	//Stack size: 0x20 (8 for lr + sp => 0x1c for data)
 	calcGravityArea(rPosition);
 	
-}
+}*/
 
-void CubeGravity::calcGravityArea(const TVec3f &rPosition) const {
+u8 CubeGravity::calcGravityArea(const TVec3f &rPosition) const {
 	//Stack size: 0x70
-	const TVec3f dirX, dirY, dirZ, trans, _8;
+	TVec3f dirX, dirY, dirZ, trans, _8;
 	_58.getXDir(dirX);
 	_58.getYDir(dirY);
 	_58.getZDir(dirZ);
 	_58.getTrans(trans);
-	_8 = dirZ - rPosition;
+	_8 = rPosition - trans;
 	u8 sum = 0;
-	float xDot = _8.dot(dirX) / _88, yDot = _8.dot(dirY) / _8C, zDot = _8.dot(dirZ);
+	float xDot = _8.dot(dirX) / _88, yDot = _8.dot(dirY) / _8C, zDot = _8.dot(dirZ) / _90;
 	if(xDot >= -_88) { // bc succeeds
 		if(xDot <= _88) { // bc fails
 			sum += 1;
@@ -71,32 +71,40 @@ void CubeGravity::calcGravityArea(const TVec3f &rPosition) const {
 		}
 		else return -1;
 	}
-	else if(mActiveFaces & 2 == 2) { // bc succeeds
-		sum += 0;
+	/*else if(mActiveFaces & 2 == 2) { // bc succeeds
+		sum = 0;
 		// goto ydot comp
 	}
-	else return -1;
-	
-		//r3 <- mActiveFaces & 1
+	else return -1;*/
+	else if(mActiveFaces & 2 != 2) return -1;
+	//jdiv nfdn bgjhnfcdvjhn
 	if(yDot >= -_8C) { // bc succeeds
-
-	}
-	else if(mActiveFaces & 8 == 8) { // bc succeeds
-		if(zDot >= -_90) { // bc succeeds
-			if(zDot > _90) { // bc succeeds
-				if(mActiveFaces & 16) { // bc succeeds
-					sum += 12;
-					
-				}
-			}
-			else {
-
-			}
+		if(yDot <= _8C) { // bc fails
+			sum += 3;
+			//goto ydot comp
 		}
-		else 
+		else if(mActiveFaces & 4 == 4) {
+			sum += 6;
+			//goto ydot comp
+		}
+		else return -1;
 	}
-	else {
+	else if(mActiveFaces & 8 != 8) { // bc succeeds
+		return -1;
+	}
+	//fdnhjukfdhhnfgfdjugdfn
+	if(yDot >= -_90) { // bc succeeds
+		if(yDot <= _90) { // bc fails
+			sum += 9;
+			//goto ydot comp
+		}
+		else if(mActiveFaces & 16 == 16) {
+			sum += 18;
+			//goto ydot comp
+		}
+		else return -1;
+	}
+	else if(mActiveFaces & 32 != 32) return -1; // bc succeeds
 		
-	}
 	return sum;
 }

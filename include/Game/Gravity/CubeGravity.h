@@ -10,7 +10,7 @@ public:
 	virtual bool calcOwnGravityVector(TVec3f *pDest, f32 *pScalar, const TVec3f &rPosition) const;
 
 	void setCube(const TPos3f &);
-	void calcGravityArea(const TVec3f &rPosition) const;
+	u8 calcGravityArea(const TVec3f &rPosition) const;
 	void calcFaceGravity(const TVec3f &rPosition, s32, TVec3f *pDest, f32 *pScalar) const;
 	void calcEdgeGravity(const TVec3f &rPosition, s32, TVec3f *pDest, f32 *pScalar) const;
 	void calcCornerGravity(const TVec3f &rPosition, s32, TVec3f *pDest, f32 *pScalar) const;
