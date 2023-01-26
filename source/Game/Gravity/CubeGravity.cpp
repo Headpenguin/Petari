@@ -60,36 +60,33 @@ u8 CubeGravity::calcGravityArea(const TVec3f &rPosition) const {
 	TVec3f _8 = rPosition - trans;
 	u8 sum;
 	float xDot = _8.dot(dirX) / _88, yDot = _8.dot(dirY) / _8C, zDot = _8.dot(dirZ) / _90;
-	if(xDot >= -_88) { // bc succeeds
+	if(xDot < -_88) { // bc succeeds
+		if((mActiveFaces & 2) != 2) return -1;
+	}
+	else {
 		if(xDot <= _88) { // bc fails
 			sum += 1;
 			//goto ydot comp
 		}
-		else if(mActiveFaces & 1 == 1) {
+		else if((mActiveFaces & 1) == 1) {
 			sum += 2;
 			//goto ydot comp
 		}
 		else return -1;
-	}
-	/*else if(mActiveFaces & 2 == 2) { // bc succeeds
-		sum = 0;
-		// goto ydot comp
-	}
-	else return -1;*/
-	else if(mActiveFaces & 2 != 2) return -1;
+	} 
 	//jdiv nfdn bgjhnfcdvjhn
 	if(yDot >= -_8C) { // bc succeeds
 		if(yDot <= _8C) { // bc fails
 			sum += 3;
 			//goto ydot comp
 		}
-		else if(mActiveFaces & 4 == 4) {
+		else if((mActiveFaces & 4) == 4) {
 			sum += 6;
 			//goto ydot comp
 		}
 		else return -1;
 	}
-	else if(mActiveFaces & 8 != 8) { // bc succeeds
+	else if((mActiveFaces & 8) != 8) { // bc succeeds
 		return -1;
 	}
 	//fdnhjukfdhhnfgfdjugdfn
@@ -98,13 +95,13 @@ u8 CubeGravity::calcGravityArea(const TVec3f &rPosition) const {
 			sum += 9;
 			//goto ydot comp
 		}
-		else if(mActiveFaces & 16 == 16) {
+		else if((mActiveFaces & 16) == 16) {
 			sum += 18;
 			//goto ydot comp
 		}
 		else return -1;
 	}
-	else if(mActiveFaces & 32 != 32) return -1; // bc succeeds
+	else if((mActiveFaces & 32) != 32) return -1; // bc succeeds
 		
 	return sum;
 }
