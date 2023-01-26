@@ -52,13 +52,13 @@ void CubeGravity::updateMtx(const TPos3f &rMtx) {
 
 u8 CubeGravity::calcGravityArea(const TVec3f &rPosition) const {
 	//Stack size: 0x70
-	TVec3f dirX, dirY, dirZ, trans, _8;
+	TVec3f dirX, dirY, dirZ, trans;
 	_58.getXDir(dirX);
 	_58.getYDir(dirY);
 	_58.getZDir(dirZ);
 	_58.getTrans(trans);
-	_8 = rPosition - trans;
-	u8 sum = 0;
+	TVec3f _8 = rPosition - trans;
+	u8 sum;
 	float xDot = _8.dot(dirX) / _88, yDot = _8.dot(dirY) / _8C, zDot = _8.dot(dirZ) / _90;
 	if(xDot >= -_88) { // bc succeeds
 		if(xDot <= _88) { // bc fails
@@ -93,8 +93,8 @@ u8 CubeGravity::calcGravityArea(const TVec3f &rPosition) const {
 		return -1;
 	}
 	//fdnhjukfdhhnfgfdjugdfn
-	if(yDot >= -_90) { // bc succeeds
-		if(yDot <= _90) { // bc fails
+	if(zDot >= -_90) { // bc succeeds
+		if(zDot <= _90) { // bc fails
 			sum += 9;
 			//goto ydot comp
 		}

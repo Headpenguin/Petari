@@ -34,3 +34,5 @@ Compilers/*
 *.ninja
 *.ninja_log
 doxygen/*
+original
+custom
