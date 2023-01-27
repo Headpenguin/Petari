@@ -50,17 +50,16 @@ bool CubeGravity::calcOwnGravityVector(TVec3f *pDest, f32 *pScalar, const TVec3f
 	if(area < 0) return false; // Note: Result of calcGravityArea probably should be stored in 1f
 	TVec3f dst;
 	float scalar;
-	if(calcFaceGravity(rPosition, area, &dst, &scalar) || calcCornerGravity(rPosition, area, &dst, &scalar) || calcEdgeGravity(rPosition, area, &dst, &scalar)) {
+	if(!calcFaceGravity(rPosition, area, &dst, &scalar) && !calcCornerGravity(rPosition, area, &dst, &scalar) && !calcEdgeGravity(rPosition, area, &dst, &scalar)) return false;
 		
 		if(isInRangeDistance(scalar)) return false; //bc fails
 
-		if(pScalar != NULL) //bc success
-			*pScalar = scalar;
 		if(pDest != NULL) //bc success
 			*pDest = dst;
+
+		if(pScalar != NULL) //bc success
+			*pScalar = scalar;
 		return true;
-	}
-	else return false;
 }
 
 int CubeGravity::calcGravityArea(const TVec3f &rPosition) const {
