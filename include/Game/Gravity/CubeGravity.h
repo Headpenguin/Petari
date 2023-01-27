@@ -11,9 +11,9 @@ public:
 
 	void setCube(const TPos3f &);
 	int calcGravityArea(const TVec3f &rPosition) const;
-	void calcFaceGravity(const TVec3f &rPosition, s32, TVec3f *pDest, f32 *pScalar) const;
-	void calcEdgeGravity(const TVec3f &rPosition, s32, TVec3f *pDest, f32 *pScalar) const;
-	void calcCornerGravity(const TVec3f &rPosition, s32, TVec3f *pDest, f32 *pScalar) const;
+	bool calcFaceGravity(const TVec3f &rPosition, s32, TVec3f *pDest, f32 *pScalar) const; // Maybe bool?
+	bool calcEdgeGravity(const TVec3f &rPosition, s32, TVec3f *pDest, f32 *pScalar) const;
+	bool calcCornerGravity(const TVec3f &rPosition, s32, TVec3f *pDest, f32 *pScalar) const;
 
 	TPos3f _28;
 	TPos3f _58;

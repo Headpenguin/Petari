@@ -18,11 +18,11 @@ bool TVec3f::isZero() const {
 
 CubeGravity::CubeGravity() : PlanetGravity() {
 
-	_88 = 1f; // FIX THIS
+	_88 = 1f;
 	_8C = 1f;
 	_90 = 1f;
 	mActiveFaces = 63;
-	//Use the function to construct both TMtx34f
+
 	_28.identity();
 	_58.identity();
 }
@@ -44,11 +44,27 @@ void CubeGravity::updateMtx(const TPos3f &rMtx) {
 	_90 = VECMag(dir.toCVec());
 }
 
-/*bool CubeGravity::calcOwnGravityVector(TVec3f *pDest, f32 *pScalar, const TVec3f &rPosition) const {
+bool CubeGravity::calcOwnGravityVector(TVec3f *pDest, f32 *pScalar, const TVec3f &rPosition) const {
 	//Stack size: 0x20 (8 for lr + sp => 0x1c for data)
-	calcGravityArea(rPosition);
-	
-}*/
+	int area = calcGravityArea(rPosition);
+	if(area < 0) return false; // Note: Result of calcGravityArea probably should be stored in 1f
+	TVec3f dst;
+	float scalar;
+	if(!calcFaceGravity(rPosition, area, &dst, &scalar)) { // bc fails
+		if(calcCornerGravity(rPosition, area, &dst, &scalar)) { // bc fails
+			return false;
+		}
+	}
+	//else {
+		if(isInRangeDistance(scalar)) return false; //bc fails
+
+		if(pScalar != NULL) //bc success
+			*pScalar = scalar;
+		if(pDest != NULL) //bc success
+			*pDest = dst;
+	//}
+	return true;
+}
 
 int CubeGravity::calcGravityArea(const TVec3f &rPosition) const {
 	TVec3f dirX, dirY, dirZ, trans;
