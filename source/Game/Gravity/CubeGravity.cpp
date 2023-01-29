@@ -165,7 +165,9 @@ bool CubeGravity::calcFaceGravity(const TVec3f &rPosition, s32 _r5, TVec3f *pDes
 		stack_24 = stack_24; //wtf
 		*pScalar = fr_31;
 	}*/
+	if(fr_31 < 0f) fr_31 = 0f;
 	*pDest = stack_24;
-	*pScalar = fr_31 < 0f ? 0f : fr_31;
+	*pScalar = fr_31;
+	//*pScalar = fr_31 < 0f ? 0f : fr_31;
 	return true;
 }
