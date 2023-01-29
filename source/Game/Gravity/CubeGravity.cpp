@@ -1,5 +1,5 @@
 #include "Game/Gravity.h"
-#include "MathUtil.h"
+#include "Game/Util/MathUtil.h"
 
 template<>
 bool TVec3f::isZero() const {
@@ -125,36 +125,39 @@ bool CubeGravity::calcFaceGravity(const TVec3f &rPosition, s32 _r5, TVec3f *pDes
 	TVec3f stack_24;
 	switch(_r5) {
 		case 4:
-			_58.getZDir(stack_24);
+			mPosition.getZDir(stack_24);
 			break;
 		case 10:
-			_58.getYDir(stack_24);
+			mPosition.getYDir(stack_24);
 			break;
 		case 12:
-			_58.getXDir(stack_24);
+			mPosition.getXDir(stack_24);
 			break;
 		case 14:
 		case 18:
-			_58.getXDir(stack_24);
+			mPosition.getXDir(stack_24);
 			JGeometry::negateInternal(&stack_24.x, &stack_24.x);
+			break;
 		case 16:
 		case 20:
-			_58.getYDir(stack_24);
+			mPosition.getYDir(stack_24);
 			JGeometry::negateInternal(&stack_24.x, &stack_24.x);
+			break;
 		case 27:
-			_58.getZDir(stack_24);
+			mPosition.getZDir(stack_24);
 			JGeometry::negateInternal(&stack_24.x, &stack_24.x);
+			break;
 		default:
 			return false;
 		
 	}
 	// Line 56
-	TVec3f stack_18, stack_24, stack_c;
+	TVec3f stack_18, stack_c;
 	f32 stack_8;
-	_58.getTrans(stack_18);
+	mPosition.getTrans(stack_18);
 	MR::separateScalarAndDirection(&stack_8, &stack_24, stack_24);
-	stack_c = stack_18 - stack_24;
-	fr_31 = stack_24.dot(stack_c) - stack_8;
+	stack_c = stack_18 - rPosition;
+	float fr_31 = stack_24.dot(stack_c) - stack_8;
 	if(fr_31 < 0) {
 		*pDest = stack_24;
 		*pScalar = 0;
