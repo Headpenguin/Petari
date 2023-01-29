@@ -143,7 +143,7 @@ bool CubeGravity::calcFaceGravity(const TVec3f &rPosition, s32 _r5, TVec3f *pDes
 			mPosition.getYDir(stack_24);
 			JGeometry::negateInternal(&stack_24.x, &stack_24.x);
 			break;
-		case 27:
+		case 22:
 			mPosition.getZDir(stack_24);
 			JGeometry::negateInternal(&stack_24.x, &stack_24.x);
 			break;
@@ -152,19 +152,20 @@ bool CubeGravity::calcFaceGravity(const TVec3f &rPosition, s32 _r5, TVec3f *pDes
 		
 	}
 	// Line 56
-	TVec3f stack_18, stack_c;
+	TVec3f stack_18;
 	f32 stack_8;
 	mPosition.getTrans(stack_18);
 	MR::separateScalarAndDirection(&stack_8, &stack_24, stack_24);
-	stack_c = stack_18 - rPosition;
-	float fr_31 = stack_24.dot(stack_c) - stack_8;
-	if(fr_31 < 0) {
+	float fr_31 = stack_24.dot(stack_18 - rPosition) - stack_8;
+	/*if(fr_31 < 0f) {
 		*pDest = stack_24;
-		*pScalar = 0;
+		*pScalar = 0f;
 	}
 	else {
 		stack_24 = stack_24; //wtf
 		*pScalar = fr_31;
-	}
+	}*/
+	*pDest = stack_24;
+	*pScalar = fr_31 < 0f ? 0f : fr_31;
 	return true;
 }
