@@ -160,6 +160,32 @@ bool CubeGravity::calcFaceGravity(const TVec3f &rPosition, s32 area, TVec3f *pDe
 	return true;
 }
 
+void helperFunc1(const TVec3f& a, TVec3f& b, const TVec3f& c) {
+	JMAVECScaleAdd(a.toCVec(), c.toCVec(), b.toVec(), -a.dot(c));
+}
+TVec3f negate(const TVec3f& in) {
+       TVec3f tmp;
+       JGeometry::negateInternal(&in.x, &tmp.x);
+       return tmp;
+}
+inline void translate(TVec3f& self, TVec3f a, const TVec3f& b) {
+	a += b;
+	self = a;
+}
+/*inline TVec3f translate(TVec3f a, const TVec3f& b) {
+	a += b;
+	return a;
+}*/
+
+
+inline TVec3f negateAndTranslate(const TVec3f& a, const TVec3f& b) {
+	TVec3f tmp = a;
+	//JGeometry::negateInternal(&a.x, &tmp.x);
+	//tmp = a;
+	tmp += b;
+	return tmp;
+}
+
 bool CubeGravity::calcEdgeGravity(const TVec3f &rPosition, s32 area, TVec3f *pDest, f32 *pScalar) const {
 	// Insn 20
 	if(!(((area & 1) ^ ((area & 0x80000000) >> 31)) - ((area & 0x80000000) >> 31)) || area == 13) return false;
@@ -233,24 +259,22 @@ bool CubeGravity::calcEdgeGravity(const TVec3f &rPosition, s32 area, TVec3f *pDe
 			stack_134 = stack_50;
 			break;
 		case 21:
-			TVec3f stack_44;
+			//TVec3f stack_38;
 			stack_140 = yDir;
-			JGeometry::negateInternal(&xDir.x, &stack_44.x);
-			TVec3f stack_38 = xDir;
-			stack_38 += zDir;
-			stack_134 = stack_38;
+			//JGeometry::negateInternal(&xDir.x, &stack_44.x);
+			//stack_38 = negate(xDir);
+			//stack_38 += zDir;
+			//stack_134 = stack_38;
+			stack_134 = negateAndTranslate(negate(xDir), zDir);
+			//stack_134 = translate(negate(xDir), zDir);
 			break;
 		case 23:
 			stack_140 = yDir;
-			TVec3f stack_2c = xDir;
-			stack_2c += zDir;
-			stack_134 = stack_2c;
+			translate(stack_134, xDir, zDir);
 			break;
 		case 25:
 			stack_140 = xDir;
-			TVec3f stack_20 = yDir;
-			stack_20 += zDir;
-			stack_134 = stack_20;
+			translate(stack_134, yDir, zDir);
 			break;
 		default:
 			return false;
@@ -258,8 +282,9 @@ bool CubeGravity::calcEdgeGravity(const TVec3f &rPosition, s32 area, TVec3f *pDe
 	mPosition.getTrans(trans);
 	stack_134 += trans;
 	MR::normalizeOrZero(&stack_140);
-	TVec3f stack_14 = stack_134 - rPosition;
-	JMAVECScaleAdd(stack_140.toVec(), stack_14.toVec(), stack_f8.toVec(), -stack_140.dot(stack_14));
+	//TVec3f stack_14 = stack_134 - rPosition;
+	//JMAVECScaleAdd(stack_140.toVec(), stack_14.toVec(), stack_f8.toVec(), -stack_140.dot(stack_14));
+	helperFunc1(stack_140, stack_f8, stack_134 - rPosition);
 	if(stack_f8.isZero()) {
 		pDest -> normalize(stack_134 - trans);
 		*pScalar = 0f;
