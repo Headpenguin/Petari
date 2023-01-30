@@ -15,6 +15,15 @@ public:
 	bool calcEdgeGravity(const TVec3f &rPosition, s32, TVec3f *pDest, f32 *pScalar) const;
 	bool calcCornerGravity(const TVec3f &rPosition, s32, TVec3f *pDest, f32 *pScalar) const;
 
+private:
+	
+
+/*inline void init(TVec3f& x, TVec3f& y, TVec3f& z) const {
+	mPosition.getXDir(x);
+	mPosition.getYDir(y);
+	mPosition.getZDir(z);
+}*/
+
 	TPos3f mCube; // _28
 	TPos3f mPosition; // _58
 	f32 _88;

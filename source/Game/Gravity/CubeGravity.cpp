@@ -162,7 +162,7 @@ bool CubeGravity::calcFaceGravity(const TVec3f &rPosition, s32 area, TVec3f *pDe
 
 bool CubeGravity::calcEdgeGravity(const TVec3f &rPosition, s32 area, TVec3f *pDest, f32 *pScalar) const {
 	// Insn 20
-	if(((area & 1) ^ ((area & 0x80000000) >> 31)) == ((area & 0x80000000) >> 31)) return false;
+	if(((area & 1) ^ ((area & 0x80000000) >> 31)) - ((area & 0x80000000) >> 31) || area == 13) return false;
 	TVec3f xDir, yDir, zDir, stack_140, stack_134, trans, stack_f8;
 	mPosition.getXDir(xDir);
 	mPosition.getYDir(yDir);
