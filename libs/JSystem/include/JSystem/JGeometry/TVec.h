@@ -177,7 +177,7 @@ namespace JGeometry {
     
         void negate();
         void negate(const TVec3<T> &rSrc);
-        void normalize(const TVec3<T> &rSrc);
+        float normalize(const TVec3<T> &rSrc);
 
         template<typename S>
         void cubic(const TVec3<T> &, const TVec3<T> &, const TVec3<T> &, const TVec3<T> &, T);
