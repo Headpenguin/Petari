@@ -1,6 +1,6 @@
 #include "Game/Gravity.h"
 #include "Game/Util/MathUtil.h"
-#include "JSymtem/JMath/JMath.h"
+#include "JSystem/JMath/JMath.h"
 
 template<>
 bool TVec3f::isZero() const {
@@ -162,10 +162,11 @@ bool CubeGravity::calcFaceGravity(const TVec3f &rPosition, s32 area, TVec3f *pDe
 
 bool CubeGravity::calcEdgeGravity(const TVec3f &rPosition, s32 area, TVec3f *pDest, f32 *pScalar) const {
 	// Insn 20
+	if(((area & 1) ^ ((area & 0x80000000) >> 31)) == ((area & 0x80000000) >> 31)) return false;
 	TVec3f xDir, yDir, zDir, stack_140, stack_134, trans, stack_f8;
-	_58.getXDir(xDir);
-	_58.getYDir(yDir);
-	_58.getZDir(zDir);
+	mPosition.getXDir(xDir);
+	mPosition.getYDir(yDir);
+	mPosition.getZDir(zDir);
 	switch(area) {
 		case 1:
 			TVec3f stack_e0;
@@ -243,13 +244,14 @@ bool CubeGravity::calcEdgeGravity(const TVec3f &rPosition, s32 area, TVec3f *pDe
 		default:
 			return false;
 	}
-	_58.getTrans(trans);
+	mPosition.getTrans(trans);
 	stack_134 += trans;
 	MR::normalizeOrZero(&stack_140);
-	TVec3f stack_14 = stack_34 - rPosition;
+	TVec3f stack_14 = stack_134 - rPosition;
 	JMAVECScaleAdd(stack_140.toVec(), stack_14.toVec(), stack_f8.toVec(), -stack_140.dot(stack_14));
 	TVec3f stack_8 = stack_134 - trans;
 	pDest -> normalize(stack_8);
 	*pScalar = 0f;
+	return true;
 }
 
