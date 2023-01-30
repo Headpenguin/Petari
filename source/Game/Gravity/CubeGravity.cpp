@@ -169,18 +169,18 @@ bool CubeGravity::calcEdgeGravity(const TVec3f &rPosition, s32 area, TVec3f *pDe
 	mPosition.getZDir(zDir);
 	switch(area) {
 		case 1:
-			TVec3f stack_e0;
+			TVec3f stack_ec;
 			stack_140 = xDir;
-			JGeometry::negateInternal(&yDir.x, &stack_e0.x);
-			TVec3f stack_ec = stack_e0 - zDir;
-			stack_134 = stack_ec;
+			JGeometry::negateInternal(&yDir.x, &stack_ec.x);
+			TVec3f stack_e0 = stack_ec - zDir;
+			stack_134 = stack_e0;
 			break;
 		case 3:
-			TVec3f stack_c8;
+			TVec3f stack_d4;
 			stack_140 = yDir;
-			JGeometry::negateInternal(&xDir.x, &stack_c8.x);
-			TVec3f stack_d4 = stack_c8 - zDir;
-			stack_134 = stack_d4;
+			JGeometry::negateInternal(&xDir.x, &stack_d4.x);
+			TVec3f stack_c8 = stack_d4 - zDir;
+			stack_134 = stack_c8;
 			break;
 		case 5:
 			stack_140 = yDir;
@@ -193,64 +193,64 @@ bool CubeGravity::calcEdgeGravity(const TVec3f &rPosition, s32 area, TVec3f *pDe
 			stack_134 = stack_b0;
 			break;
 		case 9:
-			TVec3f stack_98;
+			TVec3f stack_a4;
 			stack_140 = zDir;
-			JGeometry::negateInternal(&zDir.x, &stack_98.x);
-			TVec3f stack_8c = stack_98 - yDir;
-			stack_134 = stack_8c;
+			JGeometry::negateInternal(&zDir.x, &stack_a4.x);
+			TVec3f stack_98 = stack_a4 - yDir;
+			stack_134 = stack_98;
 			break;
 		case 11:
 			//TVec3f stack_74;
 			stack_140 = zDir;
 			//JGeometry::negateInternal(&xDir.x, &stack_74.x);
-			TVec3f stack_80 = xDir + yDir;
+			TVec3f stack_8c = xDir + yDir;
 			//stack_80 += yDir;
-			stack_134 = stack_80;
+			stack_134 = stack_8c;
 			break;
 		case 15:
-			TVec3f stack_74;
+			TVec3f stack_80;
 			stack_140 = zDir;
-			JGeometry::negateInternal(&xDir.x, &stack_74.x);
-			TVec3f stack_68 = stack_74;
+			JGeometry::negateInternal(&xDir.x, &stack_80.x);
+			TVec3f stack_74 = stack_80;
+			stack_74 += yDir;
+			stack_134 = stack_74;
+			break;
+		case 17:
+			TVec3f stack_68;
+			stack_140 = xDir;
+			//JGeometry::negateInternal(&yDir.x, &stack_50.x);
+			stack_68 = xDir;
+			//TVec3f stack_5c = stack_50;
 			stack_68 += yDir;
 			stack_134 = stack_68;
 			break;
-		case 17:
-			TVec3f stack_50;
-			stack_140 = xDir;
-			//JGeometry::negateInternal(&yDir.x, &stack_50.x);
-			stack_50 = xDir;
-			//TVec3f stack_5c = stack_50;
-			stack_50 += yDir;
+		case 19:
+			TVec3f stack_5c;
+			stack_140 = yDir;
+			JGeometry::negateInternal(&xDir.x, &stack_5c.x);
+			TVec3f stack_50 = stack_5c;
+			stack_50 += zDir;
 			stack_134 = stack_50;
 			break;
-		case 19:
-			TVec3f stack_38;
-			stack_140 = yDir;
-			JGeometry::negateInternal(&xDir.x, &stack_38.x);
-			TVec3f stack_44 = stack_38;
-			stack_44 += zDir;
-			stack_134 = stack_44;
-			break;
 		case 21:
-			TVec3f stack_2c;
+			TVec3f stack_44;
 			stack_140 = yDir;
-			JGeometry::negateInternal(&xDir.x, &stack_2c.x);
-			TVec3f stack_2b = xDir;
-			stack_2b += zDir;
-			stack_134 = stack_2b;
+			JGeometry::negateInternal(&xDir.x, &stack_44.x);
+			TVec3f stack_38 = xDir;
+			stack_38 += zDir;
+			stack_134 = stack_38;
 			break;
 		case 23:
+			stack_140 = yDir;
+			TVec3f stack_2c = xDir;
+			stack_2c += zDir;
+			stack_134 = stack_2c;
+			break;
+		case 25:
 			stack_140 = xDir;
 			TVec3f stack_20 = yDir;
 			stack_20 += zDir;
 			stack_134 = stack_20;
-			break;
-		case 25:
-			stack_140 = xDir;
-			TVec3f stack_something = yDir;
-			stack_something += zDir;
-			stack_134 = stack_something;
 			break;
 		default:
 			return false;
@@ -261,8 +261,7 @@ bool CubeGravity::calcEdgeGravity(const TVec3f &rPosition, s32 area, TVec3f *pDe
 	TVec3f stack_14 = stack_134 - rPosition;
 	JMAVECScaleAdd(stack_140.toVec(), stack_14.toVec(), stack_f8.toVec(), -stack_140.dot(stack_14));
 	if(stack_f8.isZero()) {
-		TVec3f stack_8 = stack_134 - trans;
-		pDest -> normalize(stack_8);
+		pDest -> normalize(stack_134 - trans);
 		*pScalar = 0f;
 	}
 	else {
