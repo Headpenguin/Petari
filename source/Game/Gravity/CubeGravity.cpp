@@ -193,8 +193,10 @@ bool CubeGravity::calcEdgeGravity(const TVec3f &rPosition, s32 area, TVec3f *pDe
 			stack_134 = stack_b0;
 			break;
 		case 9:
+			TVec3f stack_98;
 			stack_140 = zDir;
-			TVec3f stack_8c = xDir - yDir;
+			JGeometry::negateInternal(&zDir.x, &stack_98.x);
+			TVec3f stack_8c = stack_98 - yDir;
 			stack_134 = stack_8c;
 			break;
 		case 11:
@@ -239,8 +241,8 @@ bool CubeGravity::calcEdgeGravity(const TVec3f &rPosition, s32 area, TVec3f *pDe
 			stack_20 += zDir;
 			stack_134 = stack_20;
 			break;
-		//case 25:
-		//	break;
+		case 25:
+			break;
 		default:
 			return false;
 	}
