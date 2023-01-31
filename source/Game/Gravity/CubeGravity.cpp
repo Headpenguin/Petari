@@ -20,9 +20,9 @@ bool TVec3f::isZero() const {
 
 CubeGravity::CubeGravity() : PlanetGravity() {
 
-	_88 = 1f;
-	_8C = 1f;
-	_90 = 1f;
+	_88 = 1.0;
+	_8C = 1.0;
+	_90 = 1.0;
 	mActiveFaces = 63;
 
 	mCube.identity();
@@ -154,7 +154,7 @@ bool CubeGravity::calcFaceGravity(const TVec3f &rPosition, s32 area, TVec3f *pDe
 	mPosition.getTrans(stack_18);
 	MR::separateScalarAndDirection(&stack_8, &stack_24, stack_24);
 	float fr_31 = stack_24.dot(stack_18 - rPosition) - stack_8;
-	if(fr_31 < 0f) fr_31 = 0f;
+	if(fr_31 < 0.0) fr_31 = 0.0;
 	*pDest = stack_24;
 	*pScalar = fr_31;
 	return true;
@@ -164,17 +164,17 @@ void helperFunc1(const TVec3f& a, TVec3f& b, const TVec3f& c) {
 	JMAVECScaleAdd(a.toCVec(), c.toCVec(), b.toVec(), -a.dot(c));
 }
 
+
+TVec3f translate(const TVec3f& a, const TVec3f& b) {
+	TVec3f tmp = a;
+	tmp += b;
+	return tmp;
+}
+
 TVec3f negate(const TVec3f& in) {
        TVec3f tmp;
        JGeometry::negateInternal(&in.x, &tmp.x);
        return tmp;
-}
-
-
-inline TVec3f translate(const TVec3f& a, const TVec3f& b) {
-	TVec3f tmp = a;
-	tmp += b;
-	return tmp;
 }
 
 bool CubeGravity::calcEdgeGravity(const TVec3f &rPosition, s32 area, TVec3f *pDest, f32 *pScalar) const {
@@ -241,13 +241,17 @@ bool CubeGravity::calcEdgeGravity(const TVec3f &rPosition, s32 area, TVec3f *pDe
 	helperFunc1(stack_140, stack_f8, stack_134 - rPosition);
 	if(stack_f8.isZero()) {
 		pDest -> normalize(stack_134 - trans);
-		*pScalar = 0f;
+		*pScalar = 0.0;
 	}
 	else {
 		*pScalar = pDest -> normalize(stack_f8);
 	}
 	return true;
 	
+}
+
+TVec3f sub(const TVec3f& a, const TVec3f b) {
+	return a - b;
 }
 
 bool CubeGravity::calcCornerGravity(const TVec3f &rPosition, s32 area, TVec3f *pDest, f32 *pScalar) const {
@@ -269,10 +273,10 @@ bool CubeGravity::calcCornerGravity(const TVec3f &rPosition, s32 area, TVec3f *p
 			stack_140 = translate(xDir, yDir) - zDir;
 			break;
 		case 18:
-			stack_140 = translate(negate(xDir) - yDir, zDir);
+			stack_140 = (negate(xDir) - yDir).translate(zDir);
 			break;
 		case 20:
-			stack_140 = translate(xDir - yDir, zDir);
+			stack_140 = (xDir - yDir).translate(zDir);
 			break;
 		case 24:
 			stack_140 = translate(translate(negate(xDir), yDir), zDir);
@@ -287,7 +291,7 @@ bool CubeGravity::calcCornerGravity(const TVec3f &rPosition, s32 area, TVec3f *p
 	stack_140 += trans;
 	TVec3f stack_104 = stack_140 - rPosition;
 	if(stack_104.isZero()) {
-		*pScalar = 0f;
+		*pScalar = 0.0;
 		pDest -> normalize(stack_140 - trans);
 	}
 	else {
