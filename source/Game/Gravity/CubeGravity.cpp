@@ -168,17 +168,17 @@ TVec3f negate(const TVec3f& in) {
        JGeometry::negateInternal(&in.x, &tmp.x);
        return tmp;
 }
-inline void translate(TVec3f& self, TVec3f a, const TVec3f& b) {
+/*inline void translate(TVec3f& self, TVec3f a, const TVec3f& b) {
 	a += b;
 	self = a;
-}
+}*/
 /*inline TVec3f translate(TVec3f a, const TVec3f& b) {
 	a += b;
 	return a;
 }*/
 
 
-inline TVec3f negateAndTranslate(const TVec3f& a, const TVec3f& b) {
+inline TVec3f translate(const TVec3f& a, const TVec3f& b) {
 	TVec3f tmp = a;
 	//JGeometry::negateInternal(&a.x, &tmp.x);
 	//tmp = a;
@@ -187,7 +187,6 @@ inline TVec3f negateAndTranslate(const TVec3f& a, const TVec3f& b) {
 }
 
 bool CubeGravity::calcEdgeGravity(const TVec3f &rPosition, s32 area, TVec3f *pDest, f32 *pScalar) const {
-	// Insn 20
 	if(!(((area & 1) ^ ((area & 0x80000000) >> 31)) - ((area & 0x80000000) >> 31)) || area == 13) return false;
 	TVec3f stack_140, stack_134, xDir, yDir, zDir, trans, stack_f8;
 	mPosition.getXDir(xDir);
@@ -195,86 +194,52 @@ bool CubeGravity::calcEdgeGravity(const TVec3f &rPosition, s32 area, TVec3f *pDe
 	mPosition.getZDir(zDir);
 	switch(area) {
 		case 1:
-			//TVec3f stack_ec;
 			stack_140 = xDir;
-			//JGeometry::negateInternal(&yDir.x, &stack_ec.x);
-			//TVec3f stack_e0 = stack_ec - zDir;
 			stack_134 = negate(yDir) - zDir;
 			break;
 		case 3:
-			//TVec3f stack_d4;
 			stack_140 = yDir;
-			//JGeometry::negateInternal(&xDir.x, &stack_d4.x);
-			//TVec3f stack_c8 = stack_d4 - zDir;
 			stack_134 = negate(xDir) - zDir;
 			break;
 		case 5:
 			stack_140 = yDir;
-			//TVec3f stack_bc = xDir - zDir;
 			stack_134 = xDir - zDir;
 			break;
 		case 7:
 			stack_140 = xDir;
-			//TVec3f stack_b0 = yDir - zDir;
 			stack_134 = yDir - zDir;
 			break;
 		case 9:
-			//TVec3f stack_a4;
 			stack_140 = zDir;
-			//JGeometry::negateInternal(&zDir.x, &stack_a4.x);
-			//TVec3f stack_98 = stack_a4 - yDir;
 			stack_134 = negate(xDir) - yDir;
 			break;
 		case 11:
-			//TVec3f stack_74;
 			stack_140 = zDir;
-			//JGeometry::negateInternal(&xDir.x, &stack_74.x);
-			//TVec3f stack_8c = xDir + yDir;
-			//stack_80 += yDir;
 			stack_134 = xDir + yDir;
 			break;
 		case 15:
-			//TVec3f stack_80;
 			stack_140 = zDir;
-			//JGeometry::negateInternal(&xDir.x, &stack_80.x);
-			//TVec3f stack_74 = stack_80;
-			//stack_74 += yDir;
-			stack_134 = negateAndTranslate(negate(xDir), yDir);
+			stack_134 = translate(negate(xDir), yDir);
 			break;
 		case 17:
-			//TVec3f stack_68;
 			stack_140 = zDir;
-			//JGeometry::negateInternal(&yDir.x, &stack_50.x);
-			//stack_68 = xDir;
-			//TVec3f stack_5c = stack_50;
-			//stack_68 += yDir;
-			translate(stack_134, xDir, yDir);
+			stack_134 = translate(xDir, yDir);
 			break;
 		case 19:
-			//TVec3f stack_5c;
 			stack_140 = xDir;
-			//JGeometry::negateInternal(&xDir.x, &stack_5c.x);
-			//TVec3f stack_50 = stack_5c;
-			//stack_50 += zDir;
-			stack_134 = negateAndTranslate(negate(yDir), zDir);
+			stack_134 = translate(negate(yDir), zDir);
 			break;
 		case 21:
-			//TVec3f stack_38;
 			stack_140 = yDir;
-			//JGeometry::negateInternal(&xDir.x, &stack_44.x);
-			//stack_38 = negate(xDir);
-			//stack_38 += zDir;
-			//stack_134 = stack_38;
-			stack_134 = negateAndTranslate(negate(xDir), zDir);
-			//stack_134 = translate(negate(xDir), zDir);
+			stack_134 = translate(negate(xDir), zDir);
 			break;
 		case 23:
 			stack_140 = yDir;
-			translate(stack_134, xDir, zDir);
+			stack_134 = translate(xDir, zDir);
 			break;
 		case 25:
 			stack_140 = xDir;
-			translate(stack_134, yDir, zDir);
+			stack_134 = translate(yDir, zDir);
 			break;
 		default:
 			return false;
@@ -282,8 +247,6 @@ bool CubeGravity::calcEdgeGravity(const TVec3f &rPosition, s32 area, TVec3f *pDe
 	mPosition.getTrans(trans);
 	stack_134 += trans;
 	MR::normalizeOrZero(&stack_140);
-	//TVec3f stack_14 = stack_134 - rPosition;
-	//JMAVECScaleAdd(stack_140.toVec(), stack_14.toVec(), stack_f8.toVec(), -stack_140.dot(stack_14));
 	helperFunc1(stack_140, stack_f8, stack_134 - rPosition);
 	if(stack_f8.isZero()) {
 		pDest -> normalize(stack_134 - trans);
