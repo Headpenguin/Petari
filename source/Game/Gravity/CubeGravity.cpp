@@ -163,25 +163,16 @@ bool CubeGravity::calcFaceGravity(const TVec3f &rPosition, s32 area, TVec3f *pDe
 void helperFunc1(const TVec3f& a, TVec3f& b, const TVec3f& c) {
 	JMAVECScaleAdd(a.toCVec(), c.toCVec(), b.toVec(), -a.dot(c));
 }
+
 TVec3f negate(const TVec3f& in) {
        TVec3f tmp;
        JGeometry::negateInternal(&in.x, &tmp.x);
        return tmp;
 }
-/*inline void translate(TVec3f& self, TVec3f a, const TVec3f& b) {
-	a += b;
-	self = a;
-}*/
-/*inline TVec3f translate(TVec3f a, const TVec3f& b) {
-	a += b;
-	return a;
-}*/
 
 
 inline TVec3f translate(const TVec3f& a, const TVec3f& b) {
 	TVec3f tmp = a;
-	//JGeometry::negateInternal(&a.x, &tmp.x);
-	//tmp = a;
 	tmp += b;
 	return tmp;
 }
@@ -259,3 +250,48 @@ bool CubeGravity::calcEdgeGravity(const TVec3f &rPosition, s32 area, TVec3f *pDe
 	
 }
 
+bool CubeGravity::calcCornerGravity(const TVec3f &rPosition, s32 area, TVec3f *pDest, f32 *pScalar) const {
+	TVec3f stack_140, xDir, yDir, zDir, trans;
+	mPosition.getXDir(xDir);
+	mPosition.getYDir(yDir);
+	mPosition.getZDir(zDir);
+	switch(area) {
+		case 0:
+			stack_140 = negate(xDir) - yDir - zDir;
+			break;
+		case 2:
+			stack_140 = xDir - yDir - zDir;
+			break;
+		case 6:
+			stack_140 = translate(negate(xDir), yDir) - zDir;
+			break;
+		case 8:
+			stack_140 = translate(xDir, yDir) - zDir;
+			break;
+		case 18:
+			stack_140 = translate(negate(xDir) - yDir, zDir);
+			break;
+		case 20:
+			stack_140 = translate(xDir - yDir, zDir);
+			break;
+		case 24:
+			stack_140 = translate(translate(negate(xDir), yDir), zDir);
+			break;
+		case 26:
+			stack_140 = translate(translate(xDir, yDir), zDir);
+			break;
+		default:
+			return false;
+	}
+	mPosition.getTrans(trans);
+	stack_140 += trans;
+	TVec3f stack_104 = stack_140 - rPosition;
+	if(stack_104.isZero()) {
+		*pScalar = 0f;
+		pDest -> normalize(stack_140 - trans);
+	}
+	else {
+		*pScalar = pDest -> normalize(stack_104);
+	}
+	return true;
+}
