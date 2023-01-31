@@ -20,7 +20,6 @@ bool TVec3f::isZero() const {
 
 template<>
 float TVec3f::normalize(const TVec3f& rSrc) {
-	//*this = rSrc;
 	x = rSrc.x;
 	y = rSrc.y;
 	z = rSrc.z;
@@ -31,9 +30,9 @@ float TVec3f::normalize(const TVec3f& rSrc) {
 
 CubeGravity::CubeGravity() : PlanetGravity() {
 
-	_88 = 1.0;
-	_8C = 1.0;
-	_90 = 1.0;
+	lenX = 1.0;
+	lenY = 1.0;
+	lenZ = 1.0;
 	mActiveFaces = 63;
 
 	mCube.identity();
@@ -50,31 +49,30 @@ void CubeGravity::updateMtx(const TPos3f &rMtx) {
 	mPosition.concat(rMtx, mCube);
 	TVec3f dir;
 	mPosition.getXDir(dir);
-	_88 = VECMag(dir.toCVec());
+	lenX = VECMag(dir.toCVec());
 	mPosition.getYDir(dir);
-	_8C = VECMag(dir.toCVec());
+	lenY = VECMag(dir.toCVec());
 	mPosition.getZDir(dir);
-	_90 = VECMag(dir.toCVec());
+	lenZ = VECMag(dir.toCVec());
 }
 
 bool CubeGravity::calcOwnGravityVector(TVec3f *pDest, f32 *pScalar, const TVec3f &rPosition) const {
-	//Stack size: 0x20 (8 for lr + sp => 0x1c for data)
 	int area = calcGravityArea(rPosition);
-	if(area < 0) return false; // Note: Result of calcGravityArea probably should be stored in 1f
-	TVec3f dst;
+	if(area < 0) return false;
+	TVec3f gravityForce;
 	float scalar;
 	if (
-		!calcFaceGravity(rPosition, area, &dst, &scalar)
-		&& !calcCornerGravity(rPosition, area, &dst, &scalar)
-		&& !calcEdgeGravity(rPosition, area, &dst, &scalar)
+		!calcFaceGravity(rPosition, area, &gravityForce, &scalar)
+		&& !calcCornerGravity(rPosition, area, &gravityForce, &scalar)
+		&& !calcEdgeGravity(rPosition, area, &gravityForce, &scalar)
 	) return false;
 		
-	if(isInRangeDistance(scalar)) return false; //bc fails
+	if(isInRangeDistance(scalar)) return false;
 
-	if(pDest != NULL) //bc success
-		*pDest = dst;
+	if(pDest != NULL)
+		*pDest = gravityForce;
 
-	if(pScalar != NULL) //bc success
+	if(pScalar != NULL)
 		*pScalar = scalar;
 	return true;
 }
@@ -85,89 +83,89 @@ int CubeGravity::calcGravityArea(const TVec3f &rPosition) const { // Area as in 
 	mPosition.getYDir(dirY);
 	mPosition.getZDir(dirZ);
 	mPosition.getTrans(trans);
-	TVec3f stack_8 = rPosition - trans;
-	int sum;
-	float xDot = stack_8.dot(dirX) / _88, yDot = stack_8.dot(dirY) / _8C, zDot = stack_8.dot(dirZ) / _90;
+	TVec3f relativePosition = rPosition - trans;
+	int area; // Region of the cube
+	float xDirDistance = relativePosition.dot(dirX) / lenX, yDirDistance = relativePosition.dot(dirY) / lenY, zDirDistance = relativePosition.dot(dirZ) / lenZ;
 
-	if(xDot < -_88) {
+	if(xDirDistance < -lenX) {
 		if((mActiveFaces & 2) != 2) return -1;
-		sum = 0;
+		area = 0;
 	}
 	else {
-		if(xDot <= _88) {
-			sum = 1;
+		if(xDirDistance <= lenX) {
+			area = 1;
 		}
 		else {
 			if((mActiveFaces & 1) != 1) return -1;
-			sum = 2;
+			area = 2;
 		}
 	}
 
-	if(yDot < -_8C) {
+	if(yDirDistance < -lenY) {
 		if((mActiveFaces & 8) != 8) return -1;
 	}
 	else {
-		if(yDot <= _8C) {
-			sum += 3;
+		if(yDirDistance <= lenY) {
+			area += 3;
 		}
 		else {
 			if((mActiveFaces & 4) != 4) return -1;
-			sum += 6;
+			area += 6;
 		}
 	}
 	
-	if(zDot < -_90) {
+	if(zDirDistance < -lenZ) {
 		if((mActiveFaces & 32) != 32) return -1;
 	}
 	else {
-		if(zDot <= _90) {
-			sum += 9;
+		if(zDirDistance <= lenZ) {
+			area += 9;
 		}
 		else {
 			if((mActiveFaces & 16) != 16) return -1;
-			sum += 18;
+			area += 18;
 		}
 	} 
 		
-	return sum;
+	return area;
 }
 
 bool CubeGravity::calcFaceGravity(const TVec3f &rPosition, s32 area, TVec3f *pDest, f32 *pScalar) const {
-	TVec3f stack_24;
+	TVec3f antiFaceDir; // Negative of the normal vector of the face an object is on
 	switch(area) {
 		case 4:
-			mPosition.getZDir(stack_24);
+			mPosition.getZDir(antiFaceDir);
 			break;
 		case 10:
-			mPosition.getYDir(stack_24);
+			mPosition.getYDir(antiFaceDir);
 			break;
 		case 12:
-			mPosition.getXDir(stack_24);
+			mPosition.getXDir(antiFaceDir);
 			break;
 		case 14:
-			mPosition.getXDir(stack_24);
-			JGeometry::negateInternal(&stack_24.x, &stack_24.x);
+			mPosition.getXDir(antiFaceDir);
+			JGeometry::negateInternal(&antiFaceDir.x, &antiFaceDir.x);
 			break;
 		case 16:
-			mPosition.getYDir(stack_24);
-			JGeometry::negateInternal(&stack_24.x, &stack_24.x);
+			mPosition.getYDir(antiFaceDir);
+			JGeometry::negateInternal(&antiFaceDir.x, &antiFaceDir.x);
 			break;
 		case 22:
-			mPosition.getZDir(stack_24);
-			JGeometry::negateInternal(&stack_24.x, &stack_24.x);
+			mPosition.getZDir(antiFaceDir);
+			JGeometry::negateInternal(&antiFaceDir.x, &antiFaceDir.x);
 			break;
 		default:
 			return false;
 		
 	}
-	TVec3f stack_18;
-	f32 stack_8;
-	mPosition.getTrans(stack_18);
-	MR::separateScalarAndDirection(&stack_8, &stack_24, stack_24);
-	float fr_31 = stack_24.dot(stack_18 - rPosition) - stack_8;
-	if(fr_31 < 0.0) fr_31 = 0.0;
-	*pDest = stack_24;
-	*pScalar = fr_31;
+	TVec3f trans;
+	f32 distance; // Double-check what this really is
+	mPosition.getTrans(trans);
+	MR::separateScalarAndDirection(&distance, &antiFaceDir, antiFaceDir);
+	float gravityMagnitude = antiFaceDir.dot(trans - rPosition) / distance;
+	if(gravityMagnitude < 0.0) gravityMagnitude = 0.0;
+	*pDest = antiFaceDir;
+	*pScalar = gravityMagnitude;
 	return true;
 }
 

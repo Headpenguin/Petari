@@ -26,8 +26,8 @@ private:
 
 	TPos3f mCube; // _28
 	TPos3f mPosition; // _58
-	f32 _88;
-	f32 _8C;
-	f32 _90;
+	f32 lenX;
+	f32 lenY;
+	f32 lenZ;
 	u8 mActiveFaces; // _94
 };
