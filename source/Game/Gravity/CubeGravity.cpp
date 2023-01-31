@@ -18,6 +18,17 @@ bool TVec3f::isZero() const {
 	return sum <= 0.0000038146973f;
 }
 
+template<>
+float TVec3f::normalize(const TVec3f& rSrc) {
+	//*this = rSrc;
+	x = rSrc.x;
+	y = rSrc.y;
+	z = rSrc.z;
+	float magnitude = PSVECMag(toCVec());
+	PSVECNormalize(toCVec(), toVec());
+	return magnitude;
+}
+
 CubeGravity::CubeGravity() : PlanetGravity() {
 
 	_88 = 1.0;
