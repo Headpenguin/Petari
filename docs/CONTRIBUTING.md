@@ -249,7 +249,7 @@ please join our **[Discord]** server.
 ### Nonmatching Code
 
 If your code does **NOT** match, use the <br>
-`NONMATCHING` macro, and explain in a <br>
+`NON_MATCHING` macro, and explain in a <br>
 comment why it does not match.
 
 <br>
