@@ -165,19 +165,9 @@ void Poihana::control() {
 	MR::setBaseScale(this, mAnimScaleCtrl->_C);
 }*/
 
-//#ifdef NON_MATCHING
-/*
- * Instruction swap
- *
- * Original:                        This:
- *   fneg       f1, f1              fneg       f1, f1
- *   mr         r4, r31             mr         r4, r31
- *   addi       r3, r1, 8           mr         r5, r31
- *   mr         r5, r31             addi       r3, r1, 8
- *   bl         JMAVECScaleAdd      bl         JMAVECScaleAdd
- */
- 
+#ifdef NON_MATCHING
 
+// This inline function might be used elsewhere too? It seems unusual for it to be used once
 inline void calcRepelVector(const TVec3f &agent, const TVec3f &object, TVec3f& dst) {
 	JMAVECScaleAdd(agent.toCVec(), object.toCVec(), dst.toVec(), -agent.dot(object));
 }
@@ -221,7 +211,7 @@ void Poihana::attackSensor(HitSensor *pSender, HitSensor *pReceiver) {
 		}
 	}
 }
-//#endif
+#endif
 
 bool Poihana::receiveMsgPush(HitSensor *pSender, HitSensor *pReceiver) {
 	if (MR::isSensorEnemy(pSender) || MR::isSensorMapObj(pSender)) {
