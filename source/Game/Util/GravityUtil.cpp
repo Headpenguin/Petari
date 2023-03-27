@@ -3,7 +3,7 @@
 #include "Game/Util/JMapInfo.h"
 #include "Game/Scene/SceneObjHolder.h"
 #include "Game/LiveActor/LiveActor.h"
-#include <string.h>
+#include <cstring>
 
 namespace {
 	void getJMapInfoArgPlus(const JMapInfoIter &rIter, const char *pFieldName, f32 *pDest) {
@@ -101,7 +101,7 @@ namespace MR {
 
 	bool isZeroGravity(const LiveActor *pActor) {
 		TVec3f dummyGravity;
-		return ::calcGravityVectorOrZero(pActor, pActor->mPosition, GRAVITY_TYPE_NORMAL, &dummyGravity, NULL, 0) == false;
+		return ::calcGravityVectorOrZero(pActor, pActor->mPosition, GRAVITY_TYPE_NORMAL, &dummyGravity, nullptr, 0) == false;
 	}
 
 	bool isLightGravity(const GravityInfo &rInfo) {
@@ -139,7 +139,7 @@ namespace MR {
 	}
 
 	void getJMapInfoGravityType(const JMapInfoIter &rIter, PlanetGravity *pGravity) {
-		const char *pType = NULL;
+		const char *pType = nullptr;
 
 		if (rIter.getValue("Gravity_type", &pType)) {
 			if (!strcmp(pType, "Normal")) {
@@ -155,7 +155,7 @@ namespace MR {
 	}
 
 	void getJMapInfoGravityPower(const JMapInfoIter &rIter, PlanetGravity *pGravity) {
-		const char *pPower = NULL;
+		const char *pPower = nullptr;
 
 		if (rIter.getValue("Power", &pPower)) {
 			if (!strcmp(pPower, "Light")) {

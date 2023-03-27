@@ -17,7 +17,7 @@ void KCollisionServer::V3u::setUsingCast(const TVec3f &rPos) {
 }
 
 KCollisionServer::KCollisionServer() {
-    mFile = NULL;
+    mFile = nullptr;
     mapInfo = new JMapInfo();
     mMaxVertexDistance = 1.0f;
 }
@@ -25,7 +25,7 @@ KCollisionServer::KCollisionServer() {
 void KCollisionServer::init(void *pData, const void *pMapData) {
     setData(pData);
 
-    if (pMapData != NULL) {
+    if (pMapData != nullptr) {
         mapInfo->attach(pMapData);
     }
 }
@@ -51,7 +51,7 @@ void KCollisionServer::setData(void *pData) {
 }*/
 
 bool KCollisionServer::isBinaryInitialized(const void *pData) {
-    return reinterpret_cast<const u32 *>(pData)[0] >> 31;
+    return reinterpret_cast<const s32 *>(pData)[0] < 0;
 }
 
 bool KCollisionServer::isNearParallelNormal(const KC_PrismData *pPrism) const {

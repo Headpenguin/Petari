@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cmath>
 #include <revolution.h>
 #include "JSystem/JGeometry.h"
 
@@ -7,16 +8,6 @@ static f32 minDegree = 0.0f;
 static f32 maxDegree = 360.0f;
 
 static f32 flt_8060FC80[1816];
-
-#ifdef __cplusplus
-extern "C" {
-f64 sin(f32);
-f64 cos(f32);
-f64 fmod(f64, f64);
-f64 asin(f32);
-}
-#endif
-
 
 namespace MR {
     void initAcosTable();

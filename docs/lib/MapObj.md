@@ -43,7 +43,7 @@
 | [BigBubbleDrawer.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/BigBubbleDrawer.md) | 100.0% | 9 / 9 | 100.0% | :white_check_mark: 
 | [BigBubbleGenerator.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/BigBubbleGenerator.md) | 0.0% | 0 / 21 | 0.0% | :x: 
 | [BigBubbleHolder.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/BigBubbleHolder.md) | 0.0% | 0 / 15 | 0.0% | :x: 
-| [BigBubbleMoveLimitter.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/BigBubbleMoveLimitter.md) | 0.0% | 0 / 7 | 0.0% | :x: 
+| [BigBubbleMoveLimitter.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/BigBubbleMoveLimitter.md) | 13.903743315508022% | 1 / 7 | 14.285714285714285% | :eight_pointed_black_star: 
 | [BigFan.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/BigFan.md) | 100.0% | 18 / 18 | 100.0% | :white_check_mark: 
 | [BigFanHolder.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/BigFanHolder.md) | 100.0% | 7 / 7 | 100.0% | :white_check_mark: 
 | [BlackHole.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/BlackHole.md) | 66.66666666666666% | 18 / 22 | 81.81818181818183% | :eight_pointed_black_star: 
@@ -134,7 +134,7 @@
 | [InvisiblePolygonObjGCapture.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/InvisiblePolygonObjGCapture.md) | 0.0% | 0 / 3 | 0.0% | :x: 
 | [IronCannonShell.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/IronCannonShell.md) | 0.0% | 0 / 27 | 0.0% | :x: 
 | [ItemAppearStone.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/ItemAppearStone.md) | 100.0% | 9 / 9 | 100.0% | :white_check_mark: 
-| [ItemBlock.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/ItemBlock.md) | 0.0% | 0 / 26 | 0.0% | :x: 
+| [ItemBlock.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/ItemBlock.md) | 74.88479262672811% | 23 / 26 | 88.46153846153845% | :eight_pointed_black_star: 
 | [ItemBubble.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/ItemBubble.md) | 0.0% | 0 / 18 | 0.0% | :x: 
 | [JetTurtle.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/JetTurtle.md) | 0.0% | 0 / 55 | 0.0% | :x: 
 | [JumpHole.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/JumpHole.md) | 0.0% | 0 / 21 | 0.0% | :x: 
@@ -156,8 +156,8 @@
 | [LavaSteam.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/LavaSteam.md) | 0.0% | 0 / 22 | 0.0% | :x: 
 | [LavaStrangeRock.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/LavaStrangeRock.md) | 0.0% | 0 / 10 | 0.0% | :x: 
 | [LotusLeaf.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/LotusLeaf.md) | 0.0% | 0 / 16 | 0.0% | :x: 
-| [MagicBell.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/MagicBell.md) | 0.0% | 0 / 15 | 0.0% | :x: 
-| [ManholeCover.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/ManholeCover.md) | 0.0% | 0 / 13 | 0.0% | :x: 
+| [MagicBell.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/MagicBell.md) | 40.23494860499266% | 11 / 15 | 73.33333333333333% | :eight_pointed_black_star: 
+| [ManholeCover.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/ManholeCover.md) | 20.96069868995633% | 1 / 13 | 7.6923076923076925% | :eight_pointed_black_star: 
 | [MapObjActor.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/MapObjActor.md) | 61.95652173913043% | 58 / 59 | 98.30508474576271% | :eight_pointed_black_star: 
 | [MapObjActorInitInfo.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/MapObjActorInitInfo.md) | 22.48062015503876% | 11 / 37 | 29.72972972972973% | :eight_pointed_black_star: 
 | [MapObjConnector.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/MapObjConnector.md) | 32.25806451612903% | 4 / 6 | 66.66666666666666% | :eight_pointed_black_star: 
@@ -196,7 +196,7 @@
 | [PomponPlant.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/PomponPlant.md) | 0.0% | 0 / 15 | 0.0% | :x: 
 | [PowerStar.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/PowerStar.md) | 66.49572649572649% | 58 / 65 | 89.23076923076924% | :eight_pointed_black_star: 
 | [PowerStarAppearPoint.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/PowerStarAppearPoint.md) | 100.0% | 3 / 3 | 100.0% | :white_check_mark: 
-| [PowerStarHolder.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/PowerStarHolder.md) | 0.0% | 0 / 11 | 0.0% | :x: 
+| [PowerStarHolder.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/PowerStarHolder.md) | 100.0% | 11 / 11 | 100.0% | :white_check_mark: 
 | [PressureBase.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/PressureBase.md) | 81.69398907103826% | 44 / 48 | 91.66666666666666% | :eight_pointed_black_star: 
 | [PrizeRing.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/PrizeRing.md) | 0.0% | 0 / 31 | 0.0% | :x: 
 | [PTimerSwitch.o](https://github.com/shibbo/Petari/blob/master/docs/lib/MapObj/PTimerSwitch.md) | 0.0% | 0 / 24 | 0.0% | :x: 

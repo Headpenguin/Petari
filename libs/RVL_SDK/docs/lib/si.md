@@ -8,28 +8,28 @@
 
 | Object | Percentage (of Bytes) | Functions Done / Total Functions | Percentage (Functions) | Status 
 | ------------- | ------------- | ------------- | ------------- | ------------- 
-| SIBios.o | 0.0% | 0 / 9 | 0.0% | :x: 
-| SISamplingRate.o | 0.0% | 0 / 2 | 0.0% | :x: 
+| SIBios.o | 100.0% | 9 / 9 | 100.0% | :white_check_mark: 
+| SISamplingRate.o | 100.0% | 2 / 2 | 100.0% | :white_check_mark: 
 
 
 # SIBios.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| CompleteTransfer | :x: |
-| SIInterruptHandler | :x: |
-| SIInit | :x: |
-| __SITransfer | :x: |
-| SISetXY | :x: |
-| AlarmHandler | :x: |
-| SITransfer | :x: |
-| GetTypeCallback | :x: |
-| SIGetType | :x: |
+| CompleteTransfer | :white_check_mark: |
+| SIInterruptHandler | :white_check_mark: |
+| SIInit | :white_check_mark: |
+| __SITransfer | :white_check_mark: |
+| SISetXY | :white_check_mark: |
+| AlarmHandler | :white_check_mark: |
+| SITransfer | :white_check_mark: |
+| GetTypeCallback | :white_check_mark: |
+| SIGetType | :white_check_mark: |
 
 
 # SISamplingRate.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| SISetSamplingRate | :x: |
-| SIRefreshSamplingRate | :x: |
+| SISetSamplingRate | :white_check_mark: |
+| SIRefreshSamplingRate | :white_check_mark: |
 
 

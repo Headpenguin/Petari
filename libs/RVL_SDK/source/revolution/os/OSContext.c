@@ -1,10 +1,11 @@
 #include <revolution/base/PPCArch.h>
+#include <revolution/os.h>
 #include <revolution/os/OSContext.h>
 #include <revolution/os/OSException.h>
 #include <revolution/db.h>
 
 volatile OSContext* __OSCurrentContext: (0x8000 << 16 | 0xD4);
-volatile OSContext* __OSpContext : (0x8000 << 16 | 0xD8);
+volatile OSContext* __OSFPUContext : (0x8000 << 16 | 0xD8);
 
 /* these two do not match yet, I just have them defined to avoid the issues with OSSwitchFPUContext */
 static asm void __OSLoadFPUContext(register u32, register OSContext *pContext) {
@@ -173,33 +174,10 @@ _ret:
     blr    
 }
 
-inline void SwitchFPUContext(__OSException ex, OSContext *pContext) {
-    PPCMtmsr(PPCMfmsr() | 0x2000);
-    pContext->srr1 |= 0x2000;
-
-    if (__OSpContext == pContext) {
-        OSLoadContext(pContext);
-    }
-
-    if (__OSpContext) {
-        OSSavepContext((OSContext*)__OSpContext);
-    }
-
-    __OSpContext = pContext;
-    OSLoadFPUContext((OSContext*)__OSpContext);
-    OSLoadContext(pContext);
-}
-
-asm void OSLoadFPUContext(register OSContext *pContext) {
-    nofralloc
-    addi r4, pContext, 0
-    b __OSLoadFPUContext
-}
-
 asm void OSSaveFPUContext(register OSContext *pContext) {
     nofralloc
     addi r4, pContext, 0
-    b __OSSaveFPUContext
+    b __OSLoadFPUContext
 }
 
 asm void OSSetCurrentContext(register OSContext *pContext) {
@@ -235,6 +213,242 @@ disableFPU:
 
 OSContext* OSGetCurrentContext(void) {
     return (OSContext*)__OSCurrentContext;
+}
+
+asm u32 OSSaveContext(register OSContext* context) {
+    nofralloc
+    stmw r13, context->gpr[13]
+
+    mfspr   r0, 0x391
+    stw     r0, context->gqr[1]
+    mfspr   r0, 0x392
+    stw     r0, context->gqr[2]
+    mfspr   r0, 0x393
+    stw     r0, context->gqr[3]
+    mfspr   r0, 0x394
+    stw     r0, context->gqr[4]
+    mfspr   r0, 0x395
+    stw     r0, context->gqr[5]
+    mfspr   r0, 0x396
+    stw     r0, context->gqr[6]
+    mfspr   r0, 0x397
+    stw     r0, context->gqr[7]
+
+    mfcr    r0
+    stw     r0, context->cr
+
+    mflr    r0
+    stw     r0, context->lr
+    stw     r0, context->srr0
+
+    mfmsr   r0
+    stw     r0, context->srr1
+
+    mfctr   r0
+    stw     r0, context->ctr
+
+    mfxer   r0
+    stw     r0, context->xer
+
+    stw     r1, context->gpr[1]
+    stw     r2, context->gpr[2]
+
+    li      r0, 1
+    stw     r0, context->gpr[3]
+    li      r3, 0
+    blr
+}
+
+asm void OSLoadContext(register OSContext* context) {
+    nofralloc
+
+    lis r4, __RAS_OSDisableInterrupts_begin@ha
+    lwz r6, context->srr0
+    addi r5, r4, __RAS_OSDisableInterrupts_begin@l
+    cmplw r6, r5
+    ble notInRAS
+    lis r4, __RAS_OSDisableInterrupts_end@ha
+    addi r0, r4, __RAS_OSDisableInterrupts_end@l
+    cmplw r6, r0
+    bge notInRAS
+    stw r5, context->srr0
+
+notInRAS:
+    lwz r0, context->gpr[0]
+    lwz r1, context->gpr[1]
+    lwz r2, context->gpr[2]
+    lhz r4, context->state
+    rlwinm. r5, r4, 0, 30, 30
+    beq notexc
+    rlwinm  r4, r4, 0, 31, 29
+    sth r4, context->state
+    lmw r5, context->gpr[5]
+    b misc
+
+notexc:
+    lmw r13, context->gpr[13]
+
+misc:   
+    lwz r4, context->gqr[1]
+    mtspr 0x391, r4
+    lwz r4, context->gqr[2]
+    mtspr 0x392, r4
+    lwz r4, context->gqr[3]
+    mtspr 0x393, r4
+    lwz r4, context->gqr[4]
+    mtspr 0x394, r4
+    lwz r4, context->gqr[5]
+    mtspr 0x395, r4
+    lwz r4, context->gqr[6]
+    mtspr 0x396, r4
+    lwz r4, context->gqr[7]
+    mtspr 0x397, r4
+
+    lwz r4, context->cr
+    mtcr r4
+    lwz r4, context->lr
+    mtlr r4
+    lwz r4, context->ctr
+    mtctr r4
+    lwz r4, context->xer
+    mtxer r4
+
+    mfmsr r4
+    rlwinm r4, r4, 0, 17, 15
+    rlwinm r4, r4, 0, 31, 29
+    mtmsr r4
+
+    lwz r4, context->srr0
+    mtsrr0 r4
+    lwz r4, context->srr1
+    mtsrr1 r4
+
+    lwz r4, context->gpr[4]
+    lwz r3, context->gpr[3]
+    rfi
+}
+
+asm u32 OSGetStackPointer(void) {
+    nofralloc
+    mr r3, r1
+    blr
+}
+
+asm int OSSwitchFiber(register u32 pc, register u32 newsp) {
+    nofralloc
+    mflr r0
+    mr r5, r1
+    stwu r5, -8(newsp)
+    mr r1, newsp
+    stw r0, 4(r5)
+    mtlr pc
+    blrl
+
+    lwz r5, 0(r1)
+    lwz r0, 4(r5)
+    mtlr r0
+    mr r1, r5
+    blr
+}
+
+asm int OSSwitchFiberEx(register u32 arg0, register u32 arg1, register u32 arg2, register u32 arg3, register u32 pc, register u32 newsp) {
+    nofralloc
+    mflr r0
+    mr r9, r1
+    stwu r9, -8(newsp)
+    mr r1, newsp
+    stw r0, 4(r9)
+    mtlr pc
+    blrl
+
+    lwz r5, 0(r1)
+    lwz r0, 4(r5)
+    mtlr r0
+
+    mr r1, r5
+    blr
+}
+
+void OSClearContext(OSContext *pContext) {
+    pContext->mode = 0;
+    pContext->state = 0;
+
+    if (pContext == __OSFPUContext) {
+        __OSFPUContext = 0;
+    }
+}
+
+// OSInitContext
+
+void OSDumpContext(OSContext* context) {
+    u32 i;
+    u32* p;
+
+    OSReport("------------------------- Context 0x%08x -------------------------\n", context);
+
+    for (i = 0; i < 16; ++i) {
+        OSReport("r%-2d  = 0x%08x (%14d)  r%-2d  = 0x%08x (%14d)\n", i, context->gpr[i], context->gpr[i], i + 16, context->gpr[i + 16], context->gpr[i + 16]);
+    }
+
+    OSReport("LR   = 0x%08x                   CR   = 0x%08x\n", context->lr, context->cr);
+    OSReport("SRR0 = 0x%08x                   SRR1 = 0x%08x\n", context->srr0, context->srr1);
+    OSReport("\nGQRs----------\n");
+
+    for (i = 0; i < 4; ++i) {
+        OSReport("gqr%d = 0x%08x \t gqr%d = 0x%08x\n", i, context->gqr[i], i + 4, context->gqr[i + 4]);
+    }
+
+    if (context->state & 1) {
+        OSContext* currentContext;
+        OSContext fpuContext;
+        BOOL enabled;
+        enabled = OSDisableInterrupts();
+        currentContext = OSGetCurrentContext();
+        OSClearContext(&fpuContext);
+        OSSetCurrentContext(&fpuContext);
+
+        OSReport("\n\nFPRs----------\n");
+        for (i = 0; i < 32; i += 2) {
+            OSReport("ps%d \t= 0x%x \t ps%d \t= 0x%x\n", i, (u32)context->psf[i], i + 1, (u32)context->psf[i + 1]);
+        }
+
+        OSReport("\n\nPSFs----------\n");
+        for (i = 0; i < 32; i += 2) {
+            OSReport("ps%d \t= 0x%x \t ps%d \t= 0x%x\n", i, (u32)context->psf[i], i + 1, (u32)context->psf[i + 1]);
+        }
+
+        OSClearContext(&fpuContext);
+        OSSetCurrentContext(currentContext);
+        OSRestoreInterrupts(enabled);
+    }
+
+    OSReport("\nAddress:      Back Chain    LR Save\n");
+    for (i = 0, p = (u32*)context->gpr[1]; p && (u32)p != 0xffffffff && i++ < 16; p = (u32*)*p) {
+        OSReport("0x%08x:   0x%08x    0x%08x\n", p, p[0], p[1]);
+    }
+}
+
+inline void SwitchFPUContext(__OSException ex, OSContext *pContext) {
+    PPCMtmsr(PPCMfmsr() | 0x2000);
+    pContext->srr1 |= 0x2000;
+
+    if (__OSFPUContext == pContext) {
+        OSLoadContext(pContext);
+    }
+
+    if (__OSFPUContext) {
+        OSSavepContext((OSContext*)__OSFPUContext);
+    }
+
+    __OSFPUContext = pContext;
+    OSLoadFPUContext((OSContext*)__OSFPUContext);
+    OSLoadContext(pContext);
+}
+
+asm void OSLoadFPUContext(register OSContext *pContext) {
+    nofralloc
+    addi r4, pContext, 0
+    b __OSLoadFPUContext
 }
 
 static asm void OSSwitchFPUContext(register __OSException ex, register OSContext *pContext) {
@@ -285,6 +499,6 @@ static asm void OSSwitchFPUContext(register __OSException ex, register OSContext
 
 void __OSContextInit(void) {
     __OSSetExceptionHandler(7, OSSwitchFPUContext);
-    __OSpContext = NULL;
+    __OSFPUContext = NULL;
     DBPrintf("FPU-unavailable handler installed\n");
 }

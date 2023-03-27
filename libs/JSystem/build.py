@@ -8,13 +8,13 @@ import shutil
 
 def makeArchive(dir):
     fileList = ""
-    for root, dirs, files in os.walk(f"build/{dir}"):
+    for root, dirs, files in os.walk(f"build/JSystem/{dir}"):
         for f in files:
             if f.endswith(".o"):
-                fileList += f"build/{dir}/{f} "
+                fileList += f"build/JSystem/{dir}/{f} "
 
     default_compiler_path = pathlib.Path("GC/3.0a3/")
-    linker_path = pathlib.Path(f"Compilers/{default_compiler_path}/mwldeppc.exe ")
+    linker_path = pathlib.Path(f"../../Compilers/{default_compiler_path}/mwldeppc.exe ")
     linker_flags = f"-nodefaults -xm l -o lib/{dir}.a {fileList}"
 
     if subprocess.call(f"{linker_path} {linker_flags}", shell=True) == 1:
@@ -24,24 +24,9 @@ def makeLibArchive():
     if not os.path.isdir("lib"):
         os.mkdir("lib")
 
-    for root, dirs, files in os.walk("build"):
+    for root, dirs, files in os.walk("build/JSystem"):
         for dir in dirs:
             makeArchive(dir)
-
-def makeElf():
-    default_compiler_path = pathlib.Path("GC/3.0a3/")
-
-    fileList = ""
-
-    for root, dirs, files in os.walk("lib"):
-        for f in files:
-            if f.endswith(".a"):
-                fileList += f"{root}\\{f} "
-
-    linker_path = pathlib.Path(f"../../Compilers/{default_compiler_path}/mwldeppc.exe ")
-    linker_flags = f"-lcf ldscript.lcf -fp hard -proc gekko -map JSystem.map -o JSystem.elf {fileList}"
-    if subprocess.call(f"{linker_path} {linker_flags}", shell=True) == 1:
-            print("Linking failed.")
 
 def deleteDFiles():
     dirs = os.listdir(os.getcwd())
@@ -60,9 +45,10 @@ def main(compile_non_matching, use_ninja, clean_ninja, link):
     flags = "-c -nodefaults -nostdlib -proc gekko -align powerpc -enum int -enc SJIS -fp hard -Cpp_exceptions off -rtti off -DEPPC -DGEKKO -O4,p -inline auto "
     includes = "-i . -I- -i include "
 
+    msl_path =          pathlib.Path("../MSL_C/include")
     rvl_path =          pathlib.Path("../RVL_SDK/include")
     runtime_path =      pathlib.Path("../Runtime/include")
-    includes += f"-i {rvl_path } -i {runtime_path} "
+    includes += f"-i {msl_path} -i {rvl_path } -i {runtime_path} "
     flags += includes
 
     default_compiler_path = pathlib.Path("../../Compilers/GC/3.0a3/")
@@ -170,13 +156,11 @@ def main(compile_non_matching, use_ninja, clean_ninja, link):
     if link:
         print("Creating library archives...")
         makeLibArchive()
-        print("Making final ELF...")
-        makeElf()
     print("Complete.")
 
 def print_help_and_exit():
     print("Usage: build.py [flags...]")
-    print("\t-link: Link the final project together.")
+    print("\t-archive: Create the library archive.")
     print("\t-non-matching: Compile non-matching code.")
     print("\t-no-ninja: Do not use ninja even if available.")
     print("\t-clean: Clean old build files before building new when using ninja.")
@@ -199,7 +183,7 @@ if __name__ == "__main__":
             clean_ninja = True
         elif arg == "-help":
             print_help_and_exit()
-        elif arg == "-link":
+        elif arg == "-archive":
             link = True
         else:
             print(f"Invalid argument: {arg}")

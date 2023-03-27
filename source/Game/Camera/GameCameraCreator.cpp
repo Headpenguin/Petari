@@ -2,11 +2,11 @@
 #include "Game/Camera/CameraParamChunkHolder.h"
 #include "Game/Camera/GameCameraCreator.h"
 #include "Game/Util/AreaObjUtil.h"
-#include <string.h>
+#include <cstring>
 
 GameCameraCreator::GameCameraCreator(CameraParamChunkHolder *pChunkHolder) {
     mChunkHolder = pChunkHolder;
-    _4 = NULL;
+    _4 = nullptr;
     _8 = -1;
 
     memset(&mCodes[0], 0, sizeof(mCodes));
@@ -33,10 +33,10 @@ void GameCameraCreator::termCameraCodeCollection() {
             CameraParamChunkID_Tmp chunk = CameraParamChunkID_Tmp();
             chunk.createGroupID(_8, _4, i, 0);
 
-            mChunkHolder->createChunk(chunk, NULL);
+            mChunkHolder->createChunk(chunk, nullptr);
         }
     }
 
-    _4 = NULL;
+    _4 = nullptr;
     _8 = -1;
 }

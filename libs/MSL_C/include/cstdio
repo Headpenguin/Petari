@@ -5,14 +5,19 @@
 extern "C" {
 #endif
 
+#include <file_struct.h>
 #include <va_list.h>
 #include <cstring>
 
+
 int sprintf(char *pStr, const char *pFormat, ...);
-int snprintf(char *pStr, u32 n, const char *pFormat, ...);
+int snprintf(char *pStr, size_t n, const char *pFormat, ...);
 int vprintf(const char *, va_list);
 
 int sscanf(const char *, const char *, ...);
+
+int fclose(FILE *);
+int fflush(FILE *);
 
 #ifdef __cplusplus
 }

@@ -3,7 +3,9 @@
 #include <revolution.h>
 
 enum JSUStreamSeekFrom {
-    
+    SEEK_FROM_START,
+    SEEK_FROM_POSITION,
+    SEEK_FROM_END
 };
 
 class JSUIosBase {
@@ -13,7 +15,8 @@ public:
     }
 
     enum EIoState {
-
+        IO_OK,
+        IO_ERROR
     };
 
     virtual ~JSUIosBase() {
@@ -22,5 +25,9 @@ public:
 
     void setState(EIoState);
 
-    u8 mState; // _4
+    void clearState(EIoState state) {
+        mState &= ~state;
+    }
+
+    s8 mState; // _4
 };

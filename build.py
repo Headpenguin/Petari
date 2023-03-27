@@ -1,3 +1,4 @@
+import glob
 import subprocess
 import sys
 import os
@@ -6,42 +7,7 @@ import shutil
 import pathlib
 import shutil
 
-# todo -- implement me when SDK libs are decompiled
-sdk_o_paths = [
-    
-]
-
-
-other_libs = [
-    "deps/EABI/PowerPC_EABI_Support/MetroTRK/TRK_Hollywood_Revolution.a",
-    "deps/EABI/PowerPC_EABI_Support/Msl/MSL_C/PPC_EABI/LIB/MSL_C.PPCEABI.bare.h.a",
-    "deps/EABI/PowerPC_EABI_Support/Runtime/Lib/Runtime.PPCEABI.H.a",
-    "build/nw4r/lyt/lyt_init.o",
-    "deps/NDEV/lib/NdevExi2A.a",
-    "deps/RVL_SDK/RVL/lib/ai.a",
-    "deps/RVL_SDK/RVL/lib/base.a",
-    "deps/RVL_SDK/RVL/lib/bte.a",
-    "deps/RVL_SDK/RVL/lib/db.a",
-    "deps/RVL_SDK/RVL/lib/dvd.a",
-    "deps/RVL_SDK/RVL/lib/euart.a",
-    "deps/RVL_SDK/RVL/lib/esp.a",
-    "deps/RVL_SDK/RVL/lib/exi.a",
-    "deps/RVL_SDK/RVL/lib/fs.a",
-    "deps/RVL_SDK/RVL/lib/gx.a",
-    "deps/RVL_SDK/RVL/lib/ipc.a",
-    "deps/RVL_SDK/RVL/lib/nand.a",
-    "deps/RVL_SDK/RVL/lib/os.a",
-    "deps/RVL_SDK/RVL/lib/pad.a",
-    "deps/RVL_SDK/RVL/lib/sc.a",
-    "deps/RVL_SDK/RVL/lib/si.a",
-    "deps/RVL_SDK/RVL/lib/usb.a",
-    "deps/RVL_SDK/RVL/lib/WPAD.a",
-    "deps/RVL_SDK/RVL/lib/wud.a",
-    "deps/RVL_SDK/RVL/lib/vi.a",
-
-    "build/JSystem/JKernel/JKRHeap.o",
-    "build/JSystem/JKernel/JKRExpHeap.o",
-]
+arch_base_path = list(glob.glob("archive/*.a") + glob.glob("libs/RVL_SDK/lib/*.a") + glob.glob("libs\\MSL_C\\lib\\*.a") + glob.glob("libs\\Runtime\\lib\\*.a"))
 
 def makeArchive(dir):
     fileList = ""
@@ -52,7 +18,7 @@ def makeArchive(dir):
 
     default_compiler_path = pathlib.Path("GC/3.0a3/")
     linker_path = pathlib.Path(f"Compilers/{default_compiler_path}/mwldeppc.exe ")
-    linker_flags = f"-nodefaults -xm l -o archives/{dir}.a {fileList}"
+    linker_flags = f"-nodefaults -xm l -o archive/{dir}.a {fileList}"
 
     if subprocess.call(f"{linker_path} {linker_flags}", shell=True) == 1:
         print("Library creation failed.")
@@ -66,7 +32,8 @@ def makeLibArchive():
             makeArchive(dir)
 
 def makeElf():
-    default_compiler_path = pathlib.Path("GC/3.0a3/")
+    # using 2.6 because others fail for mismatching C files in Runtime
+    default_compiler_path = pathlib.Path("GC/2.6/")
 
     fileList = ""
 
@@ -75,11 +42,8 @@ def makeElf():
             if f.endswith(".a"):
                 fileList += f"{root}\\{f} "
 
-    for sdk_o in sdk_o_paths:
-        fileList += f"{sdk_o} "
-
-    for lib_a in other_libs:
-        fileList += f"{lib_a} "
+    for arch_paths in arch_base_path:
+        fileList += f"{arch_paths} "
 
     linker_path = pathlib.Path(f"Compilers/{default_compiler_path}/mwldeppc.exe ")
     linker_flags = f"-lcf ldscript.lcf -fp hard -proc gekko -map main.map -o main.elf {fileList}"

@@ -1,10 +1,10 @@
 #include "Game/Camera/CameraParamChunkID.h"
 #include <cstdio>
-#include <string.h>
+#include <cstring>
 
 CameraParamChunkID::CameraParamChunkID() {
     mZoneID = 0;
-    mName = NULL;
+    mName = nullptr;
 }
 
 CameraParamChunkID::CameraParamChunkID(const CameraParamChunkID &other) {
@@ -16,10 +16,10 @@ CameraParamChunkID::CameraParamChunkID(const CameraParamChunkID &other) {
 }
 
 bool CameraParamChunkID::operator>(const CameraParamChunkID &other) const {
-    if (mName == NULL) {
-        return other.mName != NULL;
+    if (mName == nullptr) {
+        return other.mName != nullptr;
     }
-    else if (other.mName == NULL) {
+    else if (other.mName == nullptr) {
         return false;
     }
 
@@ -41,10 +41,10 @@ bool CameraParamChunkID::operator>(const CameraParamChunkID &other) const {
 }
 
 bool CameraParamChunkID::operator==(const CameraParamChunkID &other) const {
-    if (mName == NULL) {
-        return other.mName == NULL;
+    if (mName == nullptr) {
+        return other.mName == nullptr;
     }
-    else if (other.mName == NULL) {
+    else if (other.mName == nullptr) {
         return false;
     }
 
@@ -61,7 +61,7 @@ char *CameraParamChunkID::getBuffer(unsigned long length) {
 }
 
 bool CameraParamChunkID::equals(long zoneID, const char *pName) const {
-    if (mName != NULL) {
+    if (mName != nullptr) {
         return zoneID == mZoneID && strcmp(mName, pName) == 0;
     }
     

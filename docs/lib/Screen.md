@@ -59,8 +59,8 @@
 | [GameStageClearSequence.o](https://github.com/shibbo/Petari/blob/master/docs/lib/Screen/GameStageClearSequence.md) | 0.0% | 0 / 13 | 0.0% | :x: 
 | [HeatHazeEffect.o](https://github.com/shibbo/Petari/blob/master/docs/lib/Screen/HeatHazeEffect.md) | 0.0% | 0 / 9 | 0.0% | :x: 
 | [HomeButtonLayout.o](https://github.com/shibbo/Petari/blob/master/docs/lib/Screen/HomeButtonLayout.md) | 0.0% | 0 / 20 | 0.0% | :x: 
-| [IconAButton.o](https://github.com/shibbo/Petari/blob/master/docs/lib/Screen/IconAButton.md) | 0.0% | 0 / 22 | 0.0% | :x: 
-| [IconComet.o](https://github.com/shibbo/Petari/blob/master/docs/lib/Screen/IconComet.md) | 0.0% | 0 / 8 | 0.0% | :x: 
+| [IconAButton.o](https://github.com/shibbo/Petari/blob/master/docs/lib/Screen/IconAButton.md) | 92.95039164490862% | 21 / 22 | 95.45454545454545% | :eight_pointed_black_star: 
+| [IconComet.o](https://github.com/shibbo/Petari/blob/master/docs/lib/Screen/IconComet.md) | 100.0% | 8 / 8 | 100.0% | :white_check_mark: 
 | [ImageEffectBase.o](https://github.com/shibbo/Petari/blob/master/docs/lib/Screen/ImageEffectBase.md) | 0.0% | 0 / 2 | 0.0% | :x: 
 | [ImageEffectDirector.o](https://github.com/shibbo/Petari/blob/master/docs/lib/Screen/ImageEffectDirector.md) | 0.0% | 0 / 33 | 0.0% | :x: 
 | [ImageEffectLocalUtil.o](https://github.com/shibbo/Petari/blob/master/docs/lib/Screen/ImageEffectLocalUtil.md) | 0.0% | 0 / 12 | 0.0% | :x: 
@@ -121,7 +121,7 @@
 | [StaffRoll.o](https://github.com/shibbo/Petari/blob/master/docs/lib/Screen/StaffRoll.md) | 0.0% | 0 / 83 | 0.0% | :x: 
 | [StageResultInformer.o](https://github.com/shibbo/Petari/blob/master/docs/lib/Screen/StageResultInformer.md) | 0.0% | 0 / 74 | 0.0% | :x: 
 | [StarCounter.o](https://github.com/shibbo/Petari/blob/master/docs/lib/Screen/StarCounter.md) | 0.0% | 0 / 18 | 0.0% | :x: 
-| [StarPieceCounter.o](https://github.com/shibbo/Petari/blob/master/docs/lib/Screen/StarPieceCounter.md) | 0.0% | 0 / 30 | 0.0% | :x: 
+| [StarPieceCounter.o](https://github.com/shibbo/Petari/blob/master/docs/lib/Screen/StarPieceCounter.md) | 29.70430107526882% | 6 / 30 | 20.0% | :eight_pointed_black_star: 
 | [StarPointerBlur.o](https://github.com/shibbo/Petari/blob/master/docs/lib/Screen/StarPointerBlur.md) | 0.0% | 0 / 13 | 0.0% | :x: 
 | [StarPointerCommandStream.o](https://github.com/shibbo/Petari/blob/master/docs/lib/Screen/StarPointerCommandStream.md) | 0.0% | 0 / 17 | 0.0% | :x: 
 | [StarPointerController.o](https://github.com/shibbo/Petari/blob/master/docs/lib/Screen/StarPointerController.md) | 0.0% | 0 / 12 | 0.0% | :x: 

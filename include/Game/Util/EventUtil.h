@@ -39,6 +39,7 @@ namespace MR {
 
     bool isPowerStarGreenInCurrentStage(s32);
     bool isPowerStarRedInCurrentStage(s32);
+    bool isGrandStarInCurrentStage(s32);
 
     bool isPowerStarGreenAtResultSequence();
     bool isPowerStarRedAtResultSequence();
@@ -67,4 +68,10 @@ namespace MR {
     bool isOnMessageAlreadyRead(s8);
     void onMessageAlreadyRead(s8);
     u32 setupAlreadyDoneFlag(const char *, const JMapInfoIter &, u32 *);
+
+    bool isGalaxyCometLandInStage(const char *);
+
+    int getEncounterGalaxyCometNameId(const char *);
+
+    int getStarPieceNum();
 };

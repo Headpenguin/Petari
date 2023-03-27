@@ -4,21 +4,6 @@
 #include <cstdio>
 #include <cmath>
 
-namespace MR {
-    bool isValidInfo(const JMapInfoIter &rIter) {
-        return rIter.isValid();
-    }
-
-    bool isObjectName(const JMapInfoIter &rIter, const char *pName) {
-        const char *objName = NULL;
-        if (MR::getObjectName(&objName, rIter)) {
-            return MR::isEqualString(pName, objName);
-        }
-
-        return false;
-    }
-};
-
 namespace {
     bool getJMapInfoRailArg(const JMapInfoIter &rIter, const char *pName, s32 *pOut) NO_INLINE {
         s32 val;
@@ -80,6 +65,36 @@ namespace {
         }
 
         return true;
+    }
+};
+
+namespace MR {
+    bool isValidInfo(const JMapInfoIter &rIter) {
+        return rIter.isValid();
+    }
+
+    bool isObjectName(const JMapInfoIter &rIter, const char *pName) {
+        const char *objName = nullptr;
+        if (MR::getObjectName(&objName, rIter)) {
+            return MR::isEqualString(pName, objName);
+        }
+
+        return false;
+    }
+
+    inline bool getArgAndInit(const JMapInfoIter &rIter, const char *pName, s32 *pOut) {
+        *pOut = -1;
+        return ::getJMapInfoArgNoInit(rIter, pName, pOut);
+    }
+
+    inline bool getArgAndInit(const JMapInfoIter &rIter, const char *pName, f32 *pOut) {
+        *pOut = -1.0f;
+        return ::getJMapInfoArgNoInit(rIter, pName, pOut);
+    }
+
+    inline bool getArgAndInit(const JMapInfoIter &rIter, const char *pName, bool *pOut) {
+        *pOut = false;
+        return ::getJMapInfoArgNoInit(rIter, pName, pOut);
     }
 };
 
@@ -540,13 +555,13 @@ namespace MR {
     }
 
     const char* getDemoName(const JMapInfoIter &rIter) {
-        const char* name = NULL;
+        const char* name = nullptr;
         rIter.getValue<const char *>("DemoName", &name);
         return name;
     }
 
     const char* getDemoSheetName(const JMapInfoIter &rIter) {
-        const char* name = NULL;
+        const char* name = nullptr;
         rIter.getValue<const char *>("TimeSheetName", &name);
         return name;
     }
@@ -556,7 +571,7 @@ namespace MR {
     }
 
     bool isEqualRailUsage(const JMapInfoIter &rIter, const char *pUsage) {
-        const char* str = NULL;
+        const char* str = nullptr;
         rIter.getValue<const char *>("usage", &str);
         return isEqualStringCase(str, pUsage);
     }
