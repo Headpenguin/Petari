@@ -1,4 +1,4 @@
-﻿#include "Game/Enemy/Poihana.h"
+#include "Game/Enemy/Poihana.h"
 #include "Game/Util.h"
 #include "JSystem/JMath/JMath.h"
 
@@ -166,16 +166,12 @@ void Poihana::control() {
 }*/
 
 #ifdef NON_MATCHING
-/*
- * Instruction swap
- *
- * Original:                        This:
- *   fneg       f1, f1              fneg       f1, f1
- *   mr         r4, r31             mr         r4, r31
- *   addi       r3, r1, 8           mr         r5, r31
- *   mr         r5, r31             addi       r3, r1, 8
- *   bl         JMAVECScaleAdd      bl         JMAVECScaleAdd
- */
+
+// This inline function might be used elsewhere too? It seems unusual for it to be used once
+inline void calcRepelVector(const TVec3f &agent, const TVec3f &object, TVec3f& dst) {
+	JMAVECScaleAdd(agent.toCVec(), object.toCVec(), dst.toVec(), -agent.dot(object));
+}
+
 void Poihana::attackSensor(HitSensor *pSender, HitSensor *pReceiver) {
 	bool ret = false;
 
@@ -209,9 +205,8 @@ void Poihana::attackSensor(HitSensor *pSender, HitSensor *pReceiver) {
 			MR::normalizeOrZero(&pushVelocity);
 
 			if (mVelocity.dot(pushVelocity) < 0.0f) {
-				Vec *velocity = mVelocity.toVec();
-				f32 dot = -(pushVelocity.dot(mVelocity));
-				JMAVECScaleAdd((pushVelocity.toCVec(), velocity, velocity, dot);
+				const TVec3f& velocity = mVelocity;
+				calcRepelVector(pushVelocity, velocity, mVelocity);
 			}
 		}
 	}
