@@ -5,6 +5,9 @@
 #include "math_types.h"
 
 namespace JGeometry {
+	void debugAssert(Vec* v) {
+		
+	}
     void negateInternal(const f32 *rSrc, f32 *rDest);
 
     template<typename T>
@@ -179,13 +182,16 @@ namespace JGeometry {
         void negate(const TVec3<T> &rSrc);
         void normalize(const TVec3<T> &rSrc);
 
-        inline void MAVECScaleAdd(const TVec3<T> &a1, TVec3<T> &a2) const {
-			JMAVECScaleAdd(toCVec(), a1.toCVec(), a2.toVec(), dot(a2));
+        inline void MAVECScaleAdd(const TVec3<T> &rA, Vec *pA) const {
+			
+			JMAVECScaleAdd(toCVec(), pA, pA, -dot(rA));
+
+//			debugAssert(pA);
+			
 		}
 
-		inline void MAVECScaleAdd2(TVec3<T> &a1) const {
-			Vec* v = a1.toVec();
-			JMAVECScaleAdd(toCVec(), v, v, -dot(a1));
+		inline void MAVECScaleAdd2(const TVec3<T> &a) {
+			JMAVECScaleAdd(a.toCVec(), toVec(), toVec(), a.dot(*this));
 		}
 
         template<typename S>

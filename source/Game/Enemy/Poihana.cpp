@@ -176,6 +176,7 @@ void Poihana::control() {
  *   mr         r5, r31             addi       r3, r1, 8
  *   bl         JMAVECScaleAdd      bl         JMAVECScaleAdd
  */
+
 void Poihana::attackSensor(HitSensor *pSender, HitSensor *pReceiver) {
 	bool ret = false;
 
@@ -209,10 +210,10 @@ void Poihana::attackSensor(HitSensor *pSender, HitSensor *pReceiver) {
 			MR::normalizeOrZero(&pushVelocity);
 
 			if (mVelocity.dot(pushVelocity) < 0.0f) {
-				/*Vec *velocity = mVelocity.toVec();
+				//Vec *velocity = mVelocity.toVec();
 				f32 dot = -(pushVelocity.dot(mVelocity));
-				JMAVECScaleAdd(pushVelocity.toCVec(), velocity, velocity, dot);*/
-				pushVelocity.MAVECScaleAdd2(mVelocity);
+				//scaleAlt(pushVelocity.toCVec(), velocity, dot);
+				mVelocity.MAVECScaleAdd2(pushVelocity);
 			}
 		}
 	}
