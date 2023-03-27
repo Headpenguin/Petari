@@ -211,7 +211,7 @@ void Poihana::attackSensor(HitSensor *pSender, HitSensor *pReceiver) {
 
 			if (mVelocity.dot(pushVelocity) < 0.0f) {
 				//Vec *velocity = mVelocity.toVec();
-				f32 dot = -(pushVelocity.dot(mVelocity));
+				//f32 dot = -(pushVelocity.dot(mVelocity));
 				//scaleAlt(pushVelocity.toCVec(), velocity, dot);
 				mVelocity.MAVECScaleAdd2(pushVelocity);
 			}
