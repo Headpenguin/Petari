@@ -185,10 +185,6 @@ namespace JGeometry {
 			return tmp;
 		}
 
-		void helperFunc1(TVec3f& b, const TVec3f& c) const {
-			JMAVECScaleAdd(toCVec(), c.toCVec(), b.toVec(), -dot(c));
-		}
-
         template<typename S>
         void cubic(const TVec3<T> &, const TVec3<T> &, const TVec3<T> &, const TVec3<T> &, T);
 

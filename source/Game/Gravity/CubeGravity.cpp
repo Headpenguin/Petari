@@ -173,6 +173,13 @@ void helperFunc1(const TVec3f& a, TVec3f& b, const TVec3f& c) {
 	JMAVECScaleAdd(a.toCVec(), c.toCVec(), b.toVec(), -a.dot(c));
 }
 
+
+/*TVec3f translate(const TVec3f& a, const TVec3f& b) {
+	TVec3f tmp = a;
+	tmp += b;
+	return tmp;
+}*/
+
 TVec3f negate(const TVec3f& in) {
        TVec3f tmp;
        JGeometry::negateInternal(&in.x, &tmp.x);
@@ -240,7 +247,7 @@ bool CubeGravity::calcEdgeGravity(const TVec3f &rPosition, s32 area, TVec3f *pDe
 	mPosition.getTrans(trans);
 	stack_134 += trans;
 	MR::normalizeOrZero(&stack_140);
-	stack_140.helperFunc1(stack_f8, stack_134 - rPosition);
+	helperFunc1(stack_140, stack_f8, stack_134 - rPosition);
 	if(stack_f8.isZero()) {
 		pDest -> normalize(stack_134 - trans);
 		*pScalar = 0.0;

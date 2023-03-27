@@ -33,7 +33,3 @@ GroupCheckManager::GroupCheckManager(const char *pName) : NameObj(pName) {
     mSpinningBoxSearchGroup = new GroupChecker("スピニングボックス反射グループ", 0x8);
     _14 = 2;
 }
-
-void GroupCheckManager::add(const NameObj *, s32) {
-	
-}
