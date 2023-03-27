@@ -11,6 +11,8 @@ namespace MR {
     bool isBindedGroundDamageFire(const LiveActor *);
     bool isBindedGroundSand(const LiveActor *);
 
+    bool trySetMoveLimitCollision(const LiveActor *);
+
     bool getFirstPolyOnLineToMapExceptActor(TVec3f * , Triangle *, const TVec3f &, const TVec3f &, const LiveActor *);
 
     bool isWallCodeNoAction(const Triangle *);
