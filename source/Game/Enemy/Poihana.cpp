@@ -176,6 +176,11 @@ void Poihana::control() {
  *   mr         r5, r31             addi       r3, r1, 8
  *   bl         JMAVECScaleAdd      bl         JMAVECScaleAdd
  */
+ 
+
+inline void calcRepelVector(const TVec3f &agent, const TVec3f &object, TVec3f& dst) {
+	JMAVECScaleAdd(agent.toCVec(), object.toCVec(), dst.toVec(), -agent.dot(object));
+}
 
 void Poihana::attackSensor(HitSensor *pSender, HitSensor *pReceiver) {
 	bool ret = false;
@@ -211,7 +216,7 @@ void Poihana::attackSensor(HitSensor *pSender, HitSensor *pReceiver) {
 
 			if (mVelocity.dot(pushVelocity) < 0.0f) {
 				const TVec3f& velocity = mVelocity;
-				mVelocity.repelVector(pushVelocity, velocity);
+				calcRepelVector(pushVelocity, velocity, mVelocity);
 			}
 		}
 	}

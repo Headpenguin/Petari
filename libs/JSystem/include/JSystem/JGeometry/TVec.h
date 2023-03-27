@@ -179,11 +179,6 @@ namespace JGeometry {
         void negate(const TVec3<T> &rSrc);
         void normalize(const TVec3<T> &rSrc);
 
-		inline void repelVector(const TVec3<T> &target, const TVec3<T> &agent) {
-			f32 dot = target.dot(agent);
-			JMAVECScaleAdd(target.toCVec(), agent.toCVec(), toVec(), -dot);
-		}
-
         template<typename S>
         void cubic(const TVec3<T> &, const TVec3<T> &, const TVec3<T> &, const TVec3<T> &, T);
 
