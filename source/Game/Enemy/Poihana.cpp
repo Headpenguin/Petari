@@ -165,7 +165,7 @@ void Poihana::control() {
 	MR::setBaseScale(this, mAnimScaleCtrl->_C);
 }*/
 
-#ifdef NON_MATCHING
+//#ifdef NON_MATCHING
 /*
  * Instruction swap
  *
@@ -209,14 +209,15 @@ void Poihana::attackSensor(HitSensor *pSender, HitSensor *pReceiver) {
 			MR::normalizeOrZero(&pushVelocity);
 
 			if (mVelocity.dot(pushVelocity) < 0.0f) {
-				Vec *velocity = mVelocity.toVec();
+				/*Vec *velocity = mVelocity.toVec();
 				f32 dot = -(pushVelocity.dot(mVelocity));
-				JMAVECScaleAdd((pushVelocity.toCVec(), velocity, velocity, dot);
+				JMAVECScaleAdd(pushVelocity.toCVec(), velocity, velocity, dot);*/
+				pushVelocity.MAVECScaleAdd2(mVelocity);
 			}
 		}
 	}
 }
-#endif
+//#endif
 
 bool Poihana::receiveMsgPush(HitSensor *pSender, HitSensor *pReceiver) {
 	if (MR::isSensorEnemy(pSender) || MR::isSensorMapObj(pSender)) {

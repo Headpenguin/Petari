@@ -179,6 +179,15 @@ namespace JGeometry {
         void negate(const TVec3<T> &rSrc);
         void normalize(const TVec3<T> &rSrc);
 
+        inline void MAVECScaleAdd(const TVec3<T> &a1, TVec3<T> &a2) const {
+			JMAVECScaleAdd(toCVec(), a1.toCVec(), a2.toVec(), dot(a2));
+		}
+
+		inline void MAVECScaleAdd2(TVec3<T> &a1) const {
+			Vec* v = a1.toVec();
+			JMAVECScaleAdd(toCVec(), v, v, -dot(a1));
+		}
+
         template<typename S>
         void cubic(const TVec3<T> &, const TVec3<T> &, const TVec3<T> &, const TVec3<T> &, T);
 
