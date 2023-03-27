@@ -38,6 +38,10 @@ namespace MR {
 
     bool isPlayerHipDropFalling();
 
+    bool isPlayerHipDropLand();
+
+    TVec3f* getPlayerVelocity();
+
     f32 getPlayerHitRadius();
 
     void pushPlayerFromArea(const TVec3f &);
@@ -59,6 +63,8 @@ namespace MR {
     void incPlayerOxygen(u32);
 
     void scatterStarPiecePlayer(u32);
+
+    bool isPlayerSwingAction();
 
     void startSoundPlayer(const char *, s32);
     void stopSoundPlayer(const char *, u32);

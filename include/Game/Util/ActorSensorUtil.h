@@ -162,9 +162,13 @@ namespace MR {
     bool isMsgItemEndMove(u32);
     bool isMsgInhaleBlackHole(u32);
 
+    bool isMsgUpdateBaseMtx(u32);
+
     bool isMsgInvincibleAttack(u32);
 
     bool isMsgFireBallAttack(u32);
+
+    bool isMsgExplosionAttack(u32);
 
     bool isMsgSpinStormRange(u32);
 
