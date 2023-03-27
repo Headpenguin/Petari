@@ -186,13 +186,13 @@ namespace JGeometry {
 //			debugAssert(pA);
 			
 		}
-		inline static void helper1(const Vec* a, Vec* b, f32 c) {
-			JMAVECScaleAdd(a, b, b, c);
+		inline void helper1(const TVec3<T> &a, const TVec3<T> &b, f32 c) {
+			JMAVECScaleAdd(a.toCVec(), b.toCVec(), toVec(), c); // Separate the connection between the variables here and the top-level reference
 		}
 
-		inline void MAVECScaleAdd2(const TVec3<T> &a) {
-			f32 dot = a.dot(*this);
-			helper1(a.toCVec(), toVec(), -dot);
+		inline void MAVECScaleAdd2(const TVec3<T> &a, const TVec3<T> &b, f32 dot) {
+			helper1(a, b, -dot);
+			//JMAVECScaleAdd(a.toCVec(), toVec(), toVec(), dot);
 		}
 
         template<typename S>
