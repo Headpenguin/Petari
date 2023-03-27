@@ -179,20 +179,9 @@ namespace JGeometry {
         void negate(const TVec3<T> &rSrc);
         void normalize(const TVec3<T> &rSrc);
 
-        inline void MAVECScaleAdd(const TVec3<T> &rA, Vec *pA) const {
-			
-			JMAVECScaleAdd(toCVec(), pA, pA, -dot(rA));
-
-//			debugAssert(pA);
-			
-		}
-		inline void helper1(const TVec3<T> &a, const TVec3<T> &b, f32 c) {
-			JMAVECScaleAdd(a.toCVec(), b.toCVec(), toVec(), c); // Separate the connection between the variables here and the top-level reference
-		}
-
-		inline void MAVECScaleAdd2(const TVec3<T> &a, const TVec3<T> &b, f32 dot) {
-			helper1(a, b, -dot);
-			//JMAVECScaleAdd(a.toCVec(), toVec(), toVec(), dot);
+		inline void repelVector(const TVec3<T> &target, const TVec3<T> &agent) {
+			f32 dot = target.dot(agent);
+			JMAVECScaleAdd(target.toCVec(), agent.toCVec(), toVec(), -dot);
 		}
 
         template<typename S>
