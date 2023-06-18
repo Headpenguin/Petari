@@ -9,6 +9,23 @@ class Mario : public MarioModule {
 public:
     Mario(MarioActor *);
 
+    virtual void init();
+    virtual bool proc(u32);
+    virtual bool start();
+    virtual bool close();
+    virtual bool update();
+    virtual bool notice();
+    virtual bool keep();
+    virtual bool postureCtrl(MtxPtr);
+    virtual void hitWall(const TVec3f &, HitSensor *);
+    virtual void hitPoly(u8, const TVec3f &, HitSensor *);
+    virtual bool passRing(const HitSensor *);
+    virtual f32 getBlurOffset() const;
+    virtual void draw3D() const;
+
+    void setHeadAndFrontVecFromRotate(const TVec3f &);
+    void initAfterConst();
+
     Mtx _64;
     Mtx _94;
     Mtx _C4;
@@ -24,12 +41,18 @@ public:
 
     TVec3f _1CC;
 
+    TVec3f _1F0;
+
     TVec3f _238;
     TVec3f _244;
     TVec3f _250;
 
     TVec3f _25C;
     TVec3f _268;
+
+    TVec3f _290;
+
+    TVec3f _310;
 
     TVec3f _350;
     TVec3f _35C;

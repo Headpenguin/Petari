@@ -27,3 +27,13 @@ public:
 namespace MR {
     TriangleFilterFunc* createTriangleFilterFunc(TriangleFunc);
 };
+
+template<typename T>
+class TriangleFilterDelegator: public TriangleFilterBase {
+	public:
+	TriangleFilterDelegator(const T *parent, const char *name, volatile u16 flags) : TriangleFilterBase((TriangleFunc)parent), mName(name), mFlags(flags) {}
+	//vtable?
+	const char *mName;
+	volatile u16 mFlags;
+	virtual bool isInvalidTriangle(const Triangle *) const;
+};
