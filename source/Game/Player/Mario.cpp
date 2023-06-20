@@ -134,7 +134,9 @@ Mario::Mario(MarioActor *actor) {
 	_58.zero();
 	_12C = 0;
 	_76C = 0;
-	_770 = _738 = _73C = 0f;
+	_770 = 0f;
+	_738 = 0f;
+	_73C = 0f;
 	_740 = 1f;
 	_744 = 0f;
 	_368.setInline(0f, 1f, 0f);
@@ -264,7 +266,9 @@ Mario::Mario(MarioActor *actor) {
 	_1CC.zero();
 
 	_38 = 0f;
-	_1C0.setInline(0f, 0f, 0f);
+	_1C0.z = 0f;
+	_1C0.y = 0f;
+	_1C0.x = 0f;
 
 	_3D8.zero();
 
@@ -331,7 +335,7 @@ Mario::Mario(MarioActor *actor) {
 	_960 = 0;
 	_962 = 0;
 	for(int i = 0; i < 3; i++) {
-		_964[i] = _962;
+		_964[i] = _960;
 	}
 	_96A = 0;
 	_574 = 0;
