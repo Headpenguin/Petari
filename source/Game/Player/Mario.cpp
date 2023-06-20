@@ -39,22 +39,28 @@
 #include "Game/Player/MarioMapCode.h"
 #include "Game/Map/HitInfo.h"
 
-Mario::Mario(MarioActor *parent) {
+Mario::Mario(MarioActor *actor) {
+	mActor = actor;
 	initMember();
 	_160.zero();
 	_13C.zero();
 	_148.zero();
 	_154.zero();
-	_43C = _220 = _208 = TVec3f(1f, 0f, 0f);
-	_214 = TVec3f(1f, 0f, 0f);
-	_22C = TVec3f(1f, 0f, 0f);
-	_3E4 = TVec3f(1f, 0f, 0f);
+	_208.setInline(1f, 0f, 0f);
+	_220 = _208;
+	_43C = _208;
+	_214.setInline(1f, 0f, 0f);
+	_22C.setInline(1f, 0f, 0f);
+	_3E4.setInline(1f, 0f, 0f);
 	_2B4 = 0f;
-	_290 = _310 = TVec3f(0f, 0f, 1f);
-	_1D8 = TVec3f(0f, -1f, 0f);
+	_310.setInline(0f, 0f, 1f);
+	_290 = _310;
+	_1D8.setInline(0f, -1f, 0f);
 	_1E4.zero();
 	bool nearZero = MR::isNearZero(_1D8, 0.0010000000475f);
-	_938 = _1F0 = -_1D8;
+	_1F0 = -_1D8;
+	_1FC = _1F0;
+	_938 = _1F0;
 	_944 = _208;
 	_950 = _310;
 	_60D = 0;
@@ -64,6 +70,7 @@ Mario::Mario(MarioActor *parent) {
 	_2D4.zero();
 	_2E0.zero();
 	_2EC.zero();
+	_42C = 0;
 	_2F8.zero();
 	_328.zero();
 	_334.zero();
@@ -130,12 +137,12 @@ Mario::Mario(MarioActor *parent) {
 	_770 = _738 = _73C = 0f;
 	_740 = 1f;
 	_744 = 0f;
-	_368 = TVec3f(0f, 1f, 0f);
+	_368.setInline(0f, 1f, 0f);
 	_374 = -_368;
 	_380 = _368;
 	_38C = -_368;
-	_398 = TVec3f(0f, 1f, 0f);
-	_344 = TVec3f(1f, 0f, 0f);
+	_398.setInline(0f, 1f, 0f);
+	_344.setInline(1f, 0f, 0f);
 	_74C = 0f;
 	_750 = 0;
 	_754 = 0;
@@ -145,7 +152,7 @@ Mario::Mario(MarioActor *parent) {
 	_558 = 0;
 	_2A8 = -_368;
 	_29C = _368;
-	_124 = _128 = _548 = 0f;
+	_548 = _128 = _124 = 0f;
 	_54C = _1F0;
 	_C4.identity();
 	_64.identity();
@@ -156,9 +163,17 @@ Mario::Mario(MarioActor *parent) {
 	_928.zero();
 	_934 = 0.8f;
 	_3C = 0.001f;
-	_8 = _C = _10 = _14 = _18 = _1C = _20 = _24 = _28 = 0;
+	_8 = 0;
+	_C = 0;
+	_10 = 0;
+	_14 = 0;
+	_18 = 0;
+	_1C = 0;
+	_20 = 0;
+	_24 = 0;
+	_28 = 0;
 
-	_458 = new TriangleFilterDelegator<Mario>(this, 0, -1, &Mario::isIgnoreTriangle);
+	_458 = new TriangleFilterDelegator<Mario>(this, &Mario::isIgnoreTriangle);
 
 	_45C = new Triangle();
 	_460 = new Triangle();
@@ -247,7 +262,7 @@ Mario::Mario(MarioActor *parent) {
 	_1CC.zero();
 
 	_38 = 0f;
-	_1C0 = TVec3f(0f, 0f, 0f);
+	_1C0.setInline(0f, 0f, 0f);
 
 	_3D8.zero();
 
@@ -262,9 +277,10 @@ Mario::Mario(MarioActor *parent) {
 	_6B0.zero();
 	_6BC.zero();
 
-	_63C = TVec3f(1f, 0f, 0f);
-	_648 = TVec3f(0f, 1f, 0f);
-	_6A0 = _654 = TVec3f(0f, 0f, 1f);
+	_63C.setInline(1f, 0f, 0f);
+	_648.setInline(0f, 1f, 0f);
+	_654.setInline(0f, 0f, 1f);
+	_6A0 = _654;
 
 	initSound();
 
