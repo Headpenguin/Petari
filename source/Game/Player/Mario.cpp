@@ -173,7 +173,9 @@ Mario::Mario(MarioActor *actor) {
 	_24 = 0;
 	_28 = 0;
 
-	_458 = new TriangleFilterDelegator<Mario>(this, &Mario::isIgnoreTriangle);
+	TriangleFilterDelegator<Mario>::DelegateFilter filter = &Mario::isIgnoreTriangle;
+
+	_458 = new TriangleFilterDelegator<Mario>(this, filter);
 
 	_45C = new Triangle();
 	_460 = new Triangle();
@@ -200,7 +202,7 @@ Mario::Mario(MarioActor *actor) {
 	_480 = new Triangle();
 	_484 = new Triangle();
 
-	for(int i = 0; i < 0x20; i++) {
+	for(unsigned int i = 0; i < 0x20; i++) {
 		_57C[i] = new Triangle();
 	}
 
@@ -221,10 +223,10 @@ Mario::Mario(MarioActor *actor) {
 
 	_564 = -1;
 	_568 = 0;
-	_564 = 0;
 	_56C = 0;
+	_570 = 0;
 	
-	for(int i = 0; i < 9; i++) {
+	for(unsigned int i = 0; i < 9; i++) {
 		_A8C[i].zero();
 	}
 
