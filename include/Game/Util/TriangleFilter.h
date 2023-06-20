@@ -6,20 +6,20 @@ typedef bool (*TriangleFunc)(const Triangle *);
 
 class TriangleFilterBase {
 public:
-    TriangleFilterBase(TriangleFunc function) {
+    /*TriangleFilterBase(TriangleFunc function) {
         mFunction = function;
-    }
+    }*/
 
     virtual bool isInvalidTriangle(const Triangle *) const = 0;
 
-    TriangleFunc mFunction; // _4
+//    TriangleFunc mFunction; // _4 
 };
 
 class TriangleFilterFunc : public TriangleFilterBase {
 public:
-    TriangleFilterFunc(TriangleFunc func) : TriangleFilterBase(func) {
+    /*TriangleFilterFunc(TriangleFunc func) : TriangleFilterBase(func) {
 
-    }
+    }*/
 
     virtual bool isInvalidTriangle(const Triangle *) const;
 };
@@ -31,9 +31,14 @@ namespace MR {
 template<typename T>
 class TriangleFilterDelegator: public TriangleFilterBase {
 	public:
-	TriangleFilterDelegator(const T *parent, const char *name, volatile u16 flags) : TriangleFilterBase((TriangleFunc)parent), mName(name), mFlags(flags) {}
-	//vtable?
-	const char *mName;
-	volatile u16 mFlags;
+	typedef bool (T::*DelegateFilter)(const Triangle *);
+	TriangleFilterDelegator(T *parent, u32 _8, s32 _C, DelegateFilter filter)
+		: mParent(parent), _8(_8), _C(_C), mFunc(filter) {}
+
 	virtual bool isInvalidTriangle(const Triangle *) const;
+
+	T *mParent; // _4
+	u32 _8;
+	s32 _C;
+	DelegateFilter mFunc; // _10
 };

@@ -19,7 +19,6 @@ class MarioActor : LiveActor {
 public:
 	MarioActor(const char*);
 	~MarioActor();
-	//unknown returns
 	void init(const JMapInfoIter&);
 	void init2(const TVec3f&, const TVec3f&, long);
 	void initAfterPlacement();
@@ -35,7 +34,7 @@ public:
 	void clearNullAnimation(signed char);
 	bool isStopNullAnimation() const;
 	void changeGameOverAnimation();
-	void getJointCtrl(const char*) const; // returns JointCtrl?
+	void getJointCtrl(const char*) const;
 	void updateRotationInfo();
 	void exeWait();
 	void movement();
@@ -103,7 +102,7 @@ public:
 	void forceGameOverSink();
 
 	void updateCameraInfo();
-	void binderFilter(const Triangle*);
+	bool binderFilter(const Triangle*);
 	
 	void setPunchHitTimer(unsigned char);
 	void initEffect();
