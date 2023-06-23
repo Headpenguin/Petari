@@ -43,6 +43,7 @@ class MarioTalk;
 class MarioMove;
 class Triangle;
 class FloorCode;
+struct SoundList;
 
 class Mario : public MarioModule {
 public:
@@ -69,6 +70,7 @@ public:
     void clearSlope();
     void clear2DStick();
     void initSound();
+	unsigned long initSoundTable(SoundList* list, unsigned long);
     void initTask();
     bool isIgnoreTriangle(const Triangle *);
 
@@ -275,23 +277,25 @@ public:
     TVec3f _600;
     u8 _60C;
     u8 _60D;
-
-    // FAKE
-	u32 _610[0xA];
-    // NOT FAKE
-
+	u8 _60E;
+	u8 _60F;
+	u8 _610;
+	u8 _611;
+	f32 _614;
+	f32 _618;
+	f32 _61C;
+	f32 _620;
+	u8 _624;
+	TVec3f _628;
+	f32 _634;
     u8 _638;
     TVec3f _63C;
     TVec3f _648;
 	TVec3f _654;
     TVec3f _660;
-
-    // fake
-	TVec3f _66C;
-	TVec3f _678;
-	f32 _684;
-    //not fake
-
+	u8 _66C;
+	TVec3f _670;
+	TVec3f _67C;
     TVec3f _688;
 	TVec3f _694;
     TVec3f _6A0;
@@ -312,9 +316,9 @@ public:
 	u8 _71D;
 	u8 _71E;
 	u8 _71F;
-	u32 _720;
-	u32 _724;
-	u32 _728;
+	const char* _720;
+	const char* _724;
+	const char* _728;
 	f32 _72C;
 	u32 _730;
 	u8 _734;
@@ -389,18 +393,10 @@ public:
 	TVec3f _8DC;
     Triangle* _8E8;
 	u8 _8EC;
-
-	//FAKE
-	u32 _8F0;
-	//NOT FAKE
-
+	f32 _8F0;
     f32 _8F4;
-
-    //FAKE
 	TVec3f _8F8;
 	TVec3f _904;
-    //NOT FAKE
-
     TVec3f _910;
     TVec3f _91C;
     TVec3f _928;
@@ -413,12 +409,8 @@ public:
     u16 _962;
     u16 _964[3];
     u16 _96A;
-
-    // FAKE
-	u32 _96C;
-	u32 _970;
-    // NOT FAKE
-
+	HashSortTable* _96C; //Sounds
+	u32 _970; // Sounds or somthing
 	u32 _974;
 
 	//Fake

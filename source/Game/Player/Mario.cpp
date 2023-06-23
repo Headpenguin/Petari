@@ -341,3 +341,7 @@ Mario::Mario(MarioActor *actor) {
 	_574 = 0;
 	_898 = 0;
 }
+
+/*void Mario::initAfterConst() {
+	mActor -> _23c
+}*/

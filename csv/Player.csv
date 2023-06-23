@@ -1019,7 +1019,7 @@ stick2Dadjust__5MarioFRfRf,MarioMove2D.o,Player.a,false
 set2Dmode__5MarioFb,MarioMove2D.o,Player.a,false
 beforeJumping2D__5MarioFv,MarioMove2D.o,Player.a,false
 afterLanding2D__5MarioFv,MarioMove2D.o,Player.a,false
-clear2DStick__5MarioFv,MarioMove2D.o,Player.a,false
+clear2DStick__5MarioFv,MarioMove2D.o,Player.a,true
 set25Dmode__5MarioFPC7AreaObj,MarioMove25D.o,Player.a,false
 update25Dmode__5MarioFv,MarioMove25D.o,Player.a,false
 updateAxisFromMode__5MarioFUc,MarioMove25D.o,Player.a,false
@@ -1079,7 +1079,7 @@ close__10MarioSkateFv,MarioSkate.o,Player.a,false
 __sinit_\MarioSkate_cpp,MarioSkate.o,Player.a,false
 notice__10MarioSkateFv,MarioSkate.o,Player.a,false
 initSoundTable__5MarioFP9SoundListUl,MarioSound.o,Player.a,false
-initSound__5MarioFv,MarioSound.o,Player.a,false
+initSound__5MarioFv,MarioSound.o,Player.a,true
 playSoundJ__5MarioFPCcl,MarioSound.o,Player.a,false
 stopSoundJ__5MarioFPCcUl,MarioSound.o,Player.a,false
 startBas__5MarioFPCcbff,MarioSound.o,Player.a,false
@@ -1340,7 +1340,7 @@ endRemoteDemo__11MarioAccessFPC11RushEndInfo,MarioAccess.o,Player.a,false
 isInWaterMode__11MarioAccessFv,MarioAccess.o,Player.a,false
 changeItemStatus__11MarioAccessFl,MarioAccess.o,Player.a,false
 __sinit_\MarioAccess_cpp,MarioAccess.o,Player.a,false
-clearSlope__5MarioFv,MarioSlip.o,Player.a,false
+clearSlope__5MarioFv,MarioSlip.o,Player.a,true
 isEnableSlopeMove__5MarioCFv,MarioSlip.o,Player.a,false
 moveSlopeSlide__5MarioFv,MarioSlip.o,Player.a,false
 slopeMove__5MarioFv,MarioSlip.o,Player.a,false
