@@ -31,19 +31,22 @@ void Mario::initSound() {
 }
 
 unsigned long Mario::initSoundTable(SoundList *list, unsigned long globalTablePosition) {
-	int i = 0; 
-	while(list -> name[0] != '\0') {
-		list -> _10 = 0;
-		list -> _14 = list -> _4;
+	int i = 0;
+	while(true) {
+		if((list + i) -> name[0] == '\0') break;
+		(list + i) -> _10 = 0;
+		(list + i) -> _14 = (list + i) -> _4;
 		if(globalTablePosition > 0) {
-			for(int j = 0; soundswaplist[j][0] != '\0'; j++) {
-				if(std::strcmp(list -> name, soundswaplist[j]) == 0) {
-					if(soundswaplist[j + globalTablePosition] != 0) list -> _14 = soundswaplist[j + globalTablePosition];
+			int j = 0;
+			while(true) {
+				if(soundswaplist[j][0] == '\0') break;
+				if(std::strcmp((list + i) -> name, soundswaplist[j]) == 0) {
+					if(soundswaplist[j + globalTablePosition] != 0) (list + i) -> _14 = soundswaplist[j + globalTablePosition];
 					break;
 				}
+				j++;
 			}
 		}
-		list++;
 		i++;
 	}
 	return i;
