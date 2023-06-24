@@ -23,7 +23,6 @@ Triangle &Triangle::operator=(const Triangle &rOther) {
 }
 
 MarioActor::MarioActor(const char* pName) : LiveActor(pName), _1b0(0xffffffff) {
-	//vtable?
 	initMember();
 	_230 = new Mario(this);
 	_930 = 0;
@@ -243,7 +242,7 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck f
 	_2c4.z = 0f;
 	mBinder -> _1ec &= 0xfffffe7f;
 	MR::setBinderOffsetVec(this, &_2c4, false);
-	mBinder -> setTriangleFilter(new TriangleFilterDelegator<MarioActor>(this, 0, -1, &MarioActor::binderFilter));
+	//mBinder -> setTriangleFilter(new TriangleFilterDelegator<MarioActor>(this, 0, -1, &MarioActor::binderFilter));
 	mBinder -> _1ec |= 0x10;
 	initEffect();
 	MR::invalidateClipping(this);
