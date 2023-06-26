@@ -261,7 +261,7 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck f
 	_270 = mPosition;
 	calcCenterPos();
 	initSound(0x10, 0);
-	addSoundObjectHolder();
+	addSoundObjHolder();
 	initParts();
 	initMorphStringTable();
 	MR::declareGlobalEventCameraAbyss("0xc");
