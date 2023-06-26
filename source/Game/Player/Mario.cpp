@@ -39,6 +39,12 @@
 #include "Game/Player/MarioMapCode.h"
 #include "Game/Map/HitInfo.h"
 
+inline TriangleFilterDelegator<Mario>* getDelegator(Mario *mario) {
+	TriangleFilterDelegator<Mario>::DelegateFilter filter = &Mario::isIgnoreTriangle;
+	
+	return new TriangleFilterDelegator<Mario>(mario, filter);
+}
+
 Mario::Mario(MarioActor *actor) {
 	mActor = actor;
 	initMember();
@@ -175,9 +181,9 @@ Mario::Mario(MarioActor *actor) {
 	_24 = 0;
 	_28 = 0;
 
-	TriangleFilterDelegator<Mario>::DelegateFilter filter = &Mario::isIgnoreTriangle;
+	//TriangleFilterDelegator<Mario>::DelegateFilter filter = &Mario::isIgnoreTriangle;
 
-	_458 = new TriangleFilterDelegator<Mario>(this, filter);
+	_458 = getDelegator(this);
 
 	_45C = new Triangle();
 	_460 = new Triangle();
