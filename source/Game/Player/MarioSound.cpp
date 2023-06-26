@@ -43,7 +43,7 @@ unsigned long Mario::initSoundTable(SoundList *list, unsigned long globalTablePo
 			int j = 0;
 			while(true) {
 				if(soundswaplist[j][0] == '\0') break;
-				if(std::strcmp(pos -> name, soundswaplist[j]) == 0) {
+				if(strcmp(pos -> name, soundswaplist[j]) == 0) {
 					if(currswap[j] != 0) pos -> _14 = currswap[j];
 					break;
 				}
