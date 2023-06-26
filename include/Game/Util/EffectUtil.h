@@ -1,11 +1,19 @@
 #pragma once
 
 #include <revolution.h>
+#include <JSystem/JGeometry.h>
 
+class ParticleEmitter;
 class LiveActor;
 class HitSensor;
+class SingleEmitter;
 
 namespace MR {
+    namespace Effect {
+        void deleteParticleEmitter(ParticleEmitter *);
+        void setLinkSingleEmitter(ParticleEmitter *, SingleEmitter *);
+    };
+
     bool isExistEffectKeeper(const LiveActor *);
 
     bool isRegisteredEffect(const LiveActor *, const char *);
@@ -31,4 +39,6 @@ namespace MR {
     void emitEffectHitBetweenSensors(LiveActor *, const HitSensor *, const HitSensor *, f32, const char *);
 
     void initEffectAfterPlacement(LiveActor *);
+
+    void setEffectHostSRT(LiveActor *, const char *, const TVec3f *, const TVec3f *, const TVec3f *);
 };

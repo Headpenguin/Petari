@@ -211,7 +211,6 @@ def check_symbol(function_library, mangled_symbol, obj_name, readonly):
     unsupported_libraries = { "TRK_Hollywood_Revolution" }
 
     library = function_library.get_library_from_symbol(mangled_symbol, obj_name)
-    print(library)
 
     if library == None:
         print("Could not find library of symbol.")
@@ -247,6 +246,8 @@ def check_symbol(function_library, mangled_symbol, obj_name, readonly):
 
         text = elf_file.get_section_by_name('.text')
         custom_data = text.data()[custom_offset:custom_offset + custom_size]
+
+        print(custom_offset)
 
         # Get original code
         original_address = function_library.get_address_from_symbol(mangled_symbol)

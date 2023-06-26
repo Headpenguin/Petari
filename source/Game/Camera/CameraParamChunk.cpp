@@ -3,7 +3,7 @@
 #include "Game/Camera/CameraParamChunkID.h"
 #include "Game/Camera/DotCamParams.h"
 #include "Game/Util/MathUtil.h"
-#include <string.h>
+#include <cstring>
 
 #ifdef NON_MATCHING
 // String constructor called first instead of last
@@ -167,7 +167,7 @@ void CameraParamChunk::load(DotCamReader *pReader, CameraHolder *pHolder) {
     pReader->getValueInt("num1", &mGeneralParam->mNum1);
     pReader->getValueInt("num2", &mGeneralParam->mNum2);
 
-    const char *stringParam = NULL;
+    const char *stringParam = nullptr;
 
     if (pReader->getValueString("string", &stringParam)) {
         mGeneralParam->mString.setCharPtr(stringParam);

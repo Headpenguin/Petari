@@ -17,6 +17,8 @@ typedef struct OSMutexQueue OSMutexQueue;
 typedef struct OSMutexLink OSMutexLink;
 typedef struct OSCond OSCond;
 
+typedef void (*OSSwitchThreadCallback)(OSThread *, OSThread *);
+
 struct OSThreadQueue {
     OSThread* head;
     OSThread* tail;
@@ -84,6 +86,10 @@ OSPriority OSGetThreadPriority(OSThread *);
 
 s32 OSDisableScheduler(void);
 s32 OSEnableScheduler(void);
+
+void OSClearStack(u8);
+
+void __OSThreadInit(void);
 
 #ifdef __cplusplus
 }

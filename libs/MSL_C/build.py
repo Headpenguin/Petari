@@ -6,16 +6,16 @@ import shutil
 import pathlib
 import shutil
 
-def makeArchive(dir):
+def makeArchive():
     fileList = ""
-    for root, dirs, files in os.walk(f"build/{dir}"):
+    for root, dirs, files in os.walk("build"):
         for f in files:
             if f.endswith(".o"):
-                fileList += f"build/{dir}/{f} "
+                fileList += f"build/{f} "
 
     default_compiler_path = pathlib.Path("GC/3.0a3/")
     linker_path = pathlib.Path(f"../../Compilers/{default_compiler_path}/mwldeppc.exe ")
-    linker_flags = f"-nodefaults -xm l -o lib/{dir}.a {fileList}"
+    linker_flags = f"-nodefaults -xm l -o lib/MSL_C.a {fileList}"
 
     if subprocess.call(f"{linker_path} {linker_flags}", shell=True) == 1:
         print("Library creation failed.")
@@ -24,24 +24,7 @@ def makeLibArchive():
     if not os.path.isdir("lib"):
         os.mkdir("lib")
 
-    for root, dirs, files in os.walk("build"):
-        for dir in dirs:
-            makeArchive(dir)
-
-def makeElf():
-    default_compiler_path = pathlib.Path("GC/3.0a3/")
-
-    fileList = ""
-
-    for root, dirs, files in os.walk("lib"):
-        for f in files:
-            if f.endswith(".a"):
-                fileList += f"{root}\\{f} "
-
-    linker_path = pathlib.Path(f"../../Compilers/{default_compiler_path}/mwldeppc.exe ")
-    linker_flags = f"-lcf ldscript.lcf -fp hard -proc gekko -map MSL_C.map -o MSL_C.elf {fileList}"
-    if subprocess.call(f"{linker_path} {linker_flags}", shell=True) == 1:
-            print("Linking failed.")
+    makeArchive()
 
 def deleteDFiles():
     dirs = os.listdir(os.getcwd())
@@ -57,10 +40,10 @@ def main(compile_non_matching, use_ninja, clean_ninja, link):
 
     isNotWindows = os.name != "nt"
 
-    flags = "-c -nodefaults -nostdlib -use_lmw_stmw on -proc gekko -align powerpc -enum int -fp hard -Cpp_exceptions off -rtti off -O4,p -inline auto "
+    flags = "-c -nodefaults -nostdlib -use_lmw_stmw on -proc gekko -readonlystrings -rostr -align powerpc -ipa file -enum int -fp hard -Cpp_exceptions on -rtti off -O4,p -sdata2 8 -inline auto,level=2 "
     includes = "-i . -I- -i include "
 
-    default_compiler_path = pathlib.Path("../../Compilers/GC/3.0a3/")
+    default_compiler_path = pathlib.Path("../../Compilers/GC/3.0/")
 
     compiler_exceptions = {
         #"source\JSystem\JKernel\JKRHeap.cpp": pathlib.Path("GC/1.2.5/")
@@ -76,11 +59,13 @@ def main(compile_non_matching, use_ninja, clean_ninja, link):
 
     tasks = list()
 
-    #rvl_path =      pathlib.Path("../RVL_SDK/include")
+    rvl_path =      pathlib.Path("../RVL_SDK/include")
     #trk_path =      pathlib.Path("../MetroTRK/include")
     #runtime_path =  pathlib.Path("../Runtime/include")
     #acelib_path =  pathlib.Path("../RVLFaceLib/include")
     #nw_path =       pathlib.Path("../nw4r/include")
+
+    includes += f"-i {rvl_path} "
 
     #includes += f"-i {rvl_path} -i {trk_path} -I- -i {runtime_path} -I- -i {facelib_path} -I- -i {nw_path} "
     flags += includes
@@ -174,13 +159,11 @@ def main(compile_non_matching, use_ninja, clean_ninja, link):
     if link:
         print("Creating library archives...")
         makeLibArchive()
-        print("Making final ELF...")
-        makeElf()
     print("Complete.")
 
 def print_help_and_exit():
     print("Usage: build.py [flags...]")
-    print("\t-link: Link the final project together.")
+    print("\t-archive: Create the library archive.")
     print("\t-non-matching: Compile non-matching code.")
     print("\t-no-ninja: Do not use ninja even if available.")
     print("\t-clean: Clean old build files before building new when using ninja.")
@@ -203,7 +186,7 @@ if __name__ == "__main__":
             clean_ninja = True
         elif arg == "-help":
             print_help_and_exit()
-        elif arg == "-link":
+        elif arg == "-archive":
             link = True
         else:
             print(f"Invalid argument: {arg}")

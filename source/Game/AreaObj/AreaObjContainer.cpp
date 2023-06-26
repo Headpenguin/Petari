@@ -1,7 +1,7 @@
 #include "Game/AreaObj/AreaObjContainer.h"
 #include "Game/AreaObj/AreaObj.h"
 #include "Game/Scene/SceneObjHolder.h"
-#include <string.h>
+#include <cstring>
 
 AreaObjContainer::AreaObjContainer(const char *pName) : NameObj(pName) {
     mNumManagers = 0;
@@ -12,7 +12,7 @@ void AreaObjContainer::init(const JMapInfoIter &rIter) {
         AreaObjEntry* entry = &cCreateTable[i];
         AreaObjMgr* mgr = entry->mFuncPtr(entry->_4, entry->mName);
         JMapInfoIter iter;
-        iter.mInfo = NULL;
+        iter.mInfo = nullptr;
         iter._4 = -1;
         mgr->init(iter);
         s32 num = mNumManagers;

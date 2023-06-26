@@ -225,6 +225,7 @@ def check_symbol(function_library, mangled_symbol, obj_name, readonly):
 
     obj_files = glob.glob(f"build/*/{library}/{obj_name}", recursive=True)
 
+
     if len(obj_files) > 1:
         print("Found multiple .o files. This should not happen.")
         return False

@@ -15,10 +15,13 @@ follows the guidelines that are listed below.
 
 When running `build.py`, it is **REQUIRED** that the output is `1:1`.
 
-After the code matches, be sure to run `scripts/check.py` <br>
+After the code matches, be sure to run `check.py` <br>
 to check the function that you want to mark.
 
 If it matches, it will automatically be marked as decompiled.
+
+When each function you've matched has been marked as decompiled, <br>
+run `progress.py` to update the progress graph and percentages.
 
 <br>
 
@@ -122,7 +125,7 @@ please join our **[Discord]** server.
 - Lines should not exceed `100` characters, <br>
   these can be split into multiple lines.
   
-- Use `NULL` instead of `0` when assigning / comparing a pointer.
+- Use `nullptr` instead of `0` when assigning / comparing a pointer in C++ code, use `NULL` in C.
   
   *Only use `0` when assigning or comparing a value.*
 
@@ -249,7 +252,7 @@ please join our **[Discord]** server.
 ### Nonmatching Code
 
 If your code does **NOT** match, use the <br>
-`NONMATCHING` macro, and explain in a <br>
+`NON_MATCHING` macro, and explain in a <br>
 comment why it does not match.
 
 <br>

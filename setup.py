@@ -6,6 +6,7 @@ import urllib.request
 import os
 import sys
 import subprocess
+import hashlib
 
 def install(what):
     subprocess.check_call([sys.executable, '-m', 'pip', 'install', what])
@@ -44,11 +45,42 @@ except ModuleNotFoundError:
     print("Module 'colorama' not found. Installing...")
     install("colorama")
 
+try:
+    import pandas
+    print("Found pandas, continuing...")
+except ModuleNotFoundError:
+    print("Module 'pandas' not found. Installing...")
+    install("pandas")
+
+try:
+    import plotly
+    print("Found plotly, continuing...")
+except ModuleNotFoundError:
+    print("Module 'plotly' not found. Installing...")
+    install("plotly")
+
+try:
+    import git
+    print("Found GitPython, continuing...")
+except ModuleNotFoundError:
+    print("Module 'GitPython' not installed. Installing...")
+    install("GitPython")
+
+try:
+    import kaleido
+    print("Found kaleido, continuing...")
+except ModuleNotFoundError:
+    print("Module 'kaleido' not installed. Installing...")
+    install("kaleido")
+
 if not os.path.exists("Compilers"):
     print("Compilers folder not found, downloading...")
 
     with urllib.request.urlopen("http://shibbo.net/smg/Compilers.zip") as response, open("Compilers.zip", 'wb') as out:
         data = response.read()
+        if hashlib.sha256(data).hexdigest().upper() != "12D439B707D7AECB1BCD5B321DA406310523357128ABADB1493BED212A4A225F":
+            print("Compilers.zip corrupt")
+            sys.exit(1)
         out.write(data)
 
     if os.path.exists("Compilers.zip"):

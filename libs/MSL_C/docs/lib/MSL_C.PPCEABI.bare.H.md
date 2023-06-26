@@ -8,213 +8,213 @@
 
 | Object | Percentage (of Bytes) | Functions Done / Total Functions | Percentage (Functions) | Status 
 | ------------- | ------------- | ------------- | ------------- | ------------- 
-| alloc.o | 0.0% | 0 / 4 | 0.0% | :x: 
-| ansi_files.o | 0.0% | 0 / 2 | 0.0% | :x: 
-| ansi_fp.o | 0.0% | 0 / 10 | 0.0% | :x: 
-| arith.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| buffer_io.o | 0.0% | 0 / 2 | 0.0% | :x: 
-| ctype.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| direct_io.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| file_io.o | 0.0% | 0 / 3 | 0.0% | :x: 
-| FILE_POS.o | 0.0% | 0 / 3 | 0.0% | :x: 
-| mbstring.o | 0.0% | 0 / 5 | 0.0% | :x: 
-| mem.o | 0.0% | 0 / 4 | 0.0% | :x: 
-| mem_funcs.o | 0.0% | 0 / 4 | 0.0% | :x: 
-| math_api.o | 0.0% | 0 / 3 | 0.0% | :x: 
-| misc_io.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| printf.o | 0.0% | 0 / 15 | 0.0% | :x: 
-| scanf.o | 0.0% | 0 / 4 | 0.0% | :x: 
-| signal.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| string.o | 92.72727272727272% | 7 / 8 | 87.5% | :eight_pointed_black_star: 
-| strtold.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| strtoul.o | 0.0% | 0 / 4 | 0.0% | :x: 
-| wmem.o | 0.0% | 0 / 2 | 0.0% | :x: 
-| wprintf.o | 0.0% | 0 / 10 | 0.0% | :x: 
-| wstring.o | 0.0% | 0 / 5 | 0.0% | :x: 
-| wchar_io.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| uart_console_io_gcn.o | 0.0% | 0 / 2 | 0.0% | :x: 
-| abort_exit_ppc_eabi.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| math_sun.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| extras.o | 0.0% | 0 / 3 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\e_acos.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\e_asin.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\e_atan2.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\e_fmod.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\e_log.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\e_log10.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\e_pow.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\e_rem_pio2.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\k_cos.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\k_rem_pio2.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\k_sin.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\k_tan.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\s_atan.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\s_ceil.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\s_copysign.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\s_cos.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\s_floor.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\s_frexp.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\s_ldexp.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\s_sin.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\s_tan.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\w_acos.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\w_asin.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\w_atan2.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\w_fmod.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\w_log10.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\w_pow.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\e_sqrt.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\PPC_EABI\SRC\math_ppc.o | 0.0% | 0 / 1 | 0.0% | :x: 
-| D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\w_sqrt.o | 0.0% | 0 / 1 | 0.0% | :x: 
+| alloc.o | 100.0% | 4 / 4 | 100.0% | :white_check_mark: 
+| ansi_files.o | 100.0% | 2 / 2 | 100.0% | :white_check_mark: 
+| ansi_fp.o | 100.0% | 10 / 10 | 100.0% | :white_check_mark: 
+| arith.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| buffer_io.o | 100.0% | 2 / 2 | 100.0% | :white_check_mark: 
+| ctype.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| direct_io.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| file_io.o | 100.0% | 3 / 3 | 100.0% | :white_check_mark: 
+| FILE_POS.o | 100.0% | 3 / 3 | 100.0% | :white_check_mark: 
+| mbstring.o | 100.0% | 5 / 5 | 100.0% | :white_check_mark: 
+| mem.o | 100.0% | 4 / 4 | 100.0% | :white_check_mark: 
+| mem_funcs.o | 100.0% | 4 / 4 | 100.0% | :white_check_mark: 
+| math_api.o | 100.0% | 3 / 3 | 100.0% | :white_check_mark: 
+| misc_io.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| printf.o | 100.0% | 15 / 15 | 100.0% | :white_check_mark: 
+| scanf.o | 34.65648854961832% | 3 / 4 | 75.0% | :eight_pointed_black_star: 
+| signal.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| string.o | 100.0% | 8 / 8 | 100.0% | :white_check_mark: 
+| strtold.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| strtoul.o | 100.0% | 4 / 4 | 100.0% | :white_check_mark: 
+| wmem.o | 100.0% | 2 / 2 | 100.0% | :white_check_mark: 
+| wprintf.o | 100.0% | 10 / 10 | 100.0% | :white_check_mark: 
+| wstring.o | 100.0% | 5 / 5 | 100.0% | :white_check_mark: 
+| wchar_io.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| uart_console_io_gcn.o | 100.0% | 2 / 2 | 100.0% | :white_check_mark: 
+| abort_exit_ppc_eabi.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| math_sun.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| extras.o | 100.0% | 3 / 3 | 100.0% | :white_check_mark: 
+| e_acos.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| e_asin.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| e_atan2.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| e_fmod.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| e_log.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| e_log10.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| e_pow.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| e_rem_pio2.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| k_cos.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| k_rem_pio2.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| k_sin.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| k_tan.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| s_atan.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| s_ceil.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| s_copysign.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| s_cos.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| s_floor.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| s_frexp.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| s_ldexp.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| s_sin.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| s_tan.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| w_acos.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| w_asin.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| w_atan2.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| w_fmod.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| w_log10.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| w_pow.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| e_sqrt.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| math_ppc.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
+| w_sqrt.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
 
 
 # alloc.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| Block_link | :x: |
-| SubBlock_merge_next | :x: |
-| deallocate_from_fixed_pools | :x: |
-| free | :x: |
+| Block_link | :white_check_mark: |
+| SubBlock_merge_next | :white_check_mark: |
+| deallocate_from_fixed_pools | :white_check_mark: |
+| free | :white_check_mark: |
 
 
 # ansi_files.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __close_all | :x: |
-| __flush_all | :x: |
+| __close_all | :white_check_mark: |
+| __flush_all | :white_check_mark: |
 
 
 # ansi_fp.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __ull2dec | :x: |
-| __timesdec | :x: |
-| __str2dec | :x: |
-| __two_exp | :x: |
-| __equals_dec | :x: |
-| __less_dec | :x: |
-| __minus_dec | :x: |
-| __num2dec_internal | :x: |
-| __num2dec | :x: |
-| __dec2num | :x: |
+| __ull2dec | :white_check_mark: |
+| __timesdec | :white_check_mark: |
+| __str2dec | :white_check_mark: |
+| __two_exp | :white_check_mark: |
+| __equals_dec | :white_check_mark: |
+| __less_dec | :white_check_mark: |
+| __minus_dec | :white_check_mark: |
+| __num2dec_internal | :white_check_mark: |
+| __num2dec | :white_check_mark: |
+| __dec2num | :white_check_mark: |
 
 
 # arith.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| abs | :x: |
+| abs | :white_check_mark: |
 
 
 # buffer_io.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __prep_buffer | :x: |
-| __flush_buffer | :x: |
+| __prep_buffer | :white_check_mark: |
+| __flush_buffer | :white_check_mark: |
 
 
 # ctype.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| tolower | :x: |
+| tolower | :white_check_mark: |
 
 
 # direct_io.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __fwrite | :x: |
+| __fwrite | :white_check_mark: |
 
 
 # file_io.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| fclose | :x: |
-| fflush | :x: |
-| __msl_strnicmp | :x: |
+| fclose | :white_check_mark: |
+| fflush | :white_check_mark: |
+| __msl_strnicmp | :white_check_mark: |
 
 
 # FILE_POS.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| _ftell | :x: |
-| ftell | :x: |
-| _fseek | :x: |
+| _ftell | :white_check_mark: |
+| ftell | :white_check_mark: |
+| _fseek | :white_check_mark: |
 
 
 # mbstring.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| mbtowc | :x: |
-| __mbtowc_noconv | :x: |
-| __wctomb_noconv | :x: |
-| mbstowcs | :x: |
-| wcstombs | :x: |
+| mbtowc | :white_check_mark: |
+| __mbtowc_noconv | :white_check_mark: |
+| __wctomb_noconv | :white_check_mark: |
+| mbstowcs | :white_check_mark: |
+| wcstombs | :white_check_mark: |
 
 
 # mem.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| memmove | :x: |
-| memchr | :x: |
-| __memrchr | :x: |
-| memcmp | :x: |
+| memmove | :white_check_mark: |
+| memchr | :white_check_mark: |
+| __memrchr | :white_check_mark: |
+| memcmp | :white_check_mark: |
 
 
 # mem_funcs.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __copy_longs_aligned | :x: |
-| __copy_longs_rev_aligned | :x: |
-| __copy_longs_unaligned | :x: |
-| __copy_longs_rev_unaligned | :x: |
+| __copy_longs_aligned | :white_check_mark: |
+| __copy_longs_rev_aligned | :white_check_mark: |
+| __copy_longs_unaligned | :white_check_mark: |
+| __copy_longs_rev_unaligned | :white_check_mark: |
 
 
 # math_api.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __fpclassifyf | :x: |
-| __signbitd | :x: |
-| __fpclassifyd | :x: |
+| __fpclassifyf | :white_check_mark: |
+| __signbitd | :white_check_mark: |
+| __fpclassifyd | :white_check_mark: |
 
 
 # misc_io.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __stdio_atexit | :x: |
+| __stdio_atexit | :white_check_mark: |
 
 
 # printf.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| parse_format | :x: |
-| long2str | :x: |
-| longlong2str | :x: |
-| double2hex | :x: |
-| round_decimal | :x: |
-| float2str | :x: |
-| __pformatter | :x: |
-| __FileWrite | :x: |
-| __StringWrite | :x: |
-| fprintf | :x: |
-| vprintf | :x: |
-| vsnprintf | :x: |
-| vsprintf | :x: |
-| snprintf | :x: |
-| sprintf | :x: |
+| parse_format | :white_check_mark: |
+| long2str | :white_check_mark: |
+| longlong2str | :white_check_mark: |
+| double2hex | :white_check_mark: |
+| round_decimal | :white_check_mark: |
+| float2str | :white_check_mark: |
+| __pformatter | :white_check_mark: |
+| __FileWrite | :white_check_mark: |
+| __StringWrite | :white_check_mark: |
+| fprintf | :white_check_mark: |
+| vprintf | :white_check_mark: |
+| vsnprintf | :white_check_mark: |
+| vsprintf | :white_check_mark: |
+| snprintf | :white_check_mark: |
+| sprintf | :white_check_mark: |
 
 
 # scanf.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| parse_format | :x: |
+| parse_format | :white_check_mark: |
 | __sformatter | :x: |
-| __StringRead | :x: |
-| sscanf | :x: |
+| __StringRead | :white_check_mark: |
+| sscanf | :white_check_mark: |
 
 
 # signal.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| raise | :x: |
+| raise | :white_check_mark: |
 
 
 # string.o
@@ -224,7 +224,7 @@
 | strncpy | :white_check_mark: |
 | strcat | :white_check_mark: |
 | strcmp | :white_check_mark: |
-| strncmp | :x: |
+| strncmp | :white_check_mark: |
 | strchr | :white_check_mark: |
 | strrchr | :white_check_mark: |
 | strstr | :white_check_mark: |
@@ -233,260 +233,260 @@
 # strtold.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __strtold | :x: |
+| __strtold | :white_check_mark: |
 
 
 # strtoul.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __strtoul | :x: |
-| __strtoull | :x: |
-| strtoul | :x: |
-| atoi | :x: |
+| __strtoul | :white_check_mark: |
+| __strtoull | :white_check_mark: |
+| strtoul | :white_check_mark: |
+| atoi | :white_check_mark: |
 
 
 # wmem.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| wmemcpy | :x: |
-| wmemchr | :x: |
+| wmemcpy | :white_check_mark: |
+| wmemchr | :white_check_mark: |
 
 
 # wprintf.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| parse_format | :x: |
-| long2str | :x: |
-| longlong2str | :x: |
-| double2hex | :x: |
-| round_decimal | :x: |
-| float2str | :x: |
-| __wpformatter | :x: |
-| __wStringWrite | :x: |
-| swprintf | :x: |
-| vswprintf | :x: |
+| parse_format | :white_check_mark: |
+| long2str | :white_check_mark: |
+| longlong2str | :white_check_mark: |
+| double2hex | :white_check_mark: |
+| round_decimal | :white_check_mark: |
+| float2str | :white_check_mark: |
+| __wpformatter | :white_check_mark: |
+| __wStringWrite | :white_check_mark: |
+| swprintf | :white_check_mark: |
+| vswprintf | :white_check_mark: |
 
 
 # wstring.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| wcslen | :x: |
-| wcscpy | :x: |
-| wcsncpy | :x: |
-| wcscmp | :x: |
-| wcschr | :x: |
+| wcslen | :white_check_mark: |
+| wcscpy | :white_check_mark: |
+| wcsncpy | :white_check_mark: |
+| wcscmp | :white_check_mark: |
+| wcschr | :white_check_mark: |
 
 
 # wchar_io.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| fwide | :x: |
+| fwide | :white_check_mark: |
 
 
 # uart_console_io_gcn.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __write_console | :x: |
-| __close_console | :x: |
+| __write_console | :white_check_mark: |
+| __close_console | :white_check_mark: |
 
 
 # abort_exit_ppc_eabi.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| abort | :x: |
+| abort | :white_check_mark: |
 
 
 # math_sun.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| scalbn | :x: |
+| scalbn | :white_check_mark: |
 
 
 # extras.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| stricmp | :x: |
-| strncasecmp | :x: |
-| strcasecmp | :x: |
+| stricmp | :white_check_mark: |
+| strncasecmp | :white_check_mark: |
+| strcasecmp | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\e_acos.o
+# e_acos.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __ieee754_acos | :x: |
+| __ieee754_acos | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\e_asin.o
+# e_asin.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __ieee754_asin | :x: |
+| __ieee754_asin | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\e_atan2.o
+# e_atan2.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __ieee754_atan2 | :x: |
+| __ieee754_atan2 | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\e_fmod.o
+# e_fmod.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __ieee754_fmod | :x: |
+| __ieee754_fmod | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\e_log.o
+# e_log.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __ieee754_log | :x: |
+| __ieee754_log | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\e_log10.o
+# e_log10.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __ieee754_log10 | :x: |
+| __ieee754_log10 | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\e_pow.o
+# e_pow.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __ieee754_pow | :x: |
+| __ieee754_pow | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\e_rem_pio2.o
+# e_rem_pio2.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __ieee754_rem_pio2 | :x: |
+| __ieee754_rem_pio2 | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\k_cos.o
+# k_cos.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __kernel_cos | :x: |
+| __kernel_cos | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\k_rem_pio2.o
+# k_rem_pio2.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __kernel_rem_pio2 | :x: |
+| __kernel_rem_pio2 | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\k_sin.o
+# k_sin.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __kernel_sin | :x: |
+| __kernel_sin | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\k_tan.o
+# k_tan.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __kernel_tan | :x: |
+| __kernel_tan | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\s_atan.o
+# s_atan.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| atan | :x: |
+| atan | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\s_ceil.o
+# s_ceil.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| ceil | :x: |
+| ceil | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\s_copysign.o
+# s_copysign.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| copysign | :x: |
+| copysign | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\s_cos.o
+# s_cos.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| cos | :x: |
+| cos | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\s_floor.o
+# s_floor.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| floor | :x: |
+| floor | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\s_frexp.o
+# s_frexp.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| frexp | :x: |
+| frexp | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\s_ldexp.o
+# s_ldexp.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| ldexp | :x: |
+| ldexp | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\s_sin.o
+# s_sin.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| sin | :x: |
+| sin | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\s_tan.o
+# s_tan.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| tan | :x: |
+| tan | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\w_acos.o
+# w_acos.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| acos | :x: |
+| acos | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\w_asin.o
+# w_asin.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| asin | :x: |
+| asin | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\w_atan2.o
+# w_atan2.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| atan2 | :x: |
+| atan2 | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\w_fmod.o
+# w_fmod.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| fmod | :x: |
+| fmod | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\w_log10.o
+# w_log10.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| log10 | :x: |
+| log10 | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\w_pow.o
+# w_pow.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| pow | :x: |
+| pow | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\e_sqrt.o
+# e_sqrt.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __ieee754_sqrt | :x: |
+| __ieee754_sqrt | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\PPC_EABI\SRC\math_ppc.o
+# math_ppc.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| nan | :x: |
+| nan | :white_check_mark: |
 
 
-# D:\layout\RVL_1.0\Layout\PowerPC_EABI_Support\MSL\MSL_C\MSL_Common_Embedded\Math\Double_precision\w_sqrt.o
+# w_sqrt.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| sqrt | :x: |
+| sqrt | :white_check_mark: |
 
 

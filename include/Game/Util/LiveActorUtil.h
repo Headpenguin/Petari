@@ -6,7 +6,6 @@
 #include <revolution.h>
 
 class CollisionParts;
-class LiveActor;
 class LiveActorGroup;
 class Nerve;
 class ResourceHolder;
@@ -21,6 +20,7 @@ class HitSensor;
 class BtkCtrl;
 class MsgSharedGroup;
 class ResTIMG;
+class LiveActor;
 
 namespace MR {
     enum CollisionScaleType {
@@ -172,6 +172,8 @@ namespace MR {
     bool tryStartAllAnim(const LiveActor *, const char *);
 
     bool isAnyAnimOneTimeAndStopped(const LiveActor *, const char *);
+
+    bool isBrkOneTimeAndStopped(const LiveActor *);
 
     void setAllAnimFrame(const LiveActor *, const char *, f32);
     void setAllAnimFrameAtEnd(const LiveActor *, const char *);

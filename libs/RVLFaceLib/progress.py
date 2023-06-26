@@ -12,7 +12,7 @@ def generateFullProgJSON(label, percent, color):
     json.append("{\n")
     json.append("\t\"schemaVersion\": 1,\n")
     json.append(f"\t\"label\": \"{label}\",\n")
-    json.append(f"\t\"message\": \"{percent}%\",\n")
+    json.append(f"\t\"message\": \"{truncate(percent, 3)}%\",\n")
     json.append(f"\t\"color\": \"{color}\"\n")
     json.append("}")
 
@@ -253,7 +253,7 @@ for key in libraries:
     lib = libraries[key]
     d, f = lib.calculateProgress()
     libprog = (d / f) * 100.0
-    progressPage.append(f"| [{key}](https://github.com/shibbo/RVL_SDK/blob/main/docs/lib/{key}.md) | {libprog}% |\n")
+    progressPage.append(f"| [{key}](https://github.com/shibbo/Petari/blob/master/libs/RVLFaceLib/docs/lib/{key}.md) | {libprog}% |\n")
 
 with open("docs/PROGRESS.md", "w") as w:
     w.writelines(progressPage)

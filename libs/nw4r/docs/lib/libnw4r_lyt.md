@@ -9,20 +9,20 @@
 | Object | Percentage (of Bytes) | Functions Done / Total Functions | Percentage (Functions) | Status 
 | ------------- | ------------- | ------------- | ------------- | ------------- 
 | lyt_init.o | 100.0% | 1 / 1 | 100.0% | :white_check_mark: 
-| lyt_pane.o | 0.0% | 0 / 30 | 0.0% | :x: 
+| lyt_pane.o | 53.71621621621622% | 24 / 30 | 80.0% | :eight_pointed_black_star: 
 | lyt_group.o | 0.0% | 0 / 4 | 0.0% | :x: 
 | lyt_layout.o | 0.0% | 0 / 17 | 0.0% | :x: 
 | lyt_picture.o | 0.0% | 0 / 11 | 0.0% | :x: 
 | lyt_textBox.o | 0.0% | 0 / 20 | 0.0% | :x: 
 | lyt_window.o | 0.0% | 0 / 20 | 0.0% | :x: 
-| lyt_bounding.o | 0.0% | 0 / 5 | 0.0% | :x: 
-| lyt_material.o | 0.0% | 0 / 76 | 0.0% | :x: 
-| lyt_texMap.o | 0.0% | 0 / 4 | 0.0% | :x: 
-| lyt_drawInfo.o | 0.0% | 0 / 2 | 0.0% | :x: 
+| lyt_bounding.o | 100.0% | 5 / 5 | 100.0% | :white_check_mark: 
+| lyt_material.o | 47.93246037215713% | 18 / 76 | 23.684210526315788% | :eight_pointed_black_star: 
+| lyt_texMap.o | 100.0% | 4 / 4 | 100.0% | :white_check_mark: 
+| lyt_drawInfo.o | 100.0% | 2 / 2 | 100.0% | :white_check_mark: 
 | lyt_animation.o | 0.0% | 0 / 15 | 0.0% | :x: 
 | lyt_resourceAccessor.o | 0.0% | 0 / 3 | 0.0% | :x: 
 | lyt_arcResourceAccessor.o | 0.0% | 0 / 7 | 0.0% | :x: 
-| lyt_common.o | 8.213256484149856% | 1 / 13 | 7.6923076923076925% | :eight_pointed_black_star: 
+| lyt_common.o | 30.11527377521614% | 8 / 13 | 61.53846153846154% | :eight_pointed_black_star: 
 
 
 # lyt_init.o
@@ -36,34 +36,34 @@
 | ------------- | ------------- |
 | __ct__Q34nw4r3lyt4PaneFPCQ44nw4r3lyt3res4Pane | :x: |
 | __dt__Q34nw4r3lyt4PaneFv | :x: |
-| SetName__Q34nw4r3lyt4PaneFPCc | :x: |
-| AppendChild__Q34nw4r3lyt4PaneFPQ34nw4r3lyt4Pane | :x: |
-| RemoveChild__Q34nw4r3lyt4PaneFPQ34nw4r3lyt4Pane | :x: |
+| SetName__Q34nw4r3lyt4PaneFPCc | :white_check_mark: |
+| AppendChild__Q34nw4r3lyt4PaneFPQ34nw4r3lyt4Pane | :white_check_mark: |
+| RemoveChild__Q34nw4r3lyt4PaneFPQ34nw4r3lyt4Pane | :white_check_mark: |
 | GetVtxColor__Q34nw4r3lyt4PaneCFUl | :x: |
-| SetVtxColor__Q34nw4r3lyt4PaneFUlQ34nw4r2ut5Color | :x: |
-| GetColorElement__Q34nw4r3lyt4PaneCFUl | :x: |
-| SetColorElement__Q34nw4r3lyt4PaneFUlUc | :x: |
+| SetVtxColor__Q34nw4r3lyt4PaneFUlQ34nw4r2ut5Color | :white_check_mark: |
+| GetColorElement__Q34nw4r3lyt4PaneCFUl | :white_check_mark: |
+| SetColorElement__Q34nw4r3lyt4PaneFUlUc | :white_check_mark: |
 | GetVtxColorElement__Q34nw4r3lyt4PaneCFUl | :x: |
-| SetVtxColorElement__Q34nw4r3lyt4PaneFUlUc | :x: |
-| FindPaneByName__Q34nw4r3lyt4PaneFPCcb | :x: |
-| FindMaterialByName__Q34nw4r3lyt4PaneFPCcb | :x: |
+| SetVtxColorElement__Q34nw4r3lyt4PaneFUlUc | :white_check_mark: |
+| FindPaneByName__Q34nw4r3lyt4PaneFPCcb | :white_check_mark: |
+| FindMaterialByName__Q34nw4r3lyt4PaneFPCcb | :white_check_mark: |
 | CalculateMtx__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo | :x: |
-| Draw__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo | :x: |
-| DrawSelf__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo | :x: |
-| Animate__Q34nw4r3lyt4PaneFUl | :x: |
-| AnimateSelf__Q34nw4r3lyt4PaneFUl | :x: |
-| BindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb | :x: |
-| UnbindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb | :x: |
-| UnbindAllAnimation__Q34nw4r3lyt4PaneFb | :x: |
-| UnbindAnimationSelf__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransform | :x: |
-| AddAnimationLink__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimationLink | :x: |
-| FindAnimationLinkSelf__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransform | :x: |
-| SetAnimationEnable__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformbb | :x: |
+| Draw__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo | :white_check_mark: |
+| DrawSelf__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo | :white_check_mark: |
+| Animate__Q34nw4r3lyt4PaneFUl | :white_check_mark: |
+| AnimateSelf__Q34nw4r3lyt4PaneFUl | :white_check_mark: |
+| BindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb | :white_check_mark: |
+| UnbindAnimation__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformb | :white_check_mark: |
+| UnbindAllAnimation__Q34nw4r3lyt4PaneFb | :white_check_mark: |
+| UnbindAnimationSelf__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransform | :white_check_mark: |
+| AddAnimationLink__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimationLink | :white_check_mark: |
+| FindAnimationLinkSelf__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransform | :white_check_mark: |
+| SetAnimationEnable__Q34nw4r3lyt4PaneFPQ34nw4r3lyt13AnimTransformbb | :white_check_mark: |
 | LoadMtx__Q34nw4r3lyt4PaneFRCQ34nw4r3lyt8DrawInfo | :x: |
-| GetVtxPos__Q34nw4r3lyt4PaneCFv | :x: |
-| GetMaterial__Q34nw4r3lyt4PaneCFv | :x: |
-| GetRuntimeTypeInfo__Q34nw4r3lyt4PaneCFv | :x: |
-| __sinit_\lyt_pane_cpp | :x: |
+| GetVtxPos__Q34nw4r3lyt4PaneCFv | :white_check_mark: |
+| GetMaterial__Q34nw4r3lyt4PaneCFv | :white_check_mark: |
+| GetRuntimeTypeInfo__Q34nw4r3lyt4PaneCFv | :white_check_mark: |
+| __sinit_\lyt_pane_cpp | :white_check_mark: |
 
 
 # lyt_group.o
@@ -166,11 +166,11 @@
 # lyt_bounding.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __ct__Q34nw4r3lyt8BoundingFPCQ44nw4r3lyt3res8BoundingRCQ34nw4r3lyt11ResBlockSet | :x: |
-| __dt__Q34nw4r3lyt8BoundingFv | :x: |
-| DrawSelf__Q34nw4r3lyt8BoundingFRCQ34nw4r3lyt8DrawInfo | :x: |
-| GetRuntimeTypeInfo__Q34nw4r3lyt8BoundingCFv | :x: |
-| __sinit_\lyt_bounding_cpp | :x: |
+| __ct__Q34nw4r3lyt8BoundingFPCQ44nw4r3lyt3res8BoundingRCQ34nw4r3lyt11ResBlockSet | :white_check_mark: |
+| __dt__Q34nw4r3lyt8BoundingFv | :white_check_mark: |
+| DrawSelf__Q34nw4r3lyt8BoundingFRCQ34nw4r3lyt8DrawInfo | :white_check_mark: |
+| GetRuntimeTypeInfo__Q34nw4r3lyt8BoundingCFv | :white_check_mark: |
+| __sinit_\lyt_bounding_cpp | :white_check_mark: |
 
 
 # lyt_material.o
@@ -225,25 +225,25 @@
 | Init__Q34nw4r3lyt8MaterialFv | :x: |
 | __dt__Q34nw4r3lyt8MaterialFv | :x: |
 | ReserveGXMem__Q34nw4r3lyt8MaterialFUcUcUcUcbUcUcbbbb | :x: |
-| GetTexMapAry__Q34nw4r3lyt8MaterialCFv | :x: |
-| GetTexMapAry__Q34nw4r3lyt8MaterialFv | :x: |
-| GetTexSRTAry__Q34nw4r3lyt8MaterialFv | :x: |
-| GetTexCoordGenAry__Q34nw4r3lyt8MaterialFv | :x: |
-| GetChanCtrlAry__Q34nw4r3lyt8MaterialFv | :x: |
-| GetMatColAry__Q34nw4r3lyt8MaterialFv | :x: |
-| GetTevSwapAry__Q34nw4r3lyt8MaterialFv | :x: |
-| GetAlphaComparePtr__Q34nw4r3lyt8MaterialFv | :x: |
-| GetBlendModePtr__Q34nw4r3lyt8MaterialFv | :x: |
-| GetIndirectStageAry__Q34nw4r3lyt8MaterialFv | :x: |
-| GetIndTexSRTAry__Q34nw4r3lyt8MaterialFv | :x: |
-| GetTevStageAry__Q34nw4r3lyt8MaterialFv | :x: |
-| SetName__Q34nw4r3lyt8MaterialFPCc | :x: |
-| SetTextureNum__Q34nw4r3lyt8MaterialFUc | :x: |
+| GetTexMapAry__Q34nw4r3lyt8MaterialCFv | :white_check_mark: |
+| GetTexMapAry__Q34nw4r3lyt8MaterialFv | :white_check_mark: |
+| GetTexSRTAry__Q34nw4r3lyt8MaterialFv | :white_check_mark: |
+| GetTexCoordGenAry__Q34nw4r3lyt8MaterialFv | :white_check_mark: |
+| GetChanCtrlAry__Q34nw4r3lyt8MaterialFv | :white_check_mark: |
+| GetMatColAry__Q34nw4r3lyt8MaterialFv | :white_check_mark: |
+| GetTevSwapAry__Q34nw4r3lyt8MaterialFv | :white_check_mark: |
+| GetAlphaComparePtr__Q34nw4r3lyt8MaterialFv | :white_check_mark: |
+| GetBlendModePtr__Q34nw4r3lyt8MaterialFv | :white_check_mark: |
+| GetIndirectStageAry__Q34nw4r3lyt8MaterialFv | :white_check_mark: |
+| GetIndTexSRTAry__Q34nw4r3lyt8MaterialFv | :white_check_mark: |
+| GetTevStageAry__Q34nw4r3lyt8MaterialFv | :white_check_mark: |
+| SetName__Q34nw4r3lyt8MaterialFPCc | :white_check_mark: |
+| SetTextureNum__Q34nw4r3lyt8MaterialFUc | :white_check_mark: |
 | SetTexCoordGenNum__Q34nw4r3lyt8MaterialFUc | :x: |
-| SetTevStageNum__Q34nw4r3lyt8MaterialFUc | :x: |
-| SetIndStageNum__Q34nw4r3lyt8MaterialFUc | :x: |
-| SetColorElement__Q34nw4r3lyt8MaterialFUls | :x: |
-| SetupGX__Q34nw4r3lyt8MaterialFbUc | :x: |
+| SetTevStageNum__Q34nw4r3lyt8MaterialFUc | :white_check_mark: |
+| SetIndStageNum__Q34nw4r3lyt8MaterialFUc | :white_check_mark: |
+| SetColorElement__Q34nw4r3lyt8MaterialFUls | :white_check_mark: |
+| SetupGX__Q34nw4r3lyt8MaterialFbUc | :white_check_mark: |
 | BindAnimation__Q34nw4r3lyt8MaterialFPQ34nw4r3lyt13AnimTransform | :x: |
 | UnbindAnimation__Q34nw4r3lyt8MaterialFPQ34nw4r3lyt13AnimTransform | :x: |
 | UnbindAllAnimation__Q34nw4r3lyt8MaterialFv | :x: |
@@ -257,17 +257,17 @@
 # lyt_texMap.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| Get__Q34nw4r3lyt6TexMapCFP9_GXTexObj | :x: |
-| Get__Q34nw4r3lyt6TexMapCFP10_GXTlutObj | :x: |
-| Set__Q34nw4r3lyt6TexMapFRC9_GXTexObj | :x: |
-| ReplaceImage__Q34nw4r3lyt6TexMapFP10TPLPaletteUl | :x: |
+| Get__Q34nw4r3lyt6TexMapCFP9_GXTexObj | :white_check_mark: |
+| Get__Q34nw4r3lyt6TexMapCFP10_GXTlutObj | :white_check_mark: |
+| Set__Q34nw4r3lyt6TexMapFRC9_GXTexObj | :white_check_mark: |
+| ReplaceImage__Q34nw4r3lyt6TexMapFP10TPLPaletteUl | :white_check_mark: |
 
 
 # lyt_drawInfo.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| __ct__Q34nw4r3lyt8DrawInfoFv | :x: |
-| __dt__Q34nw4r3lyt8DrawInfoFv | :x: |
+| __ct__Q34nw4r3lyt8DrawInfoFv | :white_check_mark: |
+| __dt__Q34nw4r3lyt8DrawInfoFv | :white_check_mark: |
 
 
 # lyt_animation.o
@@ -313,14 +313,14 @@
 # lyt_common.o
 | Symbol | Decompiled? |
 | ------------- | ------------- |
-| EqualsResName__Q34nw4r3lyt6detailFPCcPCc | :x: |
-| EqualsMaterialName__Q34nw4r3lyt6detailFPCcPCc | :x: |
-| TestFileHeader__Q34nw4r3lyt6detailFRCQ44nw4r3lyt3res16BinaryFileHeaderUl | :x: |
-| __ct__Q44nw4r3lyt6detail11TexCoordAryFv | :x: |
-| Free__Q44nw4r3lyt6detail11TexCoordAryFv | :x: |
+| EqualsResName__Q34nw4r3lyt6detailFPCcPCc | :white_check_mark: |
+| EqualsMaterialName__Q34nw4r3lyt6detailFPCcPCc | :white_check_mark: |
+| TestFileHeader__Q34nw4r3lyt6detailFRCQ44nw4r3lyt3res16BinaryFileHeaderUl | :white_check_mark: |
+| __ct__Q44nw4r3lyt6detail11TexCoordAryFv | :white_check_mark: |
+| Free__Q44nw4r3lyt6detail11TexCoordAryFv | :white_check_mark: |
 | Reserve__Q44nw4r3lyt6detail11TexCoordAryFUc | :x: |
-| SetSize__Q44nw4r3lyt6detail11TexCoordAryFUc | :x: |
-| Copy__Q44nw4r3lyt6detail11TexCoordAryFPCvUc | :x: |
+| SetSize__Q44nw4r3lyt6detail11TexCoordAryFUc | :white_check_mark: |
+| Copy__Q44nw4r3lyt6detail11TexCoordAryFPCvUc | :white_check_mark: |
 | IsModulateVertexColor__Q34nw4r3lyt6detailFPQ34nw4r2ut5ColorUc | :x: |
 | MultipleAlpha__Q34nw4r3lyt6detailFQ34nw4r2ut5ColorUc | :x: |
 | SetVertexFormat__Q34nw4r3lyt6detailFbUc | :white_check_mark: |

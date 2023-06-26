@@ -26,6 +26,10 @@ void GXSetTevKColor(GXTevKColorID, GXColor);
 void GXSetTevKColorSel(GXTevStageID, GXTevKColorSel);
 void GXSetTevKAlphaSel(GXTevStageID, GXTevKAlphaSel);
 
+void GXSetTevSwapModeTable(GXTevSwapSel, GXTevColorChan, GXTevColorChan, GXTevColorChan, GXTevColorChan);
+
+void GXSetTevSwapMode(GXTevStageID, GXTevSwapSel, GXTevSwapSel);
+
 #ifdef __cplusplus
 }
 #endif
