@@ -7,6 +7,8 @@
 #include "Game/Util/FootPrint.h"
 #include "JSystem/JAudio2/JAIAudible.h"
 
+static bool isLuigi;
+
 Triangle &Triangle::operator=(const Triangle &rOther) {
     mParts = rOther.mParts;
     mIdx = rOther.mIdx;
@@ -211,8 +213,8 @@ MarioActor::MarioActor(const char* pName) : LiveActor(pName), _1b0(0xffffffff) {
 
 void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck floats between f90c(r2) vs f908(r2) to make sure those ones are correct
 	_8c = 1;
-	//?
-	//?
+	isLuigi = false;
+	if(MR::isPlayerLuigi()) isLuigi = true;
 	mPosition.set(a);
 	mRotation.set(b);
 	mScale.set(TVec3f(1f, 1f, 1f));
@@ -242,7 +244,8 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck f
 	_2c4.z = 0f;
 	mBinder -> _1ec &= 0xfffffe7f;
 	MR::setBinderOffsetVec(this, &_2c4, false);
-	//mBinder -> setTriangleFilter(new TriangleFilterDelegator<MarioActor>(this, 0, -1, &MarioActor::binderFilter));
+	TriangleFilterDelegator<MarioActor>::DelegateFilter filter = &MarioActor::binderFilter;
+	mBinder -> setTriangleFilter(new TriangleFilterDelegator<MarioActor>(this, filter));
 	mBinder -> _1ec |= 0x10;
 	initEffect();
 	MR::invalidateClipping(this);
