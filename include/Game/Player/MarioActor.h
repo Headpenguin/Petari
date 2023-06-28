@@ -121,6 +121,9 @@ public:
 	void resetPadSwing();
 	void initActionMatrix();
 
+	TVec3f& getGravityVector();
+	void updateGravityVector(bool, bool);
+
 	//variables
 
 	struct Wierd {
