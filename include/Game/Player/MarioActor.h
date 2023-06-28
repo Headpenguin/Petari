@@ -209,8 +209,6 @@ public:
 	MarioConst* _23c;
 	TVec3f _240;
 	TVec3f _24c;
-//	f32 _250;
-//	f32 _254;
 	f32 _258;
 	f32 _25c;
 	f32 _260;

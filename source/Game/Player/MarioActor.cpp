@@ -209,8 +209,6 @@ MarioActor::MarioActor(const char* pName) : LiveActor(pName), _1b0(0xffffffff) {
 	_1e0 = 0;
 }
 
-
-
 void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck floats between f90c(r2) vs f908(r2) to make sure those ones are correct
 	_8c = 1;
 	isLuigi = false;
@@ -235,8 +233,8 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck f
 	_36c = new GravityInfo();
 	_374 = 0f;
 	initNerve(&NrvMarioActor::MarioActorNrvWait::sInstance);
-	_fb4 = 0; //int
-	_fb8 = 0; //short
+	_fb4 = 0;
+	_fb8 = 0;
 	initActionMatrix();
 	initBinder(60f, 1f, 8);
 	_2c4.x = 0f;
@@ -285,7 +283,7 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck f
 	_332 = 0;
 	MR::setGameCameraTargetToPlayer();
 	_a0c = 0;
-	_b48 = new FootPrint("0x78", 0x100, -1/*short*/);
+	_b48 = new FootPrint("0x78", 0x100, -1);
 	_b48 -> setTexture(MR::getTexFromArc("Footprint.bti", this));
 	switch(num) {
 		case 1:
@@ -299,7 +297,7 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck f
 			break;
 	}
 	updateTransForCamera();
-	_f44 = 1;//char
+	_f44 = 1;
 	_984 = 0f;
 	_978.zero();
 	_27c.zero();
@@ -307,37 +305,34 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck f
 	_498 = new FixedPosition(this, "HandR", TVec3f(0f, 0f, 0f), TVec3f(0f, 0f, 0f));
 	_49c = new FixedPosition(this, "HandR", TVec3f(76.3300018311f, 15.6899995804f, 88.9899978638f),
 		TVec3f(1.79999995232f, 52.5099983215f, 39.5800018311f));
-	_494 = 0; //i
+	_494 = 0;
 	_4b0 = 35f;
 	_4b4 = 60f;
 	_4b8.setInline(0f, 1f, 0f);
 	_4c4 = -_4b8;
-	_482 = true; //c
+	_482 = true;
 	appear();
-	_482 = false; //c -- do we change this to control appearances?
-	_1c6 = 0;//s
+	_482 = false; // do we change this to control appearances?
+	_1c6 = 0;
 	_1c8 = 0f;
 	_1cc = 0f;
-	_1d0 = 0;//c
-	_1d1 = 0;//c
-	_a24 = 0;//c
-	_a25 = 0;//c
+	_1d0 = 0;
+	_1d1 = 0;
+	_a24 = 0;
+	_a25 = 0;
 	_1d8 = new (0x20) MarioActor::FBO[MR::getFrameBufferWidth()];
 	_1dc = new (0x20) MarioActor::FBO[MR::getFrameBufferWidth()];
 	_1e4 = 0f;
-	_1e8 = 0;//s
+	_1e8 = 0;
 	_1ec = 0f;
-	//??????????????wtf is going on here
-	_f3c = new JAIAudible[0x1e]; //??????????????????
-	_f40 = 0; //s
-	_f42 = 0; //s
+	_f3c = new JAIAudible[0x1e];
+	_f40 = 0;
+	_f42 = 1;
 	for(int i = 0; i < 0x1e; i++) {
 		JAIAudible &rAudible = _f3c[i];
 		rAudible._0 = 1f;
 		rAudible._4 = 0f;
 		rAudible._8 = 0f;
 	}
-	_8c = 0; //c -- is this to indicate that we are in the process of initialization?
-	
-	
+	_8c = 0; //is this to indicate that we are in the process of initialization?
 }
