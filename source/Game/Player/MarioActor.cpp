@@ -268,7 +268,7 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck f
 	addSoundObjHolder();
 	initParts();
 	initMorphStringTable();
-	MR::declareGlobalEventCameraAbyss("0xc");
+	MR::declareGlobalEventCameraAbyss("mjikgfdnjmdf");
 	MR::declareBlackHoleCamera("0x17");
 	MR::declareGlobalEventCameraDead("0x26", 0.34999999404f, 0x78, 0x3c);
 	MR::declareGlobalEventCamera("0x31");
