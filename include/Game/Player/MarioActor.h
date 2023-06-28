@@ -15,7 +15,7 @@ namespace MR {
 	unsigned int getFrameBufferWidth();
 }
 
-class MarioActor : LiveActor {
+class MarioActor : public LiveActor {
 public:
 	MarioActor(const char*);
 	~MarioActor();
@@ -123,6 +123,10 @@ public:
 
 	//variables
 
+	struct Wierd {
+		int _0[0xc];
+	};
+
 	char _8c;
 
 	//probably alignment
@@ -165,11 +169,12 @@ public:
 	f32 _1d4;
 
 	struct FBO {
-		int stuff[8];
+		int _0;
+		int _4;
 	};
 	
-	FBO* _1d8; // BAD
-	FBO* _1dc; // BAD
+	FBO* _1d8;
+	FBO* _1dc;
 	char _1e0;
 	char _1e1;
 	char _1e2;
@@ -202,12 +207,10 @@ public:
 	MarioAnimator* _234;
 	MarioEffect* _238;
 	MarioConst* _23c;
-	f32 _240;
-	f32 _244;
-	f32 _248;
-	f32 _24c;
-	f32 _250;
-	f32 _254;
+	TVec3f _240;
+	TVec3f _24c;
+//	f32 _250;
+//	f32 _254;
 	f32 _258;
 	f32 _25c;
 	f32 _260;
@@ -322,7 +325,7 @@ public:
 	int _47c;
 	char _480;
 	char _481;
-	char _482;
+	bool _482;
 	char _483;
 	TVec3f _484;
 	f32 _490;
@@ -335,9 +338,7 @@ public:
 	f32 _4ac;
 	f32 _4b0;
 	f32 _4b4;
-	f32 _4b8;
-	f32 _4bc;
-	f32 _4c0;
+	TVec3f _4b8;
 	TVec3f _4c4;
 	int _4c8[0x80];
 
@@ -535,7 +536,7 @@ public:
 	short _bc4;
 	TMtx34f _bc8;
 	TMtx34f _bf8;
-	int _c28;
+	Wierd* _c28;
 	TMtx34f _c2c;
 	TMtx34f _c5c;
 	TMtx34f _c8c;

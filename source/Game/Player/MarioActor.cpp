@@ -223,14 +223,14 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck f
 	updateBaseScaleMtx();
 	_a18 = mRotation;
 	initDrawAndModel();
-	//_c28 = new sizeof=0x30 [MR::getJointNumber(this)];
+	_c28 = new Wierd[MR::getJointNum(this)];
 	MR::connectToScene(this, 0x25, 0x9, 0x14, 0x22);
 	MR::initLightCtrlForPlayer(this);
 	_234 = new MarioAnimator(this);
 	_238 = new MarioEffect(this);
 	_214 = new CollisionShadow(100f,360f);
 	_23c = new MarioConst();
-	//? if(
+	if(isLuigi) _23c -> _8 = 1;
 	_230 -> initAfterConst();
 	_36c = new GravityInfo();
 	_374 = 0f;
@@ -242,7 +242,7 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck f
 	_2c4.x = 0f;
 	_2c4.y = 70f;
 	_2c4.z = 0f;
-	mBinder -> _1ec &= 0xfffffe7f;
+	mBinder -> _1ec &= 0xffffff7f;
 	MR::setBinderOffsetVec(this, &_2c4, false);
 	TriangleFilterDelegator<MarioActor>::DelegateFilter filter = &MarioActor::binderFilter;
 	mBinder -> setTriangleFilter(new TriangleFilterDelegator<MarioActor>(this, filter));
@@ -250,15 +250,12 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck f
 	initEffect();
 	MR::invalidateClipping(this);
 
-	// Tvec3f?
-	_240 = 0f;
-	_244 = -1f;
-	_248 = 0f;
+	_240.setInline(0f, -1f, 0f);
 	
 	_24c = _240;
-	_334 = 0;//s
-	_336 = 0;//s
-	_338 = 0;//s
+	_334 = 0;
+	_336 = 0;
+	_338 = 0;
 	
 	_264.zero();
 	_270 = mPosition;
@@ -290,14 +287,16 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck f
 	_a0c = 0;
 	_b48 = new FootPrint("0x78", 0x100, -1/*short*/);
 	_b48 -> setTexture(MR::getTexFromArc("Footprint.bti", this));
-	if(num == 2) {
-		_230 -> changeAnimationNonStop("0x90");
-	}
-	else if(num != 1) {
-		_230 -> changeAnimation(NULL, 0x9d);
-	}
-	else {
-		_230 -> changeAnimation(NULL, 0x8b);
+	switch(num) {
+		case 1:
+			_230 -> changeAnimation("0x8b", (const char *)NULL);
+			break;
+		case 2:
+			_230 -> changeAnimationNonStop("0x90");
+			break;
+		default:
+			_230 -> changeAnimation("0x9d", (const char *)NULL);
+			break;
 	}
 	updateTransForCamera();
 	_f44 = 1;//char
@@ -311,14 +310,11 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck f
 	_494 = 0; //i
 	_4b0 = 35f;
 	_4b4 = 60f;
-	_4b8 = 0f;
-	_4bc = 0f;
-	_4c0 = 0f;
-	TVec3f stack_8 = -_4b8;
-	_4c4 = stack_8;
-	_482 = 1; //c
+	_4b8.setInline(0f, 1f, 0f);
+	_4c4 = -_4b8;
+	_482 = true; //c
 	appear();
-	_482 = 0; //c -- do we change this to control appearances?
+	_482 = false; //c -- do we change this to control appearances?
 	_1c6 = 0;//s
 	_1c8 = 0f;
 	_1cc = 0f;
@@ -326,19 +322,20 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck f
 	_1d1 = 0;//c
 	_a24 = 0;//c
 	_a25 = 0;//c
-	_1d8 = new MarioActor::FBO[8*MR::getFrameBufferWidth()];
-	_1dc = new MarioActor::FBO[8*MR::getFrameBufferWidth()];
+	_1d8 = new (0x20) MarioActor::FBO[MR::getFrameBufferWidth()];
+	_1dc = new (0x20) MarioActor::FBO[MR::getFrameBufferWidth()];
 	_1e4 = 0f;
 	_1e8 = 0;//s
 	_1ec = 0f;
 	//??????????????wtf is going on here
-	_f3c = new JAIAudible[0x1e](); //??????????????????
+	_f3c = new JAIAudible[0x1e]; //??????????????????
 	_f40 = 0; //s
 	_f42 = 0; //s
 	for(int i = 0; i < 0x1e; i++) {
-		_f3c[i]._0 = 1f;
-		_f3c[i]._4 = 0f;
-		_f3c[i]._8 = 0f;
+		JAIAudible &rAudible = _f3c[i];
+		rAudible._0 = 1f;
+		rAudible._4 = 0f;
+		rAudible._8 = 0f;
 	}
 	_8c = 0; //c -- is this to indicate that we are in the process of initialization?
 	
