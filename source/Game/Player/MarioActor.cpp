@@ -9,6 +9,10 @@
 
 static bool isLuigi;
 
+inline TriangleFilterDelegator<MarioActor>::DelegateFilter getDelegate() {
+	return &MarioActor::binderFilter;
+}
+
 Triangle &Triangle::operator=(const Triangle &rOther) {
     mParts = rOther.mParts;
     mIdx = rOther.mIdx;
@@ -242,7 +246,9 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck f
 	_2c4.z = 0f;
 	mBinder -> _1ec &= 0xffffff7f;
 	MR::setBinderOffsetVec(this, &_2c4, false);
-	TriangleFilterDelegator<MarioActor>::DelegateFilter filter = &MarioActor::binderFilter;
+	//TriangleFilterDelegator<MarioActor>::DelegateFilter filter = &MarioActor::binderFilter;
+	//mBinder -> setTriangleFilter(new TriangleFilterDelegator<MarioActor>(this, filter));
+	TriangleFilterDelegator<MarioActor>::DelegateFilter filter = getDelegate();
 	mBinder -> setTriangleFilter(new TriangleFilterDelegator<MarioActor>(this, filter));
 	mBinder -> _1ec |= 0x10;
 	initEffect();
