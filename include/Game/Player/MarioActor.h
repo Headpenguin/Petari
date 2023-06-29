@@ -125,6 +125,8 @@ public:
 	TVec3f& getGravityVector();
 	void updateGravityVector(bool, bool);
 
+	void stopEffect(const char *);
+
 	//variables
 
 	struct Wierd {
@@ -262,7 +264,7 @@ public:
 	int _394;
 	int _398;
 	char _39c;
-	char _39d;
+	u8 _39d;
 
 	//probably alignment
 
