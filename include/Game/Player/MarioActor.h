@@ -11,6 +11,7 @@
 class FootPrint;
 class JAIAudible;
 class MarioNullBck;
+class XjointTransform;
 
 namespace MR {
 	unsigned int getFrameBufferWidth();
@@ -35,7 +36,7 @@ public:
 	void clearNullAnimation(signed char);
 	bool isStopNullAnimation() const;
 	void changeGameOverAnimation();
-	void getJointCtrl(const char*) const;
+	XjointTransform* getJointCtrl(const char*) const;
 	void updateRotationInfo();
 	void exeWait();
 	void movement();
