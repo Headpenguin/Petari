@@ -10,6 +10,7 @@
 
 class FootPrint;
 class JAIAudible;
+class MarioNullBck;
 
 namespace MR {
 	unsigned int getFrameBufferWidth();
@@ -508,10 +509,10 @@ public:
 	int _b84;
 	short _b88;
 	//prob align
-	int _b8c;
+	MarioNullBck* _b8c;
 	char _b90;
 	char _b91;
-	char _b92;
+	s8 _b92;
 
 	//probably alignment
 
