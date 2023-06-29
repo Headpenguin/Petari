@@ -215,6 +215,27 @@ MarioActor::MarioActor(const char* pName) : LiveActor(pName), _1b0(0xffffffff) {
 	_1e0 = 0;
 }
 
+static float ZERO = 0f;
+
+void MarioActor::init(const JMapInfoIter &rInfo) {
+	long stack_8 = -1;
+	if(!MR::isValidInfo(rInfo)) return;
+	TVec3f stack_24, stack_18, stack_c;
+
+	MR::getJMapInfoTrans(rInfo, &stack_24);
+	MR::getJMapInfoRotate(rInfo, &stack_18);
+	MR::getJMapInfoScale(rInfo, &stack_c);
+
+	stack_18.x = ZERO + (f32)fmod(stack_18.x - ZERO + 360f, (double)360.0);
+	stack_18.y = ZERO + (f32)fmod(stack_18.y - ZERO + 360f, (double)360.0);
+	stack_18.z = ZERO + (f32)fmod(stack_18.z - ZERO + 360f, (double)360.0);
+
+	if(MR::isExistJMapArg(rInfo)) {
+		MR::getJMapInfoArg0NoInit(rInfo, &stack_8);
+	}
+	init2(stack_24, stack_18, stack_8);
+}
+
 void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck floats between f90c(r2) vs f908(r2) to make sure those ones are correct
 	_8c = 1;
 	isLuigi = false;
@@ -345,27 +366,6 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long num) { //Recheck f
 	_8c = 0; //is this to indicate that we are in the process of initialization?
 }
 
-static float ZERO = 0f;
-
-void MarioActor::init(const JMapInfoIter &rInfo) {
-	long stack_8 = -1;
-	if(!MR::isValidInfo(rInfo)) return;
-	TVec3f stack_24, stack_18, stack_c;
-
-	MR::getJMapInfoTrans(rInfo, &stack_24);
-	MR::getJMapInfoRotate(rInfo, &stack_18);
-	MR::getJMapInfoScale(rInfo, &stack_c);
-
-	stack_18.x = ZERO + (f32)fmod(stack_18.x - ZERO + 360f, (double)360.0);
-	stack_18.y = ZERO + (f32)fmod(stack_18.y - ZERO + 360f, (double)360.0);
-	stack_18.z = ZERO + (f32)fmod(stack_18.z - ZERO + 360f, (double)360.0);
-
-	if(MR::isExistJMapArg(rInfo)) {
-		MR::getJMapInfoArg0NoInit(rInfo, &stack_8);
-	}
-	init2(stack_24, stack_18, stack_8);
-}
-
 void MarioActor::initAfterPlacement() {
 	updateGravityVector(true, true);
 	_230 -> _1D8 = _240;
@@ -443,4 +443,11 @@ void MarioActor::changeNullAnimation(const char *name, signed char num) {
 	_b8c -> appear();
 	MR::startBck(_b8c, name, NULL);
 	_b92 = num;
+}
+
+bool MarioActor::isStopNullAnimation() const {
+	if(!MR::isBckStopped(_b8c)) {
+		return MR::isDead(_b8c);
+	}
+	return true;
 }
