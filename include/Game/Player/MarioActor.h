@@ -628,8 +628,8 @@ public:
 	TVec3f _f90;
 	TVec3f _f9c;
 	TVec3f _fa8;
-	int _fb4;
-	short _fb8;
+	const Nerve* _fb4;
+	u16 _fb8;
 	int _fbc;
 	int _fc0;
 	int _fc4;
