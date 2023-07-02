@@ -180,8 +180,14 @@ namespace JGeometry {
         float normalize(const TVec3<T> &rSrc);
 
 		inline TVec3<T> translate(const TVec3<T>& rSrc) const {
-			TVec3<T> tmp = *this;
+			TVec3<T> tmp(*this);
 			tmp += rSrc;
+			return tmp;
+		}
+
+		inline TVec3<T> translateOpposite(const TVec3<T> &rSrc) const {
+			TVec3<T> tmp(*this);
+			tmp -= rSrc;
 			return tmp;
 		}
 

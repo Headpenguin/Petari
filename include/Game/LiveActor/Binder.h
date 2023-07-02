@@ -8,6 +8,7 @@ public:
 	Binder(TMtx34f *, const TVec3f *, const TVec3f *, f32, f32, unsigned int);
     void clear();
     void setTriangleFilter(TriangleFilterBase *);
+    const Triangle* getPlane(int) const;
 
 	int _0;
 	int _4;

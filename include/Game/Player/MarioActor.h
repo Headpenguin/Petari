@@ -123,6 +123,7 @@ public:
 	void resetPadSwing();
 	void initActionMatrix();
 
+	TVec3f& getGravityVec();
 	TVec3f& getGravityVector();
 	void updateGravityVector(bool, bool);
 
@@ -252,7 +253,7 @@ public:
 	//probably alignment
 	
 	f32 _374;
-	short _378;
+	u16 _378;
 
 	// probably alignment
 
@@ -424,7 +425,7 @@ public:
 	int _9e8;
 	int _9ec;
 	char _9f0;
-	char _9f1;
+	bool _9f1;
 	short _9f2;
 	TVec3f _9f4;
 	int _a00;
@@ -607,9 +608,12 @@ public:
 
 	//probably alignment
 	
-	JAIAudible* _f3c;
-	short _f40;
-	short _f42; 
+	union {
+		JAIAudible* _f3c;
+		TVec3f* _f3c_vec;
+	};
+	u16 _f40;
+	u16 _f42; 
 	char _f44;
 
 	//probably alignment
