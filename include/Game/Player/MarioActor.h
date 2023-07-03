@@ -129,6 +129,22 @@ public:
 
 	void stopEffect(const char *);
 
+	inline bool isMovingVertical() const { // this is probably not be an accurate name
+		return _230 -> _8_0;
+	}
+
+	inline bool isSlipping() const { // this may not be an accurate name
+		return _230 -> _8_23;
+	}
+
+	inline bool isHoldJump() const { // this is certainly inaccurately named
+		return _230 -> _18_1e;
+	}
+
+	inline bool isHoldJumpLastFrame() const { // this is certainly inaccurately named
+		return _230 -> _30_1e;
+	}
+
 	/*inline bool getFlag(u8 bit) const volatile {
 		return _230 -> _8 >> (0x20 - bit) & 1;
 	}*/
