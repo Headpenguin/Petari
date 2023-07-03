@@ -129,6 +129,10 @@ public:
 
 	void stopEffect(const char *);
 
+	/*inline bool getFlag(u8 bit) const volatile {
+		return _230 -> _8 >> (0x20 - bit) & 1;
+	}*/
+
 	//variables
 
 	struct Wierd {
