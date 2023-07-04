@@ -416,8 +416,8 @@ public:
 	int _928;
 	int _92c;
 	int _930;
-	char _934;
-	char _935;
+	bool _934;
+	bool _935;
 
 	//probably alignment
 

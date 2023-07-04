@@ -152,7 +152,7 @@ MarioActor::MarioActor(const char* pName) : LiveActor(pName), _1b0(0xffffffff) {
 
 	_a6c=0;
 	_b48=NULL;
-	_934=0;
+	_934=false;
 	_7e2=0;
 	_ef6=0;
 	_424=0;
@@ -871,4 +871,18 @@ void MarioActor::updateBehavior() {
 			}
 		}
 	}
+}
+
+void MarioActor::updateBindRatio() {
+	if(!_934 && !MR::isNearZero(_978.translateOpposite(_264), 0.001f)) {
+		f32 fr31 = PSVECMag(_978.toCVec());
+		if(fr31 / PSVECMag(_978.translateOpposite(_264).toCVec()) < 2f) {
+			_984 += 0.1f;
+		}
+		else {
+			_984 -= 0.1f;
+		}
+	}
+	else if(!MR::isNearZero(_978, 0.001f)) _984 -= 0.01f;
+	_984 = MR::clamp(_984, 0f, 1f);
 }
