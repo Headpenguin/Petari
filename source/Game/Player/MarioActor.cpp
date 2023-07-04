@@ -92,7 +92,7 @@ MarioActor::MarioActor(const char* pName) : LiveActor(pName), _1b0(0xffffffff) {
 
 	_3b4.zero();
 
-	_3c1=0;
+	_3c1=false;
 	_211=0;
 	__46c=0;
 	__470=0;
@@ -144,7 +144,7 @@ MarioActor::MarioActor(const char* pName) : LiveActor(pName), _1b0(0xffffffff) {
 		_a28[i] = 0;
 	}
 
-	_a61=0;
+	_a61=false;
 
 	_a64=0xff;
 	
@@ -169,7 +169,7 @@ MarioActor::MarioActor(const char* pName) : LiveActor(pName), _1b0(0xffffffff) {
 
 	_3d0=0;
 	_7de=0;
-	_3c0=0;
+	_3c0=false;
 	_b90=0;
 	_b91=0;
 	_39d=0;
@@ -803,5 +803,33 @@ void MarioActor::control2() {
 		if(_230 -> _18_b) mBinder -> _1ec &= ~(u32)0x40; // suspected bitfield
 		else mBinder -> _1ec |= 0x40;
 		if(_230 -> isDamaging()) _424 = 0;
+	}
+}
+
+void MarioActor::controlMain() {
+	if(_3c0) {
+		_7dc = 0;
+		_930 = 0;
+	}
+	updateActionTrigger();
+	updateControllerSwing();
+	updateControllerSwingLeft();
+	update2D();
+	if(_a61) _a6c++;
+	if(!isEnableMoveMario()) {
+		_7dc = 0;
+		_930 = 0;
+		careMovingObject();
+	}
+	else {
+		mVelocity.zero();
+		updateBehavior();
+		updateRotationInfo();
+		updateTakingPosition();
+		updateSearchLight();
+		updateThrowing();
+		updateBeeWingAnimation();
+		updateFairyStar();
+		_930 = 0;
 	}
 }

@@ -132,6 +132,16 @@ public:
 	void playEffect(const char *);
 	void stopEffect(const char *);
 
+	void updateActionTrigger();
+	void updateControllerSwing();
+	void updateControllerSwingLeft();
+	void update2D();
+	void updateTakingPosition();
+	void updateSearchLight();
+	void updateThrowing();
+	void updateBeeWingAnimation();
+	void updateFairyStar();
+
 	inline bool isMovingVertical() const { // this is probably not be an accurate name
 		return _230 -> _8_0;
 	}
@@ -307,8 +317,8 @@ public:
 
 	float _3b0;
 	TVec3f _3b4;
-	char _3c0;
-	char _3c1;
+	bool _3c0;
+	bool _3c1;
 
 	// probably alignment
 
@@ -482,15 +492,15 @@ public:
 	char _a5a;
 	char _a5b;
 	int _a5c;
-	char _a60;
-	char _a61;
-	char _a62;
+	bool _a60;
+	bool _a61;
+	bool _a62;
 
 	//probably alignment
 
 	int _a64;
 	f32 _a68;
-	short _a6c;
+	u16 _a6c;
 	char _a6e;
 
 	//probably alignment
