@@ -136,6 +136,10 @@ public:
 		return _230 -> _8_0;
 	}
 
+	inline bool isMoving() const { // this is probably not an accurate name
+		return _230 -> _8_1;
+	}
+
 	inline bool isSlipping() const { // this may not be an accurate name
 		return _230 -> _8_23;
 	}
@@ -447,7 +451,7 @@ public:
 	int _9e4;
 	int _9e8;
 	int _9ec;
-	char _9f0;
+	bool _9f0;
 	bool _9f1;
 	short _9f2;
 	TVec3f _9f4;
@@ -560,7 +564,7 @@ public:
 	int _ba8;
 	TVec3f _bac;
 	TVec3f _bb8;
-	short _bc4;
+	u16 _bc4;
 	TMtx34f _bc8;
 	TMtx34f _bf8;
 	Wierd* _c28;
@@ -579,9 +583,9 @@ public:
 	TMtx34f _e6c;
 	short _e9c;
 	f32 _ea0;
-	char _ea4;
-	char _ea5;
-	char _ea6;
+	bool _ea4;
+	bool _ea5;
+	bool _ea6;
 	TMtx34f _ea8;
 	TVec3f _ed8;
 	int _ee4;
@@ -637,7 +641,7 @@ public:
 	};
 	u16 _f40;
 	u16 _f42; 
-	char _f44;
+	bool _f44;
 
 	//probably alignment
 
@@ -661,8 +665,8 @@ public:
 	int _fc0;
 	int _fc4;
 	int _fc8;
-	char _fcc;
-	char _fcd;
+	bool _fcc;
+	bool _fcd;
 };
 
 namespace NrvMarioActor {
