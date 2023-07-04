@@ -48,10 +48,10 @@ public:
 	void updateBindRatio();
 	bool isInPunchTimerRange() const;
 	void updatePunching();
-	void doRush();
+	bool doRush();
 	void updateSwingTimer();
 	void updateSwingAction();
-	void checkClapCatchStart();
+	bool checkClapCatchStart();
 	void updateRealMtx();
 	void setUpperRotateY(f32);
 	void decLife(unsigned short);
@@ -62,9 +62,9 @@ public:
 	void updateLife();
 	void incLife(unsigned int);
 	void changeMaxLife(int);
-	void doPressing();
+	bool doPressing();
 	void careMovingObject();
-	void doStun();
+	bool doStun();
 	void scaleMtx(f32* [4]);
 	void updateBaseScaleMtx();
 	void getRealMtx(f32* [4], const char*);
@@ -126,7 +126,7 @@ public:
 
 	TVec3f& getGravityVec();
 	TVec3f& getGravityVector();
-	void updateGravityVector(bool, bool);
+	void updateGravityVec(bool, bool);
 	void changeTeresaAnimation(const char *, long);
 
 	void playEffect(const char *);
@@ -141,6 +141,20 @@ public:
 	void updateThrowing();
 	void updateBeeWingAnimation();
 	void updateFairyStar();
+	void updatePlayerMode();
+	void updateEffect();
+	void updateThrowVector();
+	void updateForCamera();
+	void updateTornado();
+
+	bool tryJumpRush();
+	void initForJump();
+	void lockOnDPD();
+	bool tryCoinPull();
+	bool tryThrow();
+	bool tryStandardRush();
+	void checkPriorRushTarget();
+	
 
 	inline bool isMovingVertical() const { // this is probably not be an accurate name
 		return _230 -> _8_0;
@@ -309,9 +323,9 @@ public:
 
 	int _3a0;
 	int _3a4;
-	short _3a8;
-	short _3aa;
-	short _3ac;
+	u16 _3a8;
+	u16 _3aa;
+	u16 _3ac;
 
 	//probably alignment
 
@@ -557,7 +571,7 @@ public:
 
 	//probably alignment
 
-	short _b94;
+	u16 _b94;
 	char _b96;
 
 	// NOT REAL MEMBER
@@ -607,10 +621,10 @@ public:
 	bool _eed;
 	bool _eee;
 	//probably alignment
-	short _ef0;
-	short _ef2;
-	short _ef4;
-	short _ef6;
+	u16 _ef0;
+	u16 _ef2;
+	u16 _ef4;
+	u16 _ef6;
 	int _ef8;
 	int _efc;
 	char _f00;
