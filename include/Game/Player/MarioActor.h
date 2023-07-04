@@ -347,11 +347,11 @@ public:
 	char _3de;
 	char _3df;
 	int _3e0;
-	char _3e4;
-	char _3e5;
-	char _3e6;
-	char _3e7;
-	char _3e8;
+	bool _3e4;
+	bool _3e5;
+	bool _3e6;
+	bool _3e7;
+	bool _3e8;
 
 	// probably alignment
 	
@@ -423,7 +423,7 @@ public:
 
 	TVec3f _938;
 	char _944;
-	char _945;
+	unsigned char _945;
 	short _946;
 	short _948;
 	short _94a;
