@@ -77,6 +77,7 @@ namespace MR {
     void hideModelIfHidden(LiveActor *);
 
     void hideModelAndOnCalcAnim(LiveActor *);
+    void stopAnimFrame(LiveActor *);
 
     ResourceHolder* getResourceHolder(const LiveActor *);
     ResourceHolder* getModelResourceHolder(const LiveActor *);

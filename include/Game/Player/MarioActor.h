@@ -12,6 +12,7 @@ class FootPrint;
 class JAIAudible;
 class MarioNullBck;
 class XjointTransform;
+class MarioParts;
 
 namespace MR {
 	unsigned int getFrameBufferWidth();
@@ -126,7 +127,9 @@ public:
 	TVec3f& getGravityVec();
 	TVec3f& getGravityVector();
 	void updateGravityVector(bool, bool);
+	void changeTeresaAnimation(const char *, long);
 
+	void playEffect(const char *);
 	void stopEffect(const char *);
 
 	inline bool isMovingVertical() const { // this is probably not be an accurate name
@@ -306,13 +309,13 @@ public:
 	// probably alignment
 
 	TVec3f _3c4;
-	short _3d0;
-	short _3d2;
-	short _3d4;
-	short _3d6;
-	short _3d8;
-	short _3da;
-	short _3dc;
+	u16 _3d0;
+	u16 _3d2;
+	u16 _3d4;
+	u16 _3d6;
+	u16 _3d8;
+	u16 _3da;
+	u16 _3dc;
 	char _3de;
 	char _3df;
 	int _3e0;
@@ -424,7 +427,7 @@ public:
 	int _998;
 	int _99c;
 	int _9a0;
-	int _9a4;
+	MarioParts* _9a4;
 	f32 _9a8;
 	f32 _9ac;
 	f32 _9b0;
@@ -582,13 +585,13 @@ public:
 	TMtx34f _ea8;
 	TVec3f _ed8;
 	int _ee4;
-	char _ee8;
-	char _ee9;
-	char _eea;
-	char _eeb;
-	char _eec;
-	char _eed;
-	char _eee;
+	bool _ee8;
+	bool _ee9;
+	bool _eea;
+	bool _eeb;
+	bool _eec;
+	bool _eed;
+	bool _eee;
 	//probably alignment
 	short _ef0;
 	short _ef2;
