@@ -154,6 +154,7 @@ public:
 	bool tryThrow();
 	bool tryStandardRush();
 	void checkPriorRushTarget();
+	unsigned char selectAction(const char *) const;
 	
 
 	inline bool isMovingVertical() const { // this is probably not be an accurate name
@@ -312,7 +313,7 @@ public:
 	int _380;
 	int _384;
 	int _388;
-	short _38c;
+	u16 _38c;
 	int _390;
 	int _394;
 	int _398;
@@ -422,13 +423,13 @@ public:
 	//probably alignment
 
 	TVec3f _938;
-	char _944;
-	unsigned char _945;
-	short _946;
-	short _948;
-	short _94a;
-	short _94c;
-	short _94e;
+	u8 _944;
+	u8 _945;
+	u16 _946;
+	u16 _948;
+	u16 _94a;
+	u16 _94c;
+	u16 _94e;
 	char _950;
 	char _951;
 
