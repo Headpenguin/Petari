@@ -13,6 +13,7 @@ class JAIAudible;
 class MarioNullBck;
 class XjointTransform;
 class MarioParts;
+class RushEndInfo;
 
 namespace MR {
 	unsigned int getFrameBufferWidth();
@@ -155,7 +156,14 @@ public:
 	bool tryStandardRush();
 	void checkPriorRushTarget();
 	unsigned char selectAction(const char *) const;
-	
+	bool tryRushInRush();
+	void bodyClap();
+	bool selectWaterInOut(const char *) const;
+	bool selectWaterInOutRush(const HitSensor *) const;
+	void playEffectRT(const char *, const TVec3f &, const TVec3f &);
+	void emitEffectWaterColumn(const TVec3f &, const TVec3f &);
+	bool selectRecoverFlyMeter(const HitSensor *) const;
+	void endRush(const RushEndInfo *);
 
 	inline bool isMovingVertical() const { // this is probably not be an accurate name
 		return _230 -> _8_0;
@@ -175,6 +183,10 @@ public:
 
 	inline bool isHoldJumpLastFrame() const { // this is certainly inaccurately named
 		return _230 -> _30_1e;
+	}
+
+	inline Mario::Nonsense getStates() const {
+		return _230 -> bitfieldStruct;
 	}
 
 	/*inline bool getFlag(u8 bit) const volatile {
@@ -404,7 +416,7 @@ public:
 	f32 _6d4;
 	f32 _6d8;
 	int _6dc[0x40];
-	short _7dc;
+	u16 _7dc;
 	short _7de;
 	short _7e0;
 	char _7e2;
@@ -413,7 +425,7 @@ public:
 
 	int _7e4[0x40];
 	char _8e4[0x40];
-	int _924;
+	HitSensor* _924;
 	int _928;
 	int _92c;
 	int _930;
