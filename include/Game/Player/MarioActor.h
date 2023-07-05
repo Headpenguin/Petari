@@ -164,6 +164,8 @@ public:
 	void emitEffectWaterColumn(const TVec3f &, const TVec3f &);
 	bool selectRecoverFlyMeter(const HitSensor *) const;
 	void endRush(const RushEndInfo *);
+	void stopSpinTicoEffect(bool);
+	void stopEffectForce(const char *);
 
 	inline bool isMovingVertical() const { // this is probably not be an accurate name
 		return _230 -> _8_0;
@@ -222,7 +224,7 @@ public:
 	f32 _1ac;
 	Color8 _1b0;
 	char _1b4;
-	char _1b5;
+	bool _1b5;
 
 	//probably alignment
 	

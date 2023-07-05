@@ -186,7 +186,7 @@ MarioActor::MarioActor(const char* pName) : LiveActor(pName), _1b0(0xffffffff) {
 
 	_1b0.set(0xff, 0xff, 0xff, 0);
 
-	_1b5=0;
+	_1b5=false;
 	_988=0;
 
 	_f10=2;
@@ -989,4 +989,29 @@ bool MarioActor::doRush() {
 		return false;
 	}
 	
+}
+
+void MarioActor::updateSwingTimer() {
+	if(_934) stopSpinTicoEffect(false);
+	else {
+		if(_948) _948--;
+		if(_94c && --_94c == 6) _94e = 5;
+		if(_94e && --_94e == 0) {
+			_230 -> startPadVib((unsigned long)0);
+			_230 -> playSound("スピン回復終了", -1);
+			Color8 stack_8;
+			stack_8.set(0x50, 0x80, 0xc8, 0);
+			_1aa = 0xf;
+			_1ac = 1.5f;
+			_1b0 = stack_8;
+			_1b5 = true;
+		}
+		if(_946) {
+			if(--_946 == 0x18) {
+				selectAction("スピン回復エフェクト");
+				stopEffectForce("スピンリング");
+			}
+			if(_946 == 0xd) _94c = 0x13;
+		}
+	}
 }
