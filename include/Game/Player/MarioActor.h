@@ -331,9 +331,9 @@ public:
 	// probably alignment
 
 	int _37c;
-	int _380;
+	u32 _380;
 	int _384;
-	int _388;
+	u32 _388;
 	u16 _38c;
 	int _390;
 	int _394;
@@ -368,7 +368,7 @@ public:
 	u16 _3dc;
 	char _3de;
 	char _3df;
-	int _3e0;
+	u32 _3e0;
 	bool _3e4;
 	bool _3e5;
 	bool _3e6;
