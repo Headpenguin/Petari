@@ -166,6 +166,13 @@ public:
 	void endRush(const RushEndInfo *);
 	void stopSpinTicoEffect(bool);
 	void stopEffectForce(const char *);
+	bool isRequestRush() const;
+	bool isRequestSpinJump2P() const;
+	bool tryReleaseBombTeresa();
+	bool isEnableSpinPunch();
+	bool trySpinPunch();
+	void shootFireBall();
+	void doFreezeAttack();
 
 	inline bool isMovingVertical() const { // this is probably not be an accurate name
 		return _230 -> _8_0;
@@ -187,7 +194,7 @@ public:
 		return _230 -> _30_1e;
 	}
 
-	inline Mario::Nonsense getStates() const {
+	inline const Mario::Nonsense& getStates() const {
 		return _230 -> bitfieldStruct;
 	}
 
@@ -648,7 +655,7 @@ public:
 
 	int _f04;
 	int _f08;
-	char _f0c;
+	bool _f0c;
 	char _f0d;
 	short _f0e;
 	short _f10;
