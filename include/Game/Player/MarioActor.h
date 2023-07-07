@@ -66,12 +66,12 @@ public:
 	bool doPressing();
 	void careMovingObject();
 	bool doStun();
-	void scaleMtx(f32* [4]);
+	void scaleMtx(f32 (*) [4]);
 	void updateBaseScaleMtx();
-	void getRealMtx(f32* [4], const char*);
+	void getRealMtx(f32 (*) [4], const char*);
 	void getGlobalJointMtx(const char*);
 	void calcAnimInMovement();
-	void forceSetBaseMtx(f32* [4]);
+	void forceSetBaseMtx(f32 (*) [4]);
 	void calcAnim();
 	void calcAndSetBaseMtx();
 	void setBlendMtxTimer(unsigned short);
