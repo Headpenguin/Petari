@@ -66,7 +66,7 @@ public:
 	bool doPressing();
 	void careMovingObject();
 	bool doStun();
-	void scaleMtx(f32 (*) [4]);
+	void scaleMtx(MtxPtr);
 	void updateBaseScaleMtx();
 	void getRealMtx(f32 (*) [4], const char*);
 	void getGlobalJointMtx(const char*);
