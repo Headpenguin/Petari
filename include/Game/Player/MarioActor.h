@@ -175,6 +175,7 @@ public:
 	void doFreezeAttack();
 	void setBlink(const char *);
 	void resetSensorCount();
+	void getStickValue(f32 *, f32 *);
 
 	inline bool isMovingVertical() const { // this is probably not be an accurate name
 		return _230 -> _8_0;
