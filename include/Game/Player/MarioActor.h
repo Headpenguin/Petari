@@ -174,6 +174,7 @@ public:
 	void shootFireBall();
 	void doFreezeAttack();
 	void setBlink(const char *);
+	void resetSensorCount();
 
 	inline bool isMovingVertical() const { // this is probably not be an accurate name
 		return _230 -> _8_0;
@@ -340,10 +341,10 @@ public:
 	int _384;
 	u32 _388;
 	u16 _38c;
-	int _390;
+	u32 _390;
 	int _394;
 	int _398;
-	char _39c;
+	u8 _39c;
 	u8 _39d;
 
 	//probably alignment
