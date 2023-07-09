@@ -262,7 +262,7 @@ public:
 	
 	FBO* _1d8;
 	FBO* _1dc;
-	char _1e0;
+	bool _1e0;
 	char _1e1;
 	char _1e2;
 
