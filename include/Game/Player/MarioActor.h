@@ -61,7 +61,7 @@ public:
 	void decLifeSmall();
 	void resetWaterLife();
 	void updateLife();
-	void incLife(unsigned int);
+	void incLife(unsigned long);
 	void changeMaxLife(int);
 	bool doPressing();
 	void careMovingObject();
@@ -173,6 +173,7 @@ public:
 	bool trySpinPunch();
 	void shootFireBall();
 	void doFreezeAttack();
+	void setBlink(const char *);
 
 	inline bool isMovingVertical() const { // this is probably not be an accurate name
 		return _230 -> _8_0;
@@ -192,6 +193,10 @@ public:
 
 	inline bool isHoldJumpLastFrame() const { // this is certainly inaccurately named
 		return _230 -> _30_1e;
+	}
+
+	inline u32 getHealth() const {
+		return _380;
 	}
 
 	inline const Mario::Nonsense& getStates() const {
@@ -456,7 +461,7 @@ public:
 
 	//probably alignment
 
-	int _954[8];
+	u32 _954[8];
 	char _974;
 
 	//probably alignment
