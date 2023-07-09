@@ -62,7 +62,7 @@ public:
 	void resetWaterLife();
 	void updateLife();
 	void incLife(unsigned long);
-	void changeMaxLife(int);
+	void changeMaxLife(long);
 	bool doPressing();
 	void careMovingObject();
 	bool doStun();
