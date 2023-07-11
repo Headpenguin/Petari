@@ -177,53 +177,38 @@ public:
 	void resetSensorCount();
 	void getStickValue(f32 *, f32 *);
 
-	inline bool isMovingVertical() const { // this is probably not be an accurate name
-		return _230 -> _8_0;
-	}
-
-	inline bool isMoving() const { // this is probably not an accurate name
-		return _230 -> _8_1;
-	}
-
-	inline bool isSlipping() const { // this may not be an accurate name
-		return _230 -> _8_23;
-	}
-
-	inline bool isHoldJump() const { // this is certainly inaccurately named
-		return _230 -> _18_1e;
-	}
-
-	inline bool isHoldJumpLastFrame() const { // this is certainly inaccurately named
-		return _230 -> _30_1e;
-	}
-
 	inline u32 getHealth() const {
 		return _380;
 	}
 
-	inline const Mario::Nonsense& getStates() const {
-		return _230 -> bitfieldStruct;
+	inline const Mario::MovementStates& getMovementStates() const {
+		return mMario -> mMovementStates;
 	}
 
-	/*inline bool getFlag(u8 bit) const volatile {
-		return _230 -> _8 >> (0x20 - bit) & 1;
-	}*/
+	inline const Mario::DrawStates& getDrawStates() const {
+		return mMario -> mDrawStates;
+	}
+
+	inline const Mario::DrawStates& getPrevDrawStates() const {
+		return mMario -> mPrevDrawStates;
+	}
+
 
 	//variables
 
 	struct Wierd {
-		int _0[0xc];
+		u32 _0[0xc];
 	};
 
 	char _8c;
 
 	//probably alignment
 
-	int _90;
-	int _94[0x40];
-	int _194;
-	int _198;
-	int _19c;
+	u32 _90;
+	u32 _94[0x40];
+	u32 _194;
+	u32 _198;
+	u32 _19c;
 
 	//probably alignment
 	
@@ -242,12 +227,12 @@ public:
 
 	//probably alignment
 	
-	int _1b8;
+	u32 _1b8;
 	MarioMessenger* _1bc;
-	char _1c0;
-	char _1c1;
-	char _1c2;
-	char _1c3;
+	bool _1c0;
+	bool _1c1;
+	bool _1c2;
+	bool _1c3;
 	short _1c4;
 	short _1c6;
 	f32 _1c8;
@@ -257,8 +242,8 @@ public:
 	f32 _1d4;
 
 	struct FBO {
-		int _0;
-		int _4;
+		u32 _0;
+		u32 _4;
 	};
 	
 	FBO* _1d8;
@@ -278,23 +263,23 @@ public:
 	TVec3f _1f0;
 	TVec3f _1fc;
 	f32 _208;
-	int _20c;
+	u32 _20c;
 	char _210;
 	char _211;
 
 	// probably alignment
 	
 	CollisionShadow* _214;
-	int _218;
-	int _21c;
-	int _220;
-	int _224;
-	int _228;
-	int _22c;
-	Mario* _230; //mario
-	MarioAnimator* _234;
-	MarioEffect* _238;
-	MarioConst* _23c;
+	u32 _218;
+	u32 _21c;
+	u32 _220;
+	u32 _224;
+	u32 _228;
+	u32 _22c;
+	Mario* mMario; // _230
+	MarioAnimator* mMarioAnim; // _234
+	MarioEffect* mMarioEffect; // _238
+	MarioConst* mConst; // _23C
 	TVec3f _240;
 	TVec3f _24c;
 	TVec3f _258;
@@ -337,21 +322,21 @@ public:
 
 	// probably alignment
 
-	int _37c;
+	u32 _37c;
 	u32 _380;
-	int _384;
+	u32 _384;
 	u32 _388;
 	u16 _38c;
 	u32 _390;
-	int _394;
-	int _398;
+	u32 _394;
+	u32 _398;
 	u8 _39c;
 	u8 _39d;
 
 	//probably alignment
 
-	int _3a0;
-	int _3a4;
+	u32 _3a0;
+	u32 _3a4;
 	u16 _3a8;
 	u16 _3aa;
 	u16 _3ac;
@@ -385,53 +370,49 @@ public:
 	// probably alignment
 	
 	TMtx34f _3ec;
-	int _41c;
-	int _420;
-	int _424;
-	int _428[4];
+	u32 _41c;
+	u32 _420;
+	u32 _424;
+	u32 _428[4];
 
 	// FAKE DUMMY VAR PADDING
 
-	int _438[0xc];
+	u32 _438[0xc];
 
 	// END FAKE DUMMY VAR PADDING
 	
 	union {
 		TVec3f _468;
-		struct {
-			int __468;
-			int __46c;
-			int __470;
-		};
+		JGeometry::TVec3<long> _468l;
 	};
-	int _474;
+	u32 _474;
 	f32 _478;
-	int _47c;
+	u32 _47c;
 	char _480;
 	char _481;
 	bool _482;
 	char _483;
 	TVec3f _484;
 	f32 _490;
-	int _494;
+	u32 _494;
 	FixedPosition* _498;
 	FixedPosition* _49c;
-	int _4a0;
-	int _4a4;
-	int _4a8;
+	u32 _4a0;
+	u32 _4a4;
+	u32 _4a8;
 	f32 _4ac;
 	f32 _4b0;
 	f32 _4b4;
 	TVec3f _4b8;
 	TVec3f _4c4;
-	int _4c8[0x80];
+	u32 _4c8[0x80];
 
 	// array padding?
 	
 	char _6d0;
 	f32 _6d4;
 	f32 _6d8;
-	int _6dc[0x40];
+	u32 _6dc[0x40];
 	u16 _7dc;
 	short _7de;
 	short _7e0;
@@ -439,12 +420,12 @@ public:
 
 	// probably alignment
 
-	int _7e4[0x40];
+	u32 _7e4[0x40];
 	char _8e4[0x40];
 	HitSensor* _924;
-	int _928;
-	int _92c;
-	int _930;
+	u32 _928;
+	u32 _92c;
+	u32 _930;
 	bool _934;
 	bool _935;
 
@@ -475,15 +456,15 @@ public:
 
 	//probably alignment
 	
-	int _98c;
+	u32 _98c;
 	char _990;
 
 	//probably alignment
 	
-	int _994;
-	int _998;
-	int _99c;
-	int _9a0;
+	u32 _994;
+	u32 _998;
+	u32 _99c;
+	u32 _9a0;
 	MarioParts* _9a4;
 	f32 _9a8;
 	f32 _9ac;
@@ -492,64 +473,64 @@ public:
 
 	//probably alignment
 
-	int _9b8;
-	int _9bc;
-	int _9c0;
-	int _9c4;
-	int _9c8;
+	u32 _9b8;
+	u32 _9bc;
+	u32 _9c0;
+	u32 _9c4;
+	u32 _9c8;
 	f32 _9cc;
 	f32 _9d0;
-	int _9d4;
+	u32 _9d4;
 	TVec3f _9d8;
-	int _9e4;
-	int _9e8;
-	int _9ec;
+	u32 _9e4;
+	u32 _9e8;
+	u32 _9ec;
 	bool _9f0;
 	bool _9f1;
 	short _9f2;
 	TVec3f _9f4;
-	int _a00;
-	int _a04;
+	u32 _a00;
+	u32 _a04;
 	char _a08;
 	char _a09;
 	char _a0a;
 	char _a0b;
 	char _a0c;
-	int _a10;
-	int _a14;
+	u32 _a10;
+	u32 _a14;
 	TVec3f _a18;
 	char _a24;
 	char _a25;
 
 	//proabaly alignment
 	
-	int _a28[6];
-	int _a40;
-	int _a44;
-	int _a48;
-	int _a4c;
-	int _a50;
-	int _a54;
+	u32 _a28[6];
+	u32 _a40;
+	u32 _a44;
+	u32 _a48;
+	u32 _a4c;
+	u32 _a50;
+	u32 _a54;
 	char _a58;
 	char _a59;
 	char _a5a;
 	char _a5b;
-	int _a5c;
+	u32 _a5c;
 	bool _a60;
 	bool _a61;
 	bool _a62;
 
 	//probably alignment
 
-	int _a64;
+	u32 _a64;
 	f32 _a68;
 	u16 _a6c;
-	char _a6e;
+	bool _a6e;
 
 	//probably alignment
 
-	int _a70[8];
-	int _a90[8];
+	u32 _a70[8];
+	u32 _a90[8];
 	TMtx34f _ab0;
 	TMtx34f _ae0;
 	short _b10;
@@ -567,35 +548,35 @@ public:
 	f32 _b38;
 	f32 _b3c;
 	f32 _b40;
-	int _b44;
+	u32 _b44;
 	FootPrint* _b48;
-	int _b4c;
+	u32 _b4c;
 	short _b50;
 
 	//probably alignment
 
-	int _b54[3];
+	u32 _b54[3];
 	short _b60;
 	//prob align
-	int _b64;
+	u32 _b64;
 	char _b68;
 	//prob align
 	short _b6a;
-	int _b6c;
+	u32 _b6c;
 	short _b70;
 	char _b72;
 	//prob align
 	short _b74;
 	//prob align
-	int _b78;
-	int _b7c;
-	int _b80;
-	int _b84;
+	u32 _b78;
+	u32 _b7c;
+	u32 _b80;
+	u32 _b84;
 	short _b88;
 	//prob align
-	MarioNullBck* _b8c;
-	char _b90;
-	char _b91;
+	MarioNullBck* mNullAnimation;
+	bool _b90;
+	bool _b91;
 	s8 _b92;
 
 	//probably alignment
@@ -605,16 +586,16 @@ public:
 
 	// NOT REAL MEMBER
 
-	int fake;
+	u32 fake;
 
 	// END OF NOT REAL MEMBER
 
 	
 	short _b9c;
 	short _b9e;
-	int _ba0;
-	int _ba4;
-	int _ba8;
+	u32 _ba0;
+	u32 _ba4;
+	u32 _ba8;
 	TVec3f _bac;
 	TVec3f _bb8;
 	u16 _bc4;
@@ -641,7 +622,7 @@ public:
 	bool _ea6;
 	TMtx34f _ea8;
 	TVec3f _ed8;
-	int _ee4;
+	u32 _ee4;
 	bool _ee8;
 	bool _ee9;
 	bool _eea;
@@ -654,14 +635,14 @@ public:
 	u16 _ef2;
 	u16 _ef4;
 	u16 _ef6;
-	int _ef8;
-	int _efc;
+	u32 _ef8;
+	u32 _efc;
 	char _f00;
 
 	//probably alignment
 
-	int _f04;
-	int _f08;
+	u32 _f04;
+	u32 _f08;
 	bool _f0c;
 	char _f0d;
 	short _f0e;
@@ -678,7 +659,7 @@ public:
 
 	//probably alignment
 
-	int _f24;
+	u32 _f24;
 	short _f28;
 
 	//probably alignment
@@ -698,8 +679,8 @@ public:
 
 	//probably alignment
 
-	int _f48;
-	int _f4c;
+	u32 _f48;
+	u32 _f4c;
 	TVec3f _f50;
 	TVec3f _f5c;
 	TVec3f _f68;
@@ -714,10 +695,10 @@ public:
 	TVec3f _fa8;
 	const Nerve* _fb4;
 	u16 _fb8;
-	int _fbc;
-	int _fc0;
-	int _fc4;
-	int _fc8;
+	u32 _fbc;
+	u32 _fc0;
+	u32 _fc4;
+	u32 _fc8;
 	bool _fcc;
 	bool _fcd;
 };
