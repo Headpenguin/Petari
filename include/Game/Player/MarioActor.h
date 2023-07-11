@@ -178,7 +178,7 @@ public:
 	void getStickValue(f32 *, f32 *);
 
 	inline u32 getHealth() const {
-		return _380;
+		return mHealth;
 	}
 
 	inline const Mario::MovementStates& getMovementStates() const {
@@ -323,7 +323,7 @@ public:
 	// probably alignment
 
 	u32 _37c;
-	u32 _380;
+	u32 mHealth;
 	u32 _384;
 	u32 _388;
 	u16 _38c;
@@ -360,7 +360,7 @@ public:
 	u16 _3dc;
 	char _3de;
 	char _3df;
-	u32 _3e0;
+	u32 mMaxHealth;
 	bool _3e4;
 	bool _3e5;
 	bool _3e6;
