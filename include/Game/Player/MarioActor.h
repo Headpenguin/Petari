@@ -623,9 +623,9 @@ public:
 	TMtx34f _ea8;
 	TVec3f _ed8;
 	u32 _ee4;
-	bool _ee8;
-	bool _ee9;
-	bool _eea;
+	bool mSuperKinokoCollected; // _ee8
+	bool mPowerupCollected; // _ee9
+	bool mTransforming; // _eea
 	bool _eeb;
 	bool _eec;
 	bool _eed;
