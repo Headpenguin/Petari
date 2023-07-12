@@ -22,7 +22,7 @@
 #include "Game/Player/MarioShadow.h"
 #include "Game/Player/MarioMessenger.h"
 
-static bool gIsLuigi;
+static bool sIsLuigi;
 
 inline TriangleFilterDelegator<MarioActor>::DelegateFilter getDelegate() {
 	return &MarioActor::binderFilter;
@@ -251,8 +251,8 @@ void MarioActor::init(const JMapInfoIter &rInfo) {
 
 void MarioActor::init2(const TVec3f &a, const TVec3f &b, long initialAnimation) { //Recheck floats between f90c(r2) vs f908(r2) to make sure those ones are correct
 	_8c = 1;
-	gIsLuigi = false;
-	if(MR::isPlayerLuigi()) gIsLuigi = true;
+	sIsLuigi = false;
+	if(MR::isPlayerLuigi()) sIsLuigi = true;
 	mPosition.set(a);
 	mRotation.set(b);
 	mScale.set(TVec3f(1f, 1f, 1f));
@@ -268,7 +268,7 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long initialAnimation) 
 	mMarioEffect = new MarioEffect(this);
 	_214 = new CollisionShadow(100f,360f);
 	mConst = new MarioConst();
-	if(gIsLuigi) mConst -> _8 = 1;
+	if(sIsLuigi) mConst -> _8 = 1;
 	mMario -> initAfterConst();
 	_36c = new GravityInfo();
 	_374 = 0f;
@@ -1189,7 +1189,7 @@ void MarioActor::decLife(unsigned short amt) {
 	}
 	if(mHealth) mHealth--;
 	_388 = 0;
-	if(gIsLuigi) {
+	if(sIsLuigi) {
 		if(mMaxHealth == 3) return;
 		if(mHealth > 3) return;
 		mMaxHealth = 3;
