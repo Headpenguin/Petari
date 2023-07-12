@@ -206,7 +206,7 @@ public:
 		u32 _0[0xc];
 	};
 
-	char _8c;
+	u8 _8c;
 
 	//probably alignment
 
@@ -218,17 +218,17 @@ public:
 
 	//probably alignment
 	
-	char _1a0;
-	char _1a1;
+	u8 _1a0;
+	u8 _1a1;
 
 	//probably alignment
 
 	f32 _1a4;
-	short _1a8;
-	short _1aa;
+	u16 _1a8;
+	u16 _1aa;
 	f32 _1ac;
 	Color8 _1b0;
-	char _1b4;
+	u8 _1b4;
 	bool _1b5;
 
 	//probably alignment
@@ -239,12 +239,12 @@ public:
 	bool _1c1;
 	bool _1c2;
 	bool _1c3;
-	short _1c4;
-	short _1c6;
+	u16 _1c4;
+	u16 _1c6;
 	f32 _1c8;
 	f32 _1cc;
-	char _1d0;
-	char _1d1;
+	u8 _1d0;
+	u8 _1d1;
 	f32 _1d4;
 
 	struct FBO {
@@ -255,13 +255,13 @@ public:
 	FBO* _1d8;
 	FBO* _1dc;
 	bool _1e0;
-	char _1e1;
-	char _1e2;
+	u8 _1e1;
+	u8 _1e2;
 
 	//probably alignment
 	
 	f32 _1e4;
-	short _1e8;
+	u16 _1e8;
 
 	//probably alignment
 	
@@ -270,8 +270,8 @@ public:
 	TVec3f _1fc;
 	f32 _208;
 	u32 _20c;
-	char _210;
-	char _211;
+	u8 _210;
+	u8 _211;
 
 	// probably alignment
 	
@@ -306,11 +306,11 @@ public:
 	TVec3f _30c;
 	TVec3f _318;
 	TVec3f _324;
-	short _330;
-	short _332;
-	short _334;
-	short _336;
-	short _338;
+	u16 _330;
+	u16 _332;
+	u16 _334;
+	u16 _336;
+	u16 _338;
 
 	//probably alignment
 	
@@ -319,7 +319,7 @@ public:
 	TVec3f _354;
 	TVec3f _360;
 	GravityInfo* _36c;
-	char _370;
+	u8 _370;
 
 	//probably alignment
 	
@@ -364,8 +364,8 @@ public:
 	u16 _3d8;
 	u16 _3da;
 	u16 _3dc;
-	char _3de;
-	char _3df;
+	u8 _3de;
+	u8 _3df;
 	u32 mMaxHealth;
 	bool _3e4;
 	bool _3e5;
@@ -394,10 +394,10 @@ public:
 	u32 _474;
 	f32 _478;
 	u32 _47c;
-	char _480;
-	char _481;
+	u8 _480;
+	u8 _481;
 	bool _482;
-	char _483;
+	u8 _483;
 	TVec3f _484;
 	f32 _490;
 	u32 _494;
@@ -415,19 +415,19 @@ public:
 
 	// array padding?
 	
-	char _6d0;
+	u8 _6d0;
 	f32 _6d4;
 	f32 _6d8;
 	u32 _6dc[0x40];
 	u16 _7dc;
-	short _7de;
-	short _7e0;
-	char _7e2;
+	u16 _7de;
+	u16 _7e0;
+	u8 _7e2;
 
 	// probably alignment
 
 	u32 _7e4[0x40];
-	char _8e4[0x40];
+	u8 _8e4[0x40];
 	HitSensor* _924;
 	u32 _928;
 	u32 _92c;
@@ -445,25 +445,25 @@ public:
 	u16 _94a;
 	u16 _94c;
 	u16 _94e;
-	char _950;
-	char _951;
+	u8 _950;
+	u8 _951;
 
 	//probably alignment
 
 	u32 _954[8];
-	char _974;
+	u8 _974;
 
 	//probably alignment
 
 	TVec3f _978;
 	f32 _984;
-	char _988;
-	char _989;
+	u8 _988;
+	u8 _989;
 
 	//probably alignment
 	
 	u32 _98c;
-	char _990;
+	u8 _990;
 
 	//probably alignment
 	
@@ -475,7 +475,7 @@ public:
 	f32 _9a8;
 	f32 _9ac;
 	f32 _9b0;
-	short _9b4;
+	u16 _9b4;
 
 	//probably alignment
 
@@ -493,20 +493,20 @@ public:
 	u32 _9ec;
 	bool _9f0;
 	bool _9f1;
-	short _9f2;
+	u16 _9f2;
 	TVec3f _9f4;
 	u32 _a00;
 	u32 _a04;
-	char _a08;
-	char _a09;
-	char _a0a;
-	char _a0b;
-	char _a0c;
+	u8 _a08;
+	u8 _a09;
+	u8 _a0a;
+	u8 _a0b;
+	u8 _a0c;
 	u32 _a10;
 	u32 _a14;
 	TVec3f _a18;
-	char _a24;
-	char _a25;
+	u8 _a24;
+	u8 _a25;
 
 	//proabaly alignment
 	
@@ -517,10 +517,10 @@ public:
 	u32 _a4c;
 	u32 _a50;
 	u32 _a54;
-	char _a58;
-	char _a59;
-	char _a5a;
-	char _a5b;
+	u8 _a58;
+	u8 _a59;
+	u8 _a5a;
+	u8 _a5b;
 	u32 _a5c;
 	bool _a60;
 	bool _a61;
@@ -539,9 +539,9 @@ public:
 	u32 _a90[8];
 	TMtx34f _ab0;
 	TMtx34f _ae0;
-	short _b10;
-	short _b12;
-	short _b14;
+	u16 _b10;
+	u16 _b12;
+	u16 _b14;
 
 	//probably alignment
 
@@ -557,28 +557,28 @@ public:
 	u32 _b44;
 	FootPrint* _b48;
 	u32 _b4c;
-	short _b50;
+	u16 _b50;
 
 	//probably alignment
 
 	u32 _b54[3];
-	short _b60;
+	u16 _b60;
 	//prob align
 	u32 _b64;
-	char _b68;
+	u8 _b68;
 	//prob align
-	short _b6a;
+	u16 _b6a;
 	u32 _b6c;
-	short _b70;
-	char _b72;
+	u16 _b70;
+	u8 _b72;
 	//prob align
-	short _b74;
+	u16 _b74;
 	//prob align
 	u32 _b78;
 	u32 _b7c;
 	u32 _b80;
 	u32 _b84;
-	short _b88;
+	u16 _b88;
 	//prob align
 	MarioNullBck* mNullAnimation;
 	bool _b90;
@@ -588,7 +588,7 @@ public:
 	//probably alignment
 
 	u16 _b94;
-	char _b96;
+	u8 _b96;
 
 	// NOT REAL MEMBER
 
@@ -597,8 +597,8 @@ public:
 	// END OF NOT REAL MEMBER
 
 	
-	short _b9c;
-	short _b9e;
+	u16 _b9c;
+	u16 _b9e;
 	u32 _ba0;
 	u32 _ba4;
 	u32 _ba8;
@@ -621,7 +621,7 @@ public:
 	TMtx34f _e0c;
 	TMtx34f _e3c;
 	TMtx34f _e6c;
-	short _e9c;
+	u16 _e9c;
 	f32 _ea0;
 	bool _ea4;
 	bool _ea5;
@@ -643,35 +643,35 @@ public:
 	u16 _ef6;
 	u32 _ef8;
 	u32 _efc;
-	char _f00;
+	u8 _f00;
 
 	//probably alignment
 
 	u32 _f04;
 	u32 _f08;
 	bool _f0c;
-	char _f0d;
-	short _f0e;
-	short _f10;
-	short _f12;
-	short _f14;
-	short _f16;
-	short _f18;
-	short _f1a;
-	short _f1c;
-	short _f1e;
-	char _f20;
-	char _f21;
+	u8 _f0d;
+	u16 _f0e;
+	u16 _f10;
+	u16 _f12;
+	u16 _f14;
+	u16 _f16;
+	u16 _f18;
+	u16 _f1a;
+	u16 _f1c;
+	u16 _f1e;
+	u8 _f20;
+	u8 _f21;
 
 	//probably alignment
 
 	u32 _f24;
-	short _f28;
+	u16 _f28;
 
 	//probably alignment
 
 	TVec3f _f2c;
-	char _f38;
+	u8 _f38;
 
 	//probably alignment
 	
@@ -690,7 +690,7 @@ public:
 	TVec3f _f50;
 	TVec3f _f5c;
 	TVec3f _f68;
-	char _f74;
+	u8 _f74;
 
 	//probably alignment
 
