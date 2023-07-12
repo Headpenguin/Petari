@@ -2,11 +2,6 @@
 
 #include "Game/LiveActor/LiveActor.h"
 #include "Game/Player/Mario.h"
-#include "Game/Player/MarioConst.h"
-#include "Game/Player/MarioEffect.h"
-#include "Game/Player/MarioAnimator.h"
-#include "Game/Player/MarioShadow.h"
-#include "Game/Player/MarioMessenger.h"
 
 class FootPrint;
 class JAIAudible;
@@ -14,6 +9,11 @@ class MarioNullBck;
 class XjointTransform;
 class MarioParts;
 class RushEndInfo;
+class MarioConst;
+class MarioEffect;
+class MarioAnimator;
+class MarioMessenger;
+class CollisionShadow;
 
 namespace MR {
 	unsigned int getFrameBufferWidth();
