@@ -4,7 +4,7 @@
 
 #include "Game/Animation/XanimePlayer.hpp"
 #include "Game/Player/MarioAnimatorData.hpp"
-
+// ウォークイン
 MarioAnimator::MarioAnimator(MarioActor *actor) : MarioModule(actor)
 {
     init();
