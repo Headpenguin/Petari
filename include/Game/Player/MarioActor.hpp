@@ -2,6 +2,7 @@
 
 #include "Game/LiveActor/LiveActor.hpp"
 #include "Game/Player/Mario.hpp"
+#include "Game/Player/DrawAdaptor.hpp"
 
 class FootPrint;
 class JAIAudible;
@@ -139,6 +140,12 @@ public:
 
     void drawMarioModel() const;
 
+    void drawShadow() ;
+    void drawSilhouette() ;
+    void drawPreWipe() ;
+    void drawScreenBlend() ;
+    void drawIndirect() ;
+
     // Called by drawMarioModel
     void drawSpinInhibit() const;
     void drawSphereMask() const;
@@ -261,12 +268,12 @@ public:
     u8 _211;
     // padding
     CollisionShadow *_214;
-    u32 _218;
-    u32 _21C;
-    u32 _220;
+    DrawAdaptor *_218;
+    DrawAdaptor *_21C;
+    DrawAdaptor *_220;
     u32 _224;
-    u32 _228;
-    u32 _22C;
+    DrawAdaptor *_228;
+    DrawAdaptor *_22C;
     Mario *mMario;                // _230
     MarioAnimator *mMarioAnim;    // _234
     MarioEffect *mMarioEffect;    // _238
@@ -508,8 +515,7 @@ public:
     // padding
     u32 _B78;
     u32 _B7C;
-    u32 _B80;
-    u32 _B84;
+    JUTTexture *_B80[2];
     u16 _B88;
     MarioNullBck *mNullAnimation;    // _B8C
     bool _B90;
