@@ -269,9 +269,9 @@ swapTextureInit__10MarioActorFv,MarioActorDraw.o,Player.a,false
 initFace__10MarioActorFv,MarioActorDraw.o,Player.a,false
 updateFace__10MarioActorFv,MarioActorDraw.o,Player.a,false
 __sinit_\MarioActorDraw_cpp,MarioActorDraw.o,Player.a,false
-Functor<10MarioActor>__2MRFPC10MarioActorM10MarioActorFPCvPCv_v_Q22MR49FunctorV0M<PC10MarioActor&#44;M10MarioActorFPCvPCv_v>,MarioActorDraw.o,Player.a,false
-__cl__Q22MR49FunctorV0M<PC10MarioActor&#44;M10MarioActorFPCvPCv_v>CFv,MarioActorDraw.o,Player.a,false
-clone__Q22MR49FunctorV0M<PC10MarioActor&#44;M10MarioActorFPCvPCv_v>CFP7JKRHeap,MarioActorDraw.o,Player.a,false
+Functor<10MarioActor>__2MRFPC10MarioActorM10MarioActorFPCvPCv_v_Q22MR49FunctorV0M<PC10MarioActor&#44;M10MarioActorFPCvPCv_v>,MarioActorDraw.o,Player.a,true
+__cl__Q22MR49FunctorV0M<PC10MarioActor&#44;M10MarioActorFPCvPCv_v>CFv,MarioActorDraw.o,Player.a,true
+clone__Q22MR49FunctorV0M<PC10MarioActor&#44;M10MarioActorFPCvPCv_v>CFP7JKRHeap,MarioActorDraw.o,Player.a,true
 initBlur__10MarioActorFv,MarioActorDraw.o,Player.a,false
 getJ3DModel__10MarioActorCFv,MarioActorDraw.o,Player.a,false
 getModelData__10MarioActorCFv,MarioActorDraw.o,Player.a,false
@@ -1564,7 +1564,7 @@ __ct__9FloorCodeFv,MarioMapCode.o,Player.a,false
 getCode__9FloorCodeFPC8Triangle,MarioMapCode.o,Player.a,false
 drawPreWipe__10MarioActorCFv,MarioActorWipe.o,Player.a,false
 __sinit_\MarioActorWipe_cpp,MarioActorWipe.o,Player.a,false
-__ct__11DrawAdaptorFRCQ22MR11FunctorBasei,DrawAdaptor.o,Player.a,false
+__ct__11DrawAdaptorFRCQ22MR11FunctorBasei,DrawAdaptor.o,Player.a,true
 draw__11DrawAdaptorCFv,DrawAdaptor.o,Player.a,false
 __dt__11DrawAdaptorFv,DrawAdaptor.o,Player.a,false
 __ct__14EventSequencerFv,PlayerEvent.o,Player.a,false

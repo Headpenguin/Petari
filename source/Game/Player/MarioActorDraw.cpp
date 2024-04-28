@@ -9,21 +9,11 @@
 #include "Game/Player/TornadoMario.hpp"
 
 void MarioActor::initDrawAndModel() {
-    
-    //MR::FunctorV0M<MarioActor *, void (MarioActor::*)()> shadowFunc = MR::Functor<MarioActor>(this, (void (MarioActor::*)())&MarioActor::drawShadow);
-    _218 = new DrawAdaptor(MR::Functor<MarioActor>(this, (void (MarioActor::*)())&MarioActor::drawShadow), 0x29);
-    
-    //MR::FunctorV0M<MarioActor *, void (MarioActor::*)()> silhouetteFunc = MR::Functor<MarioActor>(this, &MarioActor::drawSilhouette);
-    _21C = new DrawAdaptor(MR::Functor<MarioActor>(this, (void (MarioActor::*)())&MarioActor::drawSilhouette), 0x28);
-    
-    //MR::FunctorV0M<MarioActor *, void (MarioActor::*)()> preWipeFunc = MR::Functor<MarioActor>(this, &MarioActor::drawPreWipe);
-    _220 = new DrawAdaptor(MR::Functor<MarioActor>(this, (void (MarioActor::*)())&MarioActor::drawPreWipe), 0x41);
-    
-   // MR::FunctorV0M<MarioActor *, void (MarioActor::*)()> screenBlendFunc = MR::Functor<MarioActor>(this, &MarioActor::drawScreenBlend);
-    _228 = new DrawAdaptor(MR::Functor<MarioActor>(this, (void (MarioActor::*)())&MarioActor::drawScreenBlend), 0x2F);
-    
-   // MR::FunctorV0M<MarioActor *, void (MarioActor::*)()> indirectFunc = MR::Functor<MarioActor>(this, &MarioActor::drawIndirect);
-    _22C = new DrawAdaptor(MR::Functor<MarioActor>(this, (void (MarioActor::*)())&MarioActor::drawIndirect), 0x24);
+    _218 = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawShadow), 0x29);
+    _21C = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawSilhouette), 0x28);
+    _220 = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawPreWipe), 0x41);
+    _228 = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawScreenBlend), 0x2F);
+    _22C = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawIndirect), 0x24);
     
     if(gIsLuigi) {
         initModelManagerWithAnm("Luigi", "MarioAnime", true);
