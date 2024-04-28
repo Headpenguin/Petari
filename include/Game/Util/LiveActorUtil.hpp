@@ -22,6 +22,7 @@ class MsgSharedGroup;
 class ResTIMG;
 class LiveActor;
 class TexMtxCtrl;
+class FogCtrl;
 
 namespace MR {
     enum CollisionScaleType {
@@ -75,7 +76,6 @@ namespace MR {
 
     void onBind(LiveActor *);
     void offBind(LiveActor *);
-
     
     bool isCalcGravity(const LiveActor *);
 
@@ -342,6 +342,8 @@ namespace MR {
     PartsModel* createBloomModel(LiveActor *, MtxPtr);
 
     CollisionParts* getCollisionParts(const LiveActor *);
+
+    FogCtrl* initDLMakerFog(LiveActor *, bool);
 
     TexMtxCtrl* initDLMakerTexMtx(LiveActor *, const char *);
 };

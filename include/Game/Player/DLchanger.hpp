@@ -16,7 +16,7 @@ public:
         _4 = 2;
         _5 = 0;
         for(u32 i = 0; i < _4; i++) {
-            _0._0 = new (32) u8[0x100];
+            _0[i]._0 = new (32) u8[0x100];
         }
     }
     void addDL(J3DModelX *);

@@ -253,7 +253,7 @@ getFrameBufferWidth__2MRFv,MarioActor.o,Player.a,false
 setPunchHitTimer__10MarioActorFUc,MarioActor.o,Player.a,false
 __sinit_\MarioActor_cpp,MarioActor.o,Player.a,false
 isInvalidTriangle__37TriangleFilterDelegator<10MarioActor>CFPC8Triangle,MarioActor.o,Player.a,false
-initDrawAndModel__10MarioActorFv,MarioActorDraw.o,Player.a,false
+initDrawAndModel__10MarioActorFv,MarioActorDraw.o,Player.a,true
 initBeeMario__10MarioActorFv,MarioActorDraw.o,Player.a,false
 initHopperMario__10MarioActorFv,MarioActorDraw.o,Player.a,false
 initIceMario__10MarioActorFv,MarioActorDraw.o,Player.a,false

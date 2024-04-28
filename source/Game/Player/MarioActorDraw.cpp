@@ -10,43 +10,40 @@
 
 void MarioActor::initDrawAndModel() {
     
-    //MR::FunctorV0M<MarioActor *, void (MarioActor::*)()> shadowFunc = MR::Functor<MarioActor>(this, &MarioActor::drawShadow);
-    _218 = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawShadow), 0x29);
+    //MR::FunctorV0M<MarioActor *, void (MarioActor::*)()> shadowFunc = MR::Functor<MarioActor>(this, (void (MarioActor::*)())&MarioActor::drawShadow);
+    _218 = new DrawAdaptor(MR::Functor<MarioActor>(this, (void (MarioActor::*)())&MarioActor::drawShadow), 0x29);
     
     //MR::FunctorV0M<MarioActor *, void (MarioActor::*)()> silhouetteFunc = MR::Functor<MarioActor>(this, &MarioActor::drawSilhouette);
-    _21C = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawSilhouette), 0x28);
+    _21C = new DrawAdaptor(MR::Functor<MarioActor>(this, (void (MarioActor::*)())&MarioActor::drawSilhouette), 0x28);
     
     //MR::FunctorV0M<MarioActor *, void (MarioActor::*)()> preWipeFunc = MR::Functor<MarioActor>(this, &MarioActor::drawPreWipe);
-    _220 = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawPreWipe), 0x41);
+    _220 = new DrawAdaptor(MR::Functor<MarioActor>(this, (void (MarioActor::*)())&MarioActor::drawPreWipe), 0x41);
     
    // MR::FunctorV0M<MarioActor *, void (MarioActor::*)()> screenBlendFunc = MR::Functor<MarioActor>(this, &MarioActor::drawScreenBlend);
-    _228 = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawScreenBlend), 0x2F);
+    _228 = new DrawAdaptor(MR::Functor<MarioActor>(this, (void (MarioActor::*)())&MarioActor::drawScreenBlend), 0x2F);
     
    // MR::FunctorV0M<MarioActor *, void (MarioActor::*)()> indirectFunc = MR::Functor<MarioActor>(this, &MarioActor::drawIndirect);
-    _22C = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawIndirect), 0x24);
+    _22C = new DrawAdaptor(MR::Functor<MarioActor>(this, (void (MarioActor::*)())&MarioActor::drawIndirect), 0x24);
     
-    if(!gIsLuigi) {
-        initModelWithAnm("Luigi", "MarioAnime", true);
+    if(gIsLuigi) {
+        initModelManagerWithAnm("Luigi", "MarioAnime", true);
     }
     else {
-        initModelManagerWithAnm("Mario", "MarioAnime");
+        initModelManagerWithAnm("Mario", "MarioAnime", true);
     }
 
-    J3DModelX *model = MR::getJ3DModel(this);
-    model->_DD = 8;
-    for(u32 i = 0; i < model->_DD; i++) {
-        model->_E0[i] = new (32) u8[0xC00];
-    }
+    J3DModelX *model = (J3DModelX *)MR::getJ3DModel(this);
+    model->initModel();
     MR::initDLMakerFog(this, true);
     MR::newDifferedDLBuffer(this);
-    _A28[0] = model;
+    mModels[0] = model;
     _9E4 = 0;
     _9C0 = 0;
     _B4C = 0;
     _9C8 = 0;
     _A00 = 0;
     _A04 = 0;
-    _98C = 0;
+    mTornadoMario = nullptr;
     initFireBall();
     _3D2 |= 4;
     initBeeMario();
@@ -58,14 +55,14 @@ void MarioActor::initDrawAndModel() {
     initBoneMario();
     initTornadoMario();
     initBlur();
-    _A0A = 0;
+    mCurrModel = 0;
     _A0B = 0;
     initShadow();
     initHand();
     initFace();
     mDL[0] = new (32) u8[0x100];
     mDL[1] = new (32) u8[0x100];
-    _1A0 = 0;
+    mCurrDL = 0;
     mDLchanger = new DLchanger();
     _1A4 = 0.0f;
     swapTextureInit();
@@ -75,11 +72,11 @@ void MarioActor::initDrawAndModel() {
         _B7C = new JUTTexture(0x80, 0x40, GX_TF_RGB565);
         for(u32 i = 0; i < 2; i++) {
             _B80[i] = new JUTTexture(8, 8, GX_TF_IA4);
-            _B80[i]._30 = 1;
-            _B80[i]._31 = 1;
-            _B80[i]._32 = 0;
-            _B80[i]._33 = 0;
-            _B80[i].init();
+            _B80[i]->mWrapS = 1;
+            _B80[i]->mWrapT = 1;
+            _B80[i]->mMagType = 0;
+            _B80[i]->mMinType = 0;
+            _B80[i]->init();
         }
         _B88 = 0;
         updateRandomTexture(1000.0f);

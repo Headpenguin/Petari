@@ -136,21 +136,45 @@ public:
     void init2D();
 
     void initDrawAndModel();
+
+    void initBlur();
+    void initShadow();
+    
+    void initHand();
+    void initFace();
+
+    void swapTextureInit();
+
+    void createRainbowDL();
+
+    void initScreenBox();
+
+    void initFireBall();
+    void initBeeMario();
+    void initIceMario();
+    void initInvincibleMario();
+    void initHopperMario();
+    void initTeresaMario();
+    void initBoneMario();
+    void initTornadoMario();
+    
     bool isAllHidden() const;
 
     void drawMarioModel() const;
 
-    void drawShadow() ;
-    void drawSilhouette() ;
-    void drawPreWipe() ;
-    void drawScreenBlend() ;
-    void drawIndirect() ;
+    void drawShadow() const;
+    void drawSilhouette() const;
+    void drawPreWipe() const;
+    void drawScreenBlend() const;
+    void drawIndirect() const;
 
     // Called by drawMarioModel
     void drawSpinInhibit() const;
     void drawSphereMask() const;
     bool drawDarkMask() const;
     void drawHand() const;
+
+    void updateRandomTexture(f32);
 
     void resetPadSwing();
     void initActionMatrix();
@@ -514,7 +538,7 @@ public:
     u16 _B74;
     // padding
     u32 _B78;
-    u32 _B7C;
+    JUTTexture *_B7C;
     JUTTexture *_B80[2];
     u16 _B88;
     MarioNullBck *mNullAnimation;    // _B8C

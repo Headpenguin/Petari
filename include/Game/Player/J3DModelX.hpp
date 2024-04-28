@@ -9,6 +9,13 @@ class J3DModelX : public J3DModel {
 public:
     J3DModelX(J3DModelData *, u32, u32);
 
+    inline void initModel() {
+        _DD = 8;
+        for(u32 i = 0; i < _DD; i++) {
+            _E0[i] = new (32) u8[0xC00];
+        }
+    }
+
     virtual ~J3DModelX();
 
     void simpleDrawShape(J3DMaterial *);
