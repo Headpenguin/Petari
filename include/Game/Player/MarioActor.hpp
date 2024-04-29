@@ -160,6 +160,8 @@ public:
     
     bool isAllHidden() const;
 
+    void draw() const;
+
     void drawMarioModel() const;
 
     void drawShadow() const;
@@ -173,6 +175,8 @@ public:
     void drawSphereMask() const;
     bool drawDarkMask() const;
     void drawHand() const;
+
+    void drawWallShade(const TVec3f &, const TVec3f &, f32) const;
 
     void updateRandomTexture(f32);
 
@@ -292,12 +296,12 @@ public:
     u8 _211;
     // padding
     CollisionShadow *_214;
-    DrawAdaptor *_218;
-    DrawAdaptor *_21C;
-    DrawAdaptor *_220;
+    DrawAdaptor *mShadowFunc; // _218
+    DrawAdaptor *mSilhouetteFunc; // _21C
+    DrawAdaptor *mPreWipeFunc; // _220
     u32 _224;
-    DrawAdaptor *_228;
-    DrawAdaptor *_22C;
+    DrawAdaptor *mScreenBlendFunc; // _228
+    DrawAdaptor *mIndirectFunc; // _22C
     Mario *mMario;                // _230
     MarioAnimator *mMarioAnim;    // _234
     MarioEffect *mMarioEffect;    // _238

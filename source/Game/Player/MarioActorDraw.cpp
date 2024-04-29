@@ -7,13 +7,14 @@
 #include "Game/Player/J3DModelX.hpp"
 #include "Game/Player/ModelHolder.hpp"
 #include "Game/Player/TornadoMario.hpp"
+#include "Game/Util/FootPrint.hpp"
 
 void MarioActor::initDrawAndModel() {
-    _218 = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawShadow), 0x29);
-    _21C = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawSilhouette), 0x28);
-    _220 = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawPreWipe), 0x41);
-    _228 = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawScreenBlend), 0x2F);
-    _22C = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawIndirect), 0x24);
+    mShadowFunc = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawShadow), 0x29);
+    mSilhouetteFunc = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawSilhouette), 0x28);
+    mPreWipeFunc = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawPreWipe), 0x41);
+    mScreenBlendFunc = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawScreenBlend), 0x2F);
+    mIndirectFunc = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawIndirect), 0x24);
     
     if(gIsLuigi) {
         initModelManagerWithAnm("Luigi", "MarioAnime", true);
@@ -90,6 +91,7 @@ void MarioActor::drawMarioModel() const
             }
         }
 
+        // Tornado mario is a separate object from normal mario
         if (!MR::isDead(mTornadoMario) && (MR::isBckPlaying(mTornadoMario, "MarioTornadoEnd") || MR::isBckPlaying(mTornadoMario, "MarioTornadoLoop"))) {
             return;
         }
@@ -107,32 +109,32 @@ void MarioActor::drawMarioModel() const
     drawSphereMask();
     bool res = drawDarkMask();
 
-    J3DModelX *model = mModels[mCurrModel];
+    J3DModelX *pModel = mModels[mCurrModel];
 
     if (res) {
-        model->mFlags._10 = true;
+        pModel->mFlags._10 = true;
     }
 
     if (!mFlags.mIsHiddenModel) {
-        model->mFlags._1C = false;
+        pModel->mFlags._1C = false;
         if (mMario->isStatusActive(0x12)) {
 
             if (_1A1) {
                 return;
             }
 
-            mDLchanger->addDL(model);
+            mDLchanger->addDL(pModel);
 
-            MR::showJoint(model, "HandR0");
-            MR::showJoint(model, "HandL0");
-            MR::showJoint(model, "Face0");
+            MR::showJoint(pModel, "HandR0");
+            MR::showJoint(pModel, "HandL0");
+            MR::showJoint(pModel, "Face0");
         }
         else {
             if (mCurrModel == 4) {
-                model->setDynamicDL(nullptr, 0);
+                pModel->setDynamicDL(nullptr, 0);
             }
             else {
-                model->setDynamicDL(mDL[mCurrDL], mDLSize);
+                pModel->setDynamicDL(mDL[mCurrDL], mDLSize);
             }
         }
 
@@ -140,27 +142,51 @@ void MarioActor::drawMarioModel() const
             GXSetAlphaUpdate(1);
             GXSetDstAlpha(1, 0);
         }
-        model->setDrawView(0);
-        model->directDraw(nullptr);
-        model->mFlags.clear();
+        pModel->setDrawView(0);
+        pModel->directDraw(nullptr);
+        pModel->mFlags.clear();
     }
 
     if (mMario->isStatusActive(0x12)) {
-        MR::hideJoint(model, "HandR0");
-        MR::hideJoint(model, "HandL0");
-        MR::hideJoint(model, "Face0");
+        MR::hideJoint(pModel, "HandR0");
+        MR::hideJoint(pModel, "HandL0");
+        MR::hideJoint(pModel, "Face0");
     }
 
     drawHand();
 
     if (!MR::isHiddenModel(_A5C)) {
-        J3DModelX *cool = (J3DModelX *)MR::getJ3DModel(_A5C);
-        cool->setDynamicDL(mDL[mCurrDL], mDLSize);
-        cool->directDraw(nullptr);
+        J3DModelX *pModel = (J3DModelX *)MR::getJ3DModel(_A5C);
+        pModel->setDynamicDL(mDL[mCurrDL], mDLSize);
+        pModel->directDraw(nullptr);
     }
 
     if (mAlphaEnable) {
         GXSetAlphaUpdate(0);
         GXSetDstAlpha(0, 0);
     }
+}
+
+void MarioActor::draw() const {
+    if(_B48) {
+        _B48->draw();
+    }
+    bool tmp = _482 || _481;
+    if(!tmp && !_A61 && !_1C3) {
+        if(_A0C) {
+            drawWallShade(_1F0, _1FC, _208);
+        }
+        drawMarioModel();
+        mMario->draw();
+    }
+}
+
+void DLchanger::addDL(J3DModelX *pModel) {
+    pModel->setDynamicDL(mDL[mCurrDL]._0, mDL[mCurrDL]._4);
+}
+
+void J3DModelX::setDynamicDL(u8 *a1, u32 a2) {
+    if(!a1) a2 = 0;
+    _1B8 = a1;
+    _1BC = a2;
 }

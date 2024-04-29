@@ -277,7 +277,7 @@ getJ3DModel__10MarioActorCFv,MarioActorDraw.o,Player.a,false
 getModelData__10MarioActorCFv,MarioActorDraw.o,Player.a,false
 getSimpleModel__10MarioActorCFv,MarioActorDraw.o,Player.a,false
 calcViewMainModel__10MarioActorFv,MarioActorDraw.o,Player.a,false
-draw__10MarioActorCFv,MarioActorDraw.o,Player.a,false
+draw__10MarioActorCFv,MarioActorDraw.o,Player.a,true
 drawIndirect__10MarioActorCFv,MarioActorDraw.o,Player.a,false
 drawIndirectModel__10MarioActorCFv,MarioActorDraw.o,Player.a,false
 drawReflectModel__10MarioActorCFv,MarioActorDraw.o,Player.a,false
@@ -287,7 +287,7 @@ swapTexture__10MarioActorCFPCcUc,MarioActorDraw.o,Player.a,false
 copyMaterial__10MarioActorFP8J3DModelUsl,MarioActorDraw.o,Player.a,false
 copyExtraMtxBuffer__9J3DModelXFPC9J3DModelX,MarioActorDraw.o,Player.a,false
 swapDrawBuffer__9J3DModelXFUl,MarioActorDraw.o,Player.a,false
-addDL__9DLchangerFP9J3DModelX,MarioActorDraw.o,Player.a,false
+addDL__9DLchangerFP9J3DModelX,MarioActorDraw.o,Player.a,true
 setDynamicDL__9J3DModelXFPUcUl,MarioActorDraw.o,Player.a,false
 isEnableSpinPunch__10MarioActorFv,MarioActorPunch.o,Player.a,false
 reactionPunch__10MarioActorFP9HitSensor,MarioActorPunch.o,Player.a,false
@@ -456,7 +456,7 @@ __ct__Q29JGeometry8TBox2<f>Fffff,MarioActorSpecialDraw.o,Player.a,false
 GXPosition3f32,MarioActorSpecialDraw.o,Player.a,false
 showBeeFur__10MarioActorFv,MarioActorSpecialDraw.o,Player.a,false
 __sinit_\MarioActorSpecialDraw_cpp,MarioActorSpecialDraw.o,Player.a,false
-swap__9DLchangerFv,MarioActorSpecialDraw.o,Player.a,false
+swap__9DLchangerFv,MarioActorSpecialDraw.o,Player.a,true
 getBlurOffset__10MarioStateCFv,MarioActorSpecialDraw.o,Player.a,false
 initActionMatrix__10MarioActorFv,MarioActorMatrix.o,Player.a,false
 isActionOk__10MarioActorCFPCc,MarioActorMatrix.o,Player.a,false

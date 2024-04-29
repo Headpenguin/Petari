@@ -78,7 +78,7 @@ public:
     u8 _130[0x1B0 - 0x130];
     Flags mFlags;
     u32 _1B4;
-    u32 _1B8;
+    u8 *_1B8;
     u32 _1BC;
     u32 _1C0;
     u32 *_1C4;
