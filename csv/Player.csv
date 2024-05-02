@@ -90,7 +90,7 @@ directDraw__9J3DModelXFP8J3DModel,J3DModelX.o,Player.a,false
 drawIn__9J3DModelXFP11J3DMaterialbPA4_fP8J3DModel,J3DModelX.o,Player.a,false
 simpleDrawSetup__9J3DModelXFP11J3DMaterial,J3DModelX.o,Player.a,false
 simpleDrawShape__9J3DModelXFP11J3DMaterial,J3DModelX.o,Player.a,false
-storeDisplayList__9J3DModelXFP7_GDLObjUl,J3DModelX.o,Player.a,false
+storeDisplayList__9J3DModelXFP7_GDLObjUl,J3DModelX.o,Player.a,true
 __ct__9J3DModelXFP12J3DModelDataUlUl,J3DModelX.o,Player.a,false
 shapePacketDrawFast__9J3DModelXCFP15J3DShapePacketX,J3DModelX.o,Player.a,false
 shapeDrawFast__9J3DModelXCFP9J3DShapeX,J3DModelX.o,Player.a,false

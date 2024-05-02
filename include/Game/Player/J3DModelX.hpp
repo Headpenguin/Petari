@@ -1,6 +1,7 @@
 #pragma once
 
 #include <JSystem/J3DGraphAnimator/J3DModel.hpp>
+#include <JSystem/JKernel/JKRHeap.hpp>
 
 class J3DShapeX;
 class J3DShapePacketX;
@@ -75,7 +76,8 @@ public:
     u32 _124;
     u32 _128;
     u32 _12C;
-    u8 _130[0x1B0 - 0x130];
+    u8 *_130[0x10];
+    u32 _170[0x10];
     Flags mFlags;
     u32 _1B4;
     u8 *_1B8;
