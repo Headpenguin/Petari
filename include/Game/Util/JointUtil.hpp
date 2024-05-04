@@ -9,6 +9,7 @@ class J3DModel;
 namespace MR {
     MtxPtr getJointMtx(const LiveActor *, int);
     MtxPtr getJointMtx(const LiveActor *, const char *);
+    MtxPtr getJointMtx(J3DModel *, const char *);
 
     void copyJointPos(const LiveActor *, int, TVec3f *);
     void copyJointPos(const LiveActor *, const char *, TVec3f *);

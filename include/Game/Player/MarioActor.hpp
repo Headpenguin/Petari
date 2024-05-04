@@ -82,7 +82,7 @@ public:
     bool doStun();
     void scaleMtx(MtxPtr);
     void updateBaseScaleMtx();
-    void getRealMtx(f32 (*)[4], const char *);
+    void getRealMtx(f32 (*)[4], const char *) const;
     void getGlobalJointMtx(const char *);
     void calcAnimInMovement();
     void forceSetBaseMtx(f32 (*)[4]);
@@ -179,6 +179,18 @@ public:
     void drawWallShade(const TVec3f &, const TVec3f &, f32) const;
 
     void updateRandomTexture(f32);
+
+    void updateHand();
+    void updateFace();
+
+    void changeDisplayMode(u8);
+    void changeHandMaterial();
+
+    void calcScreenBoxRange();
+
+    void updateRasterScroll();
+
+    J3DModel* getJ3DModel() const;
 
     void resetPadSwing();
     void initActionMatrix();
@@ -397,7 +409,7 @@ public:
     u8 _480;
     u8 _481;
     bool _482;
-    u8 _483;
+    bool _483;
     TVec3f _484;
     f32 _490;
     u32 _494;
@@ -458,21 +470,21 @@ public:
     u16 _9B4;
     u32 _9B8;
     u32 _9BC;
-    u32 _9C0;
+    ModelHolder *_9C0; // initIceMario
     u32 _9C4;
-    u32 _9C8;
+    ModelHolder *_9C8; // see initInvicibleMario for more info
     f32 _9CC;
     f32 _9D0;
     u32 _9D4;
     TVec3f _9D8;
-    u32 _9E4;
+    ModelHolder *_9E4; // see initBeeMario for more info
     u32 _9E8;
     u32 _9EC;
     bool _9F0;
     bool mAlphaEnable;    // _9F1
     u16 _9F2;
     TVec3f _9F4;
-    u32 _A00;
+    ModelHolder *_A00; // initHopperMario
     u32 _A04;
     u8 _A08;
     u8 _A09;
@@ -486,12 +498,12 @@ public:
     u8 _A25;
     // padding
     J3DModelX *mModels[6];    // _A28
-    u32 _A40;
-    u32 _A44;
+    ModelHolder *_A40; // initHand
+    ModelHolder *_A44; // initHand
     u32 _A48;
     u32 _A4C;
-    u32 _A50;
-    u32 _A54;
+    ModelHolder *_A50; // initHand
+    ModelHolder *_A54; // initHand
     u8 _A58;
     u8 _A59;
     u8 _A5A;
@@ -504,7 +516,7 @@ public:
     u32 _A64;
     f32 _A68;
     u16 _A6C;
-    bool _A6E;
+    u8 _A6E;
     // padding
     u32 _A70[8];
     u32 _A90[8];

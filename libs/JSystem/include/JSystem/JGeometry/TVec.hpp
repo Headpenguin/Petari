@@ -258,10 +258,10 @@ namespace JGeometry {
             return vec;
         }
 
-        TVec3<T>& operator-=(const TVec3<T> &rhs) {
+        TVec3<T>& operator-=(const TVec3<T> &rhs); /*{
             JMathInlineVEC::PSVECSubtract(toCVec(), rhs.toCVec(), toVec());
             return *this;
-        }
+        }*/
 
         TVec3<T> operator+(const TVec3<T> &rhs) const {
             TVec3<T> vec = *this;
