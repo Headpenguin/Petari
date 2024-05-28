@@ -13,4 +13,6 @@ public:
     static void drawFillFan(const TVec3f &, const TVec3f &, const TVec3f &, unsigned long, float, float, unsigned long);
 
     static void cameraInit3D();
+
+    static void mixFogColor(TVec3f, f32, u32);
 };

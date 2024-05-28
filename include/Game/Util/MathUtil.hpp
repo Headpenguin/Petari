@@ -265,7 +265,7 @@ namespace MR {
         return val % mod;
     }
 
-    f32 repeat(f32 a1, f32 a2, f32 a3) {
+    inline f32 repeat(f32 a1, f32 a2, f32 a3) {
         f64 mod = fmod(a3 + (a1 - a2), a3);
         return mod + a2;
     }
