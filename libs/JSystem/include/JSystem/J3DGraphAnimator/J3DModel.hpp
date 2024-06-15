@@ -23,6 +23,7 @@ public:
     void prepareShapePackets();
     void calcBBoardMtx();
     void calcBumpMtx();
+    void entryModelData(J3DModelData *, u32, u32);
 
     J3DModelData* mModelData;       // _4
     u32 _8;
