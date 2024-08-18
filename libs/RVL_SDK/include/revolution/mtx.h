@@ -23,6 +23,8 @@ typedef struct {
 
 typedef f32 Mtx23[2][3];
 
+typedef f32 Mtx33[3][3];
+
 typedef f32 Mtx[3][4];
 typedef f32 (*MtxPtr)[4];
 

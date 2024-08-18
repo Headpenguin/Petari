@@ -37,7 +37,9 @@ class FunctionLibrary:
 
                     line_split = line.rstrip().split(",")
 
-                    symbol = line_split[0]
+                    # We need to substitute any escaped commas in the symbol name
+                    symbol = line_split[0].replace("&#44;", ",")
+                    
                     obj_file = line_split[1]
                     library_name = line_split[2]
                     matches = line_split[3] == "true"
@@ -52,6 +54,7 @@ class FunctionLibrary:
 
         # Load addresses from symbol map
         with open("data/map_for_dol.map", "r") as input:
+            
             for line in input:
                 line_split = line.rstrip().split("=")
 
@@ -69,6 +72,11 @@ class FunctionLibrary:
                 output.write("Symbol Name, Object File, Library Archive, Matching\n")
 
                 for (symbol, obj_file), values in symbols.items():
+
+                    # Because the symbols are stored in a csv file, we need to escape any commas in the symbol name
+                    # so that the commas do not confuse the parser script
+                    symbol = symbol.replace(",", "&#44;");
+
                     output.write(f"{symbol},{obj_file},{values[0]},{str(values[1]).lower()}\n")
 
     def get_obj_names_from_symbol(self, symbol_lookup):

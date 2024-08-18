@@ -28,7 +28,7 @@ namespace MR {
         }
 
         virtual FunctorBase* clone(JKRHeap *pHeap) const {
-            return new (pHeap, 0x16) FunctorV0M(*this);
+            return new (pHeap, 0) FunctorV0M(*this);
         };
 
         T mCaller;
@@ -53,7 +53,7 @@ namespace MR {
         }
 
         virtual FunctorBase* clone(JKRHeap *pHeap) const {
-            return new (pHeap, 0x16) FunctorV1M(*this);
+            return new (pHeap, 0) FunctorV1M(*this);
         };
 
         T mCaller;
@@ -80,7 +80,7 @@ namespace MR {
         }
 
         virtual FunctorBase* clone(JKRHeap *pHeap) const {
-            return new (pHeap, 0x16) FunctorV2M(*this);
+            return new (pHeap, 0) FunctorV2M(*this);
         };
 
         T mCaller;
@@ -92,6 +92,11 @@ namespace MR {
     template<class T>
     static FunctorV0M<T *, void (T::*)()> Functor(T* a1, void (T::*a2)()) NO_INLINE {
         return FunctorV0M<T *, void (T::*)()>(a1, a2);
+    }
+    
+    template<class T>
+    static FunctorV0M<const T *, void (T::*)() const> Functor(const T* a1, void (T::*a2)() const) NO_INLINE {
+        return FunctorV0M<const T *, void (T::*)() const>(a1, a2);
     }
 
     template<class T>

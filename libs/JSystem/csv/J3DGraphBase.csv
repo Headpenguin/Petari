@@ -149,7 +149,7 @@ addTexMtxIndexInDL__12J3DShapeDrawFUlUlUl,J3DShapeDraw.o,J3DGraphBase.a,false
 __ct__12J3DShapeDrawFPCUcUl,J3DShapeDraw.o,J3DGraphBase.a,false
 draw__12J3DShapeDrawCFv,J3DShapeDraw.o,J3DGraphBase.a,false
 __dt__12J3DShapeDrawFv,J3DShapeDraw.o,J3DGraphBase.a,false
-initialize__8J3DShapeFv,J3DShape.o,J3DGraphBase.a,false
+initialize__8J3DShapeFv,J3DShape.o,J3DGraphBase.a,true
 addTexMtxIndexInDL__8J3DShapeF7_GXAttrUl,J3DShape.o,J3DGraphBase.a,false
 addTexMtxIndexInVcd__8J3DShapeF7_GXAttr,J3DShape.o,J3DGraphBase.a,false
 calcNBTScale__8J3DShapeFRC3VecPA3_A3_fPA3_A3_f,J3DShape.o,J3DGraphBase.a,false

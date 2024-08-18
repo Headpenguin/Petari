@@ -6,6 +6,7 @@
 #include "Game/Map/CollisionParts.hpp"
 #include "Game/Map/HitInfo.hpp"
 #include "Game/Map/WaterInfo.hpp"
+#include "Game/Player/J3DModelX.hpp"
 #include "Game/Player/MarioAnimator.hpp"
 #include "Game/Player/MarioConst.hpp"
 #include "Game/Player/MarioEffect.hpp"
@@ -15,6 +16,7 @@
 #include "Game/Player/MarioParts.hpp"
 #include "Game/Player/MarioShadow.hpp"
 #include "Game/Player/MarioSwim.hpp"
+#include "Game/Player/ModelHolder.hpp"
 #include "Game/Player/RushEndInfo.hpp"
 #include "Game/Screen/GameSceneLayoutHolder.hpp"
 #include "Game/Util/CameraUtil.hpp"
@@ -1272,7 +1274,7 @@ void MarioActor::updateSwingAction()
                 mMario->changeAnimation("ハチスピン空中", (const char *)nullptr);
             }
             else if (getMovementStates()._A || mAlphaEnable) {
-                mMario->changeAnimation("サマーソルト", (const char *)nullptr);
+                mMario->changeAnimation("サマー\x83\x5Cルト", (const char *)nullptr); // "サマーソルト"
             }
             else {
                 mMario->changeAnimation("ハチスピン", (const char *)nullptr);
@@ -1310,7 +1312,7 @@ void MarioActor::updateSwingAction()
         }
         else {
             if (getMovementStates()._A || mAlphaEnable) {
-                mMario->changeAnimation("サマーソルト", (const char *)nullptr);    // Summersault
+                mMario->changeAnimation("サマー\x83\x5Cルト", (const char *)nullptr);  // "サマーソルト"
             }
             else {
                 mMario->changeAnimation("ハチスピン", (const char *)nullptr);
@@ -1603,4 +1605,226 @@ void MarioActor::updateBaseScaleMtx()
     else {
         PSMTXIdentity(_BF8.toMtxPtr());
     }
+}
+
+inline void setCollisionShadow(CollisionShadow *shadow, const TVec3f &v, f32 a, f32 c, f32 b) {
+    shadow->_3C = v;
+    shadow->_18 = a + c;
+    shadow->_1C = b;
+}
+
+inline void updateModelMtx(MarioActor *self, MtxPtr a, MtxPtr b) {
+    b = self->mModels[0]->_24;
+    a = self->getJ3DModel()->_24;
+    PSMTXCopy(a, b);
+}
+inline MtxPtr getMtx(MarioActor *self) {
+    return self->mModels[0]->_24;
+}
+
+inline void getRealMtxfr(const MarioActor *self, const char *name, MtxPtr mtx) {
+    self->getRealMtx(mtx, name);
+}
+
+void MarioActor::calcAnim() {
+    if(_482) {
+        _E9C = 0;
+        return;
+    }
+    if(_3DF) {
+        u16 tmp;
+        if((_3D8 & 7) < _3D8 >> 3) {
+            tmp = _3D6;
+        }
+        else {
+            tmp = _3D4;
+        }
+        if(_3D8 && !_3D4) {
+            if(-tmp != -_3D4 && _3D6 == 6) {
+                if(_3D8 > 0x1A) {
+                    _9A4->appear();
+                }
+                _483 = true;
+                updateHand();
+                updateFace();
+                return;
+            }
+            if(_3D6 == 6) {
+                _9A4->kill();
+                _483 = false;
+            }
+        }
+        switch(tmp) {
+            case 1:
+                changeDisplayMode(4);
+                _9C8->calcAnim();
+                if(_3DE) {
+                    _A6E = 2;
+                }
+                break;
+            case 4:
+                changeDisplayMode(2);
+                break;
+            case 5:
+                _3DF = 0;
+                changeDisplayMode(5);
+                break;
+            case 3:
+                changeDisplayMode(3);
+                break;
+            default:
+                changeDisplayMode(0);
+                u32 tmp2 = 0;
+                switch(tmp) {
+                    case 7: // 1c0
+                        tmp2 = 1;
+                        break;
+                    case 2: // 1c8
+                        tmp2 = 2;
+                        break;
+                }
+                MR::startBtp(this, "ColorChange");
+                MR::setBtpFrameAndStop(this, tmp2);
+                break;
+        }
+        if(_3DF) {
+            changeHandMaterial();
+        }
+    }
+    if(mMario->isStatusActive(11)) {
+        if(mCurrModel != 1) {
+            _A0B = mCurrModel;
+        }
+        if(_37C & 3) {
+            changeDisplayMode(1);
+        }
+        else {
+            changeDisplayMode(_A0B);
+        }
+    }
+    else if(mCurrModel == 1 && mHealth > 0) {
+        changeDisplayMode(_A0B);
+    }
+    _3DF = 0;
+    _3DE = 0;
+    calcAndSetBaseMtx();
+    mMarioAnim->switchMirrorMode();
+    mMarioAnim->calc();
+    if(!_3D8) {
+        switch(_3D4) {
+            case 4: // 2E8
+                _9E4->mPosition.set(mPosition);
+                MR::updateModelDiffDL(_9E4);
+                break;
+            case 3: // 304
+                _9C0->mPosition.set(mPosition);
+                MR::updateModelDiffDL(_9C0);
+                MR::updateModelDiffDL(_A40);
+                MR::updateModelDiffDL(_A44);
+                break;
+            case 1: // 330
+                _9C8->mPosition.set(mPosition);
+                MR::updateModelDiffDL(_9C8);
+                MR::updateModelDiffDL(_A50);
+                MR::updateModelDiffDL(_A54);
+                break;
+            case 5: //35C
+                _A00->mPosition.set(mPosition);
+                MR::updateModelDiffDL(_A00);
+                break;
+            default: // 378
+                if(mCurrModel != 1) {
+                    MR::updateModelDiffDL(this);
+                }
+                break;
+        }
+    }
+    else if(mCurrModel == 0) {
+        MR::updateModelDiffDL(this);
+    }
+    
+    if(MR::isHiddenModel(this) && !_482) {
+        MR::showModel(this);
+    }
+
+    updateRealMtx();
+    if(!mMario->mMovementStates._F || mMario->_544 <= 1) {
+        if(mAlphaEnable) {
+            _214->setMode(0);
+        }
+        else {
+            _214->setMode(2);
+        }
+        _214->_20 = 60.0f + mMario->_31C.translateOpposite(mPosition).dot(_240);
+        _214->_48 = mMario->_31C;
+        Mtx handLMtx, handRMtx, centerMtx, rootMtx;
+        getRealMtxfr(this, "HandL", handLMtx);
+        TVec3f stack_44;
+        MR::extractMtxTrans(handLMtx, &stack_44);
+        getRealMtxfr(this, "HandR", handRMtx);
+        TVec3f stack_38;
+        MR::extractMtxTrans(handRMtx, &stack_38);
+        TVec3f wingspanVec = stack_38.translateOpposite(stack_44);
+        f32 wingspanLen = PSVECMag(wingspanVec.toCVec());
+        MR::normalizeOrZero(&wingspanVec);
+        TVec3f stack_20;
+        PSVECCrossProduct(wingspanVec.toCVec(), _240.toCVec(), stack_20.toVec());
+        MR::normalizeOrZero(&stack_20);
+        PSVECCrossProduct(_240.toCVec(), stack_20.toCVec(), wingspanVec.toVec());
+        if(MR::normalizeOrZero(&wingspanVec)) {
+           wingspanVec = mMario->_310;
+        }
+        if(mMario->isSwimming()) {
+            setCollisionShadow(_214, wingspanVec, 25.0f, wingspanLen, 0.5f);
+        }
+        else {
+            setCollisionShadow(_214, wingspanVec, 0.8f, wingspanLen, 10.0f);
+        }
+        TVec3f stack_14;
+        if(mMario->isStatusActive(5)) {
+            getRealMtxfr(this, "Center", centerMtx);
+            MR::extractMtxTrans(centerMtx, &stack_14);
+        }
+        else {
+            getRealMtxfr(this, "All_root", rootMtx);
+            MR::extractMtxTrans(rootMtx, &stack_14);
+        }
+        _214->create(stack_14, _240, mMario->_208);
+    }
+    if(!_1C1) {
+        mMario->updateLookOfs();
+    }
+    updateHand();
+    updateFace();
+    calcScreenBoxRange();
+    if(_946 || _F20 || _F21 || getMovementStates()._2B) {
+        _94A = 0;
+    }
+    else {
+        _94A++;
+    }
+    if(mCurrModel != 0) {
+        PSMTXCopy(MR::getJointMtx(getJ3DModel(), "HandL0"), MR::getJointMtx(mModels[0], "HandL0"));
+        
+        PSMTXCopy(MR::getJointMtx(getJ3DModel(), "HandR0"), MR::getJointMtx(mModels[0], "HandR0"));
+
+        PSMTXCopy(MR::getJointMtx(getJ3DModel(), "FootL"), MR::getJointMtx(mModels[0], "FootL"));
+        
+        PSMTXCopy(MR::getJointMtx(getJ3DModel(), "FootR"), MR::getJointMtx(mModels[0], "FootR"));
+        
+        PSMTXCopy(MR::getJointMtx(getJ3DModel(), "Center"), MR::getJointMtx(mModels[0], "Center"));
+        
+        PSMTXCopy(MR::getJointMtx(getJ3DModel(), "All_Root"), MR::getJointMtx(mModels[0], "All_Root"));
+        
+        PSMTXCopy(MR::getJointMtx(getJ3DModel(), "Spine1"), MR::getJointMtx(mModels[0], "Spine1"));
+        
+        PSMTXCopy(MR::getJointMtx(getJ3DModel(), "Cﾈ"), MR::getJointMtx(mModels[0], "Cﾈ"));
+
+        PSMTXCopy(MR::getJointMtx(getJ3DModel(), "Face0"), MR::getJointMtx(mModels[0], "Face0"));
+
+        updateModelMtx(this, nullptr, nullptr);
+    }
+
+    updateRasterScroll();
+    
 }

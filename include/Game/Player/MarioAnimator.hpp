@@ -27,6 +27,9 @@ public:
     void changeDefaultUpper(const char *);
     void entryCallback(const char *);
 
+    void switchMirrorMode();
+    void calc();
+
     inline void f1(const char *name)
     {
         getPlayer()->startBas(nullptr, false, 0.0f, 0.0f);

@@ -53,6 +53,8 @@ public:
 
     virtual bool postureCtrl(MtxPtr);
 
+    void draw() const;
+
     void update();
     void setHeadAndFrontVecFromRotate(const TVec3f &);
     void initAfterConst();
@@ -107,6 +109,7 @@ public:
     void lockGroundCheck(void *, bool);
     void checkBaseTransBall();
     void changeStatus(MarioState *);
+    void updateLookOfs();
 
     struct MovementStates {
         unsigned _0 : 1;
