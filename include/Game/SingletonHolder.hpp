@@ -19,4 +19,4 @@ public:
 };
 
 template<typename T>
-T* SingletonHolder<T>::sInstance;
+extern T* SingletonHolder<T>::sInstance;
