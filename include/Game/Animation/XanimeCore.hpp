@@ -28,18 +28,14 @@ public:
     f32 _8;
     f32 _C;
     f32 _10;
-    f32 _14;
-    f32 _18;
-    f32 _1C;
+    TVec3f _14;
     f32 _20;
     f32 _24;
     f32 _28;
     f32 _2C;
     f32 _30;
     f32 _34;
-    f32 _38;
-    f32 _3C;
-    f32 _40;
+    TVec3f _38;
     f32 _44;
     f32 _48;
     f32 _4C;
@@ -52,7 +48,7 @@ public:
     f32 _60;
     u32 _64;
     u32 _68;
-    u32 _6C;
+    MtxPtr _6C;
 };
 
 class XjointInfo {
@@ -70,7 +66,7 @@ class XanimeTrack {
 public:
     void init();
 
-    u32 _0;
+    J3DAnmTransform *_0;
     f32 mWeight;    // _4
     f32 _8;
     u8 _C;

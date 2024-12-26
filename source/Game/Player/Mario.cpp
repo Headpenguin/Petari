@@ -360,12 +360,41 @@ void Mario::setFrontVecKeepUp(const TVec3f &v)
         }
     }
     MR::normalize(&stack_2C);
+
+    // Probably an inline function to set this (no one would write code like this)
     _310 = stack_2C;
     MR::normalize(&_310);
+
     TVec3f stack_14;
     PSVECCrossProduct(_310.toCVec(), _1F0.toCVec(), stack_14.toVec());
     setFrontVec(stack_14);
     _22C = _208;
     _328 = _208 % PSVECMag(_328.toCVec());
     _344 = _310;
+}
+
+void Mario::setFrontVec(const TVec3f &rVec) {
+    if(mMovementStates._37 && !isStatusActive(0x22)) {
+        TVec3f stack_2C;
+        if(getCamDirZ().dot(_6A0) > 0.0f) {
+            stack_2C = _6A0;
+        }
+        else {
+            stack_2C = -_6A0;
+        }
+        if(stack_2C.dot(rVec) > 0.0f) {
+            TVec3f stack_20;
+            f32 f = MR::vecKillElement(rVec, stack_2C, &stack_20);
+            stack_20 -= stack_2C % f;
+            MR::normalizeOrZero(&stack_20);
+            _208 = stack_20;
+        }
+        else {
+            _208 = rVec;
+        }
+    }
+    else {
+        _208 = rVec;
+    }
+    MR::normalize(&_208);
 }

@@ -130,7 +130,7 @@ fixFrontVecFromUpSide__5MarioFv,Mario.o,Player.a,false
 fixSideVecFromFrontUp__5MarioFv,Mario.o,Player.a,false
 setSideVec__5MarioFRCQ29JGeometry8TVec3<f>,Mario.o,Player.a,false
 setHeadVec__5MarioFRCQ29JGeometry8TVec3<f>,Mario.o,Player.a,false
-setFrontVec__5MarioFRCQ29JGeometry8TVec3<f>,Mario.o,Player.a,false
+setFrontVec__5MarioFRCQ29JGeometry8TVec3<f>,Mario.o,Player.a,true
 setFrontVecKeepUp__5MarioFRCQ29JGeometry8TVec3<f>f,Mario.o,Player.a,false
 setFrontVecKeepUpAngle__5MarioFRCQ29JGeometry8TVec3<f>f,Mario.o,Player.a,false
 setFrontVecKeepUp__5MarioFRCQ29JGeometry8TVec3<f>Ul,Mario.o,Player.a,false

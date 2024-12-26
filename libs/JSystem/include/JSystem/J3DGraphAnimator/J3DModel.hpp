@@ -30,7 +30,7 @@ public:
     u32 _C;
     void (*_10)(J3DModel*, u32);
     u32 _14;
-    TVec3f _18;
+    Vec _18;
     Mtx _24;
     Mtx _54;
     J3DMtxBuffer *_84;

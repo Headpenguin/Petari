@@ -21,7 +21,7 @@ public:
     inline void initModel() {
         _DD = 8;
         for(u32 i = 0; i < _DD; i++) {
-            _E0[i] = new (32) u8[0xC00]; // First field is a MtxPtr
+            _E0[i] = new (32) u8[0xC00]; // 64 matrices
         }
     }
 

@@ -4,6 +4,7 @@
 #include "JSystem/J3DGraphBase/J3DVertex.hpp"
 
 class J3DMtxBuffer;
+class J3DJoint;
 
 class J3DJointTree {
 public:
@@ -17,7 +18,7 @@ public:
     u32 _C;
     u32 _10;
     u32 _14;
-    u32 _18;
+    J3DJoint **mJointsByIdx; // _18
     u16 _1C;
     u16 _1E;
     u32 _20;

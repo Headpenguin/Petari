@@ -89,7 +89,7 @@ void J3DModelX::drawIn(J3DMaterial *material, bool a2, MtxPtr mtx, J3DModel *pMo
         }
         if(_1B8) {
             _1B4 = _1B8;
-            _1B8 = 0;
+            _1B8 = nullptr;
         }
     
         if(_1B4 && _1BC) {

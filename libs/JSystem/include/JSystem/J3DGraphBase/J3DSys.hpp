@@ -9,8 +9,8 @@ class J3DSys {
 public:
     Mtx mViewMtx;   // _0
     u32 _30;
-    u32 _34;
-    J3DModel* _38;
+    u32 mFlags; // _34
+    J3DModel *mCurrentModel; // _38
     J3DMatPacket* _3C;
     u32 _40;
     u32 _44;
@@ -24,4 +24,11 @@ public:
 
 u32 j3dDefaultViewNo; // dc38(r13)
 
-J3DSys j3dSys;
+
+/***
+ * URGENT: MUST REMOVE EXTERN BEFORE PUSHING
+ *
+ * (USED FOR MULTIPLAYER, NOT DECOMP)
+ *
+ * ***/
+extern J3DSys j3dSys;

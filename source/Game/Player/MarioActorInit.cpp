@@ -1,5 +1,5 @@
 #include "Game/Player/MarioActor.hpp"
-
+/*
 void MarioActor::initMember()
 {
     _8C = 0;
@@ -402,3 +402,4 @@ void MarioActor::initMember()
     _FCC = 0;
     _FCD = 0;
 }
+*/

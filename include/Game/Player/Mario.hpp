@@ -275,11 +275,11 @@ public:
     TVec3f _1B4;
     TVec3f _1C0;
     TVec3f _1CC;
-    TVec3f _1D8;
+    TVec3f _1D8; // "down" / gravity vec?
     TVec3f _1E4;
-    TVec3f _1F0;
+    TVec3f _1F0; // "up" vec?
     TVec3f _1FC;
-    TVec3f _208;
+    TVec3f _208; // the elusive "front vec"
     TVec3f _214;
     TVec3f _220;
     TVec3f _22C;
@@ -414,7 +414,7 @@ public:
     u16 _534;
     f32 _538;
     f32 _53C;
-    f32 _540;
+    f32 _540; // Rotation along y-axis in radians
     u16 _544;
     f32 _548;
     TVec3f _54C;

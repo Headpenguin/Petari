@@ -2,6 +2,9 @@
 
 #include "Game/Player/MarioModule.hpp"
 
+#define STATE_MARIO_SWIM 6
+#define STATE_MARIO_FP_VIEW 18
+
 class MarioState : public MarioModule {
 public:
     MarioState(MarioActor *, u32);
@@ -20,7 +23,7 @@ public:
     virtual f32 getBlurOffset() const;
     virtual void draw3D() const;
 
-    u32 _8;
-    u32 _C;
+    u32 _8; // MarioState *next; // _8
+    u32 _C; // u32 status; // _C
     u8 _10;
 };

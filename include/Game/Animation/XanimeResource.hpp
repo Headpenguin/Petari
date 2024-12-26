@@ -125,5 +125,9 @@ public:
 
     const XanimeGroupInfo *getGroupInfo(const char *) const;
 
-    u8 _0[0x78];
+    u8 _0;
+    u8 _1;
+    u8 _2[0x10 - 2];
+    XanimeGroupInfo* _10;
+    u8 _14[0x78 - 0x14];
 };

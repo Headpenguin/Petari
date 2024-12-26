@@ -265,7 +265,7 @@ public:
 
     u8 _8C;
     DLchanger *mDLchanger;    // _90
-    u32 _94[0x40];
+    u8 _94[0x40];
     u8 *mDL[2];     // _194
     u32 mDLSize;    // _19C
     u8 mCurrDL;     // _1A0
@@ -483,7 +483,8 @@ public:
     bool _9F0;
     bool mAlphaEnable;    // _9F1
     u16 _9F2;
-    TVec3f _9F4;
+    /* Updated at the end of calcAndSetBaseMtx, called within calcAnim */
+    TVec3f mGravityVectorEndCalcAnim; // _9F4
     ModelHolder *_A00; // initHopperMario
     u32 _A04;
     u8 _A08;

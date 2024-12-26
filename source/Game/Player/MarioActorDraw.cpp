@@ -8,7 +8,7 @@
 #include "Game/Player/ModelHolder.hpp"
 #include "Game/Player/TornadoMario.hpp"
 #include "Game/Util/FootPrint.hpp"
-
+/*
 void MarioActor::initDrawAndModel() {
     mShadowFunc = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawShadow), 0x29);
     mSilhouetteFunc = new DrawAdaptor(MR::Functor<MarioActor>(this, &MarioActor::drawSilhouette), 0x28);
@@ -190,3 +190,4 @@ void J3DModelX::setDynamicDL(u8 *a1, u32 a2) {
     _1B8 = a1;
     _1BC = a2;
 }
+*/
