@@ -684,13 +684,16 @@ void MarioActor::movement()
     _4A8 = 0;
     _4AC = 0.785398185253f;
     LiveActor::movement();
-    TVec3f stack_134(mPosition);
+    TVec3f stack_134(mPosition); // ds
     stack_134 -= _294;
-    TVec3f stack_128(stack_134);
+    TVec3f stack_128(stack_134); // ds not from velocity
     stack_128 -= mVelocity;
     _27C = stack_134;
     TVec3f stack_11C(_288);
     _288 = stack_128;
+    
+     // soften the current frame's position adjustments by half when they oppose the last frame's
+     // corrections and the two frames' corrections do not differ significantly in size
     if (MR::isOppositeDirection(_288, stack_11C, 0.01f)) {
         f32 mag_288 = PSVECMag(_288.toCVec());
         f32 magStack_11C = PSVECMag(stack_11C.toCVec());
@@ -698,6 +701,7 @@ void MarioActor::movement()
             mPosition -= _288 % 0.5f;
         }
     }
+    
     if (PSVECMag(stack_128.toCVec()) > 0.1f) {
         if (!(getMovementStates()._A)) {
             if (!MR::isNearZero(mVelocity, 0.001f)) {

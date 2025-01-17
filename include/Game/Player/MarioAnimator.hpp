@@ -53,7 +53,7 @@ public:
     f32 _58;
     f32 _5C;
     TVec3f _60;
-    bool _6C;
+    bool _6C; // mUpperActive
     f32 _70;
     u32 _74;
     u16 _78;

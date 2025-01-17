@@ -262,7 +262,7 @@ public:
     f32 _128;
     u32 _12C;
     TVec3f _130;
-    TVec3f _13C;
+    TVec3f _13C; // used in MarioAnimator::calc
     TVec3f _148;
     TVec3f _154;
     TVec3f _160;

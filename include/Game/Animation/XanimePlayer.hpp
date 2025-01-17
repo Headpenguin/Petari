@@ -7,7 +7,7 @@
 
 class XanimeResourceTable;
 
-class XanimeFrameCtrl : J3DFrameCtrl {
+class XanimeFrameCtrl : public J3DFrameCtrl {
 public:
     u32 _14;
 };
