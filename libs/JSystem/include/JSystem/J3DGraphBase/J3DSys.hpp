@@ -22,6 +22,6 @@ public:
     static Mtx mCurrentMtx;
 };
 
-static J3DSys j3dSys;
+extern J3DSys j3dSys;
 
 u32 j3dDefaultViewNo; // 0xdc38(r13)
