@@ -38,11 +38,11 @@ void MarioActor::drawMarioModel() const
     J3DModelX *model = mModels[mCurrModel];
 
     if (res) {
-        model->mFlags._10 = true;
+        model->mFlags |= 0x00008000;
     }
 
     if (!mFlags.mIsHiddenModel) {
-        model->mFlags._1C = false;
+        model->mFlags &= ~0x00000008; 
         if (mMario->isStatusActive(0x12)) {
 
             if (_1A1) {
@@ -70,7 +70,7 @@ void MarioActor::drawMarioModel() const
         }
         model->setDrawView(0);
         model->directDraw(nullptr);
-        model->mFlags.clear();
+        model->mFlags = 0;
     }
 
     if (mMario->isStatusActive(0x12)) {

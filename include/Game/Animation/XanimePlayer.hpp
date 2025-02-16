@@ -2,7 +2,8 @@
 
 #include "Game/Animation/XanimeCore.hpp"
 #include "Game/Animation/XanimeResource.hpp"
-#include "JSystem/J3DGraphAnimator/J3DModel.hpp"
+#include <JSystem/J3DGraphAnimator/J3DModel.hpp>
+#include <JSystem/J3DGraphAnimator/J3DAnimation.hpp>
 #include <revolution.h>
 
 class XanimeResourceTable;

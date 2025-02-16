@@ -3,6 +3,7 @@
 #include <revolution.h>
 #include "JSystem/J3DGraphBase/J3DVertex.hpp"
 #include "JSystem/J3DGraphBase/J3DMatPacket.hpp"
+#include "JSystem/JGeometry/TVec.hpp"
 
 class J3DModelData;
 class J3DMtxBuffer;

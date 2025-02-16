@@ -4,7 +4,7 @@
 
 // fuck this shit, sensorGroupSize is getting turned into a u32 becuase literally nothing else will match
 // whatever
-HitSensor::HitSensor(u32 type, u32 sensorGroupSize, f32 radius, LiveActor *pActor) {
+HitSensor::HitSensor(u32 type, u16 sensorGroupSize, f32 radius, LiveActor *pActor) {
     mSensorType = type;
     mPosition.x = 0.0f;
     mPosition.y = 0.0f;

@@ -38,40 +38,6 @@ public:
     void drawIn(J3DMaterial *, bool, MtxPtr, J3DModel *);
     void viewCalc3(u32, MtxPtr);
 
-    struct Flags {
-        inline void clear() { *(u32 *)this = 0; }
-
-        unsigned _0 : 1;
-        unsigned _1 : 1;
-        unsigned _2 : 1;
-        unsigned _3 : 1;
-        unsigned _4 : 1;
-        unsigned _5 : 1;
-        unsigned _6 : 1;
-        unsigned _7 : 1;
-        unsigned _8 : 1;
-        unsigned _9 : 1;
-        unsigned _A : 1;
-        unsigned _B : 1;
-        unsigned _C : 1;
-        unsigned _D : 1;
-        unsigned _E : 1;
-        unsigned _F : 1;
-        unsigned _10 : 1;
-        unsigned _11 : 1;
-        unsigned _12 : 1;
-        unsigned _13 : 1;
-        unsigned _14 : 1;
-        unsigned _15 : 1;
-        unsigned _16 : 1;
-        unsigned _17 : 1;
-        unsigned _18 : 1;
-        unsigned _19 : 1;
-        unsigned _1A : 1;
-        unsigned _1B : 1;
-        unsigned _1C : 1;
-    };
-
     u8 _DC;
     u8 _DD;
     void *_E0[8];
