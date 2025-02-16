@@ -7,6 +7,11 @@
 
 class XanimeResourceTable;
 
+class XanimeFrameCtrl : public J3DFrameCtrl {
+public:
+    u32 _14;
+};
+
 class XanimePlayer {
 public:
     XanimePlayer(J3DModel *, XanimeResourceTable *, XanimePlayer *);
@@ -37,19 +42,29 @@ public:
 
     void changeCurrentAnimation(const XanimeGroupInfo *);
 
+    void calcAnm(u16);
+    void clearAnm(u16);
+    void overWriteMtxCalc(u16);
+    void clearMtxCalc(u16);
+
     inline XanimeCore *getCore() { return mCore; }
 
     J3DModel *mModel;            // 0x0
     J3DModelData *mModelData;    // 0x4
-    u8 _8[0x5C - 8];
+    u8 _8[0x20 - 8];
+    XanimeFrameCtrl *_20; // probably a pointer to the active frame ctrl
+    XanimeFrameCtrl _24[2];
+    u8 _54[0x5C - 0x54];
     const XanimeGroupInfo *mDefaultAnimation;    // 0x5C
     const XanimeGroupInfo *mCurrentAnimation;    // 0x60
     const XanimeGroupInfo *mPrevAnimation;       // 0x64
     const XanimeGroupInfo *_68;
     XanimeCore *mCore;                      // 0x6C
     XanimeResourceTable *mResourceTable;    // 0x70
-    u8 _74[0x8];
+    u8 _74[0x4];
+    s32 _78;
     bool _7C;
     bool _7D;
-    u8 _7E[0x8C - 0x7E];
+    bool _7E;
+    u8 _7F[0x8C - 0x7F];
 };

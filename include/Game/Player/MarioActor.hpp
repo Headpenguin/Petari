@@ -2,6 +2,7 @@
 
 #include "Game/LiveActor/LiveActor.hpp"
 #include "Game/Player/Mario.hpp"
+#include "Game/Player/DrawAdaptor.hpp"
 
 class FootPrint;
 class JAIAudible;
@@ -23,7 +24,7 @@ namespace MR {
     unsigned int getFrameBufferWidth();
 }
 
-bool gIsLuigi;    // (cc68 - 10000)(r13)
+extern bool gIsLuigi;    // (cc68 - 10000)(r13)
 
 class MarioActor : public LiveActor {
 public:
@@ -81,7 +82,7 @@ public:
     bool doStun();
     void scaleMtx(MtxPtr);
     void updateBaseScaleMtx();
-    void getRealMtx(f32 (*)[4], const char *);
+    void getRealMtx(f32 (*)[4], const char *) const;
     void getGlobalJointMtx(const char *);
     void calcAnimInMovement();
     void forceSetBaseMtx(f32 (*)[4]);
@@ -90,6 +91,7 @@ public:
     void setBlendMtxTimer(unsigned short);
     void getGroundPos(TVec3f *dst) const;
     void getShadowPos() const;
+    void trampleJump(f32, f32);
 
     bool isTurning() const;
     bool isJumping() const;
@@ -135,15 +137,61 @@ public:
     void init2D();
 
     void initDrawAndModel();
+
+    void initBlur();
+    void initShadow();
+    
+    void initHand();
+    void initFace();
+
+    void swapTextureInit();
+
+    void createRainbowDL();
+
+    void initScreenBox();
+
+    void initFireBall();
+    void initBeeMario();
+    void initIceMario();
+    void initInvincibleMario();
+    void initHopperMario();
+    void initTeresaMario();
+    void initBoneMario();
+    void initTornadoMario();
+    
     bool isAllHidden() const;
 
+    void draw() const;
+
     void drawMarioModel() const;
+
+    void drawShadow() const;
+    void drawSilhouette() const;
+    void drawPreWipe() const;
+    void drawScreenBlend() const;
+    void drawIndirect() const;
 
     // Called by drawMarioModel
     void drawSpinInhibit() const;
     void drawSphereMask() const;
     bool drawDarkMask() const;
     void drawHand() const;
+
+    void drawWallShade(const TVec3f &, const TVec3f &, f32) const;
+
+    void updateRandomTexture(f32);
+
+    void updateHand();
+    void updateFace();
+
+    void changeDisplayMode(u8);
+    void changeHandMaterial();
+
+    void calcScreenBoxRange();
+
+    void updateRasterScroll();
+
+    J3DModel* getJ3DModel() const;
 
     void resetPadSwing();
     void initActionMatrix();
@@ -200,6 +248,9 @@ public:
     void resetSensorCount();
     void getStickValue(f32 *, f32 *);
     const HitSensor &getCarrySensor() const;
+
+    void tryAttackMsg(u32, const HitSensor *, bool *);
+    bool tryVectorAttackMsg(u32, const TVec3f &);
 
     const MarioConst &getConst() const { return *mConst; }
 
@@ -261,12 +312,12 @@ public:
     u8 _211;
     // padding
     CollisionShadow *_214;
-    u32 _218;
-    u32 _21C;
-    u32 _220;
+    DrawAdaptor *mShadowFunc; // 0x218
+    DrawAdaptor *mSilhouetteFunc; // 0x21C
+    DrawAdaptor *mPreWipeFunc; // 0x220
     u32 _224;
-    u32 _228;
-    u32 _22C;
+    DrawAdaptor *mScreenBlendFunc; // 0x228
+    DrawAdaptor *mIndirectFunc; // 0x22C
     Mario *mMario;                // 0x230
     MarioAnimator *mMarioAnim;    // 0x234
     MarioEffect *mMarioEffect;    // 0x238
@@ -352,14 +403,17 @@ public:
     u32 _424;
     u32 _428[4];
     u8 _438[0x30];
-    TVec3f _468f;
+    union {
+        JGeometry::TVec3<long> _468;
+        TVec3f _468f;
+    };
     u32 _474;
     f32 _478;
     u32 _47C;
     u8 _480;
     u8 _481;
     bool _482;
-    u8 _483;
+    bool _483;
     TVec3f _484;
     f32 _490;
     u32 _494;
@@ -420,21 +474,21 @@ public:
     u16 _9B4;
     u32 _9B8;
     u32 _9BC;
-    u32 _9C0;
+    ModelHolder *_9C0; // initIceMario
     u32 _9C4;
-    u32 _9C8;
+    ModelHolder *_9C8; // see initInvicibleMario for more info
     f32 _9CC;
     f32 _9D0;
     u32 _9D4;
     TVec3f _9D8;
-    u32 _9E4;
+    ModelHolder *_9E4; // see initBeeMario for more info
     u32 _9E8;
     u32 _9EC;
     bool _9F0;
     bool mAlphaEnable;    // 0x9F1
     u16 _9F2;
     TVec3f _9F4;
-    u32 _A00;
+    ModelHolder *_A00; // initHopperMario
     u32 _A04;
     u8 _A08;
     u8 _A09;
@@ -448,12 +502,12 @@ public:
     u8 _A25;
     // padding
     J3DModelX *mModels[6];    // 0xA28
-    u32 _A40;
-    u32 _A44;
+    ModelHolder *_A40; // initHand
+    ModelHolder *_A44; // initHand
     u32 _A48;
     u32 _A4C;
-    u32 _A50;
-    u32 _A54;
+    ModelHolder *_A50; // initHand
+    ModelHolder *_A54; // initHand
     u8 _A58;
     u8 _A59;
     u8 _A5A;
@@ -466,7 +520,7 @@ public:
     u32 _A64;
     f32 _A68;
     u16 _A6C;
-    bool _A6E;
+    u8 _A6E;
     // padding
     u32 _A70[8];
     u32 _A90[8];
@@ -504,9 +558,8 @@ public:
     u16 _B74;
     // padding
     u32 _B78;
-    u32 _B7C;
-    u32 _B80;
-    u32 _B84;
+    JUTTexture *_B7C;
+    JUTTexture *_B80[2];
     u16 _B88;
     MarioNullBck *mNullAnimation;    // 0xB8C
     bool _B90;
