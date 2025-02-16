@@ -18,7 +18,7 @@ public:
     u32 _C;
     u32 _10;
     u32 _14;
-    J3DJoint *mJointsByIdx; // 0x18
+    J3DJoint **mJointsByIdx; // 0x18
     u16 _1C;
     u16 _1E;
     u32 _20;
