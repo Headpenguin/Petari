@@ -9,7 +9,7 @@ class CameraTargetArg;
 class NameObj;
 
 namespace MR {
-    TVec3f getCamPos();
+    const TVec3f getCamPos();
 
     f32 calcCameraDistanceZ(const TVec3f &);
 
@@ -63,6 +63,9 @@ namespace MR {
     bool calcScreenPosition(TVec3f *, const TVec3f &);
 
     void declareEventCameraAnim(const ActorCameraInfo *, const char *, void *);
+
+    void pauseOnAnimCamera(const ActorCameraInfo *, const char *);
+    void pauseOffAnimCamera(const ActorCameraInfo *, const char *);
 
     bool createActorCameraInfoIfExist(const JMapInfoIter &, ActorCameraInfo **);
     void endActorCamera(const LiveActor *, const ActorCameraInfo *, bool, s32);

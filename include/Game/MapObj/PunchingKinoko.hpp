@@ -25,7 +25,6 @@ public:
     void initSensor();
     void initCamera(const JMapInfoIter &);
     void initJointControl();
-    void initNerve(const Nerve *);
 
     bool requestPunch(HitSensor *, HitSensor *);
     bool requestEnemyBlow(HitSensor *, HitSensor *);
@@ -55,15 +54,15 @@ public:
     void addVelocityKeepHeight();
 
 private:
-    GroundChecker *mGroundChecker; // _8C
-    AnimScaleController *mScaleController; // _90
-    JointControlDelegator<PunchingKinoko> *mDelegator; // _94
+    GroundChecker *mGroundChecker; // 0x8C
+    AnimScaleController *mScaleController; // 0x90
+    JointControlDelegator<PunchingKinoko> *mDelegator; // 0x94
     s32 _98;
     TVec3f _9C;
     TVec3f _A8;
-    s32 mStarPointerHitCoolDown; // _B4
+    s32 mStarPointerHitCoolDown; // 0xB4
     bool _B8;
-    s32 mInvincibleHitCoolDown; // _BC
+    s32 mInvincibleHitCoolDown; // 0xBC
 };
 
 namespace NrvPunchingKinoko {

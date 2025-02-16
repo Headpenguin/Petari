@@ -3,6 +3,7 @@
 #include "Game/Animation/XanimeCore.hpp"
 #include "Game/Animation/XanimeResource.hpp"
 #include "JSystem/J3DGraphAnimator/J3DModel.hpp"
+#include "JSystem/J3DGraphAnimator/J3DAnimation.hpp"
 #include <revolution.h>
 
 class XanimeResourceTable;
@@ -47,18 +48,18 @@ public:
 
     inline XanimeCore *getCore() { return mCore; }
 
-    J3DModel *mModel;            // _0
-    J3DModelData *mModelData;    // _4
+    J3DModel *mModel;            // 0
+    J3DModelData *mModelData;    // 0x4
     u8 _8[0x20 - 8];
     XanimeFrameCtrl *_20; // probably a pointer to the active frame ctrl
     XanimeFrameCtrl _24[2];
     u8 _54[0x5C - 0x54];
-    const XanimeGroupInfo *mDefaultAnimation;    // _5C
-    const XanimeGroupInfo *mCurrentAnimation;    // _60
-    const XanimeGroupInfo *mPrevAnimation;       // _64
+    const XanimeGroupInfo *mDefaultAnimation;    // 0x5C
+    const XanimeGroupInfo *mCurrentAnimation;    // 0x60
+    const XanimeGroupInfo *mPrevAnimation;       // 0x64
     const XanimeGroupInfo *_68;
-    XanimeCore *mCore;                      // _6C
-    XanimeResourceTable *mResourceTable;    // _70
+    XanimeCore *mCore;                      // 0x6C
+    XanimeResourceTable *mResourceTable;    // 0x70
     u8 _74[0x4];
     s32 _78;
     bool _7C;

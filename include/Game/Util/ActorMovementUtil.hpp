@@ -51,6 +51,10 @@ namespace MR {
     bool isInWater(const LiveActor *, const TVec3f &);
     bool isInDeath(const LiveActor *, const TVec3f &);
 
+    void addVelocityAwayFromTarget(LiveActor *, const TVec3f &, f32, f32, f32, f32);
+
+    void turnDirectionToPlayerDegree(const LiveActor *, TVec3f *, f32);
+
     void makeMtxTR(MtxPtr, const LiveActor *);
     void makeMtxTRS(MtxPtr, const LiveActor *);
     void makeMtxTransRotateY(MtxPtr, const LiveActor *);
@@ -65,6 +69,8 @@ namespace MR {
 
     void calcActorAxisY(TVec3f *, const LiveActor *);
 
+    void addVelocitySeparateHV(LiveActor *, const TVec3f &, f32, f32);
+
     void attenuateVelocity(LiveActor *, f32);
 
     void killVelocityToTarget(LiveActor *, const TVec3f &);
@@ -77,6 +83,7 @@ namespace MR {
 
     void calcMtxFromGravityAndZAxis(TPos3f *, const LiveActor *, const TVec3f &, const TVec3f &);
 
+    void setVelocityJump(LiveActor *, f32);
     void addVelocityToGravity(LiveActor *, f32);
 
     void addVelocityKeepHeight(LiveActor *, const TVec3f &, f32, f32, f32);
@@ -92,4 +99,15 @@ namespace MR {
     void turnDirectionToTargetUseGroundNormalDegree(const LiveActor *, TVec3f *, const TVec3f &, f32);
 
     void turnDirectionToTargetDegree(const LiveActor *, TVec3f *, const TVec3f &, f32);
+
+    void addVelocityMoveToTarget(LiveActor *, const TVec3f &, f32, f32, f32, f32);
+
+    void addVelocityKeepHeight(LiveActor *, const TVec3f &, f32, f32, f32);
+    void addVelocityKeepHeightUseShadow(LiveActor *, f32, f32, f32, const char *);
+
+    void turnDirectionToTarget(const LiveActor *, TVec3f *, const TVec3f &, f32);
+
+    void makeQuatAndFrontFromRotate(TQuat4f *, TVec3f *, const LiveActor *);
+
+    void moveAndTurnToPlayer(LiveActor *, TVec3f *, f32, f32, f32, f32);
 };

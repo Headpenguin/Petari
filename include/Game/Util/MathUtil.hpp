@@ -4,13 +4,7 @@
 #include <revolution.h>
 #include "JSystem/JGeometry.hpp"
 
-static f32 minDegree = 0.0f;
-static f32 maxDegree = 360.0f;
-
-static f32 flt_8060FC80[1816];
-
 namespace MR {
-    
     void initAcosTable();
 
     template<typename T>
@@ -41,13 +35,31 @@ namespace MR {
     void makeAxisFrontSide(TVec3f *, TVec3f *, const TVec3f &, const TVec3f &);
     void makeAxisUpFront(TVec3f *, TVec3f *, const TVec3f &, const TVec3f &);
     void makeAxisUpSide(TVec3f *, TVec3f *, const TVec3f &, const TVec3f &);
+
+    /* 
+     * Generate an orthogonal vector to the second argument, starting by projecting the z-vector
+     * into the plane orthogonal to the second argument. If the z-vector is parallel to the second
+     * argument, the x-vector is instead projected into the orthognal plane. Regardless, the
+     * normalized result is placed into the first argument.
+     */
     void makeAxisVerticalZX(TVec3f *, const TVec3f &);
+
     void makeAxisCrossPlane(TVec3f *, TVec3f *, const TVec3f &);
     bool makeAxisAndCosignVecToVec(TVec3f *, f32 *, const TVec3f &, const TVec3f &);
-    f32 calcPerpendicFootToLine(TVec3f *, const TVec3f &, const TVec3f &, const TVec3f &);
-    f32 calcPerpendicFootToLineInside(TVec3f *, const TVec3f &, const TVec3f &, const TVec3f &);
+
+    /*
+     * Projects rPoint onto the directed line defined by rTip and rTail and places the result into pOut
+     */
+    f32 calcPerpendicFootToLine(TVec3f *pOut, const TVec3f &rPoint, const TVec3f &rTip, const TVec3f &rTail);
+    
+    /*
+     * Same as above, except the result of the projection is clamped between rTip and rTail
+     */
+    f32 calcPerpendicFootToLineInside(TVec3f *pOut, const TVec3f &rPoint, const TVec3f &rTip, const TVec3f &rTail);
 
     void blendQuatUpFront(TQuat4f *, const TVec3f &, const TVec3f &, float, float);
+
+    void rotateQuatRollBall(TQuat4f *, const TVec3f &, const TVec3f &, f32);
 
     void clampLength(TVec3f *, const TVec3f &, f32);
     f32 convergeRadian(f32, f32, f32);
@@ -137,9 +149,7 @@ namespace MR {
     f32 sinDegree(f32);
 
     // this must not be declared as inline. some callers inline it and some do not
-    static f32 max(f32 x, f32 y) {
-        return x >= y ? x : y;
-    }
+    inline f32 max(f32 x, f32 y);
 
     /* there's a couple of issues with stack ordering when it comes to vectors being created and scaled
      * this function automates this and resolves most issues
@@ -227,9 +237,23 @@ namespace MR {
         return hurr;
     }
 
+    inline TVec3f subVec(const TVec3f& rSrc, const TVec3f& rBase) {
+        TVec3f hurr(rBase);
+        JMathInlineVEC::PSVECSubtract(hurr.toCVec(), rSrc.toCVec(), hurr.toVec());
+        return hurr;
+    }
+
     inline f32 subtractFromSum(f32 lhs, f32 rhs, f32 sub) {
         return (rhs + lhs) - sub;
     }
+
+    inline f32 subtractFromSum_2(f32 lhs, f32 rhs, f32 sub) {
+        return (180.0f + (rhs + lhs)) - sub;
+    }    
+
+    inline f32 subtractFromSum_3(f32 a1, f32 a2) {
+        return a1 - a2;
+    }        
 
     inline f32 divideFromDiff(f32 lhs, f32 rhs, f32 div) {
         return (lhs - rhs) / div;
@@ -265,17 +289,17 @@ namespace MR {
         return val % mod;
     }
 
-    inline f32 repeat(f32 a1, f32 a2, f32 a3) {
+    f32 repeat(f32 a1, f32 a2, f32 a3); /*{
         f64 mod = fmod(a3 + (a1 - a2), a3);
         return mod + a2;
-    }
+    }*/
 
     inline void subtractAndSet(TVec3f &a1, const TVec3f &a2, const TVec3f *a3) {
         a1.set(a2 - *a3);
     }
 
     inline void multAndSet(TVec3f *a1, const TVec3f &a2, f32 a3) {
-        a1->set<f32>(a2 * a3);
+        a1->set(a2 * a3);
     }
 
     inline int getRemainder(int ra, int rb) {
@@ -287,6 +311,18 @@ namespace MR {
 
     inline f32 getZero() {
         return 0.0f;
+    }
+
+    inline bool isLessThan(f32 lhs, f32 rhs) {
+        if (lhs < rhs) {
+            return true;
+        }
+        
+        return false;
+    }
+
+    inline f64 normalizePhase(f32 value, f32 initial, f32 offset, f32 modulus) {
+        return (initial + fmod((offset + (value - initial)), modulus));
     }
 
     f32 cos(f32);

@@ -3,9 +3,9 @@
 #include <revolution.h>
 
 namespace MR {
-    bool isOnGameEventFlagRosettaTalkAboutTicoInTower();
-
     bool isPowerStarGetDemoWithLuigiCurrentGalaxyAndScenario(s32);
+
+    bool isOnGameEventFlagViewCompleteEndingMarioAndLuigi();
 
     bool isOnGameEventFlagChildsRoom();
     bool isOnGameEventFlagLibraryRoom();
@@ -25,10 +25,13 @@ namespace MR {
     bool isKinopioExplorerTalkGetGrandStar2();
     bool isUFOKinokoBeforeConstruction();
 
+    bool isOnGameEventFlagUseAstroDome();
     bool isOnGameEventFlagGreenDriver();
 
     bool hasGrandStar(int);
 
+    bool isGalaxyAppearGreenDriver(const char *);
+    void onGameEventFlagGalaxyOpen(const char *);
     bool hasPowerStarInCurrentStage(s32);
 
     bool hasPowerStarAtResultSequence();
@@ -85,4 +88,5 @@ namespace MR {
     s32 getPowerStarLeftToDisplayCountDownPlate();
 
     bool isOnGameEventFlagViewNormalEnding();
+    bool isButlerMapAppear();
 };

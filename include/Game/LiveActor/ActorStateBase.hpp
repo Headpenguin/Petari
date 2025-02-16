@@ -13,13 +13,25 @@ public:
 
     }
 
-    virtual void init();
-    virtual void appear();
-    virtual void kill();
-    virtual bool update();
-    virtual void control();
+    virtual void init() {
+        return;
+    }
 
-    u8 mIsDead; // _8
+    virtual void appear() {
+        mIsDead = 0;
+    }
+
+    virtual void kill() {
+        mIsDead = 1;
+    }
+
+    virtual bool update();
+
+    virtual void control() {
+        return;
+    }
+
+    u8 mIsDead; // 0x8
 };
 
 template<typename T>

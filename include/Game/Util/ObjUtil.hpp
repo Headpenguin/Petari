@@ -7,6 +7,7 @@ class NameObj;
 class LayoutActor;
 class LiveActor;
 class JMapInfo;
+class JMapInfoIter;
 class ResourceHolder;
 class StageSwitchCtrl;
 
@@ -90,9 +91,9 @@ namespace MR {
     void requestMovementOn(NameObj *);
     void requestMovementOff(NameObj *);
     
-    const JMapInfo* createCsvParser(const char *, const char *, ...);
-    const JMapInfo* tryCreateCsvParser(const ResourceHolder *, const char *, ...);
-    const JMapInfo* tryCreateCsvParser(const LiveActor *, const char *, ...);
+    JMapInfo* createCsvParser(const char *, const char *, ...);
+    JMapInfo* tryCreateCsvParser(const ResourceHolder *, const char *, ...);
+    JMapInfo* tryCreateCsvParser(const LiveActor *, const char *, ...);
     s32 getCsvDataElementNum(const JMapInfo *);
 
     void getCsvDataStr(const char **, const JMapInfo *, const char *, s32) NO_INLINE;

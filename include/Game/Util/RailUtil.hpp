@@ -58,22 +58,24 @@ namespace MR {
 
     bool isExistRail(const LiveActor *);
 
-    void moveRailRider(const LiveActor *);
+    void moveRailRider(LiveActor *);
 
-    void moveCoordToEndPos(const LiveActor *);
+    void moveCoordToEndPos(LiveActor *);
 
-    void slowDownRailCoordSpeed(const LiveActor *, f32);
+    void slowDownRailCoordSpeed(LiveActor *, f32);
 
     bool isRailGoingToEnd(const LiveActor *);
 
     f32 getRailCoordSpeed(const LiveActor *);
 
-    void setRailDirectionToEnd(const LiveActor *);
+    void setRailDirectionToEnd(LiveActor *);
 
     bool isLoopRail(const LiveActor *);
 
     bool getCurrentRailPointArg0WithInit(const LiveActor *, s32 *);
     bool getCurrentRailPointArg1WithInit(const LiveActor *, s32 *);
+    bool getCurrentRailPointArg0NoInit(const LiveActor *, s32 *);
+    bool getCurrentRailPointArg1NoInit(const LiveActor *, s32 *);
 
     const TVec3f& getRailPointPosEnd(const LiveActor *);
     void calcRailEndPointPos(TVec3f *, const LiveActor *);

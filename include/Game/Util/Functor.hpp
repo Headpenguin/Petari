@@ -123,6 +123,6 @@ namespace MR {
         virtual void operator()() const;
         virtual FunctorBase* clone(JKRHeap *) const;
 
-        void* mFunc;    // _4
+        void* mFunc;    // 0x4
     };
 };

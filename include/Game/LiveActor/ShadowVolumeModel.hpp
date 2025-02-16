@@ -8,10 +8,10 @@ class ShadowVolumeModel : public ShadowVolumeDrawer {
 public:
     ShadowVolumeModel(const char *);
 
-    virtual ~ShadowVolumeModel();
+    inline virtual ~ShadowVolumeModel();
     virtual void drawShape() const;
 
     void initVolumeModel(const char *);
 
-    J3DModelData* mModelData;   // _1C
+    J3DModelData* mModelData;   // 0x1C
 };

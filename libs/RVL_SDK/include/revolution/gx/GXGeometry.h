@@ -23,7 +23,7 @@ void GXSetNumTexGens(u8);
 
 
 static inline void GXEnd(void) {
-    
+
 }
 
 void __GXSetSUTexRegs(void);

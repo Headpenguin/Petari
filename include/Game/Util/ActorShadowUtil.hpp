@@ -48,6 +48,8 @@ namespace MR {
     void invalidateShadow(LiveActor *, const char *);
     void invalidateShadowAll(LiveActor *);
 
+    void validateShadowAll(LiveActor *);
+
     void initShadowFromCSV(LiveActor *, const char *);
 
     void initShadowSurfaceCircle(LiveActor *, f32);
@@ -65,4 +67,8 @@ namespace MR {
     bool isShadowProjected(const LiveActor *, const char *);
     void getShadowProjectionPos(const LiveActor *, const char *, TVec3f *);
     void getShadowProjectionNormal(const LiveActor *, const char *, TVec3f *);
+
+    void setShadowVolumeSphereRadius(LiveActor *, const char *, f32);
+
+    f32 getShadowNearProjectionLength(const LiveActor *);
 };

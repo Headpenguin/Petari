@@ -25,18 +25,20 @@ public:
     void calcBumpMtx();
     void entryModelData(J3DModelData *, u32, u32);
 
-    J3DModelData* mModelData;       // _4
+    J3DModelData* mModelData;       // 0x4
     u32 _8;
     u32 _C;
     void (*_10)(J3DModel*, u32);
     u32 _14;
-    Vec _18;
+    f32 _18;
+    f32 _1C;
+    f32 _20;
     Mtx _24;
     Mtx _54;
     J3DMtxBuffer *_84;
-    J3DVertexBuffer mVertexBuffer;  // _88
-    J3DMatPacket* mMaterialPacket;  // _C0
-    J3DShapePacket* mShapePacket;   // _C4
+    J3DVertexBuffer mVertexBuffer;  // 0x88
+    J3DMatPacket* mMaterialPacket;  // 0xC0
+    J3DShapePacket* mShapePacket;   // 0xC4
     u32 _C8;
     u32 _CC;
     u32 _D0;

@@ -4,18 +4,27 @@
 
 namespace JGeometry {
     template<typename T>
-    struct TQuat4 {
+    struct TQuat4 : public TVec3<T> {
     public:
         /* Constructors */
         inline TQuat4() {}
 
-        template<typename T>
-        TQuat4(T _x, T _y, T _z, T _w) {
-            x = _x;
-            y = _y;
-            z = _z;
-            w = _w;
+        inline TQuat4(T xyz, T _w) {
+            this->x = xyz;
+            this->y = xyz;
+            this->z = xyz;
+            this->w = _w;
         }
+
+        template<typename A>
+        TQuat4(A _x, A _y, A _z, A _w) {
+            this->x = _x;
+            this->y = _y;
+            this->z = _z;
+            this->w = _w;
+        }
+
+        void set(T, T, T, T);
 
         /* General operations */
         void normalize();
@@ -42,7 +51,7 @@ namespace JGeometry {
         /* Operators */
         TQuat4<T>& operator=(const TQuat4<T> &rSrc);
 
-        T x, y, z, w;
+        T w;
     };
 };
 

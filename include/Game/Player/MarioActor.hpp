@@ -246,6 +246,7 @@ public:
     void setBlink(const char *);
     void resetSensorCount();
     void getStickValue(f32 *, f32 *);
+    void trampleJump(f32, f32);
     const HitSensor &getCarrySensor() const;
 
     const MarioConst &getConst() const { return *mConst; }
@@ -264,11 +265,11 @@ public:
     };
 
     u8 _8C;
-    DLchanger *mDLchanger;    // _90
-    u8 _94[0x40];
-    u8 *mDL[2];     // _194
-    u32 mDLSize;    // _19C
-    u8 mCurrDL;     // _1A0
+    DLchanger *mDLchanger;    // 0x90
+    u32 _94[0x40];
+    u8 *mDL[2];     // 0x194
+    u32 mDLSize;    // 0x19C
+    u8 mCurrDL;     // 0x1A0
     u8 _1A1;
     f32 _1A4;
     u16 _1A8;
@@ -312,12 +313,12 @@ public:
     DrawAdaptor *mSilhouetteFunc; // _21C
     DrawAdaptor *mPreWipeFunc; // _220
     u32 _224;
-    DrawAdaptor *mScreenBlendFunc; // _228
-    DrawAdaptor *mIndirectFunc; // _22C
-    Mario *mMario;                // _230
-    MarioAnimator *mMarioAnim;    // _234
-    MarioEffect *mMarioEffect;    // _238
-    MarioConst *mConst;           // _23C
+    DrawAdaptor *mScreenBlendFunc; // 0x228
+    DrawAdaptor *mIndirectFunc; // 0x22C
+    Mario *mMario;                // 0x230
+    MarioAnimator *mMarioAnim;    // 0x234
+    MarioEffect *mMarioEffect;    // 0x238
+    MarioConst *mConst;           // 0x23C
     TVec3f _240;
     TVec3f _24C;
     TVec3f _258;
@@ -355,7 +356,7 @@ public:
     u16 _378;
     // padding
     u32 _37C;
-    u32 mHealth;    // _380
+    u32 mHealth;    // 0x380
     u32 _384;
     u32 _388;
     u16 _38C;
@@ -386,21 +387,26 @@ public:
     u16 _3DC;
     u8 _3DE;
     u8 _3DF;
-    u32 mMaxHealth;    // _3E0
+    u32 mMaxHealth;    // 0x3E0
     bool _3E4;
     bool _3E5;
-    bool _3E6;
+    bool _3E6; // if false, isInPunchTimerRange fails
     bool _3E7;
     bool _3E8;
     // padding
     TMtx34f _3EC;
     u32 _41C;
     u32 _420;
-    u32 _424;
-    u32 _428[4];
-    u8 _438[0x30];
+    HitSensor* _424; // set to 0 in memorizeSensorThrow
+    HitSensor* _428[4]; // updated by memorizeSensorThrow
+    TVec3f _438[4]; // updated by memorizeSensorThrow
     union {
-        JGeometry::TVec3<long> _468;
+        JGeometry::TVec3<long> _468; // _468.x is an idx into _428 and _438
+        struct {
+            u32 mTaskIdx; // 0x468
+            HitSensor *taskDataUnk1; // 0x46C
+            HitSensor *taskDataUnk2; // 0x470
+        };
         TVec3f _468f;
     };
     u32 _474;
@@ -411,8 +417,8 @@ public:
     bool _482;
     bool _483;
     TVec3f _484;
-    f32 _490;
-    u32 _494;
+    f32 _490; // set to 0x1E by memorizeSensorThrow
+    FixedPosition *_494;
     FixedPosition *_498;
     FixedPosition *_49C;
     u32 _4A0;
@@ -439,11 +445,11 @@ public:
     u32 _928;
     u32 _92C;
     u32 _930;
-    bool _934;
+    bool _934; // related to enemyAttack
     bool _935;
     TVec3f _938;
     u8 _944;
-    u8 _945;
+    u8 _945; // punchTimer or related
     u16 _946;
     u16 _948;
     u16 _94A;
@@ -457,7 +463,7 @@ public:
     f32 _984;
     u8 _988;
     u8 _989;
-    TornadoMario *mTornadoMario;    // _98C
+    TornadoMario *mTornadoMario;    // 0x98C
     u8 _990;
     u32 _994;
     u32 _998;
@@ -481,15 +487,15 @@ public:
     u32 _9E8;
     u32 _9EC;
     bool _9F0;
-    bool mAlphaEnable;    // _9F1
+    bool mAlphaEnable;    // 0x9F1
     u16 _9F2;
     /* Updated at the end of calcAndSetBaseMtx, called within calcAnim */
-    TVec3f mGravityVectorEndCalcAnim; // _9F4
+    TVec3f _9F4;
     ModelHolder *_A00; // initHopperMario
     u32 _A04;
     u8 _A08;
     u8 _A09;
-    u8 mCurrModel;    // _A0A
+    u8 mCurrModel;    // 0xA0A
     u8 _A0B;
     u8 _A0C;
     u32 _A10;
@@ -498,7 +504,7 @@ public:
     u8 _A24;
     u8 _A25;
     // padding
-    J3DModelX *mModels[6];    // _A28
+    J3DModelX *mModels[6];    // 0xA28
     ModelHolder *_A40; // initHand
     ModelHolder *_A44; // initHand
     u32 _A48;
@@ -558,7 +564,7 @@ public:
     JUTTexture *_B7C;
     JUTTexture *_B80[2];
     u16 _B88;
-    MarioNullBck *mNullAnimation;    // _B8C
+    MarioNullBck *mNullAnimation;    // 0xB8C
     bool _B90;
     bool _B91;
     s8 _B92;
@@ -590,7 +596,7 @@ public:
     TMtx34f _DAC;
     TMtx34f _DDC;
     TMtx34f _E0C;
-    TMtx34f _E3C;
+    TMtx34f _E3C; // Used in updateTakingPosition
     TMtx34f _E6C;
     u16 _E9C;
     f32 _EA0;
@@ -600,9 +606,9 @@ public:
     TMtx34f _EA8;
     TVec3f _ED8;
     u32 _EE4;
-    bool mSuperKinokoCollected;    // _EE8
-    bool mPowerupCollected;        // _EE9
-    bool mTransforming;            // _EEA
+    bool mSuperKinokoCollected;    // 0xEE8
+    bool mPowerupCollected;        // 0xEE9
+    bool mTransforming;            // 0xEEA
     bool _EEB;
     bool _EEC;
     bool _EED;
@@ -611,7 +617,7 @@ public:
     u16 _EF0;
     u16 _EF2;
     u16 _EF4;
-    u16 _EF6;
+    u16 _EF6; // set to 0x1E by memorizeSensorThrow
     u32 _EF8;
     u32 _EFC;
     u8 _F00;

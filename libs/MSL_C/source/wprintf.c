@@ -24,6 +24,12 @@ typedef long long intmax_t;
 #define PTRDIFF __typeof__((char*)0-(char*)0)
 typedef PTRDIFF ptrdiff_t;
 
+wchar_t* wcscpy(wchar_t *pDest, const wchar_t *pSrc);
+size_t strlen(const char *pStr);
+void* memchr(const void *, int, size_t);
+int mbtowc(wchar_t *pDest, const char *s, size_t num);
+int vswprintf(wchar_t *s, size_t n, const wchar_t *format, va_list arg);
+
 enum justification_options {
 	left_justification,
 	right_justification,
@@ -50,14 +56,14 @@ enum argument_options {
 };
 
 typedef struct {
-	unsigned char	justification_options;		// _0
-	unsigned char 	sign_options;				// _1
-	unsigned char 	precision_specified;		// _2
-	unsigned char	alternate_form;				// _3
-	unsigned char 	argument_options;			// _4
-	wchar_t	conversion_char;			// _5
-	int			  	field_width;				// _8
-	int				precision;					// _C
+	unsigned char	justification_options;		// 0x0
+	unsigned char 	sign_options;				// 0x1
+	unsigned char 	precision_specified;		// 0x2
+	unsigned char	alternate_form;				// 0x3
+	unsigned char 	argument_options;			// 0x4
+	wchar_t	conversion_char;			// 0x5
+	int			  	field_width;				// 0x8
+	int				precision;					// 0xC
 } print_format;
 
 typedef struct {
@@ -998,7 +1004,7 @@ wchar_t* float2str(long double num, wchar_t *wbuff, print_format format) {
 	}
 
     pw = wbuff - strlen(p) - 1;
-    mbstowcs(pw, p, srlen(p));
+    mbstowcs(pw, p, strlen(p));
 	return pw;
 }
 

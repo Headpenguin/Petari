@@ -52,7 +52,7 @@ namespace MR {
     HitSensor* addHitSensorCallbackEnemyAttack(LiveActor *, const char *, u16, f32);
     HitSensor* addHitSensorCallbackEye(LiveActor *, const char *, u16, f32);
 
-    void addBodyMessageSensorMapObj(LiveActor *);
+    HitSensor* addBodyMessageSensorMapObj(LiveActor *);
     void addBodyMessageSensor(LiveActor *, u32);
     HitSensor* addBodyMessageSensorMapObjMoveCollision(LiveActor *);
     HitSensor* addBodyMessageSensorReceiver(LiveActor *);
@@ -81,6 +81,8 @@ namespace MR {
     bool isMsgToEnemyAttackBlow(u32);
     bool isMsgToEnemyAttackTrample(u32);
 
+	bool isMsgRushCancel(u32);
+    bool isMsgIsRushTakeOver(u32);
     bool isMsgFloorTouch(u32);
 
     bool isSensorEnemy(const HitSensor *);
@@ -165,6 +167,7 @@ namespace MR {
     bool isMsgItemEndMove(u32);
     bool isMsgInhaleBlackHole(u32);
 
+    bool isMsgFreezeAttack(u32);
     bool isMsgInvincibleAttack(u32);
 
     bool isMsgFireBallAttack(u32);
@@ -198,4 +201,6 @@ namespace MR {
 
     void validateHitSensor(LiveActor *, const char *);
     void invalidateHitSensor(LiveActor *, const char *);
+
+    bool isInSpinStormRange(u32, HitSensor *, HitSensor *, f32);
 };

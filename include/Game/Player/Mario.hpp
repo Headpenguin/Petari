@@ -72,6 +72,7 @@ public:
     void closeStatus(MarioState *);
     void stopWalk();
     void push(const TVec3f &);
+    void push2(const TVec3f &);
     void stopJump();
     void updateGroundInfo();
     void checkEnforceMove();
@@ -112,26 +113,31 @@ public:
     void updateLookOfs();
 
     struct MovementStates {
-        unsigned _0 : 1;
-        unsigned _1 : 1;
+        unsigned _0 : 1; // If true, procJump, checkTornado, checkHang, checkWallstick, else mainMove, updateWalkSpeed
+                         // maybe isAirborn?
+                         // Maybe isJumping? Gets set to true in tryForceJump
+        unsigned _1 : 1; // both _0 and _1 must be true and false respectively for isJumping to be true, failing the other two conditions
+                         // Set to false by tryForceJump
         unsigned _2 : 1;
         unsigned _3 : 1;
         unsigned _4 : 1;
-        unsigned _5 : 1;
+        unsigned _5 : 1; // Set to false by tryForceJump
         unsigned _6 : 1;
         unsigned _7 : 1;
-        unsigned _8 : 1;
+        unsigned _8 : 1; // Cleared in _10 by tryForceJump
         unsigned _9 : 1;
         unsigned _A : 1;
-        unsigned _B : 1;
+        unsigned _B : 1; // Disallows trampleJump (checkAndTryTrampleAttack)
+                         // Masked out by tryForceJump
         unsigned _C : 1;
         unsigned _D : 1;
-        unsigned _E : 1;
+        unsigned _E : 1; // isDigitalJump
+                         // Set as the boolean argument to tryForceJump
         unsigned _F : 1;
         unsigned _10 : 1;
-        unsigned _11 : 1;
+        unsigned _11 : 1; // Cleared by tryForceJump
         unsigned _12 : 1;
-        unsigned _13 : 1;
+        unsigned _13 : 1; // Set by tryForceJump
         unsigned _14 : 1;
         unsigned _15 : 1;
         unsigned _16 : 1;
@@ -144,18 +150,19 @@ public:
         unsigned _1D : 1;
         unsigned _1E : 1;
         unsigned _1F : 1;
-        unsigned _20 : 1;
+        unsigned _20 : 1; // Is jump direction set to falling? (tryForceFreeJump)
         unsigned _21 : 1;
         unsigned _22 : 1;
         unsigned _23 : 1;
         unsigned _24 : 1;
         unsigned _25 : 1;
         unsigned _26 : 1;
-        unsigned _27 : 1;
+        unsigned _27 : 1; // In _10, gets masked out if tryHipDropAttack and tryGetItem both fail during attackOrPush
+                          // Also cleared if sendMsgPush fails and sensortype is 0x67 in the same function
         unsigned _28 : 1;
         unsigned _29 : 1;
         unsigned _2A : 1;
-        unsigned _2B : 1;
+        unsigned _2B : 1; // Cleared by doTrampleJump
         unsigned _2C : 1;
         unsigned _2D : 1;
         unsigned _2E : 1;
@@ -183,12 +190,12 @@ public:
         unsigned _3 : 1;
         unsigned _4 : 1;
         unsigned _5 : 1;
-        unsigned _6 : 1;
+        unsigned _6 : 1; // _1C._6 blocks trampleJump (doTrampleJump)
         unsigned _7 : 1;
         unsigned _8 : 1;
         unsigned _9 : 1;
         unsigned _A : 1;
-        unsigned _B : 1;
+        unsigned _B : 1; // _1C._B set to 1 when jumping
         unsigned _C : 1;
         unsigned _D : 1;
         unsigned _E : 1;
@@ -216,23 +223,23 @@ public:
     inline const DrawStates &getPrevDrawStates() const { return mPrevDrawStates; }
 
     union {
-        MovementStates mMovementStates;    // _8
+        MovementStates mMovementStates;    // 0x8
         struct {
-            u32 mMovementStates_LOW_WORD;     // _8
-            u32 mMovementStates_HIGH_WORD;    // _C
+            u32 mMovementStates_LOW_WORD;     // 0x8
+            u32 mMovementStates_HIGH_WORD;    // 0xC
         };
     };
 
     union {
         MovementStates _10;
         struct {
-            u32 _10_LOW_WORD;     // _10
-            u32 _10_HIGH_WORD;    // _14
+            u32 _10_LOW_WORD;     // 0x10
+            u32 _10_HIGH_WORD;    // 0x14
         };
     };
 
     union {
-        DrawStates mDrawStates;    // _18
+        DrawStates mDrawStates;    // 0x18
         u32 mDrawStates_WORD;
     };
     union {
@@ -244,7 +251,7 @@ public:
     u32 _28;
     u32 _2C;
 
-    DrawStates mPrevDrawStates;    // _30
+    DrawStates mPrevDrawStates;    // 0x30
     // FAKE
     u32 _34;
     // NOT FAKE
@@ -261,12 +268,12 @@ public:
     f32 _124;
     f32 _128;
     u32 _12C;
-    TVec3f _130;
+    TVec3f _130; // Position
     TVec3f _13C; // used in MarioAnimator::calc
     TVec3f _148;
     TVec3f _154;
-    TVec3f _160;
-    TVec3f _16C;
+    TVec3f _160; // Velocity
+    TVec3f _16C; // Jump vector for playerMode 4 and 6
     TVec3f _178;
     TVec3f _184;
     TVec3f _190;
@@ -300,7 +307,7 @@ public:
     TVec3f _2B8;
     TVec3f _2C4;
     f32 _2D0;
-    TVec3f _2D4;
+    TVec3f _2D4; // Jump vec
     TVec3f _2E0;
     TVec3f _2EC;
     TVec3f _2F8;
@@ -310,9 +317,9 @@ public:
     TVec3f _328;
     TVec3f _334;
     f32 _340;
-    TVec3f _344;
-    TVec3f _350;
-    TVec3f _35C;
+    TVec3f _344; // Set to _310 by tryForceJump
+    TVec3f _350; // Acceleration (undergoes much manipulation)
+    TVec3f _35C; // Acceleration (undergoes little manipulation)
     TVec3f _368;
     TVec3f _374;
     TVec3f _380;
@@ -320,15 +327,16 @@ public:
     TVec3f _398;
     TVec3f _3A4;
     TVec3f _3B0;
-    u16 _3BC;
-    u16 _3BE;
+    u16 _3BC; // Set to 0 by tryForceJump
+    u16 _3BE; // Set to 0 by tryForceJump
     u16 _3C0;
     u16 _3C2;
     u16 _3C4;
     u16 _3C6;
-    u16 _3C8;
-    u16 _3CA;
-    u16 _3CC;
+    u16 _3C8;   // Related to jumping. If 0, cannot 1p jump, but can 2p jump (and gets set to 6).
+                // Else can 1p jump
+    u16 _3CA; // Set to 0 by tryForceJump
+    u16 _3CC; // Set to 0 by tryForceJump
     u16 _3CE;
     u16 _3D0;
     u16 _3D2;
@@ -342,7 +350,7 @@ public:
     u16 _3FC;
     u16 _3FE;
     u16 _400;
-    u16 _402;
+    u16 _402; // Set to mConst._3A4 by doTrampleJump
     u16 _404;
     u16 _406;
     u16 _408;
@@ -363,7 +371,7 @@ public:
     u16 _426;
     u16 _428;
     u16 _42A;
-    u16 _42C;
+    u16 _42C; // Set to 0 by tryForceJump
     u32 _430;
     u16 _434;
     u16 _436;
@@ -388,7 +396,7 @@ public:
     TVec3f _48C;
     TVec3f _498;
     TVec3f _4A4;
-    TVec3f _4B0;
+    TVec3f _4B0; // Set to _130 in tryForceJump
     TVec3f _4BC;
     Triangle *_4C8;
     Triangle *_4CC;
@@ -496,26 +504,26 @@ public:
     MarioWall *mWall;
     TVec3f _75C;
     MarioStick *mStick;
-    u16 _76C;
+    u16 _76C; // Set to 0 by tryForceJump
     f32 _770;
     u16 _774;
-    MarioRabbit *mRabbit;        // _778
-    MarioFoo *mFoo;              // _77C
-    MarioSukekiyo *mSukekiyo;    // _780
-    MarioBury *mBury;            // _784
-    MarioWait *mWait;            // _788
-    MarioClimb *mClimb;          // _78C
+    MarioRabbit *mRabbit;        // 0x778
+    MarioFoo *mFoo;              // 0x77C
+    MarioSukekiyo *mSukekiyo;    // 0x780
+    MarioBury *mBury;            // 0x784
+    MarioWait *mWait;            // 0x788
+    MarioClimb *mClimb;          // 0x78C
     TVec3f _790;
-    MarioHang *mHang;              // _79C
-    MarioRecovery *mRecovery;      // _7A0
-    MarioWarp *mWarp;              // _7A4
-    MarioFlip *mFlip;              // _7A8
-    MarioSideStep *mSideStep;      // _7AC
-    MarioFrontStep *mFrontStep;    // _7B0
-    MarioSkate *mSkate;            // _7B4
-    MarioTalk *mTalk;              // _7B8
-    MarioTeresa *mTeresa;          // _7BC
-    MarioDamage *mDamage;          // _7C0
+    MarioHang *mHang;              // 0x79C
+    MarioRecovery *mRecovery;      // 0x7A0
+    MarioWarp *mWarp;              // 0x7A4
+    MarioFlip *mFlip;              // 0x7A8
+    MarioSideStep *mSideStep;      // 0x7AC
+    MarioFrontStep *mFrontStep;    // 0x7B0
+    MarioSkate *mSkate;            // 0x7B4
+    MarioTalk *mTalk;              // 0x7B8
+    MarioTeresa *mTeresa;          // 0x7BC
+    MarioDamage *mDamage;          // 0x7C0
     TVec3f _7C4;
     u16 _7D0;
     TVec3f _7D4;
@@ -524,26 +532,26 @@ public:
     TVec3f _814;
     Triangle *_820;
     TMtx34f _824;
-    MarioFlow *mFlow;                  // _854
-    MarioFireDamage *mFireDamage;      // _858
-    MarioFireDance *mFireDance;        // _85C
-    MarioFireRun *mFireRun;            // _860
-    MarioParalyze *mParalyze;          // _864
-    MarioStun *mStun;                  // _868
-    MarioCrush *mCrush;                // _86C
-    MarioFreeze *mFreeze;              // _870
-    MarioAbyssDamage *mAbyssDamage;    // _874
-    MarioDarkDamage *mDarkDamage;      // _878
-    MarioFaint *mFaint;                // _87C
-    MarioBlown *mBlown;                // _880
-    MarioSwim *mSwim;                  // _884
-    MarioSlider *mSlider;              // _888
-    MarioStep *mStep;                  // _88c
-    MarioBump *mBump;                  // _890
-    MarioMagic *mMagic;                // _894
+    MarioFlow *mFlow;                  // 0x854
+    MarioFireDamage *mFireDamage;      // 0x858
+    MarioFireDance *mFireDance;        // 0x85C
+    MarioFireRun *mFireRun;            // 0x860
+    MarioParalyze *mParalyze;          // 0x864
+    MarioStun *mStun;                  // 0x868
+    MarioCrush *mCrush;                // 0x86C
+    MarioFreeze *mFreeze;              // 0x870
+    MarioAbyssDamage *mAbyssDamage;    // 0x874
+    MarioDarkDamage *mDarkDamage;      // 0x878
+    MarioFaint *mFaint;                // 0x87C
+    MarioBlown *mBlown;                // 0x880
+    MarioSwim *mSwim;                  // 0x884
+    MarioSlider *mSlider;              // 0x888
+    MarioStep *mStep;                  // 0x88c
+    MarioBump *mBump;                  // 0x890
+    MarioMagic *mMagic;                // 0x894
     u8 _898;
-    MarioFpView *mFpView;    // _89C
-    MarioMove *mMove;        // _8A0
+    MarioFpView *mFpView;    // 0x89C
+    MarioMove *mMove;        // 0x8A0
     TVec3f _8A4;
     TVec3f _8B0;
     TVec3f _8BC;
@@ -591,7 +599,7 @@ public:
     MarioState *_97C;
     MarioState *_980;
 
-    Task _984[0xb];
+    Task _984[11];
     u32 _A08[11];
     u16 _A34;
     u32 _A38;

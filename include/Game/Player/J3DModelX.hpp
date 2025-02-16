@@ -4,6 +4,7 @@
 #include <JSystem/JKernel/JKRHeap.hpp>
 #include <JSystem/J3DGraphBase/J3DShapePacket.hpp>
 #include <JSystem/J3DGraphAnimator/J3DMtxBuffer.hpp>
+#include <revolution/gd/GDBase.h>
 
 class J3DShapeX;
 class J3DShapePacketX : public J3DShapePacket {};

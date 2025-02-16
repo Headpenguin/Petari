@@ -11,7 +11,9 @@ class NameObj;
 
 namespace MR {
     s32 getPlacedZoneId(const JMapInfoIter &);
+    void setCurrentPlacementZoneId(s32);
     s32 getCurrentPlacementZoneId();
+    void clearCurrentPlacementZoneId();
 
     s32 getChildObjNum(const JMapInfoIter &);
     void getChildObjName(const char **, const JMapInfoIter &, int);
@@ -56,6 +58,8 @@ namespace MR {
 
     bool isEqualStageName(const char *);
 
+    bool isStageBeginPrologueEvent();
+
     bool isStageKoopaVs();
     bool isStageKoopaVs3();
 
@@ -85,4 +89,4 @@ namespace MR {
     s32 getCurrentStageNormalScenarioNum();
 
     const char* getJapaneseObjectName(const char *);
-}
+};
