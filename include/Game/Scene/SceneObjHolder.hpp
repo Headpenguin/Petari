@@ -33,6 +33,7 @@
 #define SceneObj_CoinRotater 0x38
 #define SceneObj_AirBubbleHolder 0x39
 #define SceneObj_BigFanHolder 0x3A
+#define SceneObj_StarPieceDirector 0x3C
 #define SceneObj_ShadowControllerHolder 0x44
 #define SceneObj_ShadowVolumeDrawer 0x45
 #define SceneObj_ShadowSurfaceDrawerInit 0x46

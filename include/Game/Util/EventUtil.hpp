@@ -80,6 +80,7 @@ namespace MR {
     int getEncounterGalaxyCometNameId(const char *);
 
     int getStarPieceNum();
+    void addStarPiece(int);
 
     const char* getCometNameFromId(int);
 
