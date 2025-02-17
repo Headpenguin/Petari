@@ -181,6 +181,7 @@ BOOL DVDGetCurrentDir(char *, u32 maxlen);
 BOOL DVDCloseDir(DVDDir *);
 
 BOOL DVDReadAbsAsyncPrio(DVDCommandBlock *, void *, s32, u32, DVDCBCallback, s32);
+s32 DVDReadPrio(DVDFileInfo *, void *, s32, s32, s32);
 
 s32 DVDConvertPathToEntrynum(const char *);
 
