@@ -1,5 +1,5 @@
 #include "Game/Player/MarioActor.hpp"
-/*
+
 void MarioActor::initMember()
 {
     _8C = 0;
@@ -142,10 +142,10 @@ void MarioActor::initMember()
         _428[i] = nullptr;
     }
 
-    _468f.zero();
-    _468f.x = 0;
-    _468f.y = 0;
-    _468f.z = 0;
+    ((TVec3f *)&mTaskIdx)->zero();
+    *(f32*)&mTaskIdx = 0.0f;
+    *(f32*)&_46C = 0.0f;
+    *(f32*)&_470 = 0.0f;
     _474 = 0;
     _478 = 10.0f;
     _47C = 0;
@@ -402,4 +402,3 @@ void MarioActor::initMember()
     _FCC = 0;
     _FCD = 0;
 }
-*/

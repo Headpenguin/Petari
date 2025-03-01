@@ -400,15 +400,9 @@ public:
     HitSensor* _424; // set to 0 in memorizeSensorThrow
     HitSensor* _428[4]; // updated by memorizeSensorThrow
     TVec3f _438[4]; // updated by memorizeSensorThrow
-    union {
-        JGeometry::TVec3<long> _468; // _468.x is an idx into _428 and _438
-        struct {
-            u32 mTaskIdx; // 0x468
-            HitSensor *taskDataUnk1; // 0x46C
-            HitSensor *taskDataUnk2; // 0x470
-        };
-        TVec3f _468f;
-    };
+    u32 mTaskIdx; // 0x468
+    HitSensor *_46C; // associated with _428 and mTaskIdx
+    HitSensor *_470; // associated with _428 and mTaskIdx
     u32 _474;
     f32 _478;
     u32 _47C;
