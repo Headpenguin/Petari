@@ -20,7 +20,6 @@ public:
     Mario *getPlayer() const;
     MarioAnimator *getAnimator() const;
     TVec3f &getShadowPos() const;
-    TVec3f &getGravityVec() const;
     TVec3f &getAirGravityVec() const;
     TVec3f &getFrontVec() const;
     bool isStatusActiveID(u32) const;

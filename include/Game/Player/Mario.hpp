@@ -111,6 +111,13 @@ public:
     void checkBaseTransBall();
     void changeStatus(MarioState *);
     void updateLookOfs();
+    void calcMoveDir(f32, f32, TVec3f *, bool);
+    bool retainMoveDir(f32, f32, TVec3f *);
+    void calcMoveDir2D(f32, f32, TVec3f *);
+    void calcDir2D(f32, f32, TVec3f *);
+    void calcMoveDir25D(f32, f32, TVec3f *);
+    TVec3f &getGravityVec() const;
+    
 
     struct MovementStates {
         unsigned _0 : 1; // If true, procJump, checkTornado, checkHang, checkWallstick, else mainMove, updateWalkSpeed
@@ -137,9 +144,9 @@ public:
         unsigned _10 : 1;
         unsigned _11 : 1; // Cleared by tryForceJump
         unsigned _12 : 1;
-        unsigned _13 : 1; // Set by tryForceJump
+        unsigned _13 : 1; // Set by tryForceJump. In _10, isInTower (see _6F4 in updateCubeCode)
         unsigned _14 : 1;
-        unsigned _15 : 1;
+        unsigned _15 : 1; // calcMoveDir2D in _10 in calcMoveDir
         unsigned _16 : 1;
         unsigned _17 : 1;
         unsigned _18 : 1;
@@ -174,10 +181,10 @@ public:
         unsigned _34 : 1;
         unsigned _35 : 1;
         unsigned _36 : 1;
-        unsigned _37 : 1;
+        unsigned _37 : 1; // calcDir2D in calcMoveDir
         unsigned _38 : 1;
         unsigned _39 : 1;
-        unsigned _3A : 1;
+        unsigned _3A : 1; // calcMoveDir25D in calcMoveDir
         unsigned _3B : 1;
         unsigned _3C : 1;
         unsigned _3D : 1;

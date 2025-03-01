@@ -24,6 +24,12 @@
 #include "JSystem/JAudio2/JAIAudible.hpp"
 #include "JSystem/JMath/JMath.hpp"
 
+inline TVec3f scaleInlineOp(const TVec3f &a, f32 b) {
+    TVec3f ret(a);
+    ret.scale(b);
+    return ret;
+}
+
 Triangle &Triangle::operator=(const Triangle &rOther)
 {
     mParts = rOther.mParts;
@@ -45,7 +51,7 @@ MarioActor::MarioActor(const char *pName) : LiveActor(pName), _1B0(0xFFFFFFFF)
     initMember();
     mMario = new Mario(this);
     _930 = 0;
-    _468f.x = 0;
+    *(f32*)&mTaskIdx = 0.0f;
     mMaxHealth = 3;
     mHealth = 3;
     _384 = 8;
@@ -101,8 +107,8 @@ MarioActor::MarioActor(const char *pName) : LiveActor(pName), _1B0(0xFFFFFFFF)
 
     _3C1 = false;
     _211 = 0;
-    _468f.y = 0;
-    _468f.z = 0;
+    *(f32 *)&_46C = 0.0f;
+    *(f32 *)&_470 = 0.0f;
     _474 = 0;
     _924 = nullptr;
     _928 = 0;
@@ -261,9 +267,9 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long initialAnimation)
     if (MR::isPlayerLuigi()) {
         gIsLuigi = true;
     }
-    mPosition.set(a);
-    mRotation.set(b);
-    mScale.set(TVec3f(1.0f, 1.0f, 1.0f));
+    mPosition.set<f32>(a);
+    mRotation.set<f32>(b);
+    mScale.set<f32>(TVec3f(1.0f, 1.0f, 1.0f));
     mMario->setHeadAndFrontVecFromRotate(mRotation);
     mMario->_290 = mMario->_310;
     updateBaseScaleMtx();
@@ -302,7 +308,9 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long initialAnimation)
     initEffect();
     MR::invalidateClipping(this);
 
-    _240.setInline(0.0f, -1.0f, 0.0f);
+    _240.x = 0.0f;
+    _240.y = -1.0f;
+    _240.z = 0.0f;
 
     _24C = _240;
     _334 = 0;
@@ -361,7 +369,9 @@ void MarioActor::init2(const TVec3f &a, const TVec3f &b, long initialAnimation)
     _494 = 0;
     _4B0 = 35.0f;
     _4B4 = 60.0f;
-    _4B8.setInline(0.0f, 1.0f, 0.0f);
+    _4B8.x = 0.0f;
+    _4B8.y = 1.0f;
+    _4B8.z = 0.0f;
     _4C4 = -_4B8;
     _482 = true;
     appear();
@@ -398,7 +408,7 @@ void MarioActor::initAfterPlacement()
     mMario->_1FC = -_240;
     _300 = mMario->_1F0;
     _2D0 = _300;
-    _2C4 = _240 % -70.0f;
+    _2C4 = scaleInlineOp(_240, -70.0f);
     calcCenterPos();
     MR::updateHitSensorsAll(this);
     _360 = getGravityVector();
@@ -419,19 +429,23 @@ void MarioActor::calcBaseFrontVec(const TVec3f &rVec)
     TVec3f cross, j(0.0f, 1.0f, 0.0f);
     f32 y = j.dot(rVec);
     if (y < -0.99f) {
-        _258.setInline(0.0f, 0.0f, 1.0f);
+        _258.x = 0.0f;
+        _258.y = 0.0f;
+        _258.z = 1.0f;
     }
     else {
         f32 cosine;
         if (MR::makeAxisAndCosignVecToVec(&cross, &cosine, rVec, j)) {
             TVec3f k(0.0f, 0.0f, 1.0f);
             Mtx transformation;
-            PSMTXRotAxisRad(transformation, cross, -JMAAcosRadian(cosine));
-            PSMTXMultVecSR(transformation, k, _258);
+            PSMTXRotAxisRad(transformation, &cross, -JMAAcosRadian(cosine));
+            PSMTXMultVecSR(transformation, &k, &_258);
             MR::normalize(&_258);
         }
         else {
-            _258.setInline(0.0f, 0.0f, 1.0f);
+            _258.x = 0.0f;
+            _258.y = 0.0f;
+            _258.z = 1.0f;
         }
     }
 }
@@ -642,9 +656,13 @@ void MarioActor::updateRotationInfo()
         mRotation.x = 0.0f;
     }
     stack_44.getEuler(_318);
-    _318.scaleInline(57.2957763672f);
+    _318.x *= 57.2957763672f;
+    _318.y *= 57.2957763672f;
+    _318.z *= 57.2957763672f;
     stack_44.getEuler(_324);
-    _324.scaleInline(57.2957763672f);
+    _324.x *= 57.2957763672f;
+    _324.y *= 57.2957763672f;
+    _324.z *= 57.2957763672f;
     if (MR::isSameDirection(_240, mMario->_208, .01f)) {
         _A18 = mRotation;
     }
@@ -675,7 +693,7 @@ void MarioActor::exeWait()
 
 void MarioActor::movement()
 {
-    _468.y = 0;
+    _46C = nullptr;
     _378++;
     _1E1 = 0;
     PSMTXCopy(_AE0.toMtxPtr(), _AB0.toMtxPtr());
@@ -695,37 +713,37 @@ void MarioActor::movement()
      // soften the current frame's position adjustments by half when they oppose the last frame's
      // corrections and the two frames' corrections do not differ significantly in size
     if (MR::isOppositeDirection(_288, stack_11C, 0.01f)) {
-        f32 mag_288 = PSVECMag(_288);
-        f32 magStack_11C = PSVECMag(stack_11C);
+        f32 mag_288 = PSVECMag(&_288);
+        f32 magStack_11C = PSVECMag(&stack_11C);
         if (!MR::isNearZero(mag_288, 0.001f) && !MR::isNearZero(magStack_11C, 0.001f) && MR::isNearZero(mag_288 - magStack_11C, 1.0f)) {
-            mPosition -= _288 % 0.5f;
+            mPosition -= scaleInlineOp(_288, 0.5f);
         }
     }
-    if (PSVECMag(stack_128) > 0.1f) {
+    if (PSVECMag(&stack_128) > 0.1f) {
         if (!(getMovementStates()._A)) {
             if (!MR::isNearZero(mVelocity, 0.001f)) {
-                f32 diffMag = PSVECMag(_294.translateOpposite(_270));
-                f32 vMag = PSVECMag(mVelocity);
-                if (PSVECMag(stack_128) > 2.0f * (diffMag + vMag)) {
+                f32 diffMag = PSVECMag(&_294.translateOpposite(_270));
+                f32 vMag = PSVECMag(&mVelocity);
+                if (PSVECMag(&stack_128) > 2.0f * (diffMag + vMag)) {
                     mMario->stopWalk();
                 }
             }
         }
-        if (getMovementStates()._23 && PSVECMag(mVelocity) < PSVECMag(stack_134)) {
+        if (getMovementStates()._23 && PSVECMag(&mVelocity) < PSVECMag(&stack_134)) {
             if (stack_134.dot(getGravityVec()) < -0.0f) {
                 TVec3f stack_110;
                 MR::vecKillElement(mVelocity, getGravityVec(), &stack_110);
                 if (MR::isNearZero(stack_110, 0.001f)) {
                     MR::vecKillElement(stack_134, getGravityVec(), &stack_110);
                 }
-                stack_110.setLength(PSVECMag(stack_134));
+                stack_110.setLength(PSVECMag(&stack_134));
                 mMario->push(stack_110);
                 if (mMario->_3BC <= 2) {
-                    f32 scale = PSVECMag(stack_128);
+                    f32 scale = PSVECMag(&stack_128);
                     if (scale > 10.0f) {
                         scale = 10.0f;
                     }
-                    mMario->_2D4 += -getGravityVec() % scale;
+                    mMario->_2D4 += scaleInlineOp(-getGravityVec(), scale);
                 }
             }
         }
@@ -735,23 +753,23 @@ void MarioActor::movement()
             TVec3f stack_F8;
             f32 elementA = MR::vecKillElement(stack_134, stack_104, &stack_F8);
             f32 elementB = MR::vecKillElement(mVelocity, stack_104, &stack_F8);
-            if (PSVECMag(mVelocity) > 20.0f && elementA < elementB * 0.5f) {
+            if (PSVECMag(&mVelocity) > 20.0f && elementA < elementB * 0.5f) {
                 if (mMario->isAnimationRun("坂すべり下向きあおむけ")) {
-                    mMario->push(mMario->_208 % 5.0f);
+                    mMario->push(scaleInlineOp(mMario->_208, 5.0f));
                 }
                 else if (mMario->isAnimationRun("坂すべり上向きうつぶせ")) {
-                    mMario->push(mMario->_208 % -5.0f);
+                    mMario->push(scaleInlineOp(mMario->_208, -5.0f));
                 }
                 mMario->mDrawStates._2 = true;
             }
         }
         if (getMovementStates()._0 && !mAlphaEnable) {
             if (stack_128.dot(getGravityVec()) < -40.0f) {
-                TVec3f stack_EC(mPosition.translateOpposite(getGravityVec() % 100.0f));
+                TVec3f stack_EC(mPosition.translateOpposite(scaleInlineOp(getGravityVec(), 100.0f)));
                 TVec3f stack_E0; // Collision location?
                 Triangle *pTmp = mMario->getTmpPolygon();
 
-                if (MR::getFirstPolyOnLineToMap(&stack_E0, pTmp, stack_EC, getGravityVec() % 200f)) {
+                if (MR::getFirstPolyOnLineToMap(&stack_E0, pTmp, stack_EC, scaleInlineOp(getGravityVec(), 200f))) {
                     TVec3f stack_D4;
                     if (MR::vecKillElement(stack_E0.translateOpposite(mPosition), getGravityVec(), &stack_D4) < -5f && pTmp->mParts && !pTmp->mParts->_D4 && getMovementStates()._3E != 1) {
                         mPosition = stack_E0;
@@ -781,8 +799,8 @@ void MarioActor::movement()
                     CollisionParts *parts = mMario->_45C->mParts;
                     if (parts && !mMario->_45C->mParts->_D4) {
                         TVec3f stack_C8, stack_BC, stack_B0;
-                        PSMTXMultVec(parts->mInvBaseMatrix.toMtxPtr(), mMario->_31C, stack_C8);
-                        PSMTXMultVec(parts->mPrevBaseMatrix.toMtxPtr(), stack_C8, stack_BC);
+                        PSMTXMultVec(parts->mInvBaseMatrix.toMtxPtr(), &mMario->_31C, &stack_C8);
+                        PSMTXMultVec(parts->mPrevBaseMatrix.toMtxPtr(), &stack_C8, &stack_BC);
                         stack_B0 = mMario->_31C.translateOpposite(stack_BC);
                         if (stack_B0.dot(stack_128) > 0.0f) {
                             eject = false;
@@ -839,7 +857,7 @@ void MarioActor::movement()
             if (eject) {
                 TVec3f stack_98;
                 f32 element = MR::vecKillElement(stack_134, mMario->_368, &stack_98);
-                mPosition -= mMario->_368 % element;
+                mPosition -= scaleInlineOp(mMario->_368, element);
             }
         }
     }
@@ -1012,8 +1030,8 @@ void MarioActor::updateBehavior()
 void MarioActor::updateBindRatio()
 {
     if (!_934 && !MR::isNearZero(_978.translateOpposite(_264), 0.001f)) {
-        f32 mag = PSVECMag(_978);
-        if (mag / PSVECMag(_978.translateOpposite(_264)) < 2.0f) {
+        f32 mag = PSVECMag(&_978);
+        if (mag / PSVECMag(&_978.translateOpposite(_264)) < 2.0f) {
             _984 += 0.1f;
         }
         else {
@@ -1222,7 +1240,7 @@ void MarioActor::updateSwingAction()
     if (mMario->isStatusActive(0x13)) {
         canRush = false;
     }
-    if (_468.x) {
+    if (mTaskIdx != 0) {
         canRush = false;
     }
     if (mMario->isStatusActive(2)) {
@@ -1586,9 +1604,9 @@ void MarioActor::scaleMtx(MtxPtr rawMtx)
     i.scale(scalar);
     j.scale(scalar);
     k.scale(scalar);
-    i += _3B4 % elementX;
-    j += _3B4 % elementY;
-    k += _3B4 % elementZ;
+    i += scaleInlineOp(_3B4, elementX);
+    j += scaleInlineOp(_3B4, elementY);
+    k += scaleInlineOp(_3B4, elementZ);
     rawMtx[0][0] = i.x;
     rawMtx[1][0] = i.y;
     rawMtx[2][0] = i.z;
@@ -1716,23 +1734,23 @@ void MarioActor::calcAnim() {
     if(!_3D8) {
         switch(_3D4) {
             case 4: // 2E8
-                _9E4->mPosition.set(mPosition);
+                _9E4->mPosition.set<f32>(mPosition);
                 MR::updateModelDiffDL(_9E4);
                 break;
             case 3: // 304
-                _9C0->mPosition.set(mPosition);
+                _9C0->mPosition.set<f32>(mPosition);
                 MR::updateModelDiffDL(_9C0);
                 MR::updateModelDiffDL(_A40);
                 MR::updateModelDiffDL(_A44);
                 break;
             case 1: // 330
-                _9C8->mPosition.set(mPosition);
+                _9C8->mPosition.set<f32>(mPosition);
                 MR::updateModelDiffDL(_9C8);
                 MR::updateModelDiffDL(_A50);
                 MR::updateModelDiffDL(_A54);
                 break;
             case 5: //35C
-                _A00->mPosition.set(mPosition);
+                _A00->mPosition.set<f32>(mPosition);
                 MR::updateModelDiffDL(_A00);
                 break;
             default: // 378
@@ -1768,12 +1786,12 @@ void MarioActor::calcAnim() {
         TVec3f stack_38;
         MR::extractMtxTrans(handRMtx, &stack_38);
         TVec3f wingspanVec = stack_38.translateOpposite(stack_44);
-        f32 wingspanLen = PSVECMag(wingspanVec.toCVec());
+        f32 wingspanLen = PSVECMag(&wingspanVec);
         MR::normalizeOrZero(&wingspanVec);
         TVec3f stack_20;
-        PSVECCrossProduct(wingspanVec.toCVec(), _240.toCVec(), stack_20.toVec());
+        PSVECCrossProduct(&wingspanVec, &_240, &stack_20);
         MR::normalizeOrZero(&stack_20);
-        PSVECCrossProduct(_240.toCVec(), stack_20.toCVec(), wingspanVec.toVec());
+        PSVECCrossProduct(&_240, &stack_20, &wingspanVec);
         if(MR::normalizeOrZero(&wingspanVec)) {
            wingspanVec = mMario->_310;
         }

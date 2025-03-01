@@ -340,6 +340,12 @@ Mario::Mario(MarioActor *actor) : MarioModule(actor)
     _898 = 0;
 }
 
+inline TVec3f scaleInlineOp(const TVec3f &a, f32 b) {
+    TVec3f ret(a);
+    ret.scale(b);
+    return ret;
+}
+
 void Mario::setFrontVecKeepUp(const TVec3f &v)
 {
     TVec3f stack_38(_208);
@@ -369,7 +375,7 @@ void Mario::setFrontVecKeepUp(const TVec3f &v)
     PSVECCrossProduct(&_310, &_1F0, &stack_14);
     setFrontVec(stack_14);
     _22C = _208;
-    _328 = _208 % PSVECMag(_328);
+    _328 = scaleInlineOp(_208, PSVECMag(&_328));
     _344 = _310;
 }
 
@@ -385,7 +391,7 @@ void Mario::setFrontVec(const TVec3f &rVec) {
         if(stack_2C.dot(rVec) > 0.0f) {
             TVec3f stack_20;
             f32 f = MR::vecKillElement(rVec, stack_2C, &stack_20);
-            stack_20 -= stack_2C % f;
+            stack_20 -= scaleInlineOp(stack_2C, f);
             MR::normalizeOrZero(&stack_20);
             _208 = stack_20;
         }
