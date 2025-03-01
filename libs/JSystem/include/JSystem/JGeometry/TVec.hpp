@@ -125,14 +125,14 @@ namespace JGeometry {
             return *this;
         }
 
-        TVec3& operator+(const TVec3 &) const;
+        TVec3 operator+(const TVec3 &) const;
         TVec3& operator+=(const TVec3 &op);
 
-        TVec3& operator*(f32) const;
+        TVec3 operator*(f32) const;
         TVec3& operator*=(f32);
 
-        TVec3& operator-() const;
-        TVec3& operator-(const TVec3 &op) const;
+        TVec3 operator-() const;
+        TVec3 operator-(const TVec3 &op) const;
 
         template <typename T>
         void set(const TVec3<f32>& rVec) {
@@ -201,6 +201,12 @@ namespace JGeometry {
 
             return ret;
         }
+        
+        inline TVec3<f32> translateOpposite(const TVec3<f32> &rSrc) const {
+            TVec3<f32> tmp(*this);
+            tmp -= rSrc;
+            return tmp;
+        }
 
         void scale(f32);
         void scale(f32, const TVec3 &);
@@ -212,6 +218,13 @@ namespace JGeometry {
         void normalize(const TVec3 &);
         void setLength(f32);
         f32 setLength(const TVec3 &, f32);
+
+        TVec3<f32> operator%(f32 scalar) const
+        {
+            TVec3<f32> f = *this;
+            f.scale(scalar);
+            return f;
+        }
 
         template <typename T>
         void cubic(const TVec3 &, const TVec3 &, const TVec3 &, const TVec3 &, f32);
