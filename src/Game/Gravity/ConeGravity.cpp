@@ -28,6 +28,7 @@ inline f32 absfInline(f32 &orig, f32 v) {
     return __fabsf(v);
 }
 
+/*
 bool ConeGravity::calcOwnGravityVector(TVec3f *pDest, f32 *pScalar, const TVec3f &rPos) const {
     
     TVec3f worldBaseCenter, worldCentralAxis;
@@ -74,7 +75,7 @@ bool ConeGravity::calcOwnGravityVector(TVec3f *pDest, f32 *pScalar, const TVec3f
         return true;
     }
     
-    f32 distanceToCentralAxis = PSVECMag(positionOnBasePlane.toCVec());
+    f32 distanceToCentralAxis = PSVECMag(positionOnBasePlane);
     f32 centralAxisY = unitWorldCentralAxis.dot(relativePosition);
 
     bool isInsideCone = false;
@@ -177,13 +178,14 @@ bool ConeGravity::calcOwnGravityVector(TVec3f *pDest, f32 *pScalar, const TVec3f
     
     return calcGravityFromMassPosition(pDest, pScalar, rPos, pointOfAttraction);
 }
+*/
 
 void ConeGravity::updateMtx(const TPos3f &rMtx) {
 	mWorldMtx.concat(rMtx, mLocalMtx);
 
 	TVec3f sideVec;
 	mWorldMtx.getXDirInline(sideVec);
-	mWorldRadius = PSVECMag(sideVec.toCVec());
+	mWorldRadius = PSVECMag(&sideVec);
 
 	TVec3f axis; // unused
 	mWorldMtx.getYDir(axis);
