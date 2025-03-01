@@ -125,6 +125,13 @@ namespace JGeometry {
         /* General operations */
         void set(const Vec &rSrc);
 
+        
+        inline void set(f32 val) {
+            z = val;
+            y = val;
+            z = val;
+        }
+
         template <typename A>
         void set(const JGeometry::TVec3<A> &rSrc) NO_INLINE
         {
@@ -142,9 +149,12 @@ namespace JGeometry {
             y = val;
             x = val;
         }
-
         template <typename A>
         void setAll(A val);
+
+        inline void setPS(const TVec3<f32>& rVec) {
+            setTVec3f(&rVec.x, &x);
+        }
 
         void add(const register TVec3<T> &rSrc) NO_INLINE
         {
