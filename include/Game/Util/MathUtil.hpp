@@ -47,6 +47,8 @@ namespace MR {
     void makeAxisCrossPlane(TVec3f *, TVec3f *, const TVec3f &);
     bool makeAxisAndCosignVecToVec(TVec3f *, f32 *, const TVec3f &, const TVec3f &);
 
+    void makeQuatFromVec(TQuat4f *, const TVec3f &, const TVec3f &);
+
     /*
      * Projects rPoint onto the directed line defined by rTip and rTail and places the result into pOut
      */
