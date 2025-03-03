@@ -137,15 +137,15 @@ namespace JGeometry {
         TVec3& operator*(f32) const;
         TVec3& operator*=(f32);
 
-        TVec3& operator-() const;
-        TVec3& operator-(const TVec3 &op) const;
+        TVec3 operator-() const;
+        TVec3 operator-(const TVec3 &op) const;
 
         template <typename T>
-        void set(const TVec3<f32>& rVec) {
+        void set(const TVec3<f32>& rVec);/* {
             x = rVec.x;
             y = rVec.y;
             z = rVec.z;
-        }
+        }*/
 
         template <typename T>
         void set(f32 _x, f32 _y, f32 _z) NO_INLINE {
