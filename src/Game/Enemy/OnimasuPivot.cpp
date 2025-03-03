@@ -2,17 +2,17 @@
 #include "math_types.hpp"
 
 OnimasuPivot::OnimasuPivot(const char *pName) : Onimasu(pName) {
-    _104 = 0;
-    _108 = 0;
-    _10C = 0;
+    mNextPointNo = 0;
+    mRailPoints = 0;
+    mRailPointsLength = 0;
     ((TVec4f)_110).set<f32>(0.0f, 0.0f, 0.0f, 1.0f);
     ((TVec4f)_120).set<f32>(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
 void OnimasuPivot::initFromRailPoint() {
     s32 numRailPoint = MR::getRailPointNum(this) / 2;
-    _108 = new TVec3f[numRailPoint];
-    _10C = numRailPoint;
+    mRailPoints = new TVec3f[numRailPoint];
+    mRailPointsLength = numRailPoint;
 }
 
 inline TVec3f getRailPointPos(LiveActor *pActor, int n) {
@@ -27,7 +27,7 @@ void OnimasuPivot::startMoveInner() {
     MR::calcRailPointPos(&stack_44, this, getLastPointNo() * 2 + 1);
 
     TVec3f stack_38 = getRailPointPos(this, getLastPointNo() * 2) - stack_44;
-    TVec3f stack_2C = getRailPointPos(this, _104 * 2) - stack_44;
+    TVec3f stack_2C = getRailPointPos(this, mNextPointNo * 2) - stack_44;
 
     if(MR::isSameDirection(stack_38, stack_2C, 0.01f)) {
         stack_50.identity();
@@ -69,6 +69,9 @@ void OnimasuPivot::updatePoseInner() {
     f32 fr3 = fr3 - fr0
     */
 
+
+
+/* I am least confident about this quaternion operation being correct */
     f32 fr3 = 1.0f - 2.0f * (stack_20.x * stack_20.x); // 1 5
     f32 fr7 = 2.0f * (stack_20.x * stack_20.z); // 6
     f32 fr4 = 2.0f * (stack_20.y * stack_20.z); // 3
@@ -100,11 +103,11 @@ void OnimasuPivot::updatePoseInner() {
 }
 
 int OnimasuPivot::getNextPointNo() const {
-    return _104 * 2;
+    return mNextPointNo * 2;
 }
 
 int OnimasuPivot::getLastPointNo() const {
-    int ret = _104 - 1;
+    int ret = mNextPointNo - 1;
     if(ret < 0) {
         ret = MR::getRailPointNum(this) / 2 - 1;
     }
@@ -113,25 +116,25 @@ int OnimasuPivot::getLastPointNo() const {
 
 TVec3f* OnimasuPivot::getLastPointNormal() const {
     u32 idx = getLastPointNo();
-    return &_108[idx];
+    return &mRailPoints[idx];
 }
 
 TVec3f* OnimasuPivot::getNextPointNormal() const {
-    return &_108[_104];
+    return &mRailPoints[mNextPointNo];
 }
 
 void OnimasuPivot::incrementNextPoint() {
-    _104++;
-    if(_104 == MR::getRailPointNum(this) / 2) {
-        _104 = 0;
+    mNextPointNo++;
+    if(mNextPointNo == MR::getRailPointNum(this) / 2) {
+        mNextPointNo = 0;
     }
 }
 
 void OnimasuPivot::collectRailPointInfo() {
-    for(int i = 0; i < _10C; i++) {
+    for(int i = 0; i < mRailPointsLength; i++) {
         TVec3f stack_14(gZeroVec);
         TVec3f stack_8(gZeroVec);
         OnimasuFunction::getPolygonOnRailPoint(&stack_8, &stack_14, this, i * 2);
-        _108[i].set<f32>(stack_14);
+        mRailPoints[i].set<f32>(stack_14);
     }
 }

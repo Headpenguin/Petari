@@ -19,9 +19,9 @@ public:
     void startMoveInner();
     void updatePoseInner();
 
-    int _104;
-    TVec3f* _108; // rail point
-    int _10C; // num rail point
+    int mNextPointNo; // 0x104
+    TVec3f *mRailPoints; // 0x108
+    int mRailPointsLength; // 0x10C
     TQuat4f _110;
     TQuat4f _120;
 };
