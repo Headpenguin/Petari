@@ -4,7 +4,7 @@
 
 namespace JGeometry {
     template<typename T>
-    struct TQuat4 : public TVec3<T> {
+    struct TQuat4 : public TVec4<T> {
     public:
         /* Constructors */
         inline TQuat4() {}
@@ -51,7 +51,7 @@ namespace JGeometry {
         /* Operators */
         TQuat4<T>& operator=(const TQuat4<T> &rSrc);
 
-        T w;
+        //T w;
     };
 };
 
