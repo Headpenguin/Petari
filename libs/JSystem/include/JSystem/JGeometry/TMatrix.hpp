@@ -195,7 +195,8 @@ namespace JGeometry {
 
         inline void setRotateInline(const TVec3f &vec1, f32 r) {
             TVec3f vec;
-            PSVECMag(&vec1);
+            vec.set<f32>(vec1);
+            PSVECMag(&vec);
             PSVECNormalize(&vec, &vec);
             f32 s = sin(r);
             f32 c = cos(r);
